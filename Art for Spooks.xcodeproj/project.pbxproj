@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
+		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
+		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
+		34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34832E9419A1829100C80D70 /* InfoPlist.strings */; };
+		34832E9819A1829100C80D70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9719A1829100C80D70 /* main.m */; };
+		34832E9C19A1829100C80D70 /* AFSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9B19A1829100C80D70 /* AFSAppDelegate.m */; };
+		34832E9E19A1829100C80D70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34832E9D19A1829100C80D70 /* Images.xcassets */; };
+		34832EA519A1829100C80D70 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EA419A1829100C80D70 /* XCTest.framework */; };
+		34832EA619A1829200C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
+		34832EA719A1829200C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
+		34832EAF19A1829200C80D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34832EAD19A1829200C80D70 /* InfoPlist.strings */; };
+		34832EB119A1829200C80D70 /* Art_for_SpooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34832EB019A1829200C80D70 /* Art_for_SpooksTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		34832EA819A1829200C80D70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34832E8019A1829100C80D70 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34832E8719A1829100C80D70;
+			remoteInfo = "Art for Spooks";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		34832E8819A1829100C80D70 /* Art for Spooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art for Spooks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34832E8B19A1829100C80D70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		34832E8D19A1829100C80D70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		34832E8F19A1829100C80D70 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		34832E9319A1829100C80D70 /* Art for Spooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Art for Spooks-Info.plist"; sourceTree = "<group>"; };
+		34832E9519A1829100C80D70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		34832E9719A1829100C80D70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		34832E9919A1829100C80D70 /* Art for Spooks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art for Spooks-Prefix.pch"; sourceTree = "<group>"; };
+		34832E9A19A1829100C80D70 /* AFSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSAppDelegate.h; sourceTree = "<group>"; };
+		34832E9B19A1829100C80D70 /* AFSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSAppDelegate.m; sourceTree = "<group>"; };
+		34832E9D19A1829100C80D70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		34832EA319A1829100C80D70 /* Art for SpooksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Art for SpooksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34832EA419A1829100C80D70 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		34832EAC19A1829200C80D70 /* Art for SpooksTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Art for SpooksTests-Info.plist"; sourceTree = "<group>"; };
+		34832EAE19A1829200C80D70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		34832EB019A1829200C80D70 /* Art_for_SpooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Art_for_SpooksTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		34832E8519A1829100C80D70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */,
+				34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */,
+				34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34832EA019A1829100C80D70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34832EA519A1829100C80D70 /* XCTest.framework in Frameworks */,
+				34832EA719A1829200C80D70 /* UIKit.framework in Frameworks */,
+				34832EA619A1829200C80D70 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34832E7F19A1829100C80D70 = {
+			isa = PBXGroup;
+			children = (
+				34832E9119A1829100C80D70 /* Art for Spooks */,
+				34832EAA19A1829200C80D70 /* Art for SpooksTests */,
+				34832E8A19A1829100C80D70 /* Frameworks */,
+				34832E8919A1829100C80D70 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		34832E8919A1829100C80D70 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34832E8819A1829100C80D70 /* Art for Spooks.app */,
+				34832EA319A1829100C80D70 /* Art for SpooksTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		34832E8A19A1829100C80D70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34832E8B19A1829100C80D70 /* Foundation.framework */,
+				34832E8D19A1829100C80D70 /* CoreGraphics.framework */,
+				34832E8F19A1829100C80D70 /* UIKit.framework */,
+				34832EA419A1829100C80D70 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		34832E9119A1829100C80D70 /* Art for Spooks */ = {
+			isa = PBXGroup;
+			children = (
+				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
+				34832E9B19A1829100C80D70 /* AFSAppDelegate.m */,
+				34832E9D19A1829100C80D70 /* Images.xcassets */,
+				34832E9219A1829100C80D70 /* Supporting Files */,
+			);
+			path = "Art for Spooks";
+			sourceTree = "<group>";
+		};
+		34832E9219A1829100C80D70 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				34832E9319A1829100C80D70 /* Art for Spooks-Info.plist */,
+				34832E9419A1829100C80D70 /* InfoPlist.strings */,
+				34832E9719A1829100C80D70 /* main.m */,
+				34832E9919A1829100C80D70 /* Art for Spooks-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		34832EAA19A1829200C80D70 /* Art for SpooksTests */ = {
+			isa = PBXGroup;
+			children = (
+				34832EB019A1829200C80D70 /* Art_for_SpooksTests.m */,
+				34832EAB19A1829200C80D70 /* Supporting Files */,
+			);
+			path = "Art for SpooksTests";
+			sourceTree = "<group>";
+		};
+		34832EAB19A1829200C80D70 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				34832EAC19A1829200C80D70 /* Art for SpooksTests-Info.plist */,
+				34832EAD19A1829200C80D70 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		34832E8719A1829100C80D70 /* Art for Spooks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34832EB419A1829200C80D70 /* Build configuration list for PBXNativeTarget "Art for Spooks" */;
+			buildPhases = (
+				34832E8419A1829100C80D70 /* Sources */,
+				34832E8519A1829100C80D70 /* Frameworks */,
+				34832E8619A1829100C80D70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Art for Spooks";
+			productName = "Art for Spooks";
+			productReference = 34832E8819A1829100C80D70 /* Art for Spooks.app */;
+			productType = "com.apple.product-type.application";
+		};
+		34832EA219A1829100C80D70 /* Art for SpooksTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34832EB719A1829200C80D70 /* Build configuration list for PBXNativeTarget "Art for SpooksTests" */;
+			buildPhases = (
+				34832E9F19A1829100C80D70 /* Sources */,
+				34832EA019A1829100C80D70 /* Frameworks */,
+				34832EA119A1829100C80D70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34832EA919A1829200C80D70 /* PBXTargetDependency */,
+			);
+			name = "Art for SpooksTests";
+			productName = "Art for SpooksTests";
+			productReference = 34832EA319A1829100C80D70 /* Art for SpooksTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		34832E8019A1829100C80D70 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AFS;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = zeitkunst;
+				TargetAttributes = {
+					34832EA219A1829100C80D70 = {
+						TestTargetID = 34832E8719A1829100C80D70;
+					};
+				};
+			};
+			buildConfigurationList = 34832E8319A1829100C80D70 /* Build configuration list for PBXProject "Art for Spooks" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 34832E7F19A1829100C80D70;
+			productRefGroup = 34832E8919A1829100C80D70 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				34832E8719A1829100C80D70 /* Art for Spooks */,
+				34832EA219A1829100C80D70 /* Art for SpooksTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		34832E8619A1829100C80D70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
+				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34832EA119A1829100C80D70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34832EAF19A1829200C80D70 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34832E8419A1829100C80D70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34832E9819A1829100C80D70 /* main.m in Sources */,
+				34832E9C19A1829100C80D70 /* AFSAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34832E9F19A1829100C80D70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34832EB119A1829200C80D70 /* Art_for_SpooksTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		34832EA919A1829200C80D70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34832E8719A1829100C80D70 /* Art for Spooks */;
+			targetProxy = 34832EA819A1829200C80D70 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		34832E9419A1829100C80D70 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34832E9519A1829100C80D70 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		34832EAD19A1829200C80D70 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34832EAE19A1829200C80D70 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		34832EB219A1829200C80D70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		34832EB319A1829200C80D70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		34832EB519A1829200C80D70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
+				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		34832EB619A1829200C80D70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
+				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		34832EB819A1829200C80D70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Art for Spooks.app/Art for Spooks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Art for SpooksTests/Art for SpooksTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		34832EB919A1829200C80D70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Art for Spooks.app/Art for Spooks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
+				INFOPLIST_FILE = "Art for SpooksTests/Art for SpooksTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		34832E8319A1829100C80D70 /* Build configuration list for PBXProject "Art for Spooks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34832EB219A1829200C80D70 /* Debug */,
+				34832EB319A1829200C80D70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34832EB419A1829200C80D70 /* Build configuration list for PBXNativeTarget "Art for Spooks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34832EB519A1829200C80D70 /* Debug */,
+				34832EB619A1829200C80D70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		34832EB719A1829200C80D70 /* Build configuration list for PBXNativeTarget "Art for SpooksTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34832EB819A1829200C80D70 /* Debug */,
+				34832EB919A1829200C80D70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 34832E8019A1829100C80D70 /* Project object */;
+}
