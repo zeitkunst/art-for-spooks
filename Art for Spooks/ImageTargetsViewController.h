@@ -6,7 +6,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 ===============================================================================*/
 
 #import <UIKit/UIKit.h>
-//#import "SampleAppMenu.h"
+#import "SampleAppMenu.h"
 #import "ImageTargetsEAGLView.h"
 #import "SampleApplicationSession.h"
 #import <QCAR/DataSet.h>

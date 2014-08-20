@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="BlurredFaces" size="200.000000 75.000000" />
+    <ImageTarget name="UFO" size="200.000000 150.000000" />
+    <ImageTarget name="Woman" size="200.000000 150.000000" />
+    <ImageTarget name="Anchory" size="200.000000 149.375000" />
+    <ImageTarget name="ConjuringWithInformation" size="200.000000 150.000000" />
+    <ImageTarget name="UFOs" size="200.000000 150.000000" />
+    <ImageTarget name="Buffalo2" size="200.000000 150.000000" />
+    <ImageTarget name="Women" size="200.000000 150.000000" />
+    <ImageTarget name="RabbitDuck" size="200.000000 150.000000" />
+    <ImageTarget name="Brueghel" size="200.000000 150.000000" />
+    <ImageTarget name="Cards" size="200.000000 150.000000" />
+    <ImageTarget name="Tank" size="200.000000 150.000000" />
+    <ImageTarget name="CyberMagicians" size="200.000000 150.000000" />
+    <ImageTarget name="Couple" size="200.000000 150.000000" />
+    <ImageTarget name="Fields" size="200.000000 150.000000" />
+    <ImageTarget name="CatDog" size="200.000000 150.000000" />
+    <ImageTarget name="Egypt" size="200.000000 150.000000" />
+    <ImageTarget name="Kidnapper" size="200.000000 150.000000" />
+    <ImageTarget name="Foxacid" size="200.000000 123.615746" />
+    <ImageTarget name="Afghan" size="200.000000 149.647064" />
+    <ImageTarget name="1984" size="200.000000 150.588242" />
+    <ImageTarget name="Facebook" size="200.000000 150.045013" />
+    <ImageTarget name="Slide" size="100.000000 72.639069" />
+    <ImageTarget name="Buffalo" size="100.000000 75.091133" />
+    <ImageTarget name="Wizard" size="100.000000 77.272728" />
+  </Tracking>
+</QCARConfig>
