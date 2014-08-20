@@ -28,8 +28,8 @@
 		34832EC719A1838700C80D70 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC619A1838700C80D70 /* Security.framework */; };
 		34832EC919A1839200C80D70 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC819A1839200C80D70 /* QuartzCore.framework */; };
 		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
-		34D1DA6419A4531800CE0CA1 /* ImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* ImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA6519A4531800CE0CA1 /* ImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* ImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6819A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA6719A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard */; };
 		34D1DA6A19A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA6919A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard */; };
 		34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -98,10 +98,10 @@
 		34832EC619A1838700C80D70 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		34832EC819A1839200C80D70 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		34832ECA19A1841B00C80D70 /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVuforia.a; path = "../../../../../development/vuforia-sdk-ios-3-0-9/build/lib/arm/libVuforia.a"; sourceTree = "<group>"; };
-		34D1DA6019A4531800CE0CA1 /* ImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTargetsEAGLView.h; sourceTree = "<group>"; };
-		34D1DA6119A4531800CE0CA1 /* ImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageTargetsEAGLView.mm; sourceTree = "<group>"; };
-		34D1DA6219A4531800CE0CA1 /* ImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTargetsViewController.h; sourceTree = "<group>"; };
-		34D1DA6319A4531800CE0CA1 /* ImageTargetsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageTargetsViewController.mm; sourceTree = "<group>"; };
+		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
+		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
+		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
+		34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsViewController.mm; sourceTree = "<group>"; };
 		34D1DA6719A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "AFSStoryboard-iPhone.storyboard"; sourceTree = "<group>"; };
 		34D1DA6919A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "AFSStoryboard-iPad.storyboard"; sourceTree = "<group>"; };
 		34D1DA6C19A4559E00CE0CA1 /* SampleApplicationSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationSession.h; sourceTree = "<group>"; };
@@ -223,10 +223,10 @@
 				34D1DA6B19A4557C00CE0CA1 /* VuforiaSampleApp */,
 				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
 				34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */,
-				34D1DA6019A4531800CE0CA1 /* ImageTargetsEAGLView.h */,
-				34D1DA6119A4531800CE0CA1 /* ImageTargetsEAGLView.mm */,
-				34D1DA6219A4531800CE0CA1 /* ImageTargetsViewController.h */,
-				34D1DA6319A4531800CE0CA1 /* ImageTargetsViewController.mm */,
+				34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */,
+				34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */,
+				34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */,
+				34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */,
 				34832E9D19A1829100C80D70 /* Images.xcassets */,
 				34832E9219A1829100C80D70 /* Supporting Files */,
 			);
@@ -456,8 +456,8 @@
 				34832E9819A1829100C80D70 /* main.m in Sources */,
 				34D1DA8019A456E200CE0CA1 /* SampleAppMenu.mm in Sources */,
 				34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */,
-				34D1DA6519A4531800CE0CA1 /* ImageTargetsViewController.mm in Sources */,
-				34D1DA6419A4531800CE0CA1 /* ImageTargetsEAGLView.mm in Sources */,
+				34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */,
+				34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */,
 				34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */,
 				34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */,
 			);

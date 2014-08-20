@@ -7,7 +7,7 @@
         <!--Image Targets View Controller-->
         <scene sceneID="gTk-Td-QRC">
             <objects>
-                <viewController id="47d-AU-7MW" customClass="ImageTargetsViewController" sceneMemberID="viewController">
+                <viewController id="47d-AU-7MW" customClass="AFSImageTargetsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QTN-Bd-tN3"/>
                         <viewControllerLayoutGuide type="bottom" id="a35-hW-AWI"/>

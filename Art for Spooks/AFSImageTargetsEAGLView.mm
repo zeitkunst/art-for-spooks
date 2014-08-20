@@ -17,7 +17,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import <QCAR/TrackableResult.h>
 #import <QCAR/VideoBackgroundConfig.h>
 
-#import "ImageTargetsEAGLView.h"
+#import "AFSImageTargetsEAGLView.h"
 #import "Texture.h"
 #import "SampleApplicationUtils.h"
 #import "SampleApplicationShaderUtils.h"
@@ -197,6 +197,7 @@ namespace {
 // *** QCAR will call this method periodically on a background thread ***
 - (void)renderFrameQCAR
 {
+    
     [self setFramebuffer];
     
     // Clear colour and depth buffers
@@ -219,7 +220,7 @@ namespace {
     if(QCAR::Renderer::getInstance().getVideoBackgroundConfig().mReflection == QCAR::VIDEO_BACKGROUND_REFLECTION_ON)
         glFrontFace(GL_CW);  //Front camera
     else
-        glFrontFace(GL_CCW);   //Back camera
+        glFrontFace(GL_CCW); //Back camera
     
     
     for (int i = 0; i < state.getNumTrackableResults(); ++i) {
@@ -383,6 +384,7 @@ namespace {
 
 - (void)setFramebuffer
 {
+    
     // The EAGLContext must be set for each thread that wishes to use it.  Set
     // it the first time this method is called (on the render thread)
     if (context != [EAGLContext currentContext]) {
