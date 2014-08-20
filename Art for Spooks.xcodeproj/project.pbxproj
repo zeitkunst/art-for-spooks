@@ -34,10 +34,10 @@
 		34D1DA6A19A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA6919A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard */; };
 		34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA7A19A4559E00CE0CA1 /* SampleApplicationUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */; };
-		34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.m */; };
+		34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */; };
 		34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7319A4559E00CE0CA1 /* Texture.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA8019A456E200CE0CA1 /* SampleAppMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA8019A456E200CE0CA1 /* SampleAppMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA9219A4577300CE0CA1 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8219A4577300CE0CA1 /* ArtForSpooks.dat */; };
 		34D1DA9319A4577300CE0CA1 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8319A4577300CE0CA1 /* ArtForSpooks.xml */; };
 		34D1DA9419A4577300CE0CA1 /* StonesAndChips.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8419A4577300CE0CA1 /* StonesAndChips.dat */; };
@@ -103,16 +103,16 @@
 		34D1DA6E19A4559E00CE0CA1 /* SampleApplicationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationUtils.h; sourceTree = "<group>"; };
 		34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleApplicationUtils.cpp; sourceTree = "<group>"; };
 		34D1DA7019A4559E00CE0CA1 /* SampleApplicationShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationShaderUtils.h; sourceTree = "<group>"; };
-		34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleApplicationShaderUtils.m; sourceTree = "<group>"; };
+		34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationShaderUtils.mm; sourceTree = "<group>"; };
 		34D1DA7219A4559E00CE0CA1 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		34D1DA7319A4559E00CE0CA1 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		34D1DA7419A4559E00CE0CA1 /* Teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teapot.h; sourceTree = "<group>"; };
 		34D1DA7519A4559E00CE0CA1 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
 		34D1DA7619A4559E00CE0CA1 /* QuadResized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadResized.h; sourceTree = "<group>"; };
 		34D1DA7719A4559E00CE0CA1 /* SampleApplication3DModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplication3DModel.h; sourceTree = "<group>"; };
-		34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleApplication3DModel.m; sourceTree = "<group>"; };
+		34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplication3DModel.mm; sourceTree = "<group>"; };
 		34D1DA7E19A456E200CE0CA1 /* SampleAppMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAppMenu.h; sourceTree = "<group>"; };
-		34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleAppMenu.m; sourceTree = "<group>"; };
+		34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleAppMenu.mm; sourceTree = "<group>"; };
 		34D1DA8219A4577300CE0CA1 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
 		34D1DA8319A4577300CE0CA1 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
 		34D1DA8419A4577300CE0CA1 /* StonesAndChips.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = StonesAndChips.dat; sourceTree = "<group>"; };
@@ -263,20 +263,20 @@
 			isa = PBXGroup;
 			children = (
 				34D1DA7E19A456E200CE0CA1 /* SampleAppMenu.h */,
-				34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.m */,
+				34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.mm */,
 				34D1DA6C19A4559E00CE0CA1 /* SampleApplicationSession.h */,
 				34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */,
 				34D1DA6E19A4559E00CE0CA1 /* SampleApplicationUtils.h */,
 				34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */,
 				34D1DA7019A4559E00CE0CA1 /* SampleApplicationShaderUtils.h */,
-				34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.m */,
+				34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */,
 				34D1DA7219A4559E00CE0CA1 /* Texture.h */,
 				34D1DA7319A4559E00CE0CA1 /* Texture.mm */,
 				34D1DA7419A4559E00CE0CA1 /* Teapot.h */,
 				34D1DA7519A4559E00CE0CA1 /* Quad.h */,
 				34D1DA7619A4559E00CE0CA1 /* QuadResized.h */,
 				34D1DA7719A4559E00CE0CA1 /* SampleApplication3DModel.h */,
-				34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.m */,
+				34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.mm */,
 			);
 			name = VuforiaSampleApp;
 			sourceTree = "<group>";
@@ -418,11 +418,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.m in Sources */,
+				34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */,
 				34D1DA7A19A4559E00CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
-				34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.m in Sources */,
+				34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.mm in Sources */,
 				34832E9819A1829100C80D70 /* main.m in Sources */,
-				34D1DA8019A456E200CE0CA1 /* SampleAppMenu.m in Sources */,
+				34D1DA8019A456E200CE0CA1 /* SampleAppMenu.mm in Sources */,
 				34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */,
 				34D1DA6519A4531800CE0CA1 /* ImageTargetsViewController.mm in Sources */,
 				34D1DA6419A4531800CE0CA1 /* ImageTargetsEAGLView.mm in Sources */,
@@ -546,6 +546,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
@@ -566,6 +568,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
