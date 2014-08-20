@@ -12,7 +12,7 @@
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
 		34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34832E9419A1829100C80D70 /* InfoPlist.strings */; };
 		34832E9819A1829100C80D70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9719A1829100C80D70 /* main.m */; };
-		34832E9C19A1829100C80D70 /* AFSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9B19A1829100C80D70 /* AFSAppDelegate.m */; };
+		34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */; };
 		34832E9E19A1829100C80D70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34832E9D19A1829100C80D70 /* Images.xcassets */; };
 		34832EA519A1829100C80D70 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EA419A1829100C80D70 /* XCTest.framework */; };
 		34832EA619A1829200C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
@@ -76,7 +76,7 @@
 		34832E9719A1829100C80D70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		34832E9919A1829100C80D70 /* Art for Spooks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art for Spooks-Prefix.pch"; sourceTree = "<group>"; };
 		34832E9A19A1829100C80D70 /* AFSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSAppDelegate.h; sourceTree = "<group>"; };
-		34832E9B19A1829100C80D70 /* AFSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSAppDelegate.m; sourceTree = "<group>"; };
+		34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSAppDelegate.mm; sourceTree = "<group>"; };
 		34832E9D19A1829100C80D70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		34832EA319A1829100C80D70 /* Art for SpooksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Art for SpooksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34832EA419A1829100C80D70 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -103,7 +103,7 @@
 		34D1DA6E19A4559E00CE0CA1 /* SampleApplicationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationUtils.h; sourceTree = "<group>"; };
 		34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleApplicationUtils.cpp; sourceTree = "<group>"; };
 		34D1DA7019A4559E00CE0CA1 /* SampleApplicationShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationShaderUtils.h; sourceTree = "<group>"; };
-		34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationShaderUtils.mm; sourceTree = "<group>"; };
+		34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = SampleApplicationShaderUtils.mm; sourceTree = "<group>"; };
 		34D1DA7219A4559E00CE0CA1 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		34D1DA7319A4559E00CE0CA1 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		34D1DA7419A4559E00CE0CA1 /* Teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teapot.h; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				34D1DA6619A4545900CE0CA1 /* Storyboards */,
 				34D1DA6B19A4557C00CE0CA1 /* VuforiaSampleApp */,
 				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
-				34832E9B19A1829100C80D70 /* AFSAppDelegate.m */,
+				34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */,
 				34D1DA6019A4531800CE0CA1 /* ImageTargetsEAGLView.h */,
 				34D1DA6119A4531800CE0CA1 /* ImageTargetsEAGLView.mm */,
 				34D1DA6219A4531800CE0CA1 /* ImageTargetsViewController.h */,
@@ -426,7 +426,7 @@
 				34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */,
 				34D1DA6519A4531800CE0CA1 /* ImageTargetsViewController.mm in Sources */,
 				34D1DA6419A4531800CE0CA1 /* ImageTargetsEAGLView.mm in Sources */,
-				34832E9C19A1829100C80D70 /* AFSAppDelegate.m in Sources */,
+				34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */,
 				34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +544,10 @@
 		34832EB519A1829200C80D70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -558,6 +562,7 @@
 				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
 				LIBRARY_SEARCH_PATHS = "/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm";
+				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -566,6 +571,10 @@
 		34832EB619A1829200C80D70 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -580,6 +589,7 @@
 				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
 				LIBRARY_SEARCH_PATHS = "/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm";
+				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

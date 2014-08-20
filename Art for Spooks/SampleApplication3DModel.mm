@@ -73,15 +73,15 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
             switch(state) {
                 case 1:
                     m_nbVertices = nbItems / 3;
-                    m_vertices = malloc( nbItems * sizeof(float));
+                    m_vertices = (float *) malloc( nbItems * sizeof(float));
                     data = m_vertices;
                     break;
                 case 2:
-                    m_normals = malloc( nbItems * sizeof(float));
+                    m_normals = (float *) malloc( nbItems * sizeof(float));
                     data = m_normals;
                     break;
                 case 3:
-                    m_textcoords = malloc( nbItems * sizeof(float));
+                    m_textcoords = (float *) malloc( nbItems * sizeof(float));
                     data = m_textcoords;
                     break;
             }
