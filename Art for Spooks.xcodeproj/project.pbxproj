@@ -19,6 +19,24 @@
 		34832EA719A1829200C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
 		34832EAF19A1829200C80D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34832EAD19A1829200C80D70 /* InfoPlist.strings */; };
 		34832EB119A1829200C80D70 /* Art_for_SpooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34832EB019A1829200C80D70 /* Art_for_SpooksTests.m */; };
+		34832EBB19A1834600C80D70 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EBA19A1834600C80D70 /* CoreVideo.framework */; };
+		34832EBD19A1834F00C80D70 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EBC19A1834F00C80D70 /* CoreMedia.framework */; };
+		34832EBF19A1835C00C80D70 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EBE19A1835C00C80D70 /* AVFoundation.framework */; };
+		34832EC119A1836700C80D70 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC019A1836700C80D70 /* SystemConfiguration.framework */; };
+		34832EC319A1837000C80D70 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC219A1837000C80D70 /* OpenGLES.framework */; };
+		34832EC519A1837D00C80D70 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC419A1837D00C80D70 /* CoreMotion.framework */; };
+		34832EC719A1838700C80D70 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC619A1838700C80D70 /* Security.framework */; };
+		34832EC919A1839200C80D70 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC819A1839200C80D70 /* QuartzCore.framework */; };
+		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
+		34D1DA6419A4531800CE0CA1 /* ImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* ImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA6519A4531800CE0CA1 /* ImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* ImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA6819A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA6719A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard */; };
+		34D1DA6A19A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA6919A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard */; };
+		34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA7A19A4559E00CE0CA1 /* SampleApplicationUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */; };
+		34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.m */; };
+		34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7319A4559E00CE0CA1 /* Texture.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +66,34 @@
 		34832EAC19A1829200C80D70 /* Art for SpooksTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Art for SpooksTests-Info.plist"; sourceTree = "<group>"; };
 		34832EAE19A1829200C80D70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		34832EB019A1829200C80D70 /* Art_for_SpooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Art_for_SpooksTests.m; sourceTree = "<group>"; };
+		34832EBA19A1834600C80D70 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		34832EBC19A1834F00C80D70 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		34832EBE19A1835C00C80D70 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		34832EC019A1836700C80D70 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		34832EC219A1837000C80D70 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		34832EC419A1837D00C80D70 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		34832EC619A1838700C80D70 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		34832EC819A1839200C80D70 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		34832ECA19A1841B00C80D70 /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVuforia.a; path = "../../../../../development/vuforia-sdk-ios-3-0-9/build/lib/arm/libVuforia.a"; sourceTree = "<group>"; };
+		34D1DA6019A4531800CE0CA1 /* ImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTargetsEAGLView.h; sourceTree = "<group>"; };
+		34D1DA6119A4531800CE0CA1 /* ImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageTargetsEAGLView.mm; sourceTree = "<group>"; };
+		34D1DA6219A4531800CE0CA1 /* ImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTargetsViewController.h; sourceTree = "<group>"; };
+		34D1DA6319A4531800CE0CA1 /* ImageTargetsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageTargetsViewController.mm; sourceTree = "<group>"; };
+		34D1DA6719A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "AFSStoryboard-iPhone.storyboard"; sourceTree = "<group>"; };
+		34D1DA6919A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "AFSStoryboard-iPad.storyboard"; sourceTree = "<group>"; };
+		34D1DA6C19A4559E00CE0CA1 /* SampleApplicationSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationSession.h; sourceTree = "<group>"; };
+		34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
+		34D1DA6E19A4559E00CE0CA1 /* SampleApplicationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationUtils.h; sourceTree = "<group>"; };
+		34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleApplicationUtils.cpp; sourceTree = "<group>"; };
+		34D1DA7019A4559E00CE0CA1 /* SampleApplicationShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationShaderUtils.h; sourceTree = "<group>"; };
+		34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleApplicationShaderUtils.m; sourceTree = "<group>"; };
+		34D1DA7219A4559E00CE0CA1 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		34D1DA7319A4559E00CE0CA1 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		34D1DA7419A4559E00CE0CA1 /* Teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teapot.h; sourceTree = "<group>"; };
+		34D1DA7519A4559E00CE0CA1 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
+		34D1DA7619A4559E00CE0CA1 /* QuadResized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadResized.h; sourceTree = "<group>"; };
+		34D1DA7719A4559E00CE0CA1 /* SampleApplication3DModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplication3DModel.h; sourceTree = "<group>"; };
+		34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleApplication3DModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,9 +101,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */,
+				34832EBB19A1834600C80D70 /* CoreVideo.framework in Frameworks */,
+				34832EBD19A1834F00C80D70 /* CoreMedia.framework in Frameworks */,
+				34832EBF19A1835C00C80D70 /* AVFoundation.framework in Frameworks */,
+				34832EC119A1836700C80D70 /* SystemConfiguration.framework in Frameworks */,
+				34832EC319A1837000C80D70 /* OpenGLES.framework in Frameworks */,
+				34832EC519A1837D00C80D70 /* CoreMotion.framework in Frameworks */,
+				34832EC719A1838700C80D70 /* Security.framework in Frameworks */,
+				34832EC919A1839200C80D70 /* QuartzCore.framework in Frameworks */,
 				34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */,
 				34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */,
+				34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */,
+				34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +151,15 @@
 		34832E8A19A1829100C80D70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34832ECA19A1841B00C80D70 /* libVuforia.a */,
+				34832EC819A1839200C80D70 /* QuartzCore.framework */,
+				34832EC619A1838700C80D70 /* Security.framework */,
+				34832EC419A1837D00C80D70 /* CoreMotion.framework */,
+				34832EC219A1837000C80D70 /* OpenGLES.framework */,
+				34832EC019A1836700C80D70 /* SystemConfiguration.framework */,
+				34832EBE19A1835C00C80D70 /* AVFoundation.framework */,
+				34832EBC19A1834F00C80D70 /* CoreMedia.framework */,
+				34832EBA19A1834600C80D70 /* CoreVideo.framework */,
 				34832E8B19A1829100C80D70 /* Foundation.framework */,
 				34832E8D19A1829100C80D70 /* CoreGraphics.framework */,
 				34832E8F19A1829100C80D70 /* UIKit.framework */,
@@ -107,8 +171,14 @@
 		34832E9119A1829100C80D70 /* Art for Spooks */ = {
 			isa = PBXGroup;
 			children = (
+				34D1DA6B19A4557C00CE0CA1 /* VuforiaSampleApp */,
+				34D1DA6619A4545900CE0CA1 /* Storyboards */,
 				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
 				34832E9B19A1829100C80D70 /* AFSAppDelegate.m */,
+				34D1DA6019A4531800CE0CA1 /* ImageTargetsEAGLView.h */,
+				34D1DA6119A4531800CE0CA1 /* ImageTargetsEAGLView.mm */,
+				34D1DA6219A4531800CE0CA1 /* ImageTargetsViewController.h */,
+				34D1DA6319A4531800CE0CA1 /* ImageTargetsViewController.mm */,
 				34832E9D19A1829100C80D70 /* Images.xcassets */,
 				34832E9219A1829100C80D70 /* Supporting Files */,
 			);
@@ -142,6 +212,35 @@
 				34832EAD19A1829200C80D70 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		34D1DA6619A4545900CE0CA1 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				34D1DA6719A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard */,
+				34D1DA6919A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		34D1DA6B19A4557C00CE0CA1 /* VuforiaSampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				34D1DA6C19A4559E00CE0CA1 /* SampleApplicationSession.h */,
+				34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */,
+				34D1DA6E19A4559E00CE0CA1 /* SampleApplicationUtils.h */,
+				34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */,
+				34D1DA7019A4559E00CE0CA1 /* SampleApplicationShaderUtils.h */,
+				34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.m */,
+				34D1DA7219A4559E00CE0CA1 /* Texture.h */,
+				34D1DA7319A4559E00CE0CA1 /* Texture.mm */,
+				34D1DA7419A4559E00CE0CA1 /* Teapot.h */,
+				34D1DA7519A4559E00CE0CA1 /* Quad.h */,
+				34D1DA7619A4559E00CE0CA1 /* QuadResized.h */,
+				34D1DA7719A4559E00CE0CA1 /* SampleApplication3DModel.h */,
+				34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.m */,
+			);
+			name = VuforiaSampleApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +320,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
+				34D1DA6819A4547D00CE0CA1 /* AFSStoryboard-iPhone.storyboard in Resources */,
+				34D1DA6A19A454CB00CE0CA1 /* AFSStoryboard-iPad.storyboard in Resources */,
 				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,8 +341,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.m in Sources */,
+				34D1DA7A19A4559E00CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
+				34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.m in Sources */,
 				34832E9819A1829100C80D70 /* main.m in Sources */,
+				34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */,
+				34D1DA6519A4531800CE0CA1 /* ImageTargetsViewController.mm in Sources */,
+				34D1DA6419A4531800CE0CA1 /* ImageTargetsEAGLView.mm in Sources */,
 				34832E9C19A1829100C80D70 /* AFSAppDelegate.m in Sources */,
+				34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,9 +468,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/include",
+				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -373,9 +488,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/include",
+				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -440,6 +562,7 @@
 				34832EB619A1829200C80D70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		34832EB719A1829200C80D70 /* Build configuration list for PBXNativeTarget "Art for SpooksTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +571,7 @@
 				34832EB919A1829200C80D70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
