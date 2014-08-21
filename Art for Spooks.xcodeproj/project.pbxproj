@@ -61,6 +61,7 @@
 		34D1DAAD19A45FB700CE0CA1 /* Simple.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA919A45FB700CE0CA1 /* Simple.fragsh */; };
 		34D1DAAE19A45FB700CE0CA1 /* Simple.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAAA19A45FB700CE0CA1 /* Simple.vertsh */; };
 		34D1DABA19A57F0E00CE0CA1 /* clouds-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */; };
+		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		34D1DAA919A45FB700CE0CA1 /* Simple.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.fragsh; sourceTree = "<group>"; };
 		34D1DAAA19A45FB700CE0CA1 /* Simple.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.vertsh; sourceTree = "<group>"; };
 		34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds-2.png"; sourceTree = "<group>"; };
+		34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				34832EC519A1837D00C80D70 /* CoreMotion.framework in Frameworks */,
 				34832EC719A1838700C80D70 /* Security.framework in Frameworks */,
 				34832EC919A1839200C80D70 /* QuartzCore.framework in Frameworks */,
+				34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */,
 				34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */,
 				34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */,
 				34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */,
@@ -200,6 +203,7 @@
 		34832E8A19A1829100C80D70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */,
 				34832ECA19A1841B00C80D70 /* libVuforia.a */,
 				34832EC819A1839200C80D70 /* QuartzCore.framework */,
 				34832EC619A1838700C80D70 /* Security.framework */,

@@ -8,6 +8,7 @@
 
 #import "AFSAppDelegate.h"
 #import "AFSImageTargetsViewController.h"
+#import <GLKit/GLKit.h>
 
 @implementation AFSAppDelegate
 
@@ -17,7 +18,7 @@
     // Override point for customization after application launch.
     //self.window.backgroundColor = [UIColor whiteColor];
     //UIViewController *vc = [[[ImageTargetsViewController alloc] initWithNibName:@"ImageTargetsViewController" bundle:nil] autorelease];
-    UIViewController *vc = [[[ImageTargetsViewController alloc] init] autorelease];
+    GLKViewController *vc = [[[ImageTargetsViewController alloc] init] autorelease];
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     return YES;

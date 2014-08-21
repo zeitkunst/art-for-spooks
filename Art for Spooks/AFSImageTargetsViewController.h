@@ -6,12 +6,13 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 ===============================================================================*/
 
 #import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
 #import "SampleAppMenu.h"
 #import "AFSImageTargetsEAGLView.h"
 #import "SampleApplicationSession.h"
 #import <QCAR/DataSet.h>
 
-@interface ImageTargetsViewController : UIViewController <SampleApplicationControl, SampleAppMenuCommandProtocol>{
+@interface ImageTargetsViewController : GLKViewController <SampleApplicationControl, SampleAppMenuCommandProtocol>{
     CGRect viewFrame;
     ImageTargetsEAGLView* eaglView;
     QCAR::DataSet*  dataSetCurrent;
