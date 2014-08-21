@@ -3,8 +3,8 @@
  All Rights Reserved.
  ==============================================================================*/
 
-#ifndef _QCAR_QUAD_H_
-#define _QCAR_QUAD_H_
+#ifndef _QCAR_QUAD_RESIZED_H_
+#define _QCAR_QUAD_RESIZED_H_
 
 
 #define NUM_QUAD_VERTEX 4
@@ -42,4 +42,4 @@ static const unsigned short quadIndices[NUM_QUAD_INDEX] =
 };
 
 
-#endif // _QC_AR_QUAD_H_
+#endif // _QC_AR_QUAD_RESIZED_H_
