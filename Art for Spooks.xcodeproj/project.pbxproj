@@ -30,25 +30,13 @@
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
-		34D1DAD119A6AA1300CE0CA1 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DABE19A6AA1300CE0CA1 /* ArtForSpooks.dat */; };
-		34D1DAD219A6AA1300CE0CA1 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DABF19A6AA1300CE0CA1 /* ArtForSpooks.xml */; };
 		34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */; };
 		34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC119A6AA1300CE0CA1 /* buildings.txt */; };
-		34D1DAD519A6AA1300CE0CA1 /* clouds-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC219A6AA1300CE0CA1 /* clouds-2.png */; };
-		34D1DAD619A6AA1300CE0CA1 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC319A6AA1300CE0CA1 /* clouds.png */; };
-		34D1DAD719A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC419A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png */; };
-		34D1DAD819A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC519A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */; };
-		34D1DAD919A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC619A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
-		34D1DADA19A6AA1300CE0CA1 /* StonesAndChips.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC719A6AA1300CE0CA1 /* StonesAndChips.dat */; };
-		34D1DADB19A6AA1300CE0CA1 /* StonesAndChips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC819A6AA1300CE0CA1 /* StonesAndChips.xml */; };
-		34D1DADC19A6AA1300CE0CA1 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC919A6AA1300CE0CA1 /* Tarmac.dat */; };
-		34D1DADD19A6AA1300CE0CA1 /* Tarmac.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACA19A6AA1300CE0CA1 /* Tarmac.xml */; };
 		34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACB19A6AA1300CE0CA1 /* TextureTeapotBlue.png */; };
 		34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACC19A6AA1300CE0CA1 /* TextureTeapotBrass.png */; };
 		34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACD19A6AA1300CE0CA1 /* TextureTeapotGreen.png */; };
 		34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACE19A6AA1300CE0CA1 /* TextureTeapotRed.png */; };
 		34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACF19A6AA1300CE0CA1 /* TextureTeapotYellow.png */; };
-		34D1DAE319A6AA1300CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAD019A6AA1300CE0CA1 /* transparent.png */; };
 		34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DAF919A6AA2500CE0CA1 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAE919A6AA2500CE0CA1 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DAFA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAEB19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -60,6 +48,18 @@
 		34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAF419A6AA2500CE0CA1 /* Simple.vertsh */; };
 		34D1DB0119A6AA2500CE0CA1 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAF719A6AA2500CE0CA1 /* Texture.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DB0B19A6AB5400CE0CA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DB0919A6AB5400CE0CA1 /* main.m */; };
+		34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB0E19A6AD5100CE0CA1 /* clouds-2.png */; };
+		34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB0F19A6AD5100CE0CA1 /* clouds.png */; };
+		34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1019A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png */; };
+		34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */; };
+		34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
+		34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1319A6AD5100CE0CA1 /* transparent.png */; };
+		34D1DB2119A6AD7800CE0CA1 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1B19A6AD7800CE0CA1 /* ArtForSpooks.dat */; };
+		34D1DB2219A6AD7800CE0CA1 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1C19A6AD7800CE0CA1 /* ArtForSpooks.xml */; };
+		34D1DB2319A6AD7800CE0CA1 /* StonesAndChips.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */; };
+		34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */; };
+		34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */; };
+		34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,25 +101,13 @@
 		34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsViewController.mm; sourceTree = "<group>"; };
 		34D1DA7619A4559E00CE0CA1 /* QuadResized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadResized.h; sourceTree = "<group>"; };
 		34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		34D1DABE19A6AA1300CE0CA1 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
-		34D1DABF19A6AA1300CE0CA1 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
 		34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = building_texture.jpeg; sourceTree = "<group>"; };
 		34D1DAC119A6AA1300CE0CA1 /* buildings.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = buildings.txt; sourceTree = "<group>"; };
-		34D1DAC219A6AA1300CE0CA1 /* clouds-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds-2.png"; sourceTree = "<group>"; };
-		34D1DAC319A6AA1300CE0CA1 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
-		34D1DAC419A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-media-34098_003.png"; sourceTree = "<group>"; };
-		34D1DAC519A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_020.png"; sourceTree = "<group>"; };
-		34D1DAC619A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
-		34D1DAC719A6AA1300CE0CA1 /* StonesAndChips.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = StonesAndChips.dat; sourceTree = "<group>"; };
-		34D1DAC819A6AA1300CE0CA1 /* StonesAndChips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StonesAndChips.xml; sourceTree = "<group>"; };
-		34D1DAC919A6AA1300CE0CA1 /* Tarmac.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tarmac.dat; sourceTree = "<group>"; };
-		34D1DACA19A6AA1300CE0CA1 /* Tarmac.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tarmac.xml; sourceTree = "<group>"; };
 		34D1DACB19A6AA1300CE0CA1 /* TextureTeapotBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotBlue.png; sourceTree = "<group>"; };
 		34D1DACC19A6AA1300CE0CA1 /* TextureTeapotBrass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotBrass.png; sourceTree = "<group>"; };
 		34D1DACD19A6AA1300CE0CA1 /* TextureTeapotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotGreen.png; sourceTree = "<group>"; };
 		34D1DACE19A6AA1300CE0CA1 /* TextureTeapotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotRed.png; sourceTree = "<group>"; };
 		34D1DACF19A6AA1300CE0CA1 /* TextureTeapotYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotYellow.png; sourceTree = "<group>"; };
-		34D1DAD019A6AA1300CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		34D1DAE519A6AA2500CE0CA1 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
 		34D1DAE619A6AA2500CE0CA1 /* SampleApplication3DModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplication3DModel.h; sourceTree = "<group>"; };
 		34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplication3DModel.mm; sourceTree = "<group>"; };
@@ -141,6 +129,18 @@
 		34D1DB0719A6AAAD00CE0CA1 /* Art for Spooks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art for Spooks-Prefix.pch"; sourceTree = "<group>"; };
 		34D1DB0919A6AB5400CE0CA1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		34D1DB0C19A6ABBA00CE0CA1 /* Art for Spooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Art for Spooks-Info.plist"; sourceTree = "<group>"; };
+		34D1DB0E19A6AD5100CE0CA1 /* clouds-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds-2.png"; sourceTree = "<group>"; };
+		34D1DB0F19A6AD5100CE0CA1 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
+		34D1DB1019A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-media-34098_003.png"; sourceTree = "<group>"; };
+		34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_020.png"; sourceTree = "<group>"; };
+		34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
+		34D1DB1319A6AD5100CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
+		34D1DB1B19A6AD7800CE0CA1 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
+		34D1DB1C19A6AD7800CE0CA1 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
+		34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = StonesAndChips.dat; sourceTree = "<group>"; };
+		34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StonesAndChips.xml; sourceTree = "<group>"; };
+		34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tarmac.dat; sourceTree = "<group>"; };
+		34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tarmac.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,25 +267,15 @@
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				34D1DABE19A6AA1300CE0CA1 /* ArtForSpooks.dat */,
-				34D1DABF19A6AA1300CE0CA1 /* ArtForSpooks.xml */,
+				34D1DB0D19A6AD5100CE0CA1 /* replacements */,
+				34D1DB1A19A6AD7800CE0CA1 /* tracking_database */,
 				34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */,
 				34D1DAC119A6AA1300CE0CA1 /* buildings.txt */,
-				34D1DAC219A6AA1300CE0CA1 /* clouds-2.png */,
-				34D1DAC319A6AA1300CE0CA1 /* clouds.png */,
-				34D1DAC419A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png */,
-				34D1DAC519A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */,
-				34D1DAC619A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */,
-				34D1DAC719A6AA1300CE0CA1 /* StonesAndChips.dat */,
-				34D1DAC819A6AA1300CE0CA1 /* StonesAndChips.xml */,
-				34D1DAC919A6AA1300CE0CA1 /* Tarmac.dat */,
-				34D1DACA19A6AA1300CE0CA1 /* Tarmac.xml */,
 				34D1DACB19A6AA1300CE0CA1 /* TextureTeapotBlue.png */,
 				34D1DACC19A6AA1300CE0CA1 /* TextureTeapotBrass.png */,
 				34D1DACD19A6AA1300CE0CA1 /* TextureTeapotGreen.png */,
 				34D1DACE19A6AA1300CE0CA1 /* TextureTeapotRed.png */,
 				34D1DACF19A6AA1300CE0CA1 /* TextureTeapotYellow.png */,
-				34D1DAD019A6AA1300CE0CA1 /* transparent.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -321,6 +311,32 @@
 				34D1DAF419A6AA2500CE0CA1 /* Simple.vertsh */,
 			);
 			path = shaders;
+			sourceTree = "<group>";
+		};
+		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
+			isa = PBXGroup;
+			children = (
+				34D1DB0E19A6AD5100CE0CA1 /* clouds-2.png */,
+				34D1DB0F19A6AD5100CE0CA1 /* clouds.png */,
+				34D1DB1019A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png */,
+				34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */,
+				34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */,
+				34D1DB1319A6AD5100CE0CA1 /* transparent.png */,
+			);
+			path = replacements;
+			sourceTree = "<group>";
+		};
+		34D1DB1A19A6AD7800CE0CA1 /* tracking_database */ = {
+			isa = PBXGroup;
+			children = (
+				34D1DB1B19A6AD7800CE0CA1 /* ArtForSpooks.dat */,
+				34D1DB1C19A6AD7800CE0CA1 /* ArtForSpooks.xml */,
+				34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */,
+				34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */,
+				34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */,
+				34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */,
+			);
+			path = tracking_database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,31 +415,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */,
+				34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
-				34D1DAD519A6AA1300CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
-				34D1DAD219A6AA1300CE0CA1 /* ArtForSpooks.xml in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
-				34D1DADB19A6AA1300CE0CA1 /* StonesAndChips.xml in Resources */,
-				34D1DAD119A6AA1300CE0CA1 /* ArtForSpooks.dat in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
+				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
-				34D1DAD819A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
+				34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
-				34D1DADD19A6AA1300CE0CA1 /* Tarmac.xml in Resources */,
-				34D1DAE319A6AA1300CE0CA1 /* transparent.png in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
+				34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */,
+				34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
-				34D1DADA19A6AA1300CE0CA1 /* StonesAndChips.dat in Resources */,
+				34D1DB2219A6AD7800CE0CA1 /* ArtForSpooks.xml in Resources */,
+				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */,
 				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
-				34D1DAD619A6AA1300CE0CA1 /* clouds.png in Resources */,
-				34D1DAD719A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
-				34D1DAD919A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,
+				34D1DB2119A6AD7800CE0CA1 /* ArtForSpooks.dat in Resources */,
 				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
-				34D1DADC19A6AA1300CE0CA1 /* Tarmac.dat in Resources */,
+				34D1DB2319A6AD7800CE0CA1 /* StonesAndChips.dat in Resources */,
+				34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
+				34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
