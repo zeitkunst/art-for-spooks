@@ -56,12 +56,14 @@ namespace {
         //"TextureTeapotRed.png",
         "Intercept-psychology-a-new-kind-of-sigdev_025.png",
         "building_texture.jpeg",
-        "clouds.png"
+        "clouds-2.png"
     };
     
     // Model scale factor
     const float kObjectScaleNormal = 3.0f;
     const float kObjectScaleOffTargetTracking = 12.0f;
+    
+    float texturePosition = -20.0;
 }
 
 
@@ -185,6 +187,13 @@ namespace {
     [buildingModel read];
 }
 
+- (void) updateTexturePosition {
+    if (texturePosition >= 20.0) {
+        texturePosition = -20.0;
+    } else {
+        texturePosition += 0.05;
+    }
+}
 
 //------------------------------------------------------------------------------
 #pragma mark - UIGLViewProtocol methods
@@ -240,6 +249,9 @@ namespace {
         } else {
             SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, kObjectScaleNormal, &modelViewMatrix.data[0]);
             SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
+            [self updateTexturePosition];
+            SampleApplicationUtils::translatePoseMatrix(texturePosition, -2.0, 10.0, &modelViewMatrix.data[0]);
+            SampleApplicationUtils::rotatePoseMatrix(10, 1, 0, 0, &modelViewMatrix.data[0]);
         }
         
         SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);

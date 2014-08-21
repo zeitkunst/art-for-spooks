@@ -43,7 +43,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         extendedTrackingIsOn = NO;
         
         // a single tap will trigger a single autofocus operation
-        //tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(autofocus:)];
+        tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(autofocus:)];
         
         // we use the iOS notification to pause/resume the AR when the application goes (or come back from) background
         
@@ -113,7 +113,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 	// Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    //[self.view addGestureRecognizer:tapGestureRecognizer];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     NSLog(@"self.navigationController.navigationBarHidden:%d",self.navigationController.navigationBarHidden);
 }

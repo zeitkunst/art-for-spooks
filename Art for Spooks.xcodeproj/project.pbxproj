@@ -60,6 +60,7 @@
 		34D1DAAC19A45FB700CE0CA1 /* Line.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA819A45FB700CE0CA1 /* Line.fragsh */; };
 		34D1DAAD19A45FB700CE0CA1 /* Simple.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA919A45FB700CE0CA1 /* Simple.fragsh */; };
 		34D1DAAE19A45FB700CE0CA1 /* Simple.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAAA19A45FB700CE0CA1 /* Simple.vertsh */; };
+		34D1DABA19A57F0E00CE0CA1 /* clouds-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		34D1DAA819A45FB700CE0CA1 /* Line.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Line.fragsh; sourceTree = "<group>"; };
 		34D1DAA919A45FB700CE0CA1 /* Simple.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.fragsh; sourceTree = "<group>"; };
 		34D1DAAA19A45FB700CE0CA1 /* Simple.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.vertsh; sourceTree = "<group>"; };
+		34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds-2.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +317,7 @@
 				34D1DA8F19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */,
 				34D1DA9019A4577300CE0CA1 /* transparent.png */,
 				34D1DA9119A4577300CE0CA1 /* clouds.png */,
+				34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				34D1DA9319A4577300CE0CA1 /* ArtForSpooks.xml in Resources */,
 				34D1DAAB19A45FB700CE0CA1 /* Line.vertsh in Resources */,
 				34D1DA9619A4577300CE0CA1 /* Tarmac.dat in Resources */,
+				34D1DABA19A57F0E00CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAAC19A45FB700CE0CA1 /* Line.fragsh in Resources */,
 				34D1DAA119A4577300CE0CA1 /* clouds.png in Resources */,
 				34D1DA9F19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
