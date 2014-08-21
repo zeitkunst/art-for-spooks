@@ -11,7 +11,6 @@
 		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
 		34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34832E9419A1829100C80D70 /* InfoPlist.strings */; };
-		34832E9819A1829100C80D70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9719A1829100C80D70 /* main.m */; };
 		34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34832E9E19A1829100C80D70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34832E9D19A1829100C80D70 /* Images.xcassets */; };
 		34832EA519A1829100C80D70 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EA419A1829100C80D70 /* XCTest.framework */; };
@@ -30,36 +29,37 @@
 		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA7A19A4559E00CE0CA1 /* SampleApplicationUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */; };
-		34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */; };
-		34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7319A4559E00CE0CA1 /* Texture.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA8019A456E200CE0CA1 /* SampleAppMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DA9219A4577300CE0CA1 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8219A4577300CE0CA1 /* ArtForSpooks.dat */; };
-		34D1DA9319A4577300CE0CA1 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8319A4577300CE0CA1 /* ArtForSpooks.xml */; };
-		34D1DA9419A4577300CE0CA1 /* StonesAndChips.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8419A4577300CE0CA1 /* StonesAndChips.dat */; };
-		34D1DA9519A4577300CE0CA1 /* StonesAndChips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8519A4577300CE0CA1 /* StonesAndChips.xml */; };
-		34D1DA9619A4577300CE0CA1 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8619A4577300CE0CA1 /* Tarmac.dat */; };
-		34D1DA9719A4577300CE0CA1 /* Tarmac.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8719A4577300CE0CA1 /* Tarmac.xml */; };
-		34D1DA9819A4577300CE0CA1 /* TextureTeapotBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8819A4577300CE0CA1 /* TextureTeapotBlue.png */; };
-		34D1DA9919A4577300CE0CA1 /* TextureTeapotBrass.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8919A4577300CE0CA1 /* TextureTeapotBrass.png */; };
-		34D1DA9A19A4577300CE0CA1 /* TextureTeapotGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8A19A4577300CE0CA1 /* TextureTeapotGreen.png */; };
-		34D1DA9B19A4577300CE0CA1 /* TextureTeapotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8B19A4577300CE0CA1 /* TextureTeapotRed.png */; };
-		34D1DA9C19A4577300CE0CA1 /* TextureTeapotYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8C19A4577300CE0CA1 /* TextureTeapotYellow.png */; };
-		34D1DA9D19A4577300CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8D19A4577300CE0CA1 /* DerSpiegel-media-34098_003.png */; };
-		34D1DA9E19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8E19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
-		34D1DA9F19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA8F19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */; };
-		34D1DAA019A4577300CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA9019A4577300CE0CA1 /* transparent.png */; };
-		34D1DAA119A4577300CE0CA1 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DA9119A4577300CE0CA1 /* clouds.png */; };
-		34D1DAA419A45F7000CE0CA1 /* building_texture.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA219A45F7000CE0CA1 /* building_texture.jpeg */; };
-		34D1DAA519A45F7000CE0CA1 /* buildings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA319A45F7000CE0CA1 /* buildings.txt */; };
-		34D1DAAB19A45FB700CE0CA1 /* Line.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA719A45FB700CE0CA1 /* Line.vertsh */; };
-		34D1DAAC19A45FB700CE0CA1 /* Line.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA819A45FB700CE0CA1 /* Line.fragsh */; };
-		34D1DAAD19A45FB700CE0CA1 /* Simple.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAA919A45FB700CE0CA1 /* Simple.fragsh */; };
-		34D1DAAE19A45FB700CE0CA1 /* Simple.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAAA19A45FB700CE0CA1 /* Simple.vertsh */; };
-		34D1DABA19A57F0E00CE0CA1 /* clouds-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
+		34D1DAD119A6AA1300CE0CA1 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DABE19A6AA1300CE0CA1 /* ArtForSpooks.dat */; };
+		34D1DAD219A6AA1300CE0CA1 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DABF19A6AA1300CE0CA1 /* ArtForSpooks.xml */; };
+		34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */; };
+		34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC119A6AA1300CE0CA1 /* buildings.txt */; };
+		34D1DAD519A6AA1300CE0CA1 /* clouds-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC219A6AA1300CE0CA1 /* clouds-2.png */; };
+		34D1DAD619A6AA1300CE0CA1 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC319A6AA1300CE0CA1 /* clouds.png */; };
+		34D1DAD719A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC419A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png */; };
+		34D1DAD819A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC519A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */; };
+		34D1DAD919A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC619A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
+		34D1DADA19A6AA1300CE0CA1 /* StonesAndChips.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC719A6AA1300CE0CA1 /* StonesAndChips.dat */; };
+		34D1DADB19A6AA1300CE0CA1 /* StonesAndChips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC819A6AA1300CE0CA1 /* StonesAndChips.xml */; };
+		34D1DADC19A6AA1300CE0CA1 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAC919A6AA1300CE0CA1 /* Tarmac.dat */; };
+		34D1DADD19A6AA1300CE0CA1 /* Tarmac.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACA19A6AA1300CE0CA1 /* Tarmac.xml */; };
+		34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACB19A6AA1300CE0CA1 /* TextureTeapotBlue.png */; };
+		34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACC19A6AA1300CE0CA1 /* TextureTeapotBrass.png */; };
+		34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACD19A6AA1300CE0CA1 /* TextureTeapotGreen.png */; };
+		34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACE19A6AA1300CE0CA1 /* TextureTeapotRed.png */; };
+		34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACF19A6AA1300CE0CA1 /* TextureTeapotYellow.png */; };
+		34D1DAE319A6AA1300CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAD019A6AA1300CE0CA1 /* transparent.png */; };
+		34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DAF919A6AA2500CE0CA1 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAE919A6AA2500CE0CA1 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DAFA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAEB19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAEC19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp */; };
+		34D1DAFC19A6AA2500CE0CA1 /* SampleAppMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAEF19A6AA2500CE0CA1 /* SampleAppMenu.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAF119A6AA2500CE0CA1 /* Line.fragsh */; };
+		34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAF219A6AA2500CE0CA1 /* Line.vertsh */; };
+		34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAF319A6AA2500CE0CA1 /* Simple.fragsh */; };
+		34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DAF419A6AA2500CE0CA1 /* Simple.vertsh */; };
+		34D1DB0119A6AA2500CE0CA1 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAF719A6AA2500CE0CA1 /* Texture.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34D1DB0B19A6AB5400CE0CA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DB0919A6AB5400CE0CA1 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,10 +77,7 @@
 		34832E8B19A1829100C80D70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34832E8D19A1829100C80D70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		34832E8F19A1829100C80D70 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		34832E9319A1829100C80D70 /* Art for Spooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Art for Spooks-Info.plist"; sourceTree = "<group>"; };
 		34832E9519A1829100C80D70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		34832E9719A1829100C80D70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		34832E9919A1829100C80D70 /* Art for Spooks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art for Spooks-Prefix.pch"; sourceTree = "<group>"; };
 		34832E9A19A1829100C80D70 /* AFSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSAppDelegate.h; sourceTree = "<group>"; };
 		34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSAppDelegate.mm; sourceTree = "<group>"; };
 		34832E9D19A1829100C80D70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -102,45 +99,48 @@
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
 		34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsViewController.mm; sourceTree = "<group>"; };
-		34D1DA6C19A4559E00CE0CA1 /* SampleApplicationSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationSession.h; sourceTree = "<group>"; };
-		34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
-		34D1DA6E19A4559E00CE0CA1 /* SampleApplicationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationUtils.h; sourceTree = "<group>"; };
-		34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleApplicationUtils.cpp; sourceTree = "<group>"; };
-		34D1DA7019A4559E00CE0CA1 /* SampleApplicationShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationShaderUtils.h; sourceTree = "<group>"; };
-		34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = SampleApplicationShaderUtils.mm; sourceTree = "<group>"; };
-		34D1DA7219A4559E00CE0CA1 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
-		34D1DA7319A4559E00CE0CA1 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
-		34D1DA7419A4559E00CE0CA1 /* Teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teapot.h; sourceTree = "<group>"; };
-		34D1DA7519A4559E00CE0CA1 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
 		34D1DA7619A4559E00CE0CA1 /* QuadResized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadResized.h; sourceTree = "<group>"; };
-		34D1DA7719A4559E00CE0CA1 /* SampleApplication3DModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplication3DModel.h; sourceTree = "<group>"; };
-		34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplication3DModel.mm; sourceTree = "<group>"; };
-		34D1DA7E19A456E200CE0CA1 /* SampleAppMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAppMenu.h; sourceTree = "<group>"; };
-		34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleAppMenu.mm; sourceTree = "<group>"; };
-		34D1DA8219A4577300CE0CA1 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
-		34D1DA8319A4577300CE0CA1 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
-		34D1DA8419A4577300CE0CA1 /* StonesAndChips.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = StonesAndChips.dat; sourceTree = "<group>"; };
-		34D1DA8519A4577300CE0CA1 /* StonesAndChips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StonesAndChips.xml; sourceTree = "<group>"; };
-		34D1DA8619A4577300CE0CA1 /* Tarmac.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tarmac.dat; sourceTree = "<group>"; };
-		34D1DA8719A4577300CE0CA1 /* Tarmac.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tarmac.xml; sourceTree = "<group>"; };
-		34D1DA8819A4577300CE0CA1 /* TextureTeapotBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotBlue.png; sourceTree = "<group>"; };
-		34D1DA8919A4577300CE0CA1 /* TextureTeapotBrass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotBrass.png; sourceTree = "<group>"; };
-		34D1DA8A19A4577300CE0CA1 /* TextureTeapotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotGreen.png; sourceTree = "<group>"; };
-		34D1DA8B19A4577300CE0CA1 /* TextureTeapotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotRed.png; sourceTree = "<group>"; };
-		34D1DA8C19A4577300CE0CA1 /* TextureTeapotYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotYellow.png; sourceTree = "<group>"; };
-		34D1DA8D19A4577300CE0CA1 /* DerSpiegel-media-34098_003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-media-34098_003.png"; sourceTree = "<group>"; };
-		34D1DA8E19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
-		34D1DA8F19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_020.png"; sourceTree = "<group>"; };
-		34D1DA9019A4577300CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
-		34D1DA9119A4577300CE0CA1 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
-		34D1DAA219A45F7000CE0CA1 /* building_texture.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = building_texture.jpeg; sourceTree = "<group>"; };
-		34D1DAA319A45F7000CE0CA1 /* buildings.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = buildings.txt; sourceTree = "<group>"; };
-		34D1DAA719A45FB700CE0CA1 /* Line.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Line.vertsh; sourceTree = "<group>"; };
-		34D1DAA819A45FB700CE0CA1 /* Line.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Line.fragsh; sourceTree = "<group>"; };
-		34D1DAA919A45FB700CE0CA1 /* Simple.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.fragsh; sourceTree = "<group>"; };
-		34D1DAAA19A45FB700CE0CA1 /* Simple.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.vertsh; sourceTree = "<group>"; };
-		34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds-2.png"; sourceTree = "<group>"; };
 		34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		34D1DABE19A6AA1300CE0CA1 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
+		34D1DABF19A6AA1300CE0CA1 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
+		34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = building_texture.jpeg; sourceTree = "<group>"; };
+		34D1DAC119A6AA1300CE0CA1 /* buildings.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = buildings.txt; sourceTree = "<group>"; };
+		34D1DAC219A6AA1300CE0CA1 /* clouds-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds-2.png"; sourceTree = "<group>"; };
+		34D1DAC319A6AA1300CE0CA1 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
+		34D1DAC419A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-media-34098_003.png"; sourceTree = "<group>"; };
+		34D1DAC519A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_020.png"; sourceTree = "<group>"; };
+		34D1DAC619A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
+		34D1DAC719A6AA1300CE0CA1 /* StonesAndChips.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = StonesAndChips.dat; sourceTree = "<group>"; };
+		34D1DAC819A6AA1300CE0CA1 /* StonesAndChips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StonesAndChips.xml; sourceTree = "<group>"; };
+		34D1DAC919A6AA1300CE0CA1 /* Tarmac.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tarmac.dat; sourceTree = "<group>"; };
+		34D1DACA19A6AA1300CE0CA1 /* Tarmac.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tarmac.xml; sourceTree = "<group>"; };
+		34D1DACB19A6AA1300CE0CA1 /* TextureTeapotBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotBlue.png; sourceTree = "<group>"; };
+		34D1DACC19A6AA1300CE0CA1 /* TextureTeapotBrass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotBrass.png; sourceTree = "<group>"; };
+		34D1DACD19A6AA1300CE0CA1 /* TextureTeapotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotGreen.png; sourceTree = "<group>"; };
+		34D1DACE19A6AA1300CE0CA1 /* TextureTeapotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotRed.png; sourceTree = "<group>"; };
+		34D1DACF19A6AA1300CE0CA1 /* TextureTeapotYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextureTeapotYellow.png; sourceTree = "<group>"; };
+		34D1DAD019A6AA1300CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
+		34D1DAE519A6AA2500CE0CA1 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
+		34D1DAE619A6AA2500CE0CA1 /* SampleApplication3DModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplication3DModel.h; sourceTree = "<group>"; };
+		34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplication3DModel.mm; sourceTree = "<group>"; };
+		34D1DAE819A6AA2500CE0CA1 /* SampleApplicationSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationSession.h; sourceTree = "<group>"; };
+		34D1DAE919A6AA2500CE0CA1 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
+		34D1DAEA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationShaderUtils.h; sourceTree = "<group>"; };
+		34D1DAEB19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationShaderUtils.mm; sourceTree = "<group>"; };
+		34D1DAEC19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleApplicationUtils.cpp; sourceTree = "<group>"; };
+		34D1DAED19A6AA2500CE0CA1 /* SampleApplicationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationUtils.h; sourceTree = "<group>"; };
+		34D1DAEE19A6AA2500CE0CA1 /* SampleAppMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAppMenu.h; sourceTree = "<group>"; };
+		34D1DAEF19A6AA2500CE0CA1 /* SampleAppMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleAppMenu.mm; sourceTree = "<group>"; };
+		34D1DAF119A6AA2500CE0CA1 /* Line.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Line.fragsh; sourceTree = "<group>"; };
+		34D1DAF219A6AA2500CE0CA1 /* Line.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Line.vertsh; sourceTree = "<group>"; };
+		34D1DAF319A6AA2500CE0CA1 /* Simple.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.fragsh; sourceTree = "<group>"; };
+		34D1DAF419A6AA2500CE0CA1 /* Simple.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.vertsh; sourceTree = "<group>"; };
+		34D1DAF519A6AA2500CE0CA1 /* Teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teapot.h; sourceTree = "<group>"; };
+		34D1DAF619A6AA2500CE0CA1 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		34D1DAF719A6AA2500CE0CA1 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		34D1DB0719A6AAAD00CE0CA1 /* Art for Spooks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art for Spooks-Prefix.pch"; sourceTree = "<group>"; };
+		34D1DB0919A6AB5400CE0CA1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		34D1DB0C19A6ABBA00CE0CA1 /* Art for Spooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Art for Spooks-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,8 +220,8 @@
 		34832E9119A1829100C80D70 /* Art for Spooks */ = {
 			isa = PBXGroup;
 			children = (
-				34D1DA8119A4574F00CE0CA1 /* Assets */,
-				34D1DA6B19A4557C00CE0CA1 /* VuforiaSampleApp */,
+				34D1DABD19A6AA1300CE0CA1 /* assets */,
+				34D1DAE419A6AA2500CE0CA1 /* VuforiaSampleApp */,
 				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
 				34D1DA7619A4559E00CE0CA1 /* QuadResized.h */,
 				34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */,
@@ -238,10 +238,10 @@
 		34832E9219A1829100C80D70 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				34832E9319A1829100C80D70 /* Art for Spooks-Info.plist */,
 				34832E9419A1829100C80D70 /* InfoPlist.strings */,
-				34832E9719A1829100C80D70 /* main.m */,
-				34832E9919A1829100C80D70 /* Art for Spooks-Prefix.pch */,
+				34D1DB0919A6AB5400CE0CA1 /* main.m */,
+				34D1DB0719A6AAAD00CE0CA1 /* Art for Spooks-Prefix.pch */,
+				34D1DB0C19A6ABBA00CE0CA1 /* Art for Spooks-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -264,63 +264,63 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		34D1DA6B19A4557C00CE0CA1 /* VuforiaSampleApp */ = {
+		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				34D1DAA619A45FAC00CE0CA1 /* Shaders */,
-				34D1DA7E19A456E200CE0CA1 /* SampleAppMenu.h */,
-				34D1DA7F19A456E200CE0CA1 /* SampleAppMenu.mm */,
-				34D1DA6C19A4559E00CE0CA1 /* SampleApplicationSession.h */,
-				34D1DA6D19A4559E00CE0CA1 /* SampleApplicationSession.mm */,
-				34D1DA6E19A4559E00CE0CA1 /* SampleApplicationUtils.h */,
-				34D1DA6F19A4559E00CE0CA1 /* SampleApplicationUtils.cpp */,
-				34D1DA7019A4559E00CE0CA1 /* SampleApplicationShaderUtils.h */,
-				34D1DA7119A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm */,
-				34D1DA7219A4559E00CE0CA1 /* Texture.h */,
-				34D1DA7319A4559E00CE0CA1 /* Texture.mm */,
-				34D1DA7419A4559E00CE0CA1 /* Teapot.h */,
-				34D1DA7519A4559E00CE0CA1 /* Quad.h */,
-				34D1DA7719A4559E00CE0CA1 /* SampleApplication3DModel.h */,
-				34D1DA7819A4559E00CE0CA1 /* SampleApplication3DModel.mm */,
+				34D1DABE19A6AA1300CE0CA1 /* ArtForSpooks.dat */,
+				34D1DABF19A6AA1300CE0CA1 /* ArtForSpooks.xml */,
+				34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */,
+				34D1DAC119A6AA1300CE0CA1 /* buildings.txt */,
+				34D1DAC219A6AA1300CE0CA1 /* clouds-2.png */,
+				34D1DAC319A6AA1300CE0CA1 /* clouds.png */,
+				34D1DAC419A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png */,
+				34D1DAC519A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */,
+				34D1DAC619A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */,
+				34D1DAC719A6AA1300CE0CA1 /* StonesAndChips.dat */,
+				34D1DAC819A6AA1300CE0CA1 /* StonesAndChips.xml */,
+				34D1DAC919A6AA1300CE0CA1 /* Tarmac.dat */,
+				34D1DACA19A6AA1300CE0CA1 /* Tarmac.xml */,
+				34D1DACB19A6AA1300CE0CA1 /* TextureTeapotBlue.png */,
+				34D1DACC19A6AA1300CE0CA1 /* TextureTeapotBrass.png */,
+				34D1DACD19A6AA1300CE0CA1 /* TextureTeapotGreen.png */,
+				34D1DACE19A6AA1300CE0CA1 /* TextureTeapotRed.png */,
+				34D1DACF19A6AA1300CE0CA1 /* TextureTeapotYellow.png */,
+				34D1DAD019A6AA1300CE0CA1 /* transparent.png */,
 			);
-			name = VuforiaSampleApp;
+			path = assets;
 			sourceTree = "<group>";
 		};
-		34D1DA8119A4574F00CE0CA1 /* Assets */ = {
+		34D1DAE419A6AA2500CE0CA1 /* VuforiaSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				34D1DA8219A4577300CE0CA1 /* ArtForSpooks.dat */,
-				34D1DA8319A4577300CE0CA1 /* ArtForSpooks.xml */,
-				34D1DA8419A4577300CE0CA1 /* StonesAndChips.dat */,
-				34D1DA8519A4577300CE0CA1 /* StonesAndChips.xml */,
-				34D1DA8619A4577300CE0CA1 /* Tarmac.dat */,
-				34D1DA8719A4577300CE0CA1 /* Tarmac.xml */,
-				34D1DAA219A45F7000CE0CA1 /* building_texture.jpeg */,
-				34D1DAA319A45F7000CE0CA1 /* buildings.txt */,
-				34D1DA8819A4577300CE0CA1 /* TextureTeapotBlue.png */,
-				34D1DA8919A4577300CE0CA1 /* TextureTeapotBrass.png */,
-				34D1DA8A19A4577300CE0CA1 /* TextureTeapotGreen.png */,
-				34D1DA8B19A4577300CE0CA1 /* TextureTeapotRed.png */,
-				34D1DA8C19A4577300CE0CA1 /* TextureTeapotYellow.png */,
-				34D1DA8D19A4577300CE0CA1 /* DerSpiegel-media-34098_003.png */,
-				34D1DA8E19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */,
-				34D1DA8F19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */,
-				34D1DA9019A4577300CE0CA1 /* transparent.png */,
-				34D1DA9119A4577300CE0CA1 /* clouds.png */,
-				34D1DAB919A57F0E00CE0CA1 /* clouds-2.png */,
+				34D1DAE519A6AA2500CE0CA1 /* Quad.h */,
+				34D1DAE619A6AA2500CE0CA1 /* SampleApplication3DModel.h */,
+				34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */,
+				34D1DAE819A6AA2500CE0CA1 /* SampleApplicationSession.h */,
+				34D1DAE919A6AA2500CE0CA1 /* SampleApplicationSession.mm */,
+				34D1DAEA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.h */,
+				34D1DAEB19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm */,
+				34D1DAEC19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp */,
+				34D1DAED19A6AA2500CE0CA1 /* SampleApplicationUtils.h */,
+				34D1DAEE19A6AA2500CE0CA1 /* SampleAppMenu.h */,
+				34D1DAEF19A6AA2500CE0CA1 /* SampleAppMenu.mm */,
+				34D1DAF019A6AA2500CE0CA1 /* shaders */,
+				34D1DAF519A6AA2500CE0CA1 /* Teapot.h */,
+				34D1DAF619A6AA2500CE0CA1 /* Texture.h */,
+				34D1DAF719A6AA2500CE0CA1 /* Texture.mm */,
 			);
-			name = Assets;
+			path = VuforiaSampleApp;
 			sourceTree = "<group>";
 		};
-		34D1DAA619A45FAC00CE0CA1 /* Shaders */ = {
+		34D1DAF019A6AA2500CE0CA1 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				34D1DAA719A45FB700CE0CA1 /* Line.vertsh */,
-				34D1DAA819A45FB700CE0CA1 /* Line.fragsh */,
-				34D1DAA919A45FB700CE0CA1 /* Simple.fragsh */,
-				34D1DAAA19A45FB700CE0CA1 /* Simple.vertsh */,
+				34D1DAF119A6AA2500CE0CA1 /* Line.fragsh */,
+				34D1DAF219A6AA2500CE0CA1 /* Line.vertsh */,
+				34D1DAF319A6AA2500CE0CA1 /* Simple.fragsh */,
+				34D1DAF419A6AA2500CE0CA1 /* Simple.vertsh */,
 			);
-			name = Shaders;
+			path = shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,31 +399,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34D1DAA019A4577300CE0CA1 /* transparent.png in Resources */,
-				34D1DA9319A4577300CE0CA1 /* ArtForSpooks.xml in Resources */,
-				34D1DAAB19A45FB700CE0CA1 /* Line.vertsh in Resources */,
-				34D1DA9619A4577300CE0CA1 /* Tarmac.dat in Resources */,
-				34D1DABA19A57F0E00CE0CA1 /* clouds-2.png in Resources */,
-				34D1DAAC19A45FB700CE0CA1 /* Line.fragsh in Resources */,
-				34D1DAA119A4577300CE0CA1 /* clouds.png in Resources */,
-				34D1DA9F19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
+				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
+				34D1DAD519A6AA1300CE0CA1 /* clouds-2.png in Resources */,
+				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
+				34D1DAD219A6AA1300CE0CA1 /* ArtForSpooks.xml in Resources */,
+				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
+				34D1DADB19A6AA1300CE0CA1 /* StonesAndChips.xml in Resources */,
+				34D1DAD119A6AA1300CE0CA1 /* ArtForSpooks.dat in Resources */,
+				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
+				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
+				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
+				34D1DAD819A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
-				34D1DA9819A4577300CE0CA1 /* TextureTeapotBlue.png in Resources */,
-				34D1DAAE19A45FB700CE0CA1 /* Simple.vertsh in Resources */,
-				34D1DA9219A4577300CE0CA1 /* ArtForSpooks.dat in Resources */,
-				34D1DA9B19A4577300CE0CA1 /* TextureTeapotRed.png in Resources */,
-				34D1DAAD19A45FB700CE0CA1 /* Simple.fragsh in Resources */,
-				34D1DA9919A4577300CE0CA1 /* TextureTeapotBrass.png in Resources */,
-				34D1DA9D19A4577300CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
-				34D1DA9419A4577300CE0CA1 /* StonesAndChips.dat in Resources */,
-				34D1DA9719A4577300CE0CA1 /* Tarmac.xml in Resources */,
+				34D1DADD19A6AA1300CE0CA1 /* Tarmac.xml in Resources */,
+				34D1DAE319A6AA1300CE0CA1 /* transparent.png in Resources */,
+				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
+				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
+				34D1DADA19A6AA1300CE0CA1 /* StonesAndChips.dat in Resources */,
+				34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */,
 				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
-				34D1DA9C19A4577300CE0CA1 /* TextureTeapotYellow.png in Resources */,
-				34D1DA9E19A4577300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,
-				34D1DAA419A45F7000CE0CA1 /* building_texture.jpeg in Resources */,
-				34D1DA9519A4577300CE0CA1 /* StonesAndChips.xml in Resources */,
-				34D1DAA519A45F7000CE0CA1 /* buildings.txt in Resources */,
-				34D1DA9A19A4577300CE0CA1 /* TextureTeapotGreen.png in Resources */,
+				34D1DAD619A6AA1300CE0CA1 /* clouds.png in Resources */,
+				34D1DAD719A6AA1300CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
+				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
+				34D1DAD919A6AA1300CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,
+				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
+				34D1DADC19A6AA1300CE0CA1 /* Tarmac.dat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,16 +442,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34D1DA7B19A4559E00CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */,
-				34D1DA7A19A4559E00CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
-				34D1DA7D19A4559E00CE0CA1 /* SampleApplication3DModel.mm in Sources */,
-				34832E9819A1829100C80D70 /* main.m in Sources */,
-				34D1DA8019A456E200CE0CA1 /* SampleAppMenu.mm in Sources */,
-				34D1DA7C19A4559E00CE0CA1 /* Texture.mm in Sources */,
+				34D1DB0B19A6AB5400CE0CA1 /* main.m in Sources */,
+				34D1DB0119A6AA2500CE0CA1 /* Texture.mm in Sources */,
+				34D1DAF919A6AA2500CE0CA1 /* SampleApplicationSession.mm in Sources */,
+				34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
 				34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */,
+				34D1DAFA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */,
 				34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */,
+				34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */,
+				34D1DAFC19A6AA2500CE0CA1 /* SampleAppMenu.mm in Sources */,
 				34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */,
-				34D1DA7919A4559E00CE0CA1 /* SampleApplicationSession.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

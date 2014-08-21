@@ -37,7 +37,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         glShaderSource(shaderHandle, 1, &shaderStringUTF8, &shaderStringLength);
     } else {
         const char* finalShader[2] = {[defs UTF8String],shaderStringUTF8};
-        GLint finalShaderSizes[2] = {[defs length], shaderStringLength};
+        GLint finalShaderSizes[2] = {static_cast<GLint>([defs length]), shaderStringLength};
         glShaderSource(shaderHandle, 2, finalShader, finalShaderSizes);
     }
     
