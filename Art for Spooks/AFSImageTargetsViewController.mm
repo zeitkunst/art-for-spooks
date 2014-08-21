@@ -13,11 +13,11 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import <QCAR/DataSet.h>
 #import <QCAR/CameraDevice.h>
 
-@interface ImageTargetsViewController ()
+@interface AFSImageTargetsViewController ()
 
 @end
 
-@implementation ImageTargetsViewController
+@implementation AFSImageTargetsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +33,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         
         arViewRect.size = [[UIScreen mainScreen] bounds].size;
         arViewRect.origin.x = arViewRect.origin.y = 0;
+        NSLog(@"arViewRect.width: %f; arViewRect.height: %f", arViewRect.size.width, arViewRect.size.height);
         
         // If this device has a retina display, scale the view bounds that will
         // be passed to QCAR; this allows it to calculate the size and position of
@@ -98,7 +99,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 - (void)loadView
 {
     // Create the EAGLView
-    eaglView = [[ImageTargetsEAGLView alloc] initWithFrame:viewFrame appSession:vapp];
+    eaglView = [[AFSImageTargetsEAGLView alloc] initWithFrame:viewFrame appSession:vapp];
     [self setView:eaglView];
     
     // show loading animation while AR is being initialized
@@ -116,7 +117,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 	// Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
+    //[self.view addGestureRecognizer:tapGestureRecognizer];
     
     NSLog(@"self.navigationController.navigationBarHidden:%d",self.navigationController.navigationBarHidden);
 }
@@ -235,6 +236,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         
         NSError * error = nil;
         [vapp startAR:QCAR::CameraDevice::CAMERA_BACK error:&error];
+        NSLog(@"in onInitARDone");
         
         // by default, we try to set the continuous auto focus mode
         QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO);
@@ -257,6 +259,13 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 -(NSUInteger)supportedInterfaceOrientations
 {
     return ((1 << UIInterfaceOrientationPortrait) | (1 << UIInterfaceOrientationLandscapeLeft) | (1 << UIInterfaceOrientationLandscapeRight) | (1 << UIInterfaceOrientationPortraitUpsideDown));
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // make sure we're oriented/sized properly before reappearing/restarting
+    [self handleARViewRotation:self.interfaceOrientation];
 }
 
 // This is called on iOS 4 devices (when built with SDK 5.1 or 6.0) and iOS 6
@@ -320,10 +329,17 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         CGRect viewBounds;
         viewBounds.origin.x = 0;
         viewBounds.origin.y = 0;
-        viewBounds.size.width = arViewRect.size.height;
-        viewBounds.size.height = arViewRect.size.width;
+        //viewBounds.size.width = arViewRect.size.height;
+        viewBounds.size.width = 568;
+        //viewBounds.size.height = arViewRect.size.width;
+        viewBounds.size.height = 320;
         
         [eaglView setFrame:viewBounds];
+        CGRect afterBounds = [eaglView bounds];
+        NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
+        NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
+        NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
+        NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
     }
     else if (interfaceOrientation == UIInterfaceOrientationLandscapeRight)
     {

@@ -12,9 +12,9 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "SampleApplicationSession.h"
 #import <QCAR/DataSet.h>
 
-@interface ImageTargetsViewController : UIViewController <SampleApplicationControl, SampleAppMenuCommandProtocol>{
+@interface AFSImageTargetsViewController : UIViewController <SampleApplicationControl>{
     CGRect viewFrame;
-    ImageTargetsEAGLView* eaglView;
+    AFSImageTargetsEAGLView* eaglView;
     QCAR::DataSet*  dataSetCurrent;
     QCAR::DataSet*  dataSetTarmac;
     QCAR::DataSet*  dataSetSpooks;

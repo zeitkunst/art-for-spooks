@@ -271,6 +271,8 @@ namespace {
     // Get the default video mode
     QCAR::CameraDevice& cameraDevice = QCAR::CameraDevice::getInstance();
     QCAR::VideoMode videoMode = cameraDevice.getVideoMode(QCAR::CameraDevice::MODE_DEFAULT);
+    //videoMode.mWidth = 640;
+    //videoMode.mHeight = 480;
     
     // Configure the video background
     QCAR::VideoBackgroundConfig config;
@@ -386,15 +388,16 @@ namespace {
     viewport.sizeX = config.mSize.data[0];
     viewport.sizeY = config.mSize.data[1];
  
-#ifdef DEBUG_SAMPLE_APP
+//#ifdef DEBUG_SAMPLE_APP
     NSLog(@"VideoBackgroundConfig: size: %d,%d", config.mSize.data[0], config.mSize.data[1]);
     NSLog(@"VideoMode:w=%d h=%d", videoMode.mWidth, videoMode.mHeight);
     NSLog(@"width=%7.3f height=%7.3f", viewWidth, viewHeight);
     NSLog(@"ViewPort: X,Y: %d,%d Size X,Y:%d,%d", viewport.posX,viewport.posY,viewport.sizeX,viewport.sizeY);
-#endif
+//#endif
     
     // Set the config
     QCAR::Renderer::getInstance().setVideoBackgroundConfig(config);
+    
 }
 
 - (void) changeOrientation:(UIInterfaceOrientation) ARViewOrientation {
@@ -472,6 +475,7 @@ namespace {
     // Cache the projection matrix
     const QCAR::CameraCalibration& cameraCalibration = QCAR::CameraDevice::getInstance().getCameraCalibration();
     _projectionMatrix = QCAR::Tool::getProjectionGL(cameraCalibration, 2.0f, 5000.0f);
+    
     return YES;
 }
 
@@ -480,6 +484,7 @@ namespace {
     // Start the camera.  This causes QCAR to locate our EAGLView in the view
     // hierarchy, start a render thread, and then call renderFrameQCAR on the
     // view periodically
+    NSLog(@"IN STARTAR!!!!");
     if (! [self startCamera: camera viewWidth:self.mARViewBoundsSize.width andHeight:self.mARViewBoundsSize.height error:error]) {
         return NO;
     }

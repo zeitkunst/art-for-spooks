@@ -19,7 +19,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 // EAGLView is a subclass of UIView and conforms to the informal protocol
 // UIGLViewProtocol
-@interface ImageTargetsEAGLView : UIView <UIGLViewProtocol> {
+@interface AFSImageTargetsEAGLView : UIView <UIGLViewProtocol> {
 @private
     // OpenGL ES context
     EAGLContext *context;

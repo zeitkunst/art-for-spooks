@@ -67,7 +67,7 @@ namespace {
 }
 
 
-@interface ImageTargetsEAGLView (PrivateMethods)
+@interface AFSImageTargetsEAGLView (PrivateMethods)
 
 - (void)initShaders;
 - (void)createFramebuffer;
@@ -78,7 +78,7 @@ namespace {
 @end
 
 
-@implementation ImageTargetsEAGLView
+@implementation AFSImageTargetsEAGLView
 
 // You must implement this method, which ensures the view's underlying layer is
 // of type CAEAGLLayer
