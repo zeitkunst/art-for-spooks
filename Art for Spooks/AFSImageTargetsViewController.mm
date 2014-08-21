@@ -31,6 +31,9 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         CGRect screenBounds = [[UIScreen mainScreen] bounds];
         viewFrame = screenBounds;
         
+        arViewRect.size = [[UIScreen mainScreen] bounds].size;
+        arViewRect.origin.x = arViewRect.origin.y = 0;
+        
         // If this device has a retina display, scale the view bounds that will
         // be passed to QCAR; this allows it to calculate the size and position of
         // the viewport correctly when rendering the video background
@@ -75,10 +78,10 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     if(! [vapp resumeAR:&error]) {
         NSLog(@"Error resuming AR:%@", [error description]);
     }
-    // on resume, we reset the flash and the associated menu item
+    // on resume, we reset the flash
     QCAR::CameraDevice::getInstance().setFlashTorchMode(false);
-    SampleAppMenu * menu = [SampleAppMenu instance];
-    [menu setSelectionValueForCommand:C_FLASH value:false];
+    
+    [self handleRotation:self.interfaceOrientation];
 }
 
 - (void)dealloc
@@ -102,14 +105,14 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     [self showLoadingAnimation];
     
     // initialize the AR session
-    [vapp initAR:QCAR::GL_20 ARViewBoundsSize:viewFrame.size orientation:UIInterfaceOrientationPortrait];
+    //[vapp initAR:QCAR::GL_20 ARViewBoundsSize:viewFrame.size orientation:UIInterfaceOrientationPortrait];
+    [vapp initAR:QCAR::GL_20 ARViewBoundsSize:viewFrame.size orientation:self.interfaceOrientation];
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self prepareMenu];
 
 	// Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -119,8 +122,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    // cleanup menu 
-    [[SampleAppMenu instance]clear];
     
     [vapp stopAR:nil];
     // Be a good OpenGL ES citizen: now that QCAR is paused and the render
@@ -154,9 +155,16 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #pragma mark - loading animation
 
 - (void) showLoadingAnimation {
+    CGRect indicatorBounds;
+    
     CGRect mainBounds = [[UIScreen mainScreen] bounds];
-    CGRect indicatorBounds = CGRectMake(mainBounds.size.width / 2 - 12,
-                                        mainBounds.size.height / 2 - 12, 24, 24);
+    if (self.interfaceOrientation ==UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        indicatorBounds = CGRectMake(mainBounds.size.width / 2 - 12,
+                                     mainBounds.size.height / 2 - 12, 24, 24);
+    } else {
+        indicatorBounds = CGRectMake(mainBounds.size.height / 2 - 12,
+                                     mainBounds.size.width / 2 - 12, 24, 24);
+    }
     UIActivityIndicatorView *loadingIndicator = [[[UIActivityIndicatorView alloc]
                                                   initWithFrame:indicatorBounds]autorelease];
     
@@ -229,15 +237,110 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         [vapp startAR:QCAR::CameraDevice::CAMERA_BACK error:&error];
         
         // by default, we try to set the continuous auto focus mode
-        // and we update menu to reflect the state of continuous auto-focus
-        bool isContinuousAutofocus = QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO);
-        SampleAppMenu * menu = [SampleAppMenu instance];
-        [menu setSelectionValueForCommand:C_AUTOFOCUS value:isContinuousAutofocus];
+        QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO);
+        
+        //  the camera is initialized, this call will reset the screen configuration
+        [self handleRotation:self.interfaceOrientation];
     } else {
         NSLog(@"Error initializing AR:%@", [initError description]);
     }
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Support all orientations
+    return YES;
+}
+
+
+// Not using iOS6 specific enums in order to compile on iOS5 and lower versions
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return ((1 << UIInterfaceOrientationPortrait) | (1 << UIInterfaceOrientationLandscapeLeft) | (1 << UIInterfaceOrientationLandscapeRight) | (1 << UIInterfaceOrientationPortraitUpsideDown));
+}
+
+// This is called on iOS 4 devices (when built with SDK 5.1 or 6.0) and iOS 6
+// devices (when built with SDK 5.1)
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self handleRotation:interfaceOrientation];
+}
+
+- (void) handleRotation:(UIInterfaceOrientation)interfaceOrientation {
+    // ensure overlay size and AR orientation is correct for screen orientation
+    [self handleARViewRotation:self.interfaceOrientation];
+    //[bookOverlayController handleViewRotation:self.interfaceOrientation];
+    [vapp changeOrientation:self.interfaceOrientation];
+}
+
+- (void) handleARViewRotation:(UIInterfaceOrientation)interfaceOrientation
+{
+    CGPoint centre, pos;
+    NSInteger rot;
+    
+    // Set the EAGLView's position (its centre) to be the centre of the window, based on orientation
+    centre.x = arViewRect.size.width / 2;
+    centre.y = arViewRect.size.height / 2;
+    
+    if (interfaceOrientation == UIInterfaceOrientationPortrait)
+    {
+        NSLog(@"ARVC: Rotating to Portrait");
+        pos = centre;
+        rot = 90;
+        
+        CGRect viewBounds;
+        viewBounds.origin.x = 0;
+        viewBounds.origin.y = 0;
+        viewBounds.size.width = arViewRect.size.width;
+        viewBounds.size.height = arViewRect.size.height;
+        
+        [eaglView setFrame:viewBounds];
+    }
+    else if (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
+    {
+        NSLog(@"ARVC: Rotating to Upside Down");
+        pos = centre;
+        rot = 270;
+        
+        CGRect viewBounds;
+        viewBounds.origin.x = 0;
+        viewBounds.origin.y = 0;
+        viewBounds.size.width = arViewRect.size.width;
+        viewBounds.size.height = arViewRect.size.height;
+        
+        [eaglView setFrame:viewBounds];
+    }
+    else if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        NSLog(@"ARVC: Rotating to Landscape Left");
+        pos.x = centre.y;
+        pos.y = centre.x;
+        rot = 180;
+        
+        CGRect viewBounds;
+        viewBounds.origin.x = 0;
+        viewBounds.origin.y = 0;
+        viewBounds.size.width = arViewRect.size.height;
+        viewBounds.size.height = arViewRect.size.width;
+        
+        [eaglView setFrame:viewBounds];
+    }
+    else if (interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        NSLog(@"ARVC: Rotating to Landscape Right");
+        pos.x = centre.y;
+        pos.y = centre.x;
+        rot = 0;
+        
+        CGRect viewBounds;
+        viewBounds.origin.x = 0;
+        viewBounds.origin.y = 0;
+        viewBounds.size.width = arViewRect.size.height;
+        viewBounds.size.height = arViewRect.size.width;
+        
+        [eaglView setFrame:viewBounds];
+    }
+}
 
 
 - (void) onQCARUpdate: (QCAR::State *) state {
@@ -437,100 +540,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 - (void)cameraPerformAutoFocus
 {
     QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_TRIGGERAUTO);
-}
-
-
-#pragma mark - left menu
-
-typedef enum {
-    C_EXTENDED_TRACKING,
-    C_AUTOFOCUS,
-    C_FLASH,
-    C_CAMERA_FRONT,
-    C_CAMERA_REAR,
-    SWITCH_TO_TARMAC,
-    SWITCH_TO_SPOOKS,
-} MENU_COMMAND;
-
-- (void) prepareMenu {
-    
-    SampleAppMenu * menu = [SampleAppMenu prepareWithCommandProtocol:self title:@"Image Targets"];
-    SampleAppMenuGroup * group;
-    
-    group = [menu addGroup:@""];
-    [group addTextItem:@"Vuforia Samples" command:-1];
-
-    group = [menu addGroup:@""];
-    [group addSelectionItem:@"Extended Tracking" command:C_EXTENDED_TRACKING isSelected:NO];
-    [group addSelectionItem:@"Autofocus" command:C_AUTOFOCUS isSelected:NO];
-    [group addSelectionItem:@"Flash" command:C_FLASH isSelected:NO];
-
-    group = [menu addSelectionGroup:@"CAMERA"];
-    [group addSelectionItem:@"Front" command:C_CAMERA_FRONT isSelected:NO];
-    [group addSelectionItem:@"Rear" command:C_CAMERA_REAR isSelected:YES];
-
-    group = [menu addSelectionGroup:@"DATABASE"];
-    [group addSelectionItem:@"Spooks" command:SWITCH_TO_SPOOKS isSelected:YES];
-    [group addSelectionItem:@"Tarmac" command:SWITCH_TO_TARMAC isSelected:NO];
-}
-
-- (bool) menuProcess:(SampleAppMenu *) menu command:(int) command value:(bool) value{
-    bool result = true;
-    NSError * error = nil;
-    
-    switch(command) {
-        case C_FLASH:
-            if (!QCAR::CameraDevice::getInstance().setFlashTorchMode(value)) {
-                result = false;
-            }
-            break;
-            
-        case C_EXTENDED_TRACKING:
-            result = [self setExtendedTrackingForDataSet:dataSetCurrent start:value];
-            if (result) {
-                [eaglView setOffTargetTrackingMode:value];
-                extendedTrackingIsOn = value;
-            }
-            break;
-            
-        case C_CAMERA_FRONT:
-        case C_CAMERA_REAR: {
-            if ([vapp stopCamera:&error]) {
-                result = [vapp startAR:(command == C_CAMERA_FRONT) ? QCAR::CameraDevice::CAMERA_FRONT:QCAR::CameraDevice::CAMERA_BACK error:&error];
-            } else {
-                result = false;
-            }
-            if (result) {
-                // if the camera switch worked, the flash will be off
-                [menu setSelectionValueForCommand:C_FLASH value:false];
-            }
-
-        }
-            break;
-            
-        case C_AUTOFOCUS: {
-            int focusMode = value ? QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO : QCAR::CameraDevice::FOCUS_MODE_NORMAL;
-            result = QCAR::CameraDevice::getInstance().setFocusMode(focusMode);
-        }
-            break;
-            
-        case SWITCH_TO_TARMAC:
-            [self setExtendedTrackingForDataSet:dataSetCurrent start:NO];
-            switchToTarmac = YES;
-            switchToSpooks = NO;
-            break;
-            
-        case SWITCH_TO_SPOOKS:
-            [self setExtendedTrackingForDataSet:dataSetCurrent start:NO];
-            switchToSpooks = YES;
-            switchToTarmac = NO;
-            break;
-            
-        default:
-            result = false;
-            break;
-    }
-    return result;
 }
 
 @end

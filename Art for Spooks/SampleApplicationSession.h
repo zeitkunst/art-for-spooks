@@ -81,6 +81,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 - (bool) stopAR:(NSError **)error;
 
 // utility methods
+- (void) changeOrientation:(UIInterfaceOrientation) ARViewOrientation;
 
 // stop the camera.
 // This can be used if you want to switch between the front and the back camera for instance

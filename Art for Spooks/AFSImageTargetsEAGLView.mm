@@ -132,11 +132,48 @@ namespace {
         
         [self loadBuildingsModel];
         [self initShaders];
+        
+        testingLabel = [self labelWithText:@"This is a test" yPosition: (CGFloat) 20.0];
+        [testingLabel setBackgroundColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.25]];
+        //[self addSubview:testingLabel];
     }
     
     return self;
 }
 
+// From RosyWriter
+- (UILabel *)labelWithText:(NSString *)text yPosition:(CGFloat)yPosition
+{
+	//CGFloat labelWidth = 200.0;
+	//CGFloat labelHeight = 400.0;
+    // TODO
+    // Deal better with content scaling/retina displays than this hardcoded sample.
+    // TODO
+    // Need to deal with proper positioning, padding
+    CGFloat labelHeight = self.bounds.size.height/2.0;
+    CGFloat labelWidth = self.bounds.size.width/2.0;
+	CGFloat xPosition = self.bounds.size.width - labelWidth - 10;
+	//CGRect labelFrame = CGRectMake(xPosition, yPosition, labelWidth, labelHeight);
+    CGRect labelFrame = CGRectMake(0, 0, labelWidth, labelHeight);
+	UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+	[label setFont:[UIFont systemFontOfSize:36]];
+    // TODO
+    // Figure out how to set the following parameters in ios 7
+    [label setLineBreakMode:NSLineBreakByWordWrapping];
+    [label setTextAlignment:NSTextAlignmentJustified];
+	[label setTextColor:[UIColor whiteColor]];
+    [label setNumberOfLines:0];
+	[label setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.25]];
+	[[label layer] setCornerRadius: 4];
+	[label setText:text];
+    //[label setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
+	
+	return [label autorelease];
+}
+
+- (void) showMessage:(NSString *)message {
+    [testingLabel setText:message];
+}
 
 - (void)dealloc
 {
@@ -313,6 +350,7 @@ namespace {
     glDisableVertexAttribArray(normalHandle);
     glDisableVertexAttribArray(textureCoordHandle);
     
+    //[self performSelectorOnMainThread:@selector(showMessage:) withObject:@"TESTING!!! This is a test with long lines. Seeing if it will work." waitUntilDone:NO];
     QCAR::Renderer::getInstance().end();
     [self presentFramebuffer];
 }

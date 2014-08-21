@@ -12,7 +12,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "SampleApplicationSession.h"
 #import <QCAR/DataSet.h>
 
-@interface ImageTargetsViewController : GLKViewController <SampleApplicationControl, SampleAppMenuCommandProtocol>{
+@interface ImageTargetsViewController : UIViewController <SampleApplicationControl, SampleAppMenuCommandProtocol>{
     CGRect viewFrame;
     ImageTargetsEAGLView* eaglView;
     QCAR::DataSet*  dataSetCurrent;
@@ -20,6 +20,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     QCAR::DataSet*  dataSetSpooks;
     UITapGestureRecognizer * tapGestureRecognizer;
     SampleApplicationSession * vapp;
+    CGRect arViewRect; // the size of the AR view
     
     BOOL switchToTarmac;
     BOOL switchToSpooks;

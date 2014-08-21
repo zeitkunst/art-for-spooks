@@ -397,6 +397,50 @@ namespace {
     QCAR::Renderer::getInstance().setVideoBackgroundConfig(config);
 }
 
+- (void) changeOrientation:(UIInterfaceOrientation) ARViewOrientation {
+    self.mARViewOrientation = ARViewOrientation;
+    
+    // Frames from the camera are always landscape, no matter what the
+    // orientation of the device.  Tell QCAR to rotate the video background (and
+    // the projection matrix it provides to us for rendering our augmentation)
+    // by the proper angle in order to match the EAGLView orientation
+    if (self.mARViewOrientation == UIInterfaceOrientationPortrait)
+    {
+        QCAR::onSurfaceChanged(self.mARViewBoundsSize.width, self.mARViewBoundsSize.height);
+        QCAR::setRotation(QCAR::ROTATE_IOS_90);
+        
+        self.mIsActivityInPortraitMode = YES;
+    }
+    else if (self.mARViewOrientation == UIInterfaceOrientationPortraitUpsideDown)
+    {
+        QCAR::onSurfaceChanged(self.mARViewBoundsSize.width, self.mARViewBoundsSize.height);
+        QCAR::setRotation(QCAR::ROTATE_IOS_270);
+        
+        self.mIsActivityInPortraitMode = YES;
+    }
+    else if (self.mARViewOrientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        QCAR::onSurfaceChanged(self.mARViewBoundsSize.height, self.mARViewBoundsSize.width);
+        QCAR::setRotation(QCAR::ROTATE_IOS_180);
+        
+        self.mIsActivityInPortraitMode = NO;
+    }
+    else if (self.mARViewOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        QCAR::onSurfaceChanged(self.mARViewBoundsSize.height, self.mARViewBoundsSize.width);
+        QCAR::setRotation(1);
+        
+        self.mIsActivityInPortraitMode = NO;
+    }
+    
+    [self configureVideoBackgroundWithViewWidth:self.mARViewBoundsSize.width andHeight:self.mARViewBoundsSize.height];
+    
+    // Cache the projection matrix
+    const QCAR::CameraCalibration& cameraCalibration = QCAR::CameraDevice::getInstance().getCameraCalibration();
+    _projectionMatrix = QCAR::Tool::getProjectionGL(cameraCalibration, 2.0f, 5000.0f);
+    
+}
+
 // Start QCAR camera with the specified view size
 - (bool)startCamera:(QCAR::CameraDevice::CAMERA)camera viewWidth:(float)viewWidth andHeight:(float)viewHeight error:(NSError **)error
 {

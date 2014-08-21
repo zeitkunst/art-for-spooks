@@ -265,8 +265,8 @@ namespace SampleApplicationUtils
     {
         
         printf("screenCoordToCameraCoord:%d,%d %d,%d, %d,%d, %d,%d",screenX, screenY, screenDX, screenDY,
-              screenWidth, screenHeight, cameraWidth, cameraHeight );
-
+               screenWidth, screenHeight, cameraWidth, cameraHeight );
+        
         
         bool isPortraitMode = (screenWidth < screenHeight);
         float videoWidth, videoHeight;
@@ -346,6 +346,5 @@ namespace SampleApplicationUtils
             *cameraDY = (int)(((float)screenDY / (float)scaledUpVideoHeight) * videoHeight);
         }
     }
-
     
 }   // namespace ShaderUtils

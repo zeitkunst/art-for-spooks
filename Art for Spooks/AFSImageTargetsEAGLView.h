@@ -45,6 +45,8 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     SampleApplication3DModel * buildingModel;
 
     SampleApplicationSession * vapp;
+    
+    UILabel *testingLabel;
 }
 
 - (id)initWithFrame:(CGRect)frame appSession:(SampleApplicationSession *) app;
