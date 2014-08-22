@@ -49,19 +49,19 @@ namespace {
 
     // Teapot texture filenames
     const char* textureFilenames[] = {
-        //"TextureTeapotBrass.png",
         "DerSpiegel-media-34098_003.png",
-        //"TextureTeapotBlue.png",
         "Intercept-psychology-a-new-kind-of-sigdev_020.png",
-        //"TextureTeapotRed.png",
         "Intercept-psychology-a-new-kind-of-sigdev_025.png",
         "building_texture.jpeg",
         "clouds-2.png"
     };
     
+    NSMutableDictionary *textureFiles = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary *textureIDs = [[[NSMutableDictionary alloc] init] autorelease];
+    
+    
     // Model scale factor
     const float kObjectScaleNormal = 3.0f;
-    const float kObjectScaleOffTargetTracking = 12.0f;
     
     float texturePosition = -20.0;
 }
@@ -103,9 +103,12 @@ namespace {
         }
         
         // Load the augmentation textures
+        NSLog(@"Loading using const char*");
         for (int i = 0; i < NUM_AUGMENTATION_TEXTURES; ++i) {
+            NSLog([NSString stringWithUTF8String:textureFilenames[i]]);
             augmentationTexture[i] = [[Texture alloc] initWithImageFile:[NSString stringWithCString:textureFilenames[i] encoding:NSASCIIStringEncoding]];
         }
+        t0 = [[Texture alloc] initWithImageFile:@"clouds-2.png"];
 
         // Create the OpenGL ES context
         context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -127,8 +130,10 @@ namespace {
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [augmentationTexture[i] width], [augmentationTexture[i] height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[augmentationTexture[i] pngData]);
         }
-
-        offTargetTrackingEnabled = NO;
+        
+        // Load all of the textures, assign IDs
+        [self initTextureDict];
+        [self loadTextureIDs];
         
         [self loadBuildingsModel];
         [self initShaders];
@@ -139,6 +144,31 @@ namespace {
     }
     
     return self;
+}
+
+
+- (void)initTextureDict {
+    [textureFiles setValue:@"DerSpiegel-media-34098_003.png" forKey:@"Anchory"];
+    [textureFiles setValue:@"Intercept-psychology-a-new-kind-of-sigdev_020.png" forKey:@"Facebook"];
+    [textureFiles setValue:@"Intercept-psychology-a-new-kind-of-sigdev_025.png" forKey:@"Woman"];
+    [textureFiles setValue:@"Intercept-the-art-of-deception-training-for-a-new_034.png" forKey:@"Buffalo"];
+    [textureFiles setValue:@"clouds-2.png" forKey:@"default"];
+}
+
+- (void)loadTextureIDs {
+    for (NSString *key in textureFiles) {
+        NSString *value = [textureFiles objectForKey:key];
+        Texture* t = [[Texture alloc] initWithImageFile:value];
+
+        GLuint textureID;
+        glGenTextures(1, &textureID);
+        [t setTextureID:textureID];
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [t width], [t height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[t pngData]);
+        [textureIDs setObject:t forKey:value];
+    }
 }
 
 // From RosyWriter
@@ -215,10 +245,6 @@ namespace {
     glFinish();
 }
 
-- (void) setOffTargetTrackingMode:(BOOL) enabled {
-    offTargetTrackingEnabled = enabled;
-}
-
 - (void) loadBuildingsModel {
     buildingModel = [[SampleApplication3DModel alloc] initWithTxtResourceName:@"buildings"];
     [buildingModel read];
@@ -257,11 +283,9 @@ namespace {
     // We must detect if background reflection is active and adjust the culling direction.
     // If the reflection is active, this means the pose matrix has been reflected as well,
     // therefore standard counter clockwise face culling will result in "inside out" models.
-    if (offTargetTrackingEnabled) {
-        glDisable(GL_CULL_FACE);
-    } else {
-        glEnable(GL_CULL_FACE);
-    }
+
+    glEnable(GL_CULL_FACE);
+
     glCullFace(GL_BACK);
     if(QCAR::Renderer::getInstance().getVideoBackgroundConfig().mReflection == QCAR::VIDEO_BACKGROUND_REFLECTION_ON)
         glFrontFace(GL_CW);  //Front camera
@@ -277,33 +301,82 @@ namespace {
         //const QCAR::Trackable& trackable = result->getTrackable();
         QCAR::Matrix44F modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(result->getPose());
         
+        if (!strcmp(trackable.getName(), "Woman")) {
+            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Woman"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if (!strcmp(trackable.getName(), "Buffalo")) {
+            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Buffalo"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if (!strcmp(trackable.getName(), "Facebook")) {
+            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Facebook"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if (!strcmp(trackable.getName(), "Anchory")) {
+            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Anchory"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else {
+            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"default"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        }
+    }
+    
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+    
+    glDisableVertexAttribArray(vertexHandle);
+    glDisableVertexAttribArray(normalHandle);
+    glDisableVertexAttribArray(textureCoordHandle);
+    
+    //[self performSelectorOnMainThread:@selector(showMessage:) withObject:@"TESTING!!! This is a test with long lines. Seeing if it will work." waitUntilDone:NO];
+    QCAR::Renderer::getInstance().end();
+    [self presentFramebuffer];
+}
+
+- (void)renderFrameQCAR_bak
+{
+    
+    [self setFramebuffer];
+    
+    // Clear colour and depth buffers
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    // Render video background and retrieve tracking state
+    QCAR::State state = QCAR::Renderer::getInstance().begin();
+    QCAR::Renderer::getInstance().drawVideoBackground();
+    
+    glEnable(GL_DEPTH_TEST);
+    // We must detect if background reflection is active and adjust the culling direction.
+    // If the reflection is active, this means the pose matrix has been reflected as well,
+    // therefore standard counter clockwise face culling will result in "inside out" models.
+    
+    glEnable(GL_CULL_FACE);
+    
+    glCullFace(GL_BACK);
+    if(QCAR::Renderer::getInstance().getVideoBackgroundConfig().mReflection == QCAR::VIDEO_BACKGROUND_REFLECTION_ON)
+        glFrontFace(GL_CW);  //Front camera
+    else
+        glFrontFace(GL_CCW); //Back camera
+    
+    
+    for (int i = 0; i < state.getNumTrackableResults(); ++i) {
+        // Get the trackable
+        const QCAR::TrackableResult* result = state.getTrackableResult(i);
+        const QCAR::Trackable& trackable = result->getTrackable();
+        
+        //const QCAR::Trackable& trackable = result->getTrackable();
+        QCAR::Matrix44F modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(result->getPose());
+        
         // OpenGL 2
         QCAR::Matrix44F modelViewProjection;
         
-        if (offTargetTrackingEnabled) {
-            SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0,&modelViewMatrix.data[0]);
-            SampleApplicationUtils::scalePoseMatrix(kObjectScaleOffTargetTracking, kObjectScaleOffTargetTracking, kObjectScaleOffTargetTracking, &modelViewMatrix.data[0]);
-        } else {
-            SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, kObjectScaleNormal, &modelViewMatrix.data[0]);
-            SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
-            [self updateTexturePosition];
-            SampleApplicationUtils::translatePoseMatrix(texturePosition, -2.0, 10.0, &modelViewMatrix.data[0]);
-            SampleApplicationUtils::rotatePoseMatrix(10, 1, 0, 0, &modelViewMatrix.data[0]);
-        }
+        
+        SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, kObjectScaleNormal, &modelViewMatrix.data[0]);
+        SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
+        [self updateTexturePosition];
+        SampleApplicationUtils::translatePoseMatrix(texturePosition, -2.0, 10.0, &modelViewMatrix.data[0]);
+        SampleApplicationUtils::rotatePoseMatrix(10, 1, 0, 0, &modelViewMatrix.data[0]);
         
         SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
         
         glUseProgram(shaderProgramID);
         
-        if (offTargetTrackingEnabled) {
-            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)buildingModel.vertices);
-            glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)buildingModel.normals);
-            glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)buildingModel.texCoords);
-        } else {
-            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
-            glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
-            glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
-        }
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
         
         glEnableVertexAttribArray(vertexHandle);
         glEnableVertexAttribArray(normalHandle);
@@ -323,21 +396,14 @@ namespace {
         
         glActiveTexture(GL_TEXTURE0);
         
-        if (offTargetTrackingEnabled) {
-            glBindTexture(GL_TEXTURE_2D, augmentationTexture[3].textureID);
-        } else {
-            glBindTexture(GL_TEXTURE_2D, augmentationTexture[targetIndex].textureID);
-        }
+        glBindTexture(GL_TEXTURE_2D, augmentationTexture[targetIndex].textureID);
+        
         glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
         glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
         
-        if (offTargetTrackingEnabled) {
-            glDrawArrays(GL_TRIANGLES, 0, buildingModel.numVertices);
-        } else {
-            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-            glEnable(GL_BLEND);
-            glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-        }
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
         
         SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
         
@@ -353,6 +419,44 @@ namespace {
     //[self performSelectorOnMainThread:@selector(showMessage:) withObject:@"TESTING!!! This is a test with long lines. Seeing if it will work." waitUntilDone:NO];
     QCAR::Renderer::getInstance().end();
     [self presentFramebuffer];
+}
+
+
+- (void)applyTextureWithTextureFile:(NSString *)textureFile modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    QCAR::Matrix44F modelViewProjection;
+    
+    SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, kObjectScaleNormal, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
+    //[self updateTexturePosition];
+    //SampleApplicationUtils::translatePoseMatrix(texturePosition, -2.0, 10.0, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::rotatePoseMatrix(10, 1, 0, 0, &modelViewMatrix.data[0]);
+    
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
 
 //------------------------------------------------------------------------------

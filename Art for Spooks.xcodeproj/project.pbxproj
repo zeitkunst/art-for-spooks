@@ -60,6 +60,7 @@
 		34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */; };
 		34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */; };
 		34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */; };
+		34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StonesAndChips.xml; sourceTree = "<group>"; };
 		34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tarmac.dat; sourceTree = "<group>"; };
 		34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tarmac.xml; sourceTree = "<group>"; };
+		34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_034.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +323,7 @@
 				34D1DB1019A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png */,
 				34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */,
 				34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */,
+				34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */,
 				34D1DB1319A6AD5100CE0CA1 /* transparent.png */,
 			);
 			path = replacements;
@@ -419,6 +422,7 @@
 				34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
+				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,

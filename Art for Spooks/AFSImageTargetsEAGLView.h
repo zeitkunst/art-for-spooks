@@ -40,8 +40,9 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     
     // Texture used when rendering augmentation
     Texture* augmentationTexture[NUM_AUGMENTATION_TEXTURES];
+    Texture* augmentationTexture002[NUM_AUGMENTATION_TEXTURES];
+    Texture* t0;
     
-    BOOL offTargetTrackingEnabled;
     SampleApplication3DModel * buildingModel;
 
     SampleApplicationSession * vapp;
@@ -53,8 +54,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 - (void)finishOpenGLESCommands;
 - (void)freeOpenGLESResources;
-
-- (void) setOffTargetTrackingMode:(BOOL) enabled;
 
 - (void) updateTexturePosition;
 @end
