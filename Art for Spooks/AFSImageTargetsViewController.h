@@ -26,6 +26,10 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     BOOL switchToSpooks;
     BOOL extendedTrackingIsOn;
     
+    BOOL fullScreenPlayerPlaying;
+    UINavigationController * navController;
+    
 }
 
+- (void) setNavigationController:(UINavigationController *) navController;
 @end

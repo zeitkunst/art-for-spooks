@@ -16,6 +16,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import <QCAR/Renderer.h>
 #import <QCAR/TrackableResult.h>
 #import <QCAR/VideoBackgroundConfig.h>
+#import <QCAR/ImageTarget.h>
 
 #import "AFSImageTargetsEAGLView.h"
 #import "Texture.h"
@@ -66,10 +67,32 @@ namespace {
     const float kObjectScaleNormalx = 106.0f;
     const float kObjectScaleNormaly = 80.0f;
     
+    // Tracking lost timeout
+    const NSTimeInterval TRACKING_LOST_TIMEOUT = 2.0f;
+    
     float texturePosition = -20.0;
     
     // Current trackable
     NSMutableString *currentTrackable = [[[NSMutableString alloc] init] autorelease];
+    
+    // Video quad texture coordinates
+    const GLfloat videoQuadTextureCoords[] = {
+        0.0, 1.0,
+        1.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0,
+    };
+    
+    struct tagVideoData {
+        // Needed to calculate whether a screen tap is inside the target
+        QCAR::Matrix44F modelViewMatrix;
+        
+        // Trackable dimensions
+        QCAR::Vec2F targetPositiveDimensions;
+        
+        // Currently active flag
+        BOOL isActive;
+    } videoData;
 }
 
 
@@ -129,6 +152,14 @@ namespace {
         
         // Setup video player helper
         videoPlayerHelper = [[VideoPlayerHelper alloc] initWithRootViewController:afsImageTargetsViewController];
+        videoData.targetPositiveDimensions.data[0] = 0.0f;
+        videoData.targetPositiveDimensions.data[1] = 0.0f;
+        videoPlaybackTime = VIDEO_PLAYBACK_CURRENT_POSITION;
+        
+        // Load video
+        if (NO == [videoPlayerHelper load:@"1984Macintosh.m4v" playImmediately:NO fromPosition:videoPlaybackTime]) {
+            NSLog(@"Failed to load video file");
+        }
         
         testingLabel = [self labelWithText:@"This is a test" yPosition: (CGFloat) 20.0];
         [testingLabel setBackgroundColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.25]];
@@ -161,11 +192,20 @@ namespace {
     [textureDict setValue:@{
                              @"shader": @"Simple",
                              @"texture": @"dollar_bill_obverse.png"} forKey:@"default"];
+    [textureDict setValue:@{
+                            @"shader": @"Simple",
+                            @"texture": @""} forKey:@"1984"];
 }
 
 - (void)loadTextureIDs {
     for (NSString *key in textureDict) {
         NSDictionary *dict = [textureDict objectForKey:key];
+        NSString *textureFilename = [dict valueForKey:@"texture"];
+        
+        // If no texture is set for this particular trackable, skip
+        if ([textureFilename isEqualToString:@""]) {
+            continue;
+        }
         Texture* t = [[Texture alloc] initWithImageFile:[dict valueForKey:@"texture"]];
 
         GLuint textureID;
@@ -227,6 +267,8 @@ namespace {
     for (NSString *key in textureIDs) {
         [[textureIDs objectForKey:key] release];
     }
+    
+    [videoPlayerHelper release];
 
     [super dealloc];
 }
@@ -295,6 +337,13 @@ namespace {
         glFrontFace(GL_CCW); //Back camera
     
     NSString *trackableName;
+    
+    // ----- Synchronise data access -----
+    [dataLock lock];
+    
+    // Assume video is inactive
+    videoData.isActive = NO;
+    
     for (int i = 0; i < state.getNumTrackableResults(); ++i) {
         
         // Get the trackable
@@ -310,10 +359,168 @@ namespace {
         
         [self setCurrentTrackableWith:trackableName];
         
-        // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
-        [self applyTextureWithTextureFile:[textureDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        // Here, we branch to different types of augmentations
+        // Some are simple and just are texture replacements using different shader programs
+        // Others do video playback or loading of models and particle systems
+        
+        if ([currentTrackable isEqualToString:@"1984"]){
+            // Mark this video (target) as active
+            videoData.isActive = YES;
+            
+            // Get the target size (used to determine if taps are within the target)
+            if (0.0f == videoData.targetPositiveDimensions.data[0] ||
+                0.0f == videoData.targetPositiveDimensions.data[1]) {
+                const QCAR::ImageTarget& imageTarget = (const QCAR::ImageTarget&) trackable;
+                
+                videoData.targetPositiveDimensions = imageTarget.getSize();
+                // The pose delivers the centre of the target, thus the dimensions
+                // go from -width / 2 to width / 2, and -height / 2 to height / 2
+                videoData.targetPositiveDimensions.data[0] /= 2.0f;
+                videoData.targetPositiveDimensions.data[1] /= 2.0f;
+            }
+            
+            // Get the current trackable pose
+            const QCAR::Matrix34F& trackablePose = result->getPose();
+            
+            // This matrix is used to calculate the location of the screen tap
+            videoData.modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(trackablePose);
+            
+            float aspectRatio;
+            const GLvoid* texCoords;
+            GLuint frameTextureID;
+            BOOL displayVideoFrame = YES;
+            
+            // Retain value between calls
+            static GLuint videoTextureID = {0};
+            
+            MEDIA_STATE currentStatus = [videoPlayerHelper getStatus];
+            
+            // --- INFORMATION ---
+            // One could trigger automatic playback of a video at this point.  This
+            // could be achieved by calling the play method of the VideoPlayerHelper
+            // object if currentStatus is not PLAYING.  You should also call
+            // getStatus again after making the call to play, in order to update the
+            // value held in currentStatus.
+            // --- END INFORMATION ---
+            
+            if (ERROR != currentStatus && NOT_READY != currentStatus && PLAYING != currentStatus) {
+                // Play the video
+                NSLog(@"Playing video with on-texture player");
+                [videoPlayerHelper play:NO fromPosition:VIDEO_PLAYBACK_CURRENT_POSITION];
+            } else {
+                //NSLog(@"Should be playing...");
+            }
+            
+            switch (currentStatus) {
+                case PLAYING: {
+                    // If the tracking lost timer is scheduled, terminate it
+                    
+                    if (nil != trackingLostTimer) {
+                        // Timer termination must occur on the same thread on which
+                        // it was installed
+                        [self performSelectorOnMainThread:@selector(terminateTrackingLostTimer) withObject:nil waitUntilDone:YES];
+                    }
+                    
+                    
+                    // Upload the decoded video data for the latest frame to OpenGL
+                    // and obtain the video texture ID
+                    GLuint videoTexID = [videoPlayerHelper updateVideoData];
+                    
+                    if (0 == videoTextureID) {
+                        videoTextureID = videoTexID;
+                    }
+                    
+                    // Fallthrough
+                }
+                case PAUSED:
+                    if (0 == videoTextureID) {
+                        // No video texture available, display keyframe
+                        displayVideoFrame = NO;
+                    }
+                    else {
+                        // Display the texture most recently returned from the call
+                        // to [videoPlayerHelper updateVideoData]
+                        frameTextureID = videoTextureID;
+                    }
+                    
+                    break;
+            }
+            
+            if (YES == displayVideoFrame) {
+                // ---- Display the video frame -----
+                aspectRatio = (float)[videoPlayerHelper getVideoHeight] / (float)[videoPlayerHelper getVideoWidth];
+                NSLog(@"%f", aspectRatio);
+                texCoords = videoQuadTextureCoords;
+            }
+            else {
+                // ----- Display the keyframe -----
+                //Texture* t = augmentationTexture[OBJECT_KEYFRAME_1 + playerIndex];
+                //frameTextureID = [t textureID];
+                //aspectRatio = (float)[t height] / (float)[t width];
+                texCoords = quadTexCoords;
+            }
+            
+            // Get the current projection matrix
+            QCAR::Matrix44F projMatrix = vapp.projectionMatrix;
+            
+            // If the current status is valid (not NOT_READY or ERROR), render the
+            // video quad with the texture we've just selected
+            if (NOT_READY != currentStatus) {
+                // Convert trackable pose to matrix for use with OpenGL
+                QCAR::Matrix44F modelViewMatrixVideo = QCAR::Tool::convertPose2GLMatrix(trackablePose);
+                QCAR::Matrix44F modelViewProjectionVideo;
+                
+                //            SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, videoData[playerIndex].targetPositiveDimensions.data[0],
+                //                                             &modelViewMatrixVideo.data[0]);
+                
+                SampleApplicationUtils::scalePoseMatrix(videoData.targetPositiveDimensions.data[0],
+                                                        videoData.targetPositiveDimensions.data[0] * aspectRatio,
+                                                        videoData.targetPositiveDimensions.data[0],
+                                                        &modelViewMatrixVideo.data[0]);
+                
+                SampleApplicationUtils::multiplyMatrix(projMatrix.data,
+                                                       &modelViewMatrixVideo.data[0] ,
+                                                       &modelViewProjectionVideo.data[0]);
+                
+                glUseProgram(shaderProgramID);
+                
+                glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, quadVertices);
+                glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, quadNormals);
+                glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
+                
+                glEnableVertexAttribArray(vertexHandle);
+                glEnableVertexAttribArray(normalHandle);
+                glEnableVertexAttribArray(textureCoordHandle);
+                
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, frameTextureID);
+                glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
+                glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+                glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
+                
+                glDisableVertexAttribArray(vertexHandle);
+                glDisableVertexAttribArray(normalHandle);
+                glDisableVertexAttribArray(textureCoordHandle);
+                
+                glUseProgram(0);
+            }
+            
+        } else {
+            // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
+            [self applyTextureWithTextureFile:[textureDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        }
         
     }
+    
+    // If a video is playing on texture and we have lost tracking, create a
+    // timer on the main thread that will pause video playback after
+    // TRACKING_LOST_TIMEOUT seconds
+    if (nil == trackingLostTimer && NO == videoData.isActive && PLAYING == [videoPlayerHelper getStatus]) {
+        [self performSelectorOnMainThread:@selector(createTrackingLostTimer) withObject:nil waitUntilDone:YES];
+    }
+    
+    [dataLock unlock];
+    // ----- End synchronise data access -----
     
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
@@ -330,7 +537,7 @@ namespace {
 - (void)setCurrentTrackableWith:(NSString *)trackable {
     // Check if we're still tracking the same trackable; if not, update and reset time
     if (![trackable isEqualToString:currentTrackable]) {
-        NSLog(@"Switching to trackable %@", trackable);
+        NSLog(@"DEBUG: Switching to trackable %@", trackable);
         [currentTrackable setString: trackable];
         [self resetTime];
         [self selectShaderWithName:[[textureDict objectForKey:currentTrackable] objectForKey:@"shader"]];
@@ -386,12 +593,36 @@ namespace {
     SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
 
+// Create the tracking lost timer
+- (void)createTrackingLostTimer
+{
+    trackingLostTimer = [NSTimer scheduledTimerWithTimeInterval:TRACKING_LOST_TIMEOUT target:self selector:@selector(trackingLostTimerFired:) userInfo:nil repeats:NO];
+}
+
+// Terminate the tracking lost timer
+- (void)terminateTrackingLostTimer
+{
+    [trackingLostTimer invalidate];
+    trackingLostTimer = nil;
+}
+
+
+// Tracking lost timer fired, pause video playback
+- (void)trackingLostTimerFired:(NSTimer*)timer
+{
+    // Tracking has been lost for TRACKING_LOST_TIMEOUT seconds, pause playback
+    // (we can safely do this on all our VideoPlayerHelpers objects)
+    [videoPlayerHelper pause];
+    trackingLostTimer = nil;
+}
+
+
 //------------------------------------------------------------------------------
 #pragma mark - OpenGL ES management
 
 - (void)selectShaderWithName: (NSString *)shaderName
 {
-    NSLog(@"Shader name: %@", shaderName);
+    NSLog(@"DEBUG: Shader name: %@", shaderName);
     shaderProgramID = [SampleApplicationShaderUtils
                        createProgramWithVertexShaderFileName:[NSString stringWithFormat:@"%@.vertsh", shaderName]
                        fragmentShaderFileName:[NSString stringWithFormat:@"%@.fragsh", shaderName]];

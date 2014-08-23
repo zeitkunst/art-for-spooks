@@ -53,8 +53,16 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     AFSImageTargetsViewController *afsImageTargetsViewController;
     
     VideoPlayerHelper* videoPlayerHelper;
+    float videoPlaybackTime;
     
     UILabel *testingLabel;
+    
+    // Lock to synchronise data that is (potentially) accessed concurrently
+    NSLock* dataLock;
+    
+    // Timer to pause on-texture video playback after tracking has been lost.
+    // Note: written/read on two threads, but never concurrently
+    NSTimer* trackingLostTimer;
 }
 
 - (id)initWithFrame:(CGRect)frame rootViewController:(AFSImageTargetsViewController *) rootViewController appSession:(SampleApplicationSession *) app;

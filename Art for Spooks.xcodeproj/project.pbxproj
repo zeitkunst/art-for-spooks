@@ -36,6 +36,7 @@
 		34C7541319A917D900A7B2E4 /* VideoPlayerHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34C7541219A917D900A7B2E4 /* VideoPlayerHelper.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34C7541519A91A0700A7B2E4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */; };
 		34C7541719A91A0F00A7B2E4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */; };
+		34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 34C7541B19A9331E00A7B2E4 /* 1984Macintosh.m4v */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -113,6 +114,7 @@
 		34C7541219A917D900A7B2E4 /* VideoPlayerHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoPlayerHelper.mm; sourceTree = "<group>"; };
 		34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		34C7541B19A9331E00A7B2E4 /* 1984Macintosh.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1984Macintosh.m4v; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -304,11 +306,20 @@
 			path = VideoPlayback;
 			sourceTree = "<group>";
 		};
+		34C7541819A91F4F00A7B2E4 /* videos */ = {
+			isa = PBXGroup;
+			children = (
+				34C7541B19A9331E00A7B2E4 /* 1984Macintosh.m4v */,
+			);
+			path = videos;
+			sourceTree = "<group>";
+		};
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
 				34D1DB0D19A6AD5100CE0CA1 /* replacements */,
 				34D1DB1A19A6AD7800CE0CA1 /* tracking_database */,
+				34C7541819A91F4F00A7B2E4 /* videos */,
 				34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */,
 				34D1DAC119A6AA1300CE0CA1 /* buildings.txt */,
 				34D1DACB19A6AA1300CE0CA1 /* TextureTeapotBlue.png */,
@@ -477,6 +488,7 @@
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
 				34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */,
 				34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */,
+				34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
 				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,
 				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,

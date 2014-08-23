@@ -558,4 +558,56 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_TRIGGERAUTO);
 }
 
+- (void) setNavigationController:(UINavigationController *) theNavController {
+    navController = theNavController;
+}
+
+// Present a view controller using the root view controller (eaglViewController)
+- (void)rootViewControllerPresentViewController:(UIViewController*)viewController inContext:(BOOL)currentContext
+{
+    //    if (YES == currentContext) {
+    //        // Use UIModalPresentationCurrentContext so the root view is not hidden
+    //        // when presenting another view controller
+    //        [self setModalPresentationStyle:UIModalPresentationCurrentContext];
+    //    }
+    //    else {
+    //        // Use UIModalPresentationFullScreen so the presented view controller
+    //        // covers the screen
+    //        [self setModalPresentationStyle:UIModalPresentationFullScreen];
+    //    }
+    //
+    //    if ([self respondsToSelector:@selector(presentViewController:animated:completion:)]) {
+    //        // iOS > 4
+    //        [self presentViewController:viewController animated:NO completion:nil];
+    //    }
+    //    else {
+    //        // iOS 4
+    //        [self presentModalViewController:viewController animated:NO];
+    //    }
+    
+    NSLog(@"navigationController is:%@", [navController description]);
+    fullScreenPlayerPlaying = YES;
+    [navController pushViewController:viewController animated:YES];
+}
+
+// Dismiss a view controller presented by the root view controller
+// (eaglViewController)
+- (void)rootViewControllerDismissPresentedViewController
+{
+    //    // Dismiss the presented view controller (return to the root view
+    //    // controller)
+    //    if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
+    //        // iOS > 4
+    //        [self dismissViewControllerAnimated:NO completion:nil];
+    //    }
+    //    else {
+    //        // iOS 4
+    //        [self dismissModalViewControllerAnimated:NO];
+    //    }
+    //
+    NSLog(@"navigationController is:%@", [navController description]);
+    fullScreenPlayerPlaying = NO;
+    [navController popViewControllerAnimated:YES];
+    
+}
 @end
