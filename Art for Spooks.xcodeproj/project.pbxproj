@@ -27,6 +27,12 @@
 		34832EC719A1838700C80D70 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC619A1838700C80D70 /* Security.framework */; };
 		34832EC919A1839200C80D70 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC819A1839200C80D70 /* QuartzCore.framework */; };
 		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
+		34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */; };
+		34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540119A842F600A7B2E4 /* ArtForSpooks.dat */; };
+		34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */; };
+		34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540519A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png */; };
+		34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540C19A84C0200A7B2E4 /* DistortedTV.fragsh */; };
+		34C7540F19A84C0200A7B2E4 /* DistortedTV.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540D19A84C0200A7B2E4 /* DistortedTV.vertsh */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -54,8 +60,6 @@
 		34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */; };
 		34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
 		34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1319A6AD5100CE0CA1 /* transparent.png */; };
-		34D1DB2119A6AD7800CE0CA1 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1B19A6AD7800CE0CA1 /* ArtForSpooks.dat */; };
-		34D1DB2219A6AD7800CE0CA1 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1C19A6AD7800CE0CA1 /* ArtForSpooks.xml */; };
 		34D1DB2319A6AD7800CE0CA1 /* StonesAndChips.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */; };
 		34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */; };
 		34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */; };
@@ -96,6 +100,12 @@
 		34832EC619A1838700C80D70 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		34832EC819A1839200C80D70 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		34832ECA19A1841B00C80D70 /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVuforia.a; path = "../../../../../development/vuforia-sdk-ios-3-0-9/build/lib/arm/libVuforia.a"; sourceTree = "<group>"; };
+		34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_bill_obverse.png; sourceTree = "<group>"; };
+		34C7540119A842F600A7B2E4 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
+		34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
+		34C7540519A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_021.png"; sourceTree = "<group>"; };
+		34C7540C19A84C0200A7B2E4 /* DistortedTV.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DistortedTV.fragsh; path = shaders/DistortedTV.fragsh; sourceTree = "<group>"; };
+		34C7540D19A84C0200A7B2E4 /* DistortedTV.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DistortedTV.vertsh; path = shaders/DistortedTV.vertsh; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -122,8 +132,8 @@
 		34D1DAEF19A6AA2500CE0CA1 /* SampleAppMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleAppMenu.mm; sourceTree = "<group>"; };
 		34D1DAF119A6AA2500CE0CA1 /* Line.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Line.fragsh; sourceTree = "<group>"; };
 		34D1DAF219A6AA2500CE0CA1 /* Line.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Line.vertsh; sourceTree = "<group>"; };
-		34D1DAF319A6AA2500CE0CA1 /* Simple.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.fragsh; sourceTree = "<group>"; };
-		34D1DAF419A6AA2500CE0CA1 /* Simple.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simple.vertsh; sourceTree = "<group>"; };
+		34D1DAF319A6AA2500CE0CA1 /* Simple.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Simple.fragsh; sourceTree = "<group>"; };
+		34D1DAF419A6AA2500CE0CA1 /* Simple.vertsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Simple.vertsh; sourceTree = "<group>"; };
 		34D1DAF519A6AA2500CE0CA1 /* Teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teapot.h; sourceTree = "<group>"; };
 		34D1DAF619A6AA2500CE0CA1 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		34D1DAF719A6AA2500CE0CA1 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
@@ -136,8 +146,6 @@
 		34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_020.png"; sourceTree = "<group>"; };
 		34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
 		34D1DB1319A6AD5100CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
-		34D1DB1B19A6AD7800CE0CA1 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
-		34D1DB1C19A6AD7800CE0CA1 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
 		34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = StonesAndChips.dat; sourceTree = "<group>"; };
 		34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StonesAndChips.xml; sourceTree = "<group>"; };
 		34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tarmac.dat; sourceTree = "<group>"; };
@@ -224,6 +232,7 @@
 			children = (
 				34D1DABD19A6AA1300CE0CA1 /* assets */,
 				34D1DAE419A6AA2500CE0CA1 /* VuforiaSampleApp */,
+				34C7540B19A84BDE00A7B2E4 /* shaders */,
 				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
 				34D1DA7619A4559E00CE0CA1 /* QuadResized.h */,
 				34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */,
@@ -264,6 +273,15 @@
 				34832EAD19A1829200C80D70 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		34C7540B19A84BDE00A7B2E4 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				34C7540C19A84C0200A7B2E4 /* DistortedTV.fragsh */,
+				34C7540D19A84C0200A7B2E4 /* DistortedTV.vertsh */,
+			);
+			name = shaders;
 			sourceTree = "<group>";
 		};
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
@@ -318,12 +336,14 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
+				34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */,
 				34D1DB0E19A6AD5100CE0CA1 /* clouds-2.png */,
 				34D1DB0F19A6AD5100CE0CA1 /* clouds.png */,
 				34D1DB1019A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png */,
 				34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */,
 				34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */,
 				34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */,
+				34C7540519A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png */,
 				34D1DB1319A6AD5100CE0CA1 /* transparent.png */,
 			);
 			path = replacements;
@@ -332,8 +352,8 @@
 		34D1DB1A19A6AD7800CE0CA1 /* tracking_database */ = {
 			isa = PBXGroup;
 			children = (
-				34D1DB1B19A6AD7800CE0CA1 /* ArtForSpooks.dat */,
-				34D1DB1C19A6AD7800CE0CA1 /* ArtForSpooks.xml */,
+				34C7540119A842F600A7B2E4 /* ArtForSpooks.dat */,
+				34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */,
 				34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */,
 				34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */,
 				34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */,
@@ -426,6 +446,9 @@
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
+				34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */,
+				34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */,
+				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
 				34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */,
@@ -434,12 +457,13 @@
 				34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */,
 				34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
-				34D1DB2219A6AD7800CE0CA1 /* ArtForSpooks.xml in Resources */,
+				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,
 				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */,
 				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
+				34C7540F19A84C0200A7B2E4 /* DistortedTV.vertsh in Resources */,
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
-				34D1DB2119A6AD7800CE0CA1 /* ArtForSpooks.dat in Resources */,
+				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,
 				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
 				34D1DB2319A6AD7800CE0CA1 /* StonesAndChips.dat in Resources */,
 				34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,

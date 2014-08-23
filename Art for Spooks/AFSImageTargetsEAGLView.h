@@ -32,6 +32,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
     // Shader handles
     GLuint shaderProgramID;
+    GLuint distortedTVShaderProgramID;
     GLint vertexHandle;
     GLint normalHandle;
     GLint textureCoordHandle;
@@ -44,12 +45,13 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     
     // Texture used when rendering augmentation
     Texture* augmentationTexture[NUM_AUGMENTATION_TEXTURES];
-    Texture* augmentationTexture002[NUM_AUGMENTATION_TEXTURES];
-    Texture* t0;
     
     SampleApplication3DModel * buildingModel;
 
     SampleApplicationSession * vapp;
+    
+    // Current trackable
+    NSString *currentTrackable;
     
     UILabel *testingLabel;
 }

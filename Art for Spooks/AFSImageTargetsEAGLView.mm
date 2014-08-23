@@ -58,12 +58,13 @@ namespace {
     
     NSMutableDictionary *textureFiles = [[[NSMutableDictionary alloc] init] autorelease];
     NSMutableDictionary *textureIDs = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableArray *shaderNames = [[[NSMutableArray alloc] init] autorelease];
     
     
     // Model scale factor
     const float kObjectScaleNormal = 72.0f; // old, should be removed
     const float kObjectScaleNormalx = 106.0f;
-    const float kObjectScaleNormaly = 79.0f;
+    const float kObjectScaleNormaly = 80.0f;
     
     float texturePosition = -20.0;
 }
@@ -110,7 +111,6 @@ namespace {
             NSLog([NSString stringWithUTF8String:textureFilenames[i]]);
             augmentationTexture[i] = [[Texture alloc] initWithImageFile:[NSString stringWithCString:textureFilenames[i] encoding:NSASCIIStringEncoding]];
         }
-        t0 = [[Texture alloc] initWithImageFile:@"clouds-2.png"];
 
         // Create the OpenGL ES context
         context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -137,6 +137,13 @@ namespace {
         [self initTextureDict];
         [self loadTextureIDs];
         
+        // Set of possible shaders
+        [shaderNames addObject:@"Simple"];
+        [shaderNames addObject:@"DistortedTV"];
+        
+        // Current trackable
+        currentTrackable = @"";
+        
         [self loadBuildingsModel];
         [self initShaders];
         
@@ -154,7 +161,8 @@ namespace {
     [textureFiles setValue:@"Intercept-psychology-a-new-kind-of-sigdev_020.png" forKey:@"Facebook"];
     [textureFiles setValue:@"Intercept-psychology-a-new-kind-of-sigdev_025.png" forKey:@"Woman"];
     [textureFiles setValue:@"Intercept-the-art-of-deception-training-for-a-new_034.png" forKey:@"Buffalo"];
-    [textureFiles setValue:@"clouds-2.png" forKey:@"default"];
+    [textureFiles setValue:@"Intercept-the-art-of-deception-training-for-a-new_021.png" forKey:@"Bosch"];
+    [textureFiles setValue:@"dollar_bill_obverse.png" forKey:@"default"];
 }
 
 - (void)loadTextureIDs {
@@ -294,11 +302,13 @@ namespace {
     else
         glFrontFace(GL_CCW); //Back camera
     
-    
+    NSString *trackableName;
     for (int i = 0; i < state.getNumTrackableResults(); ++i) {
+        
         // Get the trackable
         const QCAR::TrackableResult* result = state.getTrackableResult(i);
         const QCAR::Trackable& trackable = result->getTrackable();
+        trackableName = [NSString stringWithUTF8String:trackable.getName()];
 
         //const QCAR::Trackable& trackable = result->getTrackable();
         QCAR::Matrix44F modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(result->getPose());
@@ -311,6 +321,8 @@ namespace {
             [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Facebook"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if (!strcmp(trackable.getName(), "Anchory")) {
             [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Anchory"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([trackableName isEqualToString:@"Bosch"]) {
+            [self applyTextureWithTextureFile:[textureFiles objectForKey:trackableName] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else {
             [self applyTextureWithTextureFile:[textureFiles objectForKey:@"default"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         }
@@ -474,7 +486,35 @@ namespace {
 {
     shaderProgramID = [SampleApplicationShaderUtils createProgramWithVertexShaderFileName:@"Simple.vertsh"
                                                    fragmentShaderFileName:@"Simple.fragsh"];
+    distortedTVShaderProgramID = [SampleApplicationShaderUtils createProgramWithVertexShaderFileName:@"DistortedTV.vertsh"
+                                                                   fragmentShaderFileName:@"DistortedTV.fragsh"];
 
+    if (0 < shaderProgramID) {
+        vertexHandle = glGetAttribLocation(shaderProgramID, "vertexPosition");
+        normalHandle = glGetAttribLocation(shaderProgramID, "vertexNormal");
+        textureCoordHandle = glGetAttribLocation(shaderProgramID, "vertexTexCoord");
+        mvpMatrixHandle = glGetUniformLocation(shaderProgramID, "modelViewProjectionMatrix");
+        texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
+        resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");
+        timeHandle = glGetUniformLocation(shaderProgramID, "time");
+        time = 0.0;
+        CGRect rect = [self frame];
+        resolution[0] = rect.size.width;
+        resolution[1] = rect.size.height;
+    }
+    else {
+        NSLog(@"Could not initialise augmentation shader");
+    }
+}
+
+- (void)selectShaderWithName: (NSString *)shaderName
+{
+    shaderProgramID = [SampleApplicationShaderUtils
+                       createProgramWithVertexShaderFileName:[NSString stringWithFormat:@"%@.vertsh", shaderName]
+                       fragmentShaderFileName:[NSString stringWithFormat:@"%@.fragsh", shaderName]];
+    
+    //distortedTVShaderProgramID = [SampleApplicationShaderUtils createProgramWithVertexShaderFileName:@"DistortedTV.vertsh"
+    //                                                                          fragmentShaderFileName:@"DistortedTV.fragsh"];
     if (0 < shaderProgramID) {
         vertexHandle = glGetAttribLocation(shaderProgramID, "vertexPosition");
         normalHandle = glGetAttribLocation(shaderProgramID, "vertexNormal");
