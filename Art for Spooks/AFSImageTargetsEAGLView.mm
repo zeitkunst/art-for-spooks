@@ -56,7 +56,7 @@ namespace {
         "clouds-2.png"
     };
     
-    NSMutableDictionary *textureFiles = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary *textureDict = [[[NSMutableDictionary alloc] init] autorelease];
     NSMutableDictionary *textureIDs = [[[NSMutableDictionary alloc] init] autorelease];
     NSMutableArray *shaderNames = [[[NSMutableArray alloc] init] autorelease];
     
@@ -157,18 +157,33 @@ namespace {
 
 
 - (void)initTextureDict {
-    [textureFiles setValue:@"DerSpiegel-media-34098_003.png" forKey:@"Anchory"];
-    [textureFiles setValue:@"Intercept-psychology-a-new-kind-of-sigdev_020.png" forKey:@"Facebook"];
-    [textureFiles setValue:@"Intercept-psychology-a-new-kind-of-sigdev_025.png" forKey:@"Woman"];
-    [textureFiles setValue:@"Intercept-the-art-of-deception-training-for-a-new_034.png" forKey:@"Buffalo"];
-    [textureFiles setValue:@"Intercept-the-art-of-deception-training-for-a-new_021.png" forKey:@"Bosch"];
-    [textureFiles setValue:@"dollar_bill_obverse.png" forKey:@"default"];
+    
+    //[textureDict setValue:@"DerSpiegel-media-34098_003.png" forKey:@"Anchory"];
+    [textureDict setValue:@{
+                             @"shader": @"Simple",
+                             @"texture": @"DerSpiegel-media-34098_003.png"
+                             } forKey:@"Anchory"];
+    [textureDict setValue:@{
+                             @"shader": @"Simple",
+                             @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_020.png"} forKey:@"Facebook"];
+    [textureDict setValue:@{
+                             @"shader": @"Simple",
+                             @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_025.png"} forKey:@"Woman"];
+    [textureDict setValue:@{
+                             @"shader": @"Simple",
+                             @"texture": @"Intercept-the-art-of-deception-training-for-a-new_034.png"} forKey:@"Buffalo"];
+    [textureDict setValue:@{
+                             @"shader": @"DistortedTV",
+                             @"texture": @"Intercept-the-art-of-deception-training-for-a-new_021.png"} forKey:@"Bosch"];
+    [textureDict setValue:@{
+                             @"shader": @"Simple",
+                             @"texture": @"dollar_bill_obverse.png"} forKey:@"default"];
 }
 
 - (void)loadTextureIDs {
-    for (NSString *key in textureFiles) {
-        NSString *value = [textureFiles objectForKey:key];
-        Texture* t = [[Texture alloc] initWithImageFile:value];
+    for (NSString *key in textureDict) {
+        NSDictionary *dict = [textureDict objectForKey:key];
+        Texture* t = [[Texture alloc] initWithImageFile:[dict valueForKey:@"texture"]];
 
         GLuint textureID;
         glGenTextures(1, &textureID);
@@ -177,7 +192,7 @@ namespace {
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [t width], [t height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[t pngData]);
-        [textureIDs setObject:t forKey:value];
+        [textureIDs setObject:t forKey:[dict valueForKey:@"texture"]];
     }
 }
 
@@ -314,17 +329,17 @@ namespace {
         QCAR::Matrix44F modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(result->getPose());
         
         if (!strcmp(trackable.getName(), "Woman")) {
-            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Woman"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Woman"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if (!strcmp(trackable.getName(), "Buffalo")) {
-            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Buffalo"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Buffalo"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if (!strcmp(trackable.getName(), "Facebook")) {
-            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Facebook"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Facebook"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if (!strcmp(trackable.getName(), "Anchory")) {
-            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"Anchory"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Anchory"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([trackableName isEqualToString:@"Bosch"]) {
-            [self applyTextureWithTextureFile:[textureFiles objectForKey:trackableName] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self applyTextureWithTextureFile:[textureDict objectForKey:trackableName] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else {
-            [self applyTextureWithTextureFile:[textureFiles objectForKey:@"default"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self applyTextureWithTextureFile:[textureDict objectForKey:@"default"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         }
     }
     
@@ -439,7 +454,7 @@ namespace {
     time += 0.1;
 }
 
-- (void)applyTextureWithTextureFile:(NSString *)textureFile modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+- (void)applyTextureWithTextureFile:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
     // OpenGL 2
     QCAR::Matrix44F modelViewProjection;
     
@@ -463,6 +478,7 @@ namespace {
     
     glActiveTexture(GL_TEXTURE0);
     
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
     Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
     glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
     
