@@ -22,7 +22,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "SampleApplicationUtils.h"
 #import "SampleApplicationShaderUtils.h"
 #import "Teapot.h"
-#import "QuadResized.h"
+#import "Quad.h"
 
 
 //******************************************************************************
@@ -61,7 +61,9 @@ namespace {
     
     
     // Model scale factor
-    const float kObjectScaleNormal = 3.0f;
+    const float kObjectScaleNormal = 72.0f; // old, should be removed
+    const float kObjectScaleNormalx = 106.0f;
+    const float kObjectScaleNormaly = 79.0f;
     
     float texturePosition = -20.0;
 }
@@ -421,13 +423,16 @@ namespace {
     [self presentFramebuffer];
 }
 
+- (void)updateTime {
+    time += 0.1;
+}
 
 - (void)applyTextureWithTextureFile:(NSString *)textureFile modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
     // OpenGL 2
     QCAR::Matrix44F modelViewProjection;
     
-    SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, kObjectScaleNormal, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
     //[self updateTexturePosition];
     //SampleApplicationUtils::translatePoseMatrix(texturePosition, -2.0, 10.0, &modelViewMatrix.data[0]);
     //SampleApplicationUtils::rotatePoseMatrix(10, 1, 0, 0, &modelViewMatrix.data[0]);
@@ -451,6 +456,9 @@ namespace {
     
     glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
     glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateTime];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
     
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
@@ -473,6 +481,12 @@ namespace {
         textureCoordHandle = glGetAttribLocation(shaderProgramID, "vertexTexCoord");
         mvpMatrixHandle = glGetUniformLocation(shaderProgramID, "modelViewProjectionMatrix");
         texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
+        resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");
+        timeHandle = glGetUniformLocation(shaderProgramID, "time");
+        time = 0.0;
+        CGRect rect = [self frame];
+        resolution[0] = rect.size.width;
+        resolution[1] = rect.size.height;
     }
     else {
         NSLog(@"Could not initialise augmentation shader");

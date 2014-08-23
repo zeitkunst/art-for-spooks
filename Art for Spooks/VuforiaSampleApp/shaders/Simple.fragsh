@@ -6,9 +6,273 @@
 precision mediump float;
 varying vec2 texCoord;
 
+uniform float time;
+uniform vec2 resolution;
 uniform sampler2D texSampler2D;
+uniform mat4 modelViewProjectionMatrix;
+float PI = 3.1415926535;
+
+/*
+ * Old, from https://www.shadertoy.com/view/MsXGD4
+float scanline(vec2 uv) {
+	return sin(resolution.y * uv.y * 0.7 - time * 10.0);
+}
+
+float slowscan(vec2 uv) {
+	return sin(resolution.y * uv.y * 0.02 + time * 6.0);
+}
+
+vec2 colorShift(vec2 uv) {
+	return vec2(
+                uv.x,
+                uv.y + sin(time)*0.02
+                );
+}
+
+// from https://www.shadertoy.com/view/4sf3Dr
+// Thanks, Jasper
+vec2 crt(vec2 coord, float bend)
+{
+	// put in symmetrical coords
+	coord = (coord - 0.5) * 2.0;
+    
+	coord *= 0.5;
+	
+	// deform coords
+	coord.x *= 1.0 + pow((abs(coord.y) / bend), 2.0);
+	coord.y *= 1.0 + pow((abs(coord.x) / bend), 2.0);
+    
+	// transform back to 0.0 - 1.0 space
+	coord  = (coord / 1.0) + 0.5;
+    
+	return coord;
+}
+
+vec2 colorshift(vec2 uv, float amount, float rand) {
+	
+	return vec2(
+                uv.x,
+                uv.y + amount * rand // * sin(uv.y * iResolution.y * 0.12 + iGlobalTime)
+                );
+}
+
+vec2 scandistort(vec2 uv) {
+	float scan1 = clamp(cos(uv.y * 2.0 + time), 0.0, 1.0);
+	float scan2 = clamp(cos(uv.y * 2.0 + time + 4.0) * 10.0, 0.0, 1.0) ;
+	float amount = scan1 * scan2 * uv.x;
+	
+	uv.x -= 0.05 * mix(texture2D(texSampler2D, vec2(uv.x, amount)).r * amount, amount, 0.9);
+    
+	return uv;
+    
+}
+
+float vignette(vec2 uv) {
+	uv = (uv - 0.5) * 0.98;
+	return clamp(pow(cos(uv.x * 3.1415), 1.2) * pow(cos(uv.y * 3.1415), 1.2) * 50.0, 0.0, 1.0);
+}
+ */
+
+/*
+ * From https://www.shadertoy.com/view/4sf3Dr
+ */
+vec3 scanline(vec2 coord, vec3 screen)
+{
+	screen.rgb -= sin((coord.y + (time * 29.0))) * 0.02;
+	return screen;
+}
+
+vec2 crt(vec2 coord, float bend)
+{
+	// put in symmetrical coords
+	coord = (coord - 0.5) * 2.0;
+    
+	coord *= 1.1;
+    
+	// deform coords
+	coord.x *= 1.0 + pow((abs(coord.y) / bend), 2.0);
+	coord.y *= 1.0 + pow((abs(coord.x) / bend), 2.0);
+    
+	// transform back to 0.0 - 1.0 space
+	coord  = (coord / 2.0) + 0.5;
+    
+	return coord;
+}
+
+vec3 sampleSplit(sampler2D tex, vec2 coord)
+{
+	vec3 frag;
+	frag.r = texture2D(tex, vec2(coord.x - 0.01 * sin(time), coord.y)).r;
+	frag.g = texture2D(tex, vec2(coord.x                          , coord.y)).g;
+	frag.b = texture2D(tex, vec2(coord.x + 0.01 * sin(time), coord.y)).b;
+	return frag;
+}
 
 void main()
 {
-    gl_FragColor = texture2D(texSampler2D, texCoord);
+    /*
+     * This works too! At least somewhat. Can't quite get all of the dynamics to work....
+    vec2 p=(gl_FragCoord.xy -.5 * resolution)/ min(resolution.x,resolution.y);
+    
+    vec3 c = vec3(0);
+    
+    for(int i = 0; i < 2; i++){
+        float t = 2.* PI * float(i) / 20. * fract(timer*0.5);
+        float x = cos(t) * sin(t);
+        float y = sin(t);
+        vec2 o = 0.45 * vec2(x,y);
+        float r = fract(t);
+        float g = 1.-r;
+        //float b = 1.-r;
+        c += 0.005/(length(p-o))*vec3(r,g,1);
+    }
+    gl_FragColor = vec4(c,1);
+     */
+    
+    /*
+     * From https://www.shadertoy.com/view/4sf3Dr
+     */
+    vec2 uv = gl_FragCoord.xy / resolution.xy;
+	//uv.y = 1.0 - uv.y; // flip tex
+	vec2 crtCoords = crt(uv, 3.2);
+    
+	// shadertoy has tiling textures. wouldn't be needed
+	// if you set up your tex params properly
+	if (crtCoords.x < 0.0 || crtCoords.x > 1.0 || crtCoords.y < 0.0 || crtCoords.y > 1.0)
+		discard;
+    
+	// Split the color channels
+	gl_FragColor.rgb = sampleSplit(texSampler2D, crtCoords);
+    
+	// HACK: this bend produces a shitty moire pattern.
+	// Up the bend for the scanline
+	vec2 screenSpace = crtCoords * resolution.xy;
+	gl_FragColor.rgb = scanline(screenSpace, gl_FragColor.rgb);
+    
+    /*
+     * Old, from https://www.shadertoy.com/view/MsXGD4
+     *
+    vec2 uv = gl_FragCoord.xy / resolution.xy;
+    vec2 sd_uv = scandistort(uv);
+    vec2 crt_uv = crt(sd_uv, 2.0);
+
+    vec4 color;
+	
+    vec4 rand = texture2D(texSampler2D, vec2(time * 0.01, time * 0.02));
+	
+	color.r = texture2D(texSampler2D, crt(colorshift(sd_uv, 0.025, rand.r), 2.0)).r;
+	color.g = texture2D(texSampler2D, crt(colorshift(sd_uv, 0.01, rand.g), 2.0)).g;
+	color.b = texture2D(texSampler2D, crt(colorshift(sd_uv, 0.024, rand.b), 2.0)).b;
+    
+	vec4 scanline_color = vec4(scanline(crt_uv));
+	vec4 slowscan_color = vec4(slowscan(crt_uv));
+	
+	gl_FragColor = mix(color, mix(scanline_color, slowscan_color, 0.5), 0.05) *
+    vignette(uv);
+    //gl_FragColor = texture2D(texSampler2D, texCoord);
+     */
+    
+    /*
+    vec4 rgba = texture2D(texSampler2D, texCoord);
+    vec4 intensity;
+    if(fract(gl_FragCoord.y * (0.5 * 4.0 / 3.0)) > 0.5) {
+        intensity = vec4(0);
+    } else {
+        intensity = smoothstep(0.2, 0.8, rgba) + normalize(rgba);
+    }
+    float pos = gl_FragCoord.x + sin(time);
+    vec2 pos2 = vec2(pos, gl_FragCoord.y);
+    //vec2 xy = pos
+    vec3 col = texture2D(texSampler2D, pos2).xyz;
+    gl_FragColor = (intensity * -0.25 + rgba * 1.1) + vec4(col, 1.0);
+    //gl_FragColor = intensity * -0.25 + rgba * 1.1;
+     */
+    
+    
+    
+    //vec3 output = mix(texel0.xyz, c.xyz, 0.5);
+    //vec3 output = cross(texel0.xyz, c);
+    //gl_FragColor = vec4(c, 1.0) * texture2D(texSampler2D, texCoord);
+    //gl_FragColor = mix(texture2D(texSampler2D, texCoord), c.xyz, 0.5);
+    
+    /*
+    vec2 cPos = -1.0 + 2.0 * gl_FragCoord.xy / resolution.xy;
+    //vec2 cPos = gl_FragCoord.xy/resolution.xy;
+    float cLength = length(cPos);
+    
+    vec2 uv = gl_FragCoord.xy/resolution.xy+(cPos/cLength)*cos(cLength*12.0-timer*4.0)*0.03;
+    vec3 col = texture2D(texSampler2D,uv).xyz;
+    
+    gl_FragColor = vec4(col,1.0);
+     */
+    /*
+     * A glow that works! But it's really really really slow
+    vec4 sum = vec4(0);
+    vec2 texcoord = vec2(texCoord);
+    int j;
+    int i;
+    
+    for( i= -4 ;i < 4; i++)
+    {
+        for (j = -3; j < 3; j++)
+        {
+            sum += texture2D(texSampler2D, texcoord + vec2(j, i)*0.004) * 0.25;
+        }
+    }
+    if (texture2D(texSampler2D, texcoord).r < 0.3)
+    {
+        gl_FragColor = sum*sum*0.012 + texture2D(texSampler2D, texcoord);
+    }
+    else
+    {
+        if (texture2D(texSampler2D, texcoord).r < 0.5)
+        {
+            gl_FragColor = sum*sum*0.009 + texture2D(texSampler2D, texcoord);
+        }
+        else
+        {
+            gl_FragColor = sum*sum*0.0075 + texture2D(texSampler2D, texcoord);
+        }
+    }
+     */
+    
+    /*
+    //vec2 newPos = vec2(texCoord.x + sin(timer), texCoord.y - sin(timer));
+    vec2 newPos = vec2(sin(timer), -cos(timer));
+    newPos = texCoord * newPos;
+    //gl_FragColor = texture2D(texSampler2D, texCoord);
+    gl_FragColor = texture2D(texSampler2D, newPos);
+     */
 }
+
+
+/*
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2  resolution;
+uniform float timer;
+//uniform vec2 mouse;
+varying vec2 texCoord;
+
+float PI = 3.1415926535;
+
+void main( void ) {
+    vec2 p=(gl_FragCoord.xy -.5 * resolution)/ min(resolution.x,resolution.y);
+    vec3 c = vec3(0);
+    
+    for(int i = 0; i < 2; i++){
+        float t = 2.* PI * float(i) / 20. * fract(timer*0.5);
+        float x = cos(t) * sin(t);
+        float y = sin(t);
+        vec2 o = 0.45 * vec2(x,y);
+        float r = fract(t);
+        float g = 1.-r;
+        //float b = 1.-r;
+        c += 0.005/(length(p-o))*vec3(r,g,1);
+    }
+    gl_FragColor = vec4(c,1);
+}
+ */
+

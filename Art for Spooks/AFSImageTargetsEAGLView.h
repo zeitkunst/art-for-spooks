@@ -37,6 +37,10 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     GLint textureCoordHandle;
     GLint mvpMatrixHandle;
     GLint texSampler2DHandle;
+    GLint resolutionHandle;
+    GLint timeHandle;
+    GLfloat time;
+    GLfloat resolution[2];
     
     // Texture used when rendering augmentation
     Texture* augmentationTexture[NUM_AUGMENTATION_TEXTURES];
