@@ -108,6 +108,12 @@ vec3 sampleSplit(sampler2D tex, vec2 coord)
 	return frag;
 }
 
+vec2 wobble(vec2 uv, float amplitude, float frequence, float speed)
+{
+    float offset = amplitude*sin(uv.y*frequence+time*speed);
+    return vec2(uv.x+offset,uv.y);
+}
+
 void main()
 {
     /*
@@ -128,10 +134,25 @@ void main()
     }
     gl_FragColor = vec4(c,1);
      */
+   
+    /*
+     * Wobble from https://www.shadertoy.com/view/MdS3RV
+     */
+    vec4 temp = texture2D(texSampler2D, texCoord);
+    // This is how we get things to stay in the correct space/position on screen!
+    // We use texCoord.xy in the code rather than gl_FragCoord.xy/resolution.xy
+    vec2 uv = texCoord.xy;
+	float amplitude = 0.0030;
+	float frequence = 190.00;
+	float speed = 3.0;
+	uv = wobble(uv,amplitude,frequence,speed);
+	gl_FragColor = texture2D(texSampler2D,uv);
+    
     
     /*
      * From https://www.shadertoy.com/view/4sf3Dr
-     */
+     * This works! I think...
+     *
     vec2 uv = gl_FragCoord.xy / resolution.xy;
 	//uv.y = 1.0 - uv.y; // flip tex
 	vec2 crtCoords = crt(uv, 3.2);
@@ -148,6 +169,7 @@ void main()
 	// Up the bend for the scanline
 	vec2 screenSpace = crtCoords * resolution.xy;
 	gl_FragColor.rgb = scanline(screenSpace, gl_FragColor.rgb);
+     */
     
     /*
      * Old, from https://www.shadertoy.com/view/MsXGD4
