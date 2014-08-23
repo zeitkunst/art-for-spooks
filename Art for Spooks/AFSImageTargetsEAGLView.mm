@@ -325,26 +325,19 @@ namespace {
         // Get the trackable
         const QCAR::TrackableResult* result = state.getTrackableResult(i);
         const QCAR::Trackable& trackable = result->getTrackable();
-        trackableName = [NSString stringWithUTF8String:trackable.getName()];
-        [self setCurrentTrackableWith:trackableName];
-
-
-        //const QCAR::Trackable& trackable = result->getTrackable();
         QCAR::Matrix44F modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(result->getPose());
+        trackableName = [NSMutableString stringWithUTF8String:trackable.getName()];
         
-        if (!strcmp(trackable.getName(), "Woman")) {
-            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Woman"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
-        } else if (!strcmp(trackable.getName(), "Buffalo")) {
-            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Buffalo"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
-        } else if (!strcmp(trackable.getName(), "Facebook")) {
-            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Facebook"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
-        } else if (!strcmp(trackable.getName(), "Anchory")) {
-            [self applyTextureWithTextureFile:[textureDict objectForKey:@"Anchory"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
-        } else if ([trackableName isEqualToString:@"Bosch"]) {
-            [self applyTextureWithTextureFile:[textureDict objectForKey:trackableName] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
-        } else {
-            [self applyTextureWithTextureFile:[textureDict objectForKey:@"default"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        // Check if we have anything for this trackable in our dict
+        if ([textureDict valueForKey:trackableName] == nil) {
+            trackableName = @"default";
         }
+        
+        [self setCurrentTrackableWith:trackableName];
+        
+        // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
+        [self applyTextureWithTextureFile:[textureDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        
     }
     
     glDisable(GL_DEPTH_TEST);
