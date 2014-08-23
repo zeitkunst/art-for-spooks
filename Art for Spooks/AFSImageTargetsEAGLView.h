@@ -50,9 +50,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
     SampleApplicationSession * vapp;
     
-    // Current trackable
-    NSString *currentTrackable;
-    
     UILabel *testingLabel;
 }
 

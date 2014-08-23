@@ -67,6 +67,9 @@ namespace {
     const float kObjectScaleNormaly = 80.0f;
     
     float texturePosition = -20.0;
+    
+    // Current trackable
+    NSMutableString *currentTrackable = [[[NSMutableString alloc] init] autorelease];
 }
 
 
@@ -137,12 +140,11 @@ namespace {
         [self initTextureDict];
         [self loadTextureIDs];
         
+        [currentTrackable setString:@""];
+        
         // Set of possible shaders
         [shaderNames addObject:@"Simple"];
         [shaderNames addObject:@"DistortedTV"];
-        
-        // Current trackable
-        currentTrackable = @"";
         
         [self loadBuildingsModel];
         [self initShaders];
@@ -324,6 +326,8 @@ namespace {
         const QCAR::TrackableResult* result = state.getTrackableResult(i);
         const QCAR::Trackable& trackable = result->getTrackable();
         trackableName = [NSString stringWithUTF8String:trackable.getName()];
+        [self setCurrentTrackableWith:trackableName];
+
 
         //const QCAR::Trackable& trackable = result->getTrackable();
         QCAR::Matrix44F modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(result->getPose());
@@ -353,6 +357,16 @@ namespace {
     //[self performSelectorOnMainThread:@selector(showMessage:) withObject:@"TESTING!!! This is a test with long lines. Seeing if it will work." waitUntilDone:NO];
     QCAR::Renderer::getInstance().end();
     [self presentFramebuffer];
+}
+
+- (void)setCurrentTrackableWith:(NSString *)trackable {
+    // Check if we're still tracking the same trackable; if not, update and reset time
+    if (![trackable isEqualToString:currentTrackable]) {
+        NSLog(@"Switching to trackable %@", trackable);
+        [currentTrackable setString: trackable];
+        [self resetTime];
+        [self selectShaderWithName:[[textureDict objectForKey:currentTrackable] objectForKey:@"shader"]];
+    }
 }
 
 - (void)renderFrameQCAR_bak
@@ -450,6 +464,10 @@ namespace {
     [self presentFramebuffer];
 }
 
+- (void)resetTime {
+    time = 0;
+}
+
 - (void)updateTime {
     time += 0.1;
 }
@@ -525,6 +543,7 @@ namespace {
 
 - (void)selectShaderWithName: (NSString *)shaderName
 {
+    NSLog(@"Shader name: %@", shaderName);
     shaderProgramID = [SampleApplicationShaderUtils
                        createProgramWithVertexShaderFileName:[NSString stringWithFormat:@"%@.vertsh", shaderName]
                        fragmentShaderFileName:[NSString stringWithFormat:@"%@.fragsh", shaderName]];
