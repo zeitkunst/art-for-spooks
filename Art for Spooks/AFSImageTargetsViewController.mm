@@ -99,7 +99,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 - (void)loadView
 {
     // Create the EAGLView
-    eaglView = [[AFSImageTargetsEAGLView alloc] initWithFrame:viewFrame appSession:vapp];
+    eaglView = [[AFSImageTargetsEAGLView alloc] initWithFrame:viewFrame rootViewController:self appSession:vapp];
     [self setView:eaglView];
     
     // show loading animation while AR is being initialized

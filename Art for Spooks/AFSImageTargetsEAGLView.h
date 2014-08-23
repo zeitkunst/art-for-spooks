@@ -12,10 +12,12 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "Texture.h"
 #import "SampleApplicationSession.h"
 #import "SampleApplication3DModel.h"
+#import "VideoPlayerHelper.h"
 
 
 #define NUM_AUGMENTATION_TEXTURES 5
 
+@class AFSImageTargetsViewController;
 
 // EAGLView is a subclass of UIView and conforms to the informal protocol
 // UIGLViewProtocol
@@ -45,15 +47,17 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     
     // Texture used when rendering augmentation
     Texture* augmentationTexture[NUM_AUGMENTATION_TEXTURES];
-    
-    SampleApplication3DModel * buildingModel;
 
     SampleApplicationSession * vapp;
+    
+    AFSImageTargetsViewController *afsImageTargetsViewController;
+    
+    VideoPlayerHelper* videoPlayerHelper;
     
     UILabel *testingLabel;
 }
 
-- (id)initWithFrame:(CGRect)frame appSession:(SampleApplicationSession *) app;
+- (id)initWithFrame:(CGRect)frame rootViewController:(AFSImageTargetsViewController *) rootViewController appSession:(SampleApplicationSession *) app;
 
 - (void)finishOpenGLESCommands;
 - (void)freeOpenGLESResources;

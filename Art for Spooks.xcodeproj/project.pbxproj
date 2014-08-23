@@ -33,6 +33,9 @@
 		34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540519A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png */; };
 		34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540C19A84C0200A7B2E4 /* DistortedTV.fragsh */; };
 		34C7540F19A84C0200A7B2E4 /* DistortedTV.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540D19A84C0200A7B2E4 /* DistortedTV.vertsh */; };
+		34C7541319A917D900A7B2E4 /* VideoPlayerHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34C7541219A917D900A7B2E4 /* VideoPlayerHelper.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34C7541519A91A0700A7B2E4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */; };
+		34C7541719A91A0F00A7B2E4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -106,6 +109,10 @@
 		34C7540519A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_021.png"; sourceTree = "<group>"; };
 		34C7540C19A84C0200A7B2E4 /* DistortedTV.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DistortedTV.fragsh; path = shaders/DistortedTV.fragsh; sourceTree = "<group>"; };
 		34C7540D19A84C0200A7B2E4 /* DistortedTV.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DistortedTV.vertsh; path = shaders/DistortedTV.vertsh; sourceTree = "<group>"; };
+		34C7541119A917D900A7B2E4 /* VideoPlayerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerHelper.h; sourceTree = "<group>"; };
+		34C7541219A917D900A7B2E4 /* VideoPlayerHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoPlayerHelper.mm; sourceTree = "<group>"; };
+		34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -158,6 +165,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34C7541519A91A0700A7B2E4 /* AudioToolbox.framework in Frameworks */,
+				34C7541719A91A0F00A7B2E4 /* MediaPlayer.framework in Frameworks */,
 				34832EBB19A1834600C80D70 /* CoreVideo.framework in Frameworks */,
 				34832EBD19A1834F00C80D70 /* CoreMedia.framework in Frameworks */,
 				34832EBF19A1835C00C80D70 /* AVFoundation.framework in Frameworks */,
@@ -209,6 +218,8 @@
 		34832E8A19A1829100C80D70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */,
+				34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */,
 				34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */,
 				34832ECA19A1841B00C80D70 /* libVuforia.a */,
 				34832EC819A1839200C80D70 /* QuartzCore.framework */,
@@ -284,6 +295,15 @@
 			name = shaders;
 			sourceTree = "<group>";
 		};
+		34C7541019A917D900A7B2E4 /* VideoPlayback */ = {
+			isa = PBXGroup;
+			children = (
+				34C7541119A917D900A7B2E4 /* VideoPlayerHelper.h */,
+				34C7541219A917D900A7B2E4 /* VideoPlayerHelper.mm */,
+			);
+			path = VideoPlayback;
+			sourceTree = "<group>";
+		};
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +335,7 @@
 				34D1DAEE19A6AA2500CE0CA1 /* SampleAppMenu.h */,
 				34D1DAEF19A6AA2500CE0CA1 /* SampleAppMenu.mm */,
 				34D1DAF019A6AA2500CE0CA1 /* shaders */,
+				34C7541019A917D900A7B2E4 /* VideoPlayback */,
 				34D1DAF519A6AA2500CE0CA1 /* Teapot.h */,
 				34D1DAF619A6AA2500CE0CA1 /* Texture.h */,
 				34D1DAF719A6AA2500CE0CA1 /* Texture.mm */,
@@ -487,6 +508,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34D1DB0B19A6AB5400CE0CA1 /* main.m in Sources */,
+				34C7541319A917D900A7B2E4 /* VideoPlayerHelper.mm in Sources */,
 				34D1DB0119A6AA2500CE0CA1 /* Texture.mm in Sources */,
 				34D1DAF919A6AA2500CE0CA1 /* SampleApplicationSession.mm in Sources */,
 				34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */,

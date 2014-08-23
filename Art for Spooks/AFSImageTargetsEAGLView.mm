@@ -75,7 +75,6 @@ namespace {
 
 @interface AFSImageTargetsEAGLView (PrivateMethods)
 
-- (void)initShaders;
 - (void)createFramebuffer;
 - (void)deleteFramebuffer;
 - (void)setFramebuffer;
@@ -97,22 +96,16 @@ namespace {
 //------------------------------------------------------------------------------
 #pragma mark - Lifecycle
 
-- (id)initWithFrame:(CGRect)frame appSession:(SampleApplicationSession *) app
+- (id)initWithFrame:(CGRect)frame rootViewController:(AFSImageTargetsViewController *) rootViewController appSession:(SampleApplicationSession *) app
 {
     self = [super initWithFrame:frame];
     
     if (self) {
+        afsImageTargetsViewController = rootViewController;
         vapp = app;
         // Enable retina mode if available on this device
         if (YES == [vapp isRetinaDisplay]) {
             [self setContentScaleFactor:2.0f];
-        }
-        
-        // Load the augmentation textures
-        NSLog(@"Loading using const char*");
-        for (int i = 0; i < NUM_AUGMENTATION_TEXTURES; ++i) {
-            NSLog([NSString stringWithUTF8String:textureFilenames[i]]);
-            augmentationTexture[i] = [[Texture alloc] initWithImageFile:[NSString stringWithCString:textureFilenames[i] encoding:NSASCIIStringEncoding]];
         }
 
         // Create the OpenGL ES context
@@ -122,18 +115,6 @@ namespace {
         // Set it the first time this method is called (on the main thread)
         if (context != [EAGLContext currentContext]) {
             [EAGLContext setCurrentContext:context];
-        }
-        
-        // Generate the OpenGL ES texture and upload the texture data for use
-        // when rendering the augmentation
-        for (int i = 0; i < NUM_AUGMENTATION_TEXTURES; ++i) {
-            GLuint textureID;
-            glGenTextures(1, &textureID);
-            [augmentationTexture[i] setTextureID:textureID];
-            glBindTexture(GL_TEXTURE_2D, textureID);
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [augmentationTexture[i] width], [augmentationTexture[i] height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[augmentationTexture[i] pngData]);
         }
         
         // Load all of the textures, assign IDs
@@ -146,8 +127,8 @@ namespace {
         [shaderNames addObject:@"Simple"];
         [shaderNames addObject:@"DistortedTV"];
         
-        [self loadBuildingsModel];
-        [self initShaders];
+        // Setup video player helper
+        videoPlayerHelper = [[VideoPlayerHelper alloc] initWithRootViewController:afsImageTargetsViewController];
         
         testingLabel = [self labelWithText:@"This is a test" yPosition: (CGFloat) 20.0];
         [testingLabel setBackgroundColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.25]];
@@ -242,10 +223,9 @@ namespace {
     }
     
     [context release];
-    [buildingModel release];
-
-    for (int i = 0; i < NUM_AUGMENTATION_TEXTURES; ++i) {
-        [augmentationTexture[i] release];
+    
+    for (NSString *key in textureIDs) {
+        [[textureIDs objectForKey:key] release];
     }
 
     [super dealloc];
@@ -270,11 +250,6 @@ namespace {
     // recreated OpenGL ES resources
     [self deleteFramebuffer];
     glFinish();
-}
-
-- (void) loadBuildingsModel {
-    buildingModel = [[SampleApplication3DModel alloc] initWithTxtResourceName:@"buildings"];
-    [buildingModel read];
 }
 
 - (void) updateTexturePosition {
@@ -362,101 +337,6 @@ namespace {
     }
 }
 
-- (void)renderFrameQCAR_bak
-{
-    
-    [self setFramebuffer];
-    
-    // Clear colour and depth buffers
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    // Render video background and retrieve tracking state
-    QCAR::State state = QCAR::Renderer::getInstance().begin();
-    QCAR::Renderer::getInstance().drawVideoBackground();
-    
-    glEnable(GL_DEPTH_TEST);
-    // We must detect if background reflection is active and adjust the culling direction.
-    // If the reflection is active, this means the pose matrix has been reflected as well,
-    // therefore standard counter clockwise face culling will result in "inside out" models.
-    
-    glEnable(GL_CULL_FACE);
-    
-    glCullFace(GL_BACK);
-    if(QCAR::Renderer::getInstance().getVideoBackgroundConfig().mReflection == QCAR::VIDEO_BACKGROUND_REFLECTION_ON)
-        glFrontFace(GL_CW);  //Front camera
-    else
-        glFrontFace(GL_CCW); //Back camera
-    
-    
-    for (int i = 0; i < state.getNumTrackableResults(); ++i) {
-        // Get the trackable
-        const QCAR::TrackableResult* result = state.getTrackableResult(i);
-        const QCAR::Trackable& trackable = result->getTrackable();
-        
-        //const QCAR::Trackable& trackable = result->getTrackable();
-        QCAR::Matrix44F modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(result->getPose());
-        
-        // OpenGL 2
-        QCAR::Matrix44F modelViewProjection;
-        
-        
-        SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, kObjectScaleNormal, &modelViewMatrix.data[0]);
-        SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
-        [self updateTexturePosition];
-        SampleApplicationUtils::translatePoseMatrix(texturePosition, -2.0, 10.0, &modelViewMatrix.data[0]);
-        SampleApplicationUtils::rotatePoseMatrix(10, 1, 0, 0, &modelViewMatrix.data[0]);
-        
-        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
-        
-        glUseProgram(shaderProgramID);
-        
-        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
-        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
-        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
-        
-        glEnableVertexAttribArray(vertexHandle);
-        glEnableVertexAttribArray(normalHandle);
-        glEnableVertexAttribArray(textureCoordHandle);
-        
-        // Choose the texture based on the target name
-        int targetIndex = 4;
-        if (!strcmp(trackable.getName(), "Anchory")) {
-            targetIndex = 0;
-        } else if (!strcmp(trackable.getName(), "Facebook")) {
-            targetIndex = 1;
-        } else if (!strcmp(trackable.getName(), "Woman")) {
-            targetIndex = 2;
-        } else {
-            targetIndex = 4;
-        }
-        
-        glActiveTexture(GL_TEXTURE0);
-        
-        glBindTexture(GL_TEXTURE_2D, augmentationTexture[targetIndex].textureID);
-        
-        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-        
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-        
-        SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-        
-    }
-    
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_CULL_FACE);
-    
-    glDisableVertexAttribArray(vertexHandle);
-    glDisableVertexAttribArray(normalHandle);
-    glDisableVertexAttribArray(textureCoordHandle);
-    
-    //[self performSelectorOnMainThread:@selector(showMessage:) withObject:@"TESTING!!! This is a test with long lines. Seeing if it will work." waitUntilDone:NO];
-    QCAR::Renderer::getInstance().end();
-    [self presentFramebuffer];
-}
-
 - (void)resetTime {
     time = 0;
 }
@@ -508,31 +388,6 @@ namespace {
 
 //------------------------------------------------------------------------------
 #pragma mark - OpenGL ES management
-
-- (void)initShaders
-{
-    shaderProgramID = [SampleApplicationShaderUtils createProgramWithVertexShaderFileName:@"Simple.vertsh"
-                                                   fragmentShaderFileName:@"Simple.fragsh"];
-    distortedTVShaderProgramID = [SampleApplicationShaderUtils createProgramWithVertexShaderFileName:@"DistortedTV.vertsh"
-                                                                   fragmentShaderFileName:@"DistortedTV.fragsh"];
-
-    if (0 < shaderProgramID) {
-        vertexHandle = glGetAttribLocation(shaderProgramID, "vertexPosition");
-        normalHandle = glGetAttribLocation(shaderProgramID, "vertexNormal");
-        textureCoordHandle = glGetAttribLocation(shaderProgramID, "vertexTexCoord");
-        mvpMatrixHandle = glGetUniformLocation(shaderProgramID, "modelViewProjectionMatrix");
-        texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
-        resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");
-        timeHandle = glGetUniformLocation(shaderProgramID, "time");
-        time = 0.0;
-        CGRect rect = [self frame];
-        resolution[0] = rect.size.width;
-        resolution[1] = rect.size.height;
-    }
-    else {
-        NSLog(@"Could not initialise augmentation shader");
-    }
-}
 
 - (void)selectShaderWithName: (NSString *)shaderName
 {
