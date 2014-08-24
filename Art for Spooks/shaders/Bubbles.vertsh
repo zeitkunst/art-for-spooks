@@ -11,21 +11,10 @@ varying vec2 texCoord;
 varying vec4 normal;
 
 uniform mat4 modelViewProjectionMatrix;
-uniform float frame;
-uniform float frameRow;
-uniform float frameColumn;
-
-float scalex = 0.25;
-float scaley = 0.2;
 
 void main()
 {
     gl_Position = modelViewProjectionMatrix * vertexPosition;
     normal = vertexNormal;
     texCoord = vertexTexCoord;
-    texCoord.x *= scalex;
-    texCoord.y *= scaley;
-    //texCoord.x += (1.0f/3.0);
-    //texCoord.y += (1.0f/3.0);
-    texCoord += vec2(frameRow, frameColumn);
 }

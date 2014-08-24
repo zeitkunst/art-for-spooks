@@ -37,6 +37,11 @@
 		34C7541519A91A0700A7B2E4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */; };
 		34C7541719A91A0F00A7B2E4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */; };
 		34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 34C7541B19A9331E00A7B2E4 /* 1984Macintosh.m4v */; };
+		34C7542119A9591700A7B2E4 /* Hologram.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7541F19A9591700A7B2E4 /* Hologram.fragsh */; };
+		34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542019A9591700A7B2E4 /* Hologram.vertsh */; };
+		34C7542519A95E0800A7B2E4 /* Bubbles.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542319A95E0800A7B2E4 /* Bubbles.fragsh */; };
+		34C7542619A95E0800A7B2E4 /* Bubbles.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542419A95E0800A7B2E4 /* Bubbles.vertsh */; };
+		34C7542C19A9D7EA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542B19A9D7EA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -115,6 +120,11 @@
 		34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		34C7541B19A9331E00A7B2E4 /* 1984Macintosh.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1984Macintosh.m4v; sourceTree = "<group>"; };
+		34C7541F19A9591700A7B2E4 /* Hologram.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Hologram.fragsh; path = shaders/Hologram.fragsh; sourceTree = "<group>"; };
+		34C7542019A9591700A7B2E4 /* Hologram.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Hologram.vertsh; path = shaders/Hologram.vertsh; sourceTree = "<group>"; };
+		34C7542319A95E0800A7B2E4 /* Bubbles.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bubbles.fragsh; path = shaders/Bubbles.fragsh; sourceTree = "<group>"; };
+		34C7542419A95E0800A7B2E4 /* Bubbles.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bubbles.vertsh; path = shaders/Bubbles.vertsh; sourceTree = "<group>"; };
+		34C7542B19A9D7EA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-nsa-quantumtheory_002_sprites.png"; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -291,6 +301,10 @@
 		34C7540B19A84BDE00A7B2E4 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				34C7542319A95E0800A7B2E4 /* Bubbles.fragsh */,
+				34C7542419A95E0800A7B2E4 /* Bubbles.vertsh */,
+				34C7541F19A9591700A7B2E4 /* Hologram.fragsh */,
+				34C7542019A9591700A7B2E4 /* Hologram.vertsh */,
 				34C7540C19A84C0200A7B2E4 /* DistortedTV.fragsh */,
 				34C7540D19A84C0200A7B2E4 /* DistortedTV.vertsh */,
 			);
@@ -368,6 +382,7 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
+				34C7542B19A9D7EA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
 				34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */,
 				34D1DB0E19A6AD5100CE0CA1 /* clouds-2.png */,
 				34D1DB0F19A6AD5100CE0CA1 /* clouds.png */,
@@ -473,6 +488,7 @@
 				34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */,
 				34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
+				34C7542C19A9D7EA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
 				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
@@ -480,13 +496,16 @@
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
 				34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */,
 				34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */,
+				34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */,
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
 				34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
+				34C7542619A95E0800A7B2E4 /* Bubbles.vertsh in Resources */,
 				34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */,
+				34C7542119A9591700A7B2E4 /* Hologram.fragsh in Resources */,
 				34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */,
 				34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
@@ -498,6 +517,7 @@
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
 				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,
 				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
+				34C7542519A95E0800A7B2E4 /* Bubbles.fragsh in Resources */,
 				34D1DB2319A6AD7800CE0CA1 /* StonesAndChips.dat in Resources */,
 				34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
 				34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,

@@ -42,8 +42,15 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     GLint texSampler2DHandle;
     GLint resolutionHandle;
     GLint timeHandle;
+    GLint frameHandle;
+    GLint frameRowHandle;
+    GLint frameColumnHandle;
     GLfloat time;
     GLfloat resolution[2];
+    
+    double previousTime;
+    
+    float angle;
     
     // Texture used when rendering augmentation
     Texture* augmentationTexture[NUM_AUGMENTATION_TEXTURES];
@@ -56,7 +63,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     float videoPlaybackTime;
     
     UILabel *testingLabel;
-    
+        
     // Lock to synchronise data that is (potentially) accessed concurrently
     NSLock* dataLock;
     

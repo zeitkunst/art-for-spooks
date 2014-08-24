@@ -72,6 +72,12 @@ namespace {
     
     float texturePosition = -20.0;
     
+    int foxacid_FramesPerSecond = 15;
+    int foxacid_FramesPerRow = 4;
+    int foxacid_FramesPerColumn = 5;
+    int foxacid_Frames = 19;
+    int foxacid_currentFrame = 0;
+    
     // Current trackable
     NSMutableString *currentTrackable = [[[NSMutableString alloc] init] autorelease];
     
@@ -190,11 +196,14 @@ namespace {
                              @"shader": @"DistortedTV",
                              @"texture": @"Intercept-the-art-of-deception-training-for-a-new_021.png"} forKey:@"Bosch"];
     [textureDict setValue:@{
-                             @"shader": @"Simple",
-                             @"texture": @"dollar_bill_obverse.png"} forKey:@"default"];
+                            @"shader": @"DistortedTV",
+                            @"texture": @""} forKey:@"1984"];
     [textureDict setValue:@{
                             @"shader": @"Simple",
-                            @"texture": @""} forKey:@"1984"];
+                            @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
+    [textureDict setValue:@{
+                            @"shader": @"Simple",
+                            @"texture": @"dollar_bill_obverse.png"} forKey:@"default"];
 }
 
 - (void)loadTextureIDs {
@@ -214,6 +223,8 @@ namespace {
         glBindTexture(GL_TEXTURE_2D, textureID);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [t width], [t height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[t pngData]);
         [textureIDs setObject:t forKey:[dict valueForKey:@"texture"]];
     }
@@ -363,6 +374,7 @@ namespace {
         // Some are simple and just are texture replacements using different shader programs
         // Others do video playback or loading of models and particle systems
         
+        // BEGIN 1984 TARGET AUGMENTATION
         if ([currentTrackable isEqualToString:@"1984"]){
             // Mark this video (target) as active
             videoData.isActive = YES;
@@ -432,7 +444,7 @@ namespace {
                     
                     // Fallthrough
                 }
-                case PAUSED:
+                case PAUSED: {
                     if (0 == videoTextureID) {
                         // No video texture available, display keyframe
                         displayVideoFrame = NO;
@@ -444,12 +456,16 @@ namespace {
                     }
                     
                     break;
+                }
+                default:
+                    videoTextureID = 0;
+                    displayVideoFrame = NO;
+                    break;
             }
             
             if (YES == displayVideoFrame) {
                 // ---- Display the video frame -----
                 aspectRatio = (float)[videoPlayerHelper getVideoHeight] / (float)[videoPlayerHelper getVideoWidth];
-                NSLog(@"%f", aspectRatio);
                 texCoords = videoQuadTextureCoords;
             }
             else {
@@ -505,6 +521,9 @@ namespace {
                 glUseProgram(0);
             }
             
+        } // END 1984 TARGET AUGMENTATION
+        else if ([currentTrackable isEqualToString:@"Foxacid"]) {
+            [self animateFoxacid:[textureDict objectForKey:@"Foxacid"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else {
             // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
             [self applyTextureWithTextureFile:[textureDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
@@ -546,10 +565,72 @@ namespace {
 
 - (void)resetTime {
     time = 0;
+    angle = 0;
+    previousTime = CACurrentMediaTime();
 }
 
 - (void)updateTime {
     time += 0.1;
+    angle += 1.0;
+    //foxacid_currentFrame += 1;
+    if ((CACurrentMediaTime() - previousTime) >= (1.0/foxacid_FramesPerSecond) ) {
+        foxacid_currentFrame += 1;
+        foxacid_currentFrame = (foxacid_currentFrame)%foxacid_Frames;
+        //foxacid_currentFrame = 0;
+        previousTime = CACurrentMediaTime();
+    }
+    
+    //NSLog(@"Current frame: %d", foxacid_currentFrame);
+}
+
+- (void)animateFoxacid:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    QCAR::Matrix44F modelViewProjection;
+    
+    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    
+    
+    float currentRowPosition = (((foxacid_currentFrame) % foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerRow);
+    //NSLog(@"Current row position: %f", currentRowPosition);
+    float currentColumnPosition = ((foxacid_currentFrame) / foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerColumn;
+    //NSLog(@"Current column position: %f", currentColumnPosition);
+    //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::scalePoseMatrix(1.0f/foxacid_FramesPerRow, 1/foxacid_FramesPerColumn, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(-0.42, 0.15, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(0.6, 0.65, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    glUniform1f(frameHandle, foxacid_currentFrame);
+    glUniform1f(frameRowHandle, currentRowPosition);
+    glUniform1f(frameColumnHandle, currentColumnPosition);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateTime];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
+    
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
 
 - (void)applyTextureWithTextureFile:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
@@ -557,10 +638,10 @@ namespace {
     QCAR::Matrix44F modelViewProjection;
     
     SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
     SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
     //[self updateTexturePosition];
-    //SampleApplicationUtils::translatePoseMatrix(texturePosition, -2.0, 10.0, &modelViewMatrix.data[0]);
-    //SampleApplicationUtils::rotatePoseMatrix(10, 1, 0, 0, &modelViewMatrix.data[0]);
     
     SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
     
@@ -633,6 +714,9 @@ namespace {
         vertexHandle = glGetAttribLocation(shaderProgramID, "vertexPosition");
         normalHandle = glGetAttribLocation(shaderProgramID, "vertexNormal");
         textureCoordHandle = glGetAttribLocation(shaderProgramID, "vertexTexCoord");
+        frameHandle = glGetUniformLocation(shaderProgramID, "frame");
+        frameRowHandle = glGetUniformLocation(shaderProgramID, "frameRow");
+        frameColumnHandle = glGetUniformLocation(shaderProgramID, "frameColumn");
         mvpMatrixHandle = glGetUniformLocation(shaderProgramID, "modelViewProjectionMatrix");
         texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
         resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");
