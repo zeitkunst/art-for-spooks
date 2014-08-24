@@ -199,7 +199,7 @@ namespace {
                             @"shader": @"DistortedTV",
                             @"texture": @""} forKey:@"1984"];
     [textureDict setValue:@{
-                            @"shader": @"Simple",
+                            @"shader": @"Animate_4x5",
                             @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
     [textureDict setValue:@{
                             @"shader": @"Simple",
@@ -591,7 +591,8 @@ namespace {
     SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
     
     
-    float currentRowPosition = (((foxacid_currentFrame) % foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerRow);
+    // If sprite sheet is organized from right to left, then we need to offset by the last x position
+    float currentRowPosition = 0.75 - (((foxacid_currentFrame) % foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerRow);
     //NSLog(@"Current row position: %f", currentRowPosition);
     float currentColumnPosition = ((foxacid_currentFrame) / foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerColumn;
     //NSLog(@"Current column position: %f", currentColumnPosition);
@@ -602,6 +603,9 @@ namespace {
     SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
     
     glUseProgram(shaderID);
+    
+    glVertexAttrib1f(frameRowHandle, currentRowPosition);
+    glVertexAttrib1f(frameColumnHandle, currentColumnPosition);
     
     glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
     glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
@@ -618,9 +622,9 @@ namespace {
     glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
     
     glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-    glUniform1f(frameHandle, foxacid_currentFrame);
-    glUniform1f(frameRowHandle, currentRowPosition);
-    glUniform1f(frameColumnHandle, currentColumnPosition);
+    //glUniform1f(frameHandle, foxacid_currentFrame);
+    //glUniform1f(frameRowHandle, currentRowPosition);
+    //glUniform1f(frameColumnHandle, currentColumnPosition);
     glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
     [self updateTime];
     glUniform1f(timeHandle, time);
@@ -714,9 +718,8 @@ namespace {
         vertexHandle = glGetAttribLocation(shaderProgramID, "vertexPosition");
         normalHandle = glGetAttribLocation(shaderProgramID, "vertexNormal");
         textureCoordHandle = glGetAttribLocation(shaderProgramID, "vertexTexCoord");
-        frameHandle = glGetUniformLocation(shaderProgramID, "frame");
-        frameRowHandle = glGetUniformLocation(shaderProgramID, "frameRow");
-        frameColumnHandle = glGetUniformLocation(shaderProgramID, "frameColumn");
+        frameRowHandle = glGetAttribLocation(shaderProgramID, "frameRow");
+        frameColumnHandle = glGetAttribLocation(shaderProgramID, "frameColumn");
         mvpMatrixHandle = glGetUniformLocation(shaderProgramID, "modelViewProjectionMatrix");
         texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
         resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");

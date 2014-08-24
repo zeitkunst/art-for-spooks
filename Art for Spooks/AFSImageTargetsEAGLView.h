@@ -42,7 +42,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     GLint texSampler2DHandle;
     GLint resolutionHandle;
     GLint timeHandle;
-    GLint frameHandle;
     GLint frameRowHandle;
     GLint frameColumnHandle;
     GLfloat time;
