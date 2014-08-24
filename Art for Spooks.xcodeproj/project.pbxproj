@@ -44,6 +44,7 @@
 		34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542F19AA552300A7B2E4 /* Animate_4x5.fragsh */; };
 		34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */; };
 		34C7543419AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */; };
+		34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7543519AA812500A7B2E4 /* ImageIO.framework */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -129,6 +130,7 @@
 		34C7542F19AA552300A7B2E4 /* Animate_4x5.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.fragsh; path = shaders/Animate_4x5.fragsh; sourceTree = "<group>"; };
 		34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.vertsh; path = shaders/Animate_4x5.vertsh; sourceTree = "<group>"; };
 		34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-nsa-quantumtheory_002_sprites.png"; sourceTree = "<group>"; };
+		34C7543519AA812500A7B2E4 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */,
 				34C7541519A91A0700A7B2E4 /* AudioToolbox.framework in Frameworks */,
 				34C7541719A91A0F00A7B2E4 /* MediaPlayer.framework in Frameworks */,
 				34832EBB19A1834600C80D70 /* CoreVideo.framework in Frameworks */,
@@ -234,6 +237,7 @@
 		34832E8A19A1829100C80D70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34C7543519AA812500A7B2E4 /* ImageIO.framework */,
 				34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */,
 				34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */,
 				34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */,
