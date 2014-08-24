@@ -242,6 +242,10 @@ namespace {
                             @"texture": @"",
                             @"video":@"HackersSceneForAFS.m4v"} forKey:@"CyberMagicians"];
     [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
+                                 @"texture": @"",
+                                 @"video":@"YoussefForAFS.m4v"} forKey:@"Egypt"];
+    [augmentationDict setValue:@{
                             @"shader": @"Animate_4x5",
                             @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
     [augmentationDict setValue:@{
@@ -425,6 +429,9 @@ namespace {
         } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
             [self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"CyberMagicians"]) {
+            [self playVideoWithTrackable:trackable withCurrentResult:result];
+            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([currentTrackable isEqualToString:@"Egypt"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
             //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"1984"]) {
@@ -620,7 +627,9 @@ namespace {
             foxacid_currentFrame = 0;
         } else if ([trackable isEqualToString:@"BlurredFaces"]) {
             blurredFaces_state = PRE_CAPTURE_FACE;
-        } else if ([trackable isEqualToString:@"1984"] || [trackable isEqualToString:@"CyberMagicians"]) {
+        } else if ([trackable isEqualToString:@"1984"]
+                   || [trackable isEqualToString:@"CyberMagicians"]
+                   || [trackable isEqualToString:@"Egypt"]) {
             videoData.targetPositiveDimensions.data[0] = 0.0f;
             videoData.targetPositiveDimensions.data[1] = 0.0f;
             videoPlaybackTime = VIDEO_PLAYBACK_CURRENT_POSITION;
