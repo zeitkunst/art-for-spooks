@@ -45,6 +45,7 @@
 		34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */; };
 		34C7543419AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */; };
 		34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7543519AA812500A7B2E4 /* ImageIO.framework */; };
+		34C7543B19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543A19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -131,6 +132,7 @@
 		34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.vertsh; path = shaders/Animate_4x5.vertsh; sourceTree = "<group>"; };
 		34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-nsa-quantumtheory_002_sprites.png"; sourceTree = "<group>"; };
 		34C7543519AA812500A7B2E4 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		34C7543A19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 		34D1DB1A19A6AD7800CE0CA1 /* tracking_database */ = {
 			isa = PBXGroup;
 			children = (
+				34C7543A19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v */,
 				34C7540119A842F600A7B2E4 /* ArtForSpooks.dat */,
 				34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */,
 				34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */,
@@ -518,6 +521,7 @@
 				34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */,
 				34C7542119A9591700A7B2E4 /* Hologram.fragsh in Resources */,
 				34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */,
+				34C7543B19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v in Resources */,
 				34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
 				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,

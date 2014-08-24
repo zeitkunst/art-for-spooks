@@ -58,7 +58,7 @@ namespace {
         "clouds-2.png"
     };
     
-    NSMutableDictionary *textureDict = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary *augmentationDict = [[[NSMutableDictionary alloc] init] autorelease];
     NSMutableDictionary *textureIDs = [[[NSMutableDictionary alloc] init] autorelease];
     NSMutableArray *shaderNames = [[[NSMutableArray alloc] init] autorelease];
     
@@ -181,7 +181,7 @@ namespace {
         }
         
         // Load all of the textures, assign IDs
-        [self initTextureDict];
+        [self initAugmentationDict];
         [self loadTextureIDs];
         
         [currentTrackable setString:@""];
@@ -197,9 +197,9 @@ namespace {
         videoPlaybackTime = VIDEO_PLAYBACK_CURRENT_POSITION;
         
         // Load video
-        if (NO == [videoPlayerHelper load:@"1984Macintosh.m4v" playImmediately:NO fromPosition:videoPlaybackTime]) {
-            NSLog(@"Failed to load video file");
-        }
+        //if (NO == [videoPlayerHelper load:@"HackersSceneForAFS.m4v" playImmediately:NO fromPosition:videoPlaybackTime]) {
+        //    NSLog(@"Failed to load video file");
+        //}
         
         // Create our face detector for BlurredFaces
         NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
@@ -214,42 +214,47 @@ namespace {
 }
 
 
-- (void)initTextureDict {
+- (void)initAugmentationDict {
     
-    //[textureDict setValue:@"DerSpiegel-media-34098_003.png" forKey:@"Anchory"];
-    [textureDict setValue:@{
+    //[augmentationDict setValue:@"DerSpiegel-media-34098_003.png" forKey:@"Anchory"];
+    [augmentationDict setValue:@{
                              @"shader": @"Simple",
                              @"texture": @"DerSpiegel-media-34098_003.png"
                              } forKey:@"Anchory"];
-    [textureDict setValue:@{
+    [augmentationDict setValue:@{
                              @"shader": @"Simple",
                              @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_020.png"} forKey:@"Facebook"];
-    [textureDict setValue:@{
+    [augmentationDict setValue:@{
                              @"shader": @"Simple",
                              @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_025.png"} forKey:@"Woman"];
-    [textureDict setValue:@{
+    [augmentationDict setValue:@{
                              @"shader": @"Simple",
                              @"texture": @"Intercept-the-art-of-deception-training-for-a-new_034.png"} forKey:@"Buffalo"];
-    [textureDict setValue:@{
+    [augmentationDict setValue:@{
                              @"shader": @"DistortedTV",
                              @"texture": @"Intercept-the-art-of-deception-training-for-a-new_021.png"} forKey:@"Bosch"];
-    [textureDict setValue:@{
+    [augmentationDict setValue:@{
                             @"shader": @"DistortedTV",
-                            @"texture": @""} forKey:@"1984"];
-    [textureDict setValue:@{
+                            @"texture": @"",
+                            @"video":@"1984Macintosh.m4v"} forKey:@"1984"];
+    [augmentationDict setValue:@{
+                            @"shader": @"Simple",
+                            @"texture": @"",
+                            @"video":@"HackersSceneForAFS.m4v"} forKey:@"CyberMagicians"];
+    [augmentationDict setValue:@{
                             @"shader": @"Animate_4x5",
                             @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
-    [textureDict setValue:@{
+    [augmentationDict setValue:@{
                             @"shader": @"Simple",
                             @"texture": @"clouds-2.png"} forKey:@"BlurredFaces"];
-    [textureDict setValue:@{
+    [augmentationDict setValue:@{
                             @"shader": @"Simple",
                             @"texture": @"dollar_bill_obverse.png"} forKey:@"default"];
 }
 
 - (void)loadTextureIDs {
-    for (NSString *key in textureDict) {
-        NSDictionary *dict = [textureDict objectForKey:key];
+    for (NSString *key in augmentationDict) {
+        NSDictionary *dict = [augmentationDict objectForKey:key];
         NSString *textureFilename = [dict valueForKey:@"texture"];
         
         // If no texture is set for this particular trackable, skip
@@ -405,7 +410,7 @@ namespace {
         trackableName = [NSMutableString stringWithUTF8String:trackable.getName()];
         
         // Check if we have anything for this trackable in our dict
-        if ([textureDict valueForKey:trackableName] == nil) {
+        if ([augmentationDict valueForKey:trackableName] == nil) {
             trackableName = @"default";
         }
         
@@ -415,161 +420,19 @@ namespace {
         // Some are simple and just are texture replacements using different shader programs
         // Others do video playback or loading of models and particle systems
         
-        // BEGIN 1984 TARGET AUGMENTATION
-        if ([currentTrackable isEqualToString:@"1984"]){
-            // Mark this video (target) as active
-            videoData.isActive = YES;
-            
-            // Get the target size (used to determine if taps are within the target)
-            if (0.0f == videoData.targetPositiveDimensions.data[0] ||
-                0.0f == videoData.targetPositiveDimensions.data[1]) {
-                const QCAR::ImageTarget& imageTarget = (const QCAR::ImageTarget&) trackable;
-                
-                videoData.targetPositiveDimensions = imageTarget.getSize();
-                // The pose delivers the centre of the target, thus the dimensions
-                // go from -width / 2 to width / 2, and -height / 2 to height / 2
-                videoData.targetPositiveDimensions.data[0] /= 2.0f;
-                videoData.targetPositiveDimensions.data[1] /= 2.0f;
-            }
-            
-            // Get the current trackable pose
-            const QCAR::Matrix34F& trackablePose = result->getPose();
-            
-            // This matrix is used to calculate the location of the screen tap
-            videoData.modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(trackablePose);
-            
-            float aspectRatio;
-            const GLvoid* texCoords;
-            GLuint frameTextureID;
-            BOOL displayVideoFrame = YES;
-            
-            // Retain value between calls
-            static GLuint videoTextureID = {0};
-            
-            MEDIA_STATE currentStatus = [videoPlayerHelper getStatus];
-            
-            // --- INFORMATION ---
-            // One could trigger automatic playback of a video at this point.  This
-            // could be achieved by calling the play method of the VideoPlayerHelper
-            // object if currentStatus is not PLAYING.  You should also call
-            // getStatus again after making the call to play, in order to update the
-            // value held in currentStatus.
-            // --- END INFORMATION ---
-            
-            if (ERROR != currentStatus && NOT_READY != currentStatus && PLAYING != currentStatus) {
-                // Play the video
-                NSLog(@"Playing video with on-texture player");
-                [videoPlayerHelper play:NO fromPosition:VIDEO_PLAYBACK_CURRENT_POSITION];
-            } else {
-                //NSLog(@"Should be playing...");
-            }
-            
-            switch (currentStatus) {
-                case PLAYING: {
-                    // If the tracking lost timer is scheduled, terminate it
-                    
-                    if (nil != trackingLostTimer) {
-                        // Timer termination must occur on the same thread on which
-                        // it was installed
-                        [self performSelectorOnMainThread:@selector(terminateTrackingLostTimer) withObject:nil waitUntilDone:YES];
-                    }
-                    
-                    
-                    // Upload the decoded video data for the latest frame to OpenGL
-                    // and obtain the video texture ID
-                    GLuint videoTexID = [videoPlayerHelper updateVideoData];
-                    
-                    if (0 == videoTextureID) {
-                        videoTextureID = videoTexID;
-                    }
-                    
-                    // Fallthrough
-                }
-                case PAUSED: {
-                    if (0 == videoTextureID) {
-                        // No video texture available, display keyframe
-                        displayVideoFrame = NO;
-                    }
-                    else {
-                        // Display the texture most recently returned from the call
-                        // to [videoPlayerHelper updateVideoData]
-                        frameTextureID = videoTextureID;
-                    }
-                    
-                    break;
-                }
-                default:
-                    videoTextureID = 0;
-                    displayVideoFrame = NO;
-                    break;
-            }
-            
-            if (YES == displayVideoFrame) {
-                // ---- Display the video frame -----
-                aspectRatio = (float)[videoPlayerHelper getVideoHeight] / (float)[videoPlayerHelper getVideoWidth];
-                texCoords = videoQuadTextureCoords;
-            }
-            else {
-                // ----- Display the keyframe -----
-                //Texture* t = augmentationTexture[OBJECT_KEYFRAME_1 + playerIndex];
-                //frameTextureID = [t textureID];
-                //aspectRatio = (float)[t height] / (float)[t width];
-                texCoords = quadTexCoords;
-            }
-            
-            // Get the current projection matrix
-            QCAR::Matrix44F projMatrix = vapp.projectionMatrix;
-            
-            // If the current status is valid (not NOT_READY or ERROR), render the
-            // video quad with the texture we've just selected
-            if (NOT_READY != currentStatus) {
-                // Convert trackable pose to matrix for use with OpenGL
-                QCAR::Matrix44F modelViewMatrixVideo = QCAR::Tool::convertPose2GLMatrix(trackablePose);
-                QCAR::Matrix44F modelViewProjectionVideo;
-                
-                //            SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, videoData[playerIndex].targetPositiveDimensions.data[0],
-                //                                             &modelViewMatrixVideo.data[0]);
-                
-                SampleApplicationUtils::scalePoseMatrix(videoData.targetPositiveDimensions.data[0],
-                                                        videoData.targetPositiveDimensions.data[0] * aspectRatio,
-                                                        videoData.targetPositiveDimensions.data[0],
-                                                        &modelViewMatrixVideo.data[0]);
-                
-                SampleApplicationUtils::multiplyMatrix(projMatrix.data,
-                                                       &modelViewMatrixVideo.data[0] ,
-                                                       &modelViewProjectionVideo.data[0]);
-                
-                glUseProgram(shaderProgramID);
-                
-                glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, quadVertices);
-                glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, quadNormals);
-                glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
-                
-                glEnableVertexAttribArray(vertexHandle);
-                glEnableVertexAttribArray(normalHandle);
-                glEnableVertexAttribArray(textureCoordHandle);
-                
-                glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, frameTextureID);
-                glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
-                glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-                glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
-                
-                glDisableVertexAttribArray(vertexHandle);
-                glDisableVertexAttribArray(normalHandle);
-                glDisableVertexAttribArray(textureCoordHandle);
-                
-                glUseProgram(0);
-            }
-            
-        } // END 1984 TARGET AUGMENTATION
-        else if ([currentTrackable isEqualToString:@"Foxacid"]) {
-            [self animateFoxacid:[textureDict objectForKey:@"Foxacid"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        if ([currentTrackable isEqualToString:@"Foxacid"]) {
+            [self animateFoxacid:[augmentationDict objectForKey:@"Foxacid"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
-            [self augmentBlurredFaces:[textureDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([currentTrackable isEqualToString:@"CyberMagicians"]) {
+            [self playVideoWithTrackable:trackable withCurrentResult:result];
+            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([currentTrackable isEqualToString:@"1984"]) {
+            [self playVideoWithTrackable:trackable withCurrentResult:result];
+            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else {
             // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
-            [self applyTextureWithTextureFile:[textureDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            [self applyTextureWithTextureFile:[augmentationDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         }
         
     }
@@ -596,19 +459,176 @@ namespace {
     [self presentFramebuffer];
 }
 
+- (void) playVideoWithTrackable:(const QCAR::Trackable& )trackable withCurrentResult:(const QCAR::TrackableResult*) result  {
+    // Mark this video (target) as active
+    videoData.isActive = YES;
+    
+    // Get the target size (used to determine if taps are within the target)
+    if (0.0f == videoData.targetPositiveDimensions.data[0] ||
+        0.0f == videoData.targetPositiveDimensions.data[1]) {
+        const QCAR::ImageTarget& imageTarget = (const QCAR::ImageTarget&) trackable;
+        
+        videoData.targetPositiveDimensions = imageTarget.getSize();
+        // The pose delivers the centre of the target, thus the dimensions
+        // go from -width / 2 to width / 2, and -height / 2 to height / 2
+        videoData.targetPositiveDimensions.data[0] /= 2.0f;
+        videoData.targetPositiveDimensions.data[1] /= 2.0f;
+    }
+    
+    // Get the current trackable pose
+    const QCAR::Matrix34F& trackablePose = result->getPose();
+    
+    // This matrix is used to calculate the location of the screen tap
+    videoData.modelViewMatrix = QCAR::Tool::convertPose2GLMatrix(trackablePose);
+    
+    float aspectRatio;
+    const GLvoid* texCoords;
+    GLuint frameTextureID;
+    BOOL displayVideoFrame = YES;
+    
+    // Retain value between calls
+    static GLuint videoTextureID = {0};
+    
+    MEDIA_STATE currentStatus = [videoPlayerHelper getStatus];
+    
+    // --- INFORMATION ---
+    // One could trigger automatic playback of a video at this point.  This
+    // could be achieved by calling the play method of the VideoPlayerHelper
+    // object if currentStatus is not PLAYING.  You should also call
+    // getStatus again after making the call to play, in order to update the
+    // value held in currentStatus.
+    // --- END INFORMATION ---
+    
+    if (ERROR != currentStatus && NOT_READY != currentStatus && PLAYING != currentStatus) {
+        // Play the video
+        NSLog(@"Playing video with on-texture player");
+        [videoPlayerHelper play:NO fromPosition:VIDEO_PLAYBACK_CURRENT_POSITION];
+    } else {
+        //NSLog(@"Should be playing...");
+    }
+    
+    switch (currentStatus) {
+        case PLAYING: {
+            // If the tracking lost timer is scheduled, terminate it
+            
+            if (nil != trackingLostTimer) {
+                // Timer termination must occur on the same thread on which
+                // it was installed
+                [self performSelectorOnMainThread:@selector(terminateTrackingLostTimer) withObject:nil waitUntilDone:YES];
+            }
+            
+            
+            // Upload the decoded video data for the latest frame to OpenGL
+            // and obtain the video texture ID
+            GLuint videoTexID = [videoPlayerHelper updateVideoData];
+            
+            if (0 == videoTextureID) {
+                videoTextureID = videoTexID;
+            }
+            
+            // Fallthrough
+        }
+        case PAUSED: {
+            if (0 == videoTextureID) {
+                // No video texture available, display keyframe
+                displayVideoFrame = NO;
+            }
+            else {
+                // Display the texture most recently returned from the call
+                // to [videoPlayerHelper updateVideoData]
+                frameTextureID = videoTextureID;
+            }
+            
+            break;
+        }
+        default:
+            videoTextureID = 0;
+            displayVideoFrame = NO;
+            break;
+    }
+    
+    if (YES == displayVideoFrame) {
+        // ---- Display the video frame -----
+        aspectRatio = (float)[videoPlayerHelper getVideoHeight] / (float)[videoPlayerHelper getVideoWidth];
+        texCoords = videoQuadTextureCoords;
+    }
+    else {
+        // ----- Display the keyframe -----
+        //Texture* t = augmentationTexture[OBJECT_KEYFRAME_1 + playerIndex];
+        //frameTextureID = [t textureID];
+        //aspectRatio = (float)[t height] / (float)[t width];
+        texCoords = quadTexCoords;
+    }
+    
+    // Get the current projection matrix
+    QCAR::Matrix44F projMatrix = vapp.projectionMatrix;
+    
+    // If the current status is valid (not NOT_READY or ERROR), render the
+    // video quad with the texture we've just selected
+    if (NOT_READY != currentStatus) {
+        // Convert trackable pose to matrix for use with OpenGL
+        QCAR::Matrix44F modelViewMatrixVideo = QCAR::Tool::convertPose2GLMatrix(trackablePose);
+        QCAR::Matrix44F modelViewProjectionVideo;
+        
+        //            SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, videoData[playerIndex].targetPositiveDimensions.data[0],
+        //                                             &modelViewMatrixVideo.data[0]);
+        
+        SampleApplicationUtils::scalePoseMatrix(videoData.targetPositiveDimensions.data[0],
+                                                videoData.targetPositiveDimensions.data[0] * aspectRatio,
+                                                videoData.targetPositiveDimensions.data[0],
+                                                &modelViewMatrixVideo.data[0]);
+        
+        SampleApplicationUtils::multiplyMatrix(projMatrix.data,
+                                               &modelViewMatrixVideo.data[0] ,
+                                               &modelViewProjectionVideo.data[0]);
+        
+        glUseProgram(shaderProgramID);
+        
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, quadVertices);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, quadNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
+        
+        glEnableVertexAttribArray(vertexHandle);
+        glEnableVertexAttribArray(normalHandle);
+        glEnableVertexAttribArray(textureCoordHandle);
+        
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, frameTextureID);
+        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
+        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
+        
+        glDisableVertexAttribArray(vertexHandle);
+        glDisableVertexAttribArray(normalHandle);
+        glDisableVertexAttribArray(textureCoordHandle);
+        
+        glUseProgram(0);
+    }
+    
+}
+
 - (void)setCurrentTrackableWith:(NSString *)trackable {
     // Check if we're still tracking the same trackable; if not, update and reset time
     if (![trackable isEqualToString:currentTrackable]) {
         NSLog(@"DEBUG: Switching to trackable %@", trackable);
         [currentTrackable setString: trackable];
         [self resetTime];
-        [self selectShaderWithName:[[textureDict objectForKey:currentTrackable] objectForKey:@"shader"]];
+        [self selectShaderWithName:[[augmentationDict objectForKey:currentTrackable] objectForKey:@"shader"]];
         
         if ([trackable isEqualToString:@"Foxacid"]) {
             foxacid_state = PRE_FOXACID;
             foxacid_currentFrame = 0;
         } else if ([trackable isEqualToString:@"BlurredFaces"]) {
             blurredFaces_state = PRE_CAPTURE_FACE;
+        } else if ([trackable isEqualToString:@"1984"] || [trackable isEqualToString:@"CyberMagicians"]) {
+            videoData.targetPositiveDimensions.data[0] = 0.0f;
+            videoData.targetPositiveDimensions.data[1] = 0.0f;
+            videoPlaybackTime = VIDEO_PLAYBACK_CURRENT_POSITION;
+            [videoPlayerHelper unload];
+            NSString *videoFile = [[augmentationDict objectForKey:trackable] objectForKey:@"video"];
+            if (NO == [videoPlayerHelper load:videoFile playImmediately:NO fromPosition:videoPlaybackTime]) {
+                NSLog(@"Failed to load video file: %@", videoFile);
+            }
         }
     }
 }
