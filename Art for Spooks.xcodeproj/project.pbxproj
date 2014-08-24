@@ -41,9 +41,9 @@
 		34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542019A9591700A7B2E4 /* Hologram.vertsh */; };
 		34C7542519A95E0800A7B2E4 /* Bubbles.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542319A95E0800A7B2E4 /* Bubbles.fragsh */; };
 		34C7542619A95E0800A7B2E4 /* Bubbles.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542419A95E0800A7B2E4 /* Bubbles.vertsh */; };
-		34C7542E19AA50FA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542D19AA50FA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */; };
 		34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542F19AA552300A7B2E4 /* Animate_4x5.fragsh */; };
 		34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */; };
+		34C7543419AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -126,9 +126,9 @@
 		34C7542019A9591700A7B2E4 /* Hologram.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Hologram.vertsh; path = shaders/Hologram.vertsh; sourceTree = "<group>"; };
 		34C7542319A95E0800A7B2E4 /* Bubbles.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bubbles.fragsh; path = shaders/Bubbles.fragsh; sourceTree = "<group>"; };
 		34C7542419A95E0800A7B2E4 /* Bubbles.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bubbles.vertsh; path = shaders/Bubbles.vertsh; sourceTree = "<group>"; };
-		34C7542D19AA50FA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-nsa-quantumtheory_002_sprites.png"; sourceTree = "<group>"; };
 		34C7542F19AA552300A7B2E4 /* Animate_4x5.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.fragsh; path = shaders/Animate_4x5.fragsh; sourceTree = "<group>"; };
 		34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.vertsh; path = shaders/Animate_4x5.vertsh; sourceTree = "<group>"; };
+		34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-nsa-quantumtheory_002_sprites.png"; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -388,7 +388,7 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
-				34C7542D19AA50FA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
+				34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
 				34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */,
 				34D1DB0E19A6AD5100CE0CA1 /* clouds-2.png */,
 				34D1DB0F19A6AD5100CE0CA1 /* clouds.png */,
@@ -494,7 +494,6 @@
 				34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */,
 				34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
-				34C7542E19AA50FA00A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
 				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
@@ -521,6 +520,7 @@
 				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */,
 				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
+				34C7543419AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */,
 				34C7540F19A84C0200A7B2E4 /* DistortedTV.vertsh in Resources */,
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
 				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,

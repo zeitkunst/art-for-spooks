@@ -72,11 +72,21 @@ namespace {
     
     float texturePosition = -20.0;
     
+    enum tagFOXACID_STATE {
+        PRE_FOXACID,
+        PLAYING_FOXACID,
+        POST_FOXACID
+    } foxacid_state;
+    
     int foxacid_FramesPerSecond = 15;
     int foxacid_FramesPerRow = 4;
     int foxacid_FramesPerColumn = 5;
     int foxacid_Frames = 19;
     int foxacid_currentFrame = 0;
+    float foxacid_preDelay = 2.0;
+    float foxacid_postDelay = 2.0;
+    
+    
     
     // Current trackable
     NSMutableString *currentTrackable = [[[NSMutableString alloc] init] autorelease];
@@ -560,6 +570,11 @@ namespace {
         [currentTrackable setString: trackable];
         [self resetTime];
         [self selectShaderWithName:[[textureDict objectForKey:currentTrackable] objectForKey:@"shader"]];
+        
+        if ([trackable isEqualToString:@"Foxacid"]) {
+            foxacid_state = PRE_FOXACID;
+            foxacid_currentFrame = 0;
+        }
     }
 }
 
@@ -580,7 +595,43 @@ namespace {
         previousTime = CACurrentMediaTime();
     }
     
-    //NSLog(@"Current frame: %d", foxacid_currentFrame);
+    
+}
+
+- (void)updateFoxacidParams {
+    time += 0.1;
+    angle += 1.0;
+    //foxacid_currentFrame += 1;
+    switch (foxacid_state) {
+        case PRE_FOXACID:
+            if ((CACurrentMediaTime() - previousTime) >= foxacid_preDelay) {
+                previousTime = CACurrentMediaTime();
+                foxacid_state = PLAYING_FOXACID;
+            }
+            break;
+        case PLAYING_FOXACID:
+            if ((CACurrentMediaTime() - previousTime) >= (1.0/foxacid_FramesPerSecond) ) {
+                foxacid_currentFrame += 1;
+                //foxacid_currentFrame = (foxacid_currentFrame)%foxacid_Frames;
+                //foxacid_currentFrame = 0;
+                previousTime = CACurrentMediaTime();
+            }
+
+            //NSLog(@"Current frame: %d", foxacid_currentFrame);
+            if (foxacid_currentFrame == foxacid_Frames) {
+                //NSLog(@"RESETTING");
+                previousTime = CACurrentMediaTime();
+                foxacid_state = POST_FOXACID;
+            }
+            break;
+        case POST_FOXACID:
+            if ((CACurrentMediaTime() - previousTime) >= foxacid_postDelay) {
+                previousTime = CACurrentMediaTime();
+                foxacid_state = PRE_FOXACID;
+                foxacid_currentFrame = 0;
+            }
+            break;
+    }
 }
 
 - (void)animateFoxacid:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
@@ -598,8 +649,8 @@ namespace {
     //NSLog(@"Current column position: %f", currentColumnPosition);
     //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
     //SampleApplicationUtils::scalePoseMatrix(1.0f/foxacid_FramesPerRow, 1/foxacid_FramesPerColumn, 1, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::translatePoseMatrix(-0.42, 0.15, 0.0f, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(0.6, 0.65, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(-0.37, 0.07, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(0.58, 0.71, 1, &modelViewMatrix.data[0]);
     SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
     
     glUseProgram(shaderID);
@@ -626,7 +677,7 @@ namespace {
     //glUniform1f(frameRowHandle, currentRowPosition);
     //glUniform1f(frameColumnHandle, currentColumnPosition);
     glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-    [self updateTime];
+    [self updateFoxacidParams];
     glUniform1f(timeHandle, time);
     glUniform2fv(resolutionHandle, 1, resolution);
     
