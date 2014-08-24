@@ -643,6 +643,7 @@ namespace {
                 previousTime = CACurrentMediaTime();
                 blurredFaces_state = SETUP_CAPTURE_FACE;
                 NSLog(@"Switching to SETUP_CAPTURE_FACE");
+                //[afsImageTargetsViewController pauseAR];
             }
             break;
         case CAPTURE_FACE:
@@ -650,6 +651,7 @@ namespace {
                 blurredFaces_state = AUGMENT_FACE;
                 previousTime = CACurrentMediaTime();
                 NSLog(@"Swithing to AUGMENT_FACE");
+                //[self teardownAVCapture];
             }
             
             break;
@@ -761,7 +763,7 @@ namespace {
             self.currentFrontImage = [CIImage emptyImage];
             
             NSError *error = nil;
-            AVCaptureSession *session = [[AVCaptureSession alloc] init];
+            session = [[AVCaptureSession alloc] init];
             if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
                 [session setSessionPreset:AVCaptureSessionPreset640x480];
             } else {
@@ -1133,12 +1135,23 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 // clean up capture setup
 - (void)teardownAVCapture
 {
-	//self.videoDataOutput = nil;
-	//if (self.videoDataOutputQueue) {
-	//	dispatch_release(self.videoDataOutputQueue);
-    //}
+    [session stopRunning];
+    
+    [self.videoDataOutput release];
+	self.videoDataOutput = nil;
+    
+	if (self.videoDataOutputQueue) {
+		dispatch_release(self.videoDataOutputQueue);
+    }
+    [self.videoDataOutputQueue release];
+    self.videoDataOutputQueue = nil;
+    
 	[self.videoPreviewLayer removeFromSuperlayer];
+    [self.videoPreviewLayer release];
 	self.videoPreviewLayer = nil;
+    
+    [session release];
+    session = nil;
 }
 
 

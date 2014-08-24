@@ -484,7 +484,6 @@ namespace {
     // Start the camera.  This causes QCAR to locate our EAGLView in the view
     // hierarchy, start a render thread, and then call renderFrameQCAR on the
     // view periodically
-    NSLog(@"IN STARTAR!!!!");
     if (! [self startCamera: camera viewWidth:self.mARViewBoundsSize.width andHeight:self.mARViewBoundsSize.height error:error]) {
         return NO;
     }

@@ -31,5 +31,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     
 }
 
+- (void) pauseAR;
 - (void) setNavigationController:(UINavigationController *) navController;
 @end

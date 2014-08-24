@@ -69,6 +69,8 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     // Timer to pause on-texture video playback after tracking has been lost.
     // Note: written/read on two threads, but never concurrently
     NSTimer* trackingLostTimer;
+    
+    AVCaptureSession *session;
 }
 
 - (id)initWithFrame:(CGRect)frame rootViewController:(AFSImageTargetsViewController *) rootViewController appSession:(SampleApplicationSession *) app;

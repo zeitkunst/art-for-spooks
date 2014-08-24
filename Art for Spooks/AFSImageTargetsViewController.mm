@@ -236,7 +236,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         
         NSError * error = nil;
         [vapp startAR:QCAR::CameraDevice::CAMERA_BACK error:&error];
-        NSLog(@"in onInitARDone");
         
         // by default, we try to set the continuous auto focus mode
         QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO);
