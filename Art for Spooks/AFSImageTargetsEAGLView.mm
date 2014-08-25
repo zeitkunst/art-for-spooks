@@ -216,7 +216,9 @@ namespace {
 
 - (void)initAugmentationDict {
     
-    //[augmentationDict setValue:@"DerSpiegel-media-34098_003.png" forKey:@"Anchory"];
+    /*
+     * AUGMENTATIONS
+     */
     [augmentationDict setValue:@{
                              @"shader": @"Simple",
                              @"texture": @"DerSpiegel-media-34098_003.png"
@@ -234,10 +236,6 @@ namespace {
                              @"shader": @"DistortedTV",
                              @"texture": @"Intercept-the-art-of-deception-training-for-a-new_021.png"} forKey:@"Bosch"];
     [augmentationDict setValue:@{
-                                 @"shader": @"Simple",
-                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_022.png"} forKey:@"RabbitDuck"];
-
-    [augmentationDict setValue:@{
                             @"shader": @"DistortedTV",
                             @"texture": @"",
                             @"video":@"1984Macintosh.m4v"} forKey:@"1984"];
@@ -252,12 +250,33 @@ namespace {
                                  @"shader": @"Simple",
                                  @"texture": @"",
                                  @"video":@"YoussefForAFS.m4v"} forKey:@"Egypt"];
+    
+    /* 
+     * AUGMENTATIONS TO AUGMENT
+     * :-) (i.e., make better) 
+     */
+    
+    // Add background to cover up original fox/barrel; add bubbles coming out of barrel
     [augmentationDict setValue:@{
                             @"shader": @"Animate_4x5",
                             @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
+    
+    // Add some kind of animation
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
+                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_022.png"} forKey:@"RabbitDuck"];
+    
+    /* 
+     * AUGMENTATIONS THAT ARE NOT DONE YET
+     */
     [augmentationDict setValue:@{
                             @"shader": @"Simple",
                             @"texture": @"clouds-2.png"} forKey:@"BlurredFaces"];
+    
+    /*
+     * DEFAULT AUGMENTATION
+     * Change when we are done with all of the augmentations
+     */
     [augmentationDict setValue:@{
                             @"shader": @"Simple",
                             @"texture": @"dollar_bill_obverse.png"} forKey:@"default"];
