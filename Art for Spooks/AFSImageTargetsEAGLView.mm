@@ -243,6 +243,9 @@ namespace {
                             @"video":@"HackersSceneForAFS.m4v"} forKey:@"CyberMagicians"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
+                                 @"texture": @"DerSpiegel-image-542019-galleryV9-hheg.png"} forKey:@"Afghan"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
                                  @"texture": @"",
                                  @"video":@"YoussefForAFS.m4v"} forKey:@"Egypt"];
     [augmentationDict setValue:@{

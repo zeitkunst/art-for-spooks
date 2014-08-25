@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3433E67E19AAABA600640977 /* YoussefForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67D19AAABA600640977 /* YoussefForAFS.m4v */; };
 		3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */; };
+		3433E68219AAB6A100640977 /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3433E68119AAB6A100640977 /* DerSpiegel-image-542019-galleryV9-hheg.png */; };
 		34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
 		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
@@ -95,6 +96,7 @@
 /* Begin PBXFileReference section */
 		3433E67D19AAABA600640977 /* YoussefForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = YoussefForAFS.m4v; sourceTree = "<group>"; };
 		3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
+		3433E68119AAB6A100640977 /* DerSpiegel-image-542019-galleryV9-hheg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-image-542019-galleryV9-hheg.png"; sourceTree = "<group>"; };
 		34832E8819A1829100C80D70 /* Art for Spooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art for Spooks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34832E8B19A1829100C80D70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34832E8D19A1829100C80D70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -400,6 +402,7 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
+				3433E68119AAB6A100640977 /* DerSpiegel-image-542019-galleryV9-hheg.png */,
 				34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
 				34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */,
 				34D1DB0E19A6AD5100CE0CA1 /* clouds-2.png */,
@@ -510,6 +513,7 @@
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
 				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
+				3433E68219AAB6A100640977 /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
