@@ -248,6 +248,9 @@ namespace {
                                  @"texture": @"DerSpiegel-image-542019-galleryV9-hheg.png"} forKey:@"Afghan"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
+                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_035.png"} forKey:@"UFO"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
                                  @"texture": @"",
                                  @"video":@"YoussefForAFS.m4v"} forKey:@"Egypt"];
     

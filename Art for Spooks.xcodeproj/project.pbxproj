@@ -11,6 +11,7 @@
 		3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */; };
 		34823E3019ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E2F19ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png */; };
 		34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */; };
+		34823E3419ABBB9600C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3319ABBB9600C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */; };
 		34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
 		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
@@ -94,6 +95,7 @@
 		3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
 		34823E2F19ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_022.png"; sourceTree = "<group>"; };
 		34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-image-542019-galleryV9-hheg.png"; sourceTree = "<group>"; };
+		34823E3319ABBB9600C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_035.png"; sourceTree = "<group>"; };
 		34832E8819A1829100C80D70 /* Art for Spooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art for Spooks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34832E8B19A1829100C80D70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34832E8D19A1829100C80D70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -405,6 +407,7 @@
 				34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */,
 				34C7540519A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png */,
 				34823E2F19ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png */,
+				34823E3319ABBB9600C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */,
 				34D1DB1319A6AD5100CE0CA1 /* transparent.png */,
 			);
 			path = replacements;
@@ -498,6 +501,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34823E3419ABBB9600C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png in Resources */,
 				34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
