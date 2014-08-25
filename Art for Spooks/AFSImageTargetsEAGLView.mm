@@ -234,6 +234,10 @@ namespace {
                              @"shader": @"DistortedTV",
                              @"texture": @"Intercept-the-art-of-deception-training-for-a-new_021.png"} forKey:@"Bosch"];
     [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
+                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_022.png"} forKey:@"RabbitDuck"];
+
+    [augmentationDict setValue:@{
                             @"shader": @"DistortedTV",
                             @"texture": @"",
                             @"video":@"1984Macintosh.m4v"} forKey:@"1984"];
