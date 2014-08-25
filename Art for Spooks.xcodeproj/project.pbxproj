@@ -48,7 +48,6 @@
 		34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */; };
 		34C7543419AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */; };
 		34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7543519AA812500A7B2E4 /* ImageIO.framework */; };
-		34C7543B19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543A19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -76,10 +75,6 @@
 		34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */; };
 		34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
 		34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1319A6AD5100CE0CA1 /* transparent.png */; };
-		34D1DB2319A6AD7800CE0CA1 /* StonesAndChips.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */; };
-		34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */; };
-		34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */; };
-		34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */; };
 		34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */; };
 /* End PBXBuildFile section */
 
@@ -138,7 +133,6 @@
 		34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.vertsh; path = shaders/Animate_4x5.vertsh; sourceTree = "<group>"; };
 		34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-nsa-quantumtheory_002_sprites.png"; sourceTree = "<group>"; };
 		34C7543519AA812500A7B2E4 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		34C7543A19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -179,10 +173,6 @@
 		34D1DB1119A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_020.png"; sourceTree = "<group>"; };
 		34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
 		34D1DB1319A6AD5100CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
-		34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = StonesAndChips.dat; sourceTree = "<group>"; };
-		34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StonesAndChips.xml; sourceTree = "<group>"; };
-		34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tarmac.dat; sourceTree = "<group>"; };
-		34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tarmac.xml; sourceTree = "<group>"; };
 		34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_034.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -420,13 +410,8 @@
 		34D1DB1A19A6AD7800CE0CA1 /* tracking_database */ = {
 			isa = PBXGroup;
 			children = (
-				34C7543A19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v */,
 				34C7540119A842F600A7B2E4 /* ArtForSpooks.dat */,
 				34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */,
-				34D1DB1D19A6AD7800CE0CA1 /* StonesAndChips.dat */,
-				34D1DB1E19A6AD7800CE0CA1 /* StonesAndChips.xml */,
-				34D1DB1F19A6AD7800CE0CA1 /* Tarmac.dat */,
-				34D1DB2019A6AD7800CE0CA1 /* Tarmac.xml */,
 			);
 			path = tracking_database;
 			sourceTree = "<group>";
@@ -508,7 +493,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */,
-				34D1DB2519A6AD7800CE0CA1 /* Tarmac.dat in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
 				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
@@ -524,14 +508,11 @@
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
-				34D1DB2419A6AD7800CE0CA1 /* StonesAndChips.xml in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
 				34C7542619A95E0800A7B2E4 /* Bubbles.vertsh in Resources */,
-				34D1DB2619A6AD7800CE0CA1 /* Tarmac.xml in Resources */,
 				34C7542119A9591700A7B2E4 /* Hologram.fragsh in Resources */,
 				34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */,
-				34C7543B19AAA5A400A7B2E4 /* HackersSceneForAFS.m4v in Resources */,
 				34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
 				3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */,
@@ -546,7 +527,6 @@
 				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,
 				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
 				34C7542519A95E0800A7B2E4 /* Bubbles.fragsh in Resources */,
-				34D1DB2319A6AD7800CE0CA1 /* StonesAndChips.dat in Resources */,
 				34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
 				34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,
 			);
