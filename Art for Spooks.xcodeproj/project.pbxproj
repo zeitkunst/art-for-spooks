@@ -464,6 +464,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = zeitkunst;
 				TargetAttributes = {
+					34832E8719A1829100C80D70 = {
+						DevelopmentTeam = BCJYZ7AT45;
+					};
 					34832EA219A1829100C80D70 = {
 						TestTargetID = 34832E8719A1829100C80D70;
 					};
@@ -682,7 +685,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -709,7 +712,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
