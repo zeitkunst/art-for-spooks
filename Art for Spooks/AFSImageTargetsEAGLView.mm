@@ -1265,12 +1265,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     // OpenGL 2
     QCAR::Matrix44F modelViewProjection;
     
-    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 1.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 3.0f, &modelViewMatrix.data[0]);
     //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
     
     SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
     //[self updateTexturePosition];
     SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::rotatePoseMatrix(angle, 0, 0, 1, &modelViewMatrix.data[0]);
     
     SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
     
