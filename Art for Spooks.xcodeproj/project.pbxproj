@@ -12,6 +12,7 @@
 		34823E3019ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E2F19ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png */; };
 		34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */; };
 		34823E3619AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3519AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */; };
+		34823E7219AC64E800C526EB /* card_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E7019AC64E800C526EB /* card_texture.png */; };
 		34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
 		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
@@ -96,6 +97,8 @@
 		34823E2F19ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_022.png"; sourceTree = "<group>"; };
 		34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-image-542019-galleryV9-hheg.png"; sourceTree = "<group>"; };
 		34823E3519AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_035.png"; sourceTree = "<group>"; };
+		34823E7019AC64E800C526EB /* card_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_texture.png; sourceTree = "<group>"; };
+		34823E7119AC64E800C526EB /* card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = card.h; sourceTree = "<group>"; };
 		34832E8819A1829100C80D70 /* Art for Spooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art for Spooks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34832E8B19A1829100C80D70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34832E8D19A1829100C80D70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -396,6 +399,8 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
+				34823E7019AC64E800C526EB /* card_texture.png */,
+				34823E7119AC64E800C526EB /* card.h */,
 				34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
 				34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */,
 				34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */,
@@ -514,6 +519,7 @@
 				34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */,
 				34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */,
 				34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */,
+				34823E7219AC64E800C526EB /* card_texture.png in Resources */,
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,

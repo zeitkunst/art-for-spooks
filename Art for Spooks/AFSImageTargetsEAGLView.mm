@@ -24,6 +24,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "SampleApplicationShaderUtils.h"
 #import "Teapot.h"
 #import "Quad.h"
+#import "card.h"
 
 
 //******************************************************************************
@@ -248,6 +249,9 @@ namespace {
                                  @"texture": @"DerSpiegel-image-542019-galleryV9-hheg.png"} forKey:@"Afghan"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
+                                 @"texture": @"card_texture.png"} forKey:@"Cards"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
                                  @"texture": @"Intercept-the-art-of-deception-training-for-a-new_035.png"} forKey:@"UFO"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
@@ -465,6 +469,9 @@ namespace {
             //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"1984"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
+            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([currentTrackable isEqualToString:@"Cards"]) {
+            [self augmentCards:[augmentationDict objectForKey:@"Cards"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
             //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else {
             // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
@@ -1250,6 +1257,48 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
+- (void)augmentCards:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    QCAR::Matrix44F modelViewProjection;
+    
+    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 1.0f, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
+    
+    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
+    //[self updateTexturePosition];
+    SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
+    
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardVerts);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateTime];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
+    
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawArrays(GL_TRIANGLES, 0, cardNumVerts);
     
     SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
