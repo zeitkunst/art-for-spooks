@@ -20,6 +20,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 #import "AFSImageTargetsEAGLView.h"
 #import "AFSCardEmitterObject.h"
+#import "AFSCardParticle.h"
 #import "Texture.h"
 #import "SampleApplicationUtils.h"
 #import "SampleApplicationShaderUtils.h"
@@ -1289,15 +1290,18 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     for (int i = 0; i < NUM_CARDS; i++) {
         QCAR::Matrix44F modelViewProjection;
         memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
-        xPos = [emitter cardEmitter].eCards[i].xPos;
-        yPos = [emitter cardEmitter].eCards[i].yPos;
-        zPos = [emitter cardEmitter].eCards[i].zPos;
+        AFSCardParticle *currentCard;
+        currentCard = [[emitter cardEmitter] objectAtIndex:i];
         
-        xRot = [emitter cardEmitter].eCards[i].xRot;
-        yRot = [emitter cardEmitter].eCards[i].yRot;
-        zRot = [emitter cardEmitter].eCards[i].zRot;
+        xPos = currentCard.xPos;
+        yPos = currentCard.yPos;
+        zPos = currentCard.zPos;
         
-        rotAngle = [emitter cardEmitter].eCards[i].angle;
+        xRot = currentCard.xRot;
+        yRot = currentCard.yRot;
+        zRot = currentCard.zRot;
+        
+        rotAngle = currentCard.angle;
         NSLog(@"rotAngle: %f", rotAngle);
         
         // Set the position of the card
@@ -1312,7 +1316,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         // First, rotate to that we default to facing the viewer
         SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
         // Then, rotate away!
-        SampleApplicationUtils::rotatePoseMatrix(rotAngle, 1, 0, 0, &originalMVMatrixData[0]);
+        SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
         
         SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
         

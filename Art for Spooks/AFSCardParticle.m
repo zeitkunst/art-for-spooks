@@ -8,9 +8,43 @@
 
 #import "AFSCardParticle.h"
 
+float xRotMin = 0.0;
+float xRotMax = 0.5;
+
+float yRotMin = 0.0;
+float yRotMax = 0.5;
+
+float zRotMin = 0.0;
+float zRotMax = 0.5;
+
+float xPosMin = -20.0;
+float xPosMax = 20.0;
+
+float yPosMin = -10.0;
+float yPosMax = 10.0;
+
+float zPosMin = 0.2;
+float zPosMax = 0.9;
+
+double lifetimeMin = 4.0;
+double lifetimeMax = 8.0;
+
+float xStartPosMin = -100.0;
+float xStartPosMax = 100.0;
+
+float yStartPosMin = -50.0;
+float yStartPosMax = 50.0;
+
+float zStartPosMin = 1.0;
+float zStartPosMax = 4.0;
+
+float angleOffsetMin = 5.0;
+float angleOffsetMax = 20.0;
+
 @implementation AFSCardParticle
 - (id)init {
-    if (self = [super init]) {
+    self = [super init];
+    if (self) {
         [self setupCard];
     }
     return self;
@@ -46,9 +80,9 @@
     NSLog(@"Creating card, yPos: %f", self.yPos);
     self.zPos = self.zStartPos;
     
-    self.xRot = self.xStartRot;
-    self.yRot = self.yStartRot;
-    self.zRot = self.zStartRot;
+    self.xRot = self.xRotOffset;
+    self.yRot = self.yRotOffset;
+    self.zRot = self.zRotOffset;
     
     self.angle = self.angleStart;
     
