@@ -19,6 +19,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import <QCAR/ImageTarget.h>
 
 #import "AFSImageTargetsEAGLView.h"
+#import "AFSCardEmitterObject.h"
 #import "Texture.h"
 #import "SampleApplicationUtils.h"
 #import "SampleApplicationShaderUtils.h"
@@ -66,6 +67,7 @@ namespace {
     
     // Model scale factor
     const float kObjectScaleNormal = 72.0f; // old, should be removed
+    const float kCardsScaleNormal = 35.0f;
     const float kObjectScaleNormalx = 106.0f;
     const float kObjectScaleNormaly = 80.0f;
     
@@ -118,6 +120,8 @@ namespace {
         // Currently active flag
         BOOL isActive;
     } videoData;
+    
+    AFSCardEmitterObject *emitter;
 }
 
 
@@ -663,6 +667,8 @@ namespace {
             foxacid_currentFrame = 0;
         } else if ([trackable isEqualToString:@"BlurredFaces"]) {
             blurredFaces_state = PRE_CAPTURE_FACE;
+        } else if ([trackable isEqualToString:@"Cards"]) {
+            emitter = [[AFSCardEmitterObject alloc] init];
         } else if ([trackable isEqualToString:@"1984"]
                    || [trackable isEqualToString:@"CyberMagicians"]
                    || [trackable isEqualToString:@"Egypt"]) {
@@ -681,12 +687,14 @@ namespace {
 - (void)resetTime {
     time = 0;
     angle = 0;
+    xAxis = 0;
+    yAxis = 0;
     previousTime = CACurrentMediaTime();
 }
 
 - (void)updateTime {
     time += 0.1;
-    angle += 1.0;
+    angle += 15.0;
     //foxacid_currentFrame += 1;
     if ((CACurrentMediaTime() - previousTime) >= (1.0/foxacid_FramesPerSecond) ) {
         foxacid_currentFrame += 1;
@@ -1263,43 +1271,79 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (void)augmentCards:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
     // OpenGL 2
-    QCAR::Matrix44F modelViewProjection;
     
-    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 3.0f, &modelViewMatrix.data[0]);
-    //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
     
-    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
-    //[self updateTexturePosition];
-    SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::rotatePoseMatrix(angle, 0, 0, 1, &modelViewMatrix.data[0]);
+    float xPos;
+    float yPos;
+    float zPos;
+    float xRot;
+    float yRot;
+    float zRot;
+    float rotAngle;
+    //xPos = -100.0;
     
-    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
     
-    glUseProgram(shaderID);
+    //QCAR::Matrix44F originalMVMatrix = modelViewMatrix;
+    float originalMVMatrixData[16];
     
-    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardVerts);
-    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardNormals);
-    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardTexCoords);
-    
-    glEnableVertexAttribArray(vertexHandle);
-    glEnableVertexAttribArray(normalHandle);
-    glEnableVertexAttribArray(textureCoordHandle);
-    
-    glActiveTexture(GL_TEXTURE0);
-    
-    NSString *textureFile = [textureInfo objectForKey:@"texture"];
-    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-    
-    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-    [self updateTime];
-    glUniform1f(timeHandle, time);
-    glUniform2fv(resolutionHandle, 1, resolution);
-    
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    glDrawArrays(GL_TRIANGLES, 0, cardNumVerts);
+    for (int i = 0; i < NUM_CARDS; i++) {
+        QCAR::Matrix44F modelViewProjection;
+        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
+        xPos = [emitter cardEmitter].eCards[i].xPos;
+        yPos = [emitter cardEmitter].eCards[i].yPos;
+        zPos = [emitter cardEmitter].eCards[i].zPos;
+        
+        xRot = [emitter cardEmitter].eCards[i].xRot;
+        yRot = [emitter cardEmitter].eCards[i].yRot;
+        zRot = [emitter cardEmitter].eCards[i].zRot;
+        
+        rotAngle = [emitter cardEmitter].eCards[i].angle;
+        NSLog(@"rotAngle: %f", rotAngle);
+        
+        // Set the position of the card
+        //SampleApplicationUtils::translatePoseMatrix(xPos, -1.0f, zPos, &originalMVMatrixData[0]);
+        NSLog(@"yPos: %f", yPos);
+        SampleApplicationUtils::translatePoseMatrix(xPos, yPos, zPos, &originalMVMatrixData[0]);
+        
+        // Scale to a normal size
+        SampleApplicationUtils::scalePoseMatrix(kCardsScaleNormal, kCardsScaleNormal, kCardsScaleNormal, &originalMVMatrixData[0]);
+        
+        // Rotate accordingly
+        // First, rotate to that we default to facing the viewer
+        SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
+        // Then, rotate away!
+        SampleApplicationUtils::rotatePoseMatrix(rotAngle, 1, 0, 0, &originalMVMatrixData[0]);
+        
+        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
+        
+        glUseProgram(shaderID);
+        
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardVerts);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardTexCoords);
+        
+        glEnableVertexAttribArray(vertexHandle);
+        glEnableVertexAttribArray(normalHandle);
+        glEnableVertexAttribArray(textureCoordHandle);
+        
+        glActiveTexture(GL_TEXTURE0);
+        
+        NSString *textureFile = [textureInfo objectForKey:@"texture"];
+        Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        
+        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        [self updateTime];
+        glUniform1f(timeHandle, time);
+        glUniform2fv(resolutionHandle, 1, resolution);
+        
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDrawArrays(GL_TRIANGLES, 0, cardNumVerts);
+        //xPos += 30.0;
+    }
+    [emitter updateLifeCycle];
     
     SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }

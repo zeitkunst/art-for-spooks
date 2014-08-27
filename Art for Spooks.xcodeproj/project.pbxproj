@@ -12,7 +12,9 @@
 		34823E3019ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E2F19ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png */; };
 		34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */; };
 		34823E3619AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3519AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */; };
-		34823E7219AC64E800C526EB /* card_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E7019AC64E800C526EB /* card_texture.png */; };
+		34823E7519ACDF4B00C526EB /* AFSCardEmitterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 34823E7419ACDF4B00C526EB /* AFSCardEmitterObject.m */; };
+		34823E8319AD3A8B00C526EB /* card_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E8119AD3A8B00C526EB /* card_texture.png */; };
+		34823E8619AD63E200C526EB /* AFSCardParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 34823E8519AD63E200C526EB /* AFSCardParticle.m */; };
 		34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
 		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
@@ -97,8 +99,12 @@
 		34823E2F19ABB3BC00C526EB /* Intercept-the-art-of-deception-training-for-a-new_022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_022.png"; sourceTree = "<group>"; };
 		34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-image-542019-galleryV9-hheg.png"; sourceTree = "<group>"; };
 		34823E3519AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_035.png"; sourceTree = "<group>"; };
-		34823E7019AC64E800C526EB /* card_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_texture.png; sourceTree = "<group>"; };
-		34823E7119AC64E800C526EB /* card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = card.h; sourceTree = "<group>"; };
+		34823E7319ACDF4B00C526EB /* AFSCardEmitterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSCardEmitterObject.h; sourceTree = "<group>"; };
+		34823E7419ACDF4B00C526EB /* AFSCardEmitterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSCardEmitterObject.m; sourceTree = "<group>"; };
+		34823E8119AD3A8B00C526EB /* card_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_texture.png; sourceTree = "<group>"; };
+		34823E8219AD3A8B00C526EB /* card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = card.h; sourceTree = "<group>"; };
+		34823E8419AD63E200C526EB /* AFSCardParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSCardParticle.h; sourceTree = "<group>"; };
+		34823E8519AD63E200C526EB /* AFSCardParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSCardParticle.m; sourceTree = "<group>"; };
 		34832E8819A1829100C80D70 /* Art for Spooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art for Spooks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34832E8B19A1829100C80D70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34832E8D19A1829100C80D70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -274,6 +280,10 @@
 				34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */,
 				34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */,
 				34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */,
+				34823E7319ACDF4B00C526EB /* AFSCardEmitterObject.h */,
+				34823E7419ACDF4B00C526EB /* AFSCardEmitterObject.m */,
+				34823E8419AD63E200C526EB /* AFSCardParticle.h */,
+				34823E8519AD63E200C526EB /* AFSCardParticle.m */,
 				34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */,
 				34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */,
 				34832E9D19A1829100C80D70 /* Images.xcassets */,
@@ -399,8 +409,8 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
-				34823E7019AC64E800C526EB /* card_texture.png */,
-				34823E7119AC64E800C526EB /* card.h */,
+				34823E8119AD3A8B00C526EB /* card_texture.png */,
+				34823E8219AD3A8B00C526EB /* card.h */,
 				34C7543319AA6B9900A7B2E4 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
 				34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */,
 				34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */,
@@ -519,7 +529,7 @@
 				34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */,
 				34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */,
 				34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */,
-				34823E7219AC64E800C526EB /* card_texture.png in Resources */,
+				34823E8319AD3A8B00C526EB /* card_texture.png in Resources */,
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
@@ -570,7 +580,9 @@
 				34D1DAF919A6AA2500CE0CA1 /* SampleApplicationSession.mm in Sources */,
 				34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
 				34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */,
+				34823E7519ACDF4B00C526EB /* AFSCardEmitterObject.m in Sources */,
 				34D1DAFA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */,
+				34823E8619AD63E200C526EB /* AFSCardParticle.m in Sources */,
 				34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */,
 				34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */,
 				34D1DAFC19A6AA2500CE0CA1 /* SampleAppMenu.mm in Sources */,

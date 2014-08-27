@@ -14,7 +14,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "SampleApplication3DModel.h"
 #import "VideoPlayerHelper.h"
 
-
 #define NUM_AUGMENTATION_TEXTURES 5
 
 @class AFSImageTargetsViewController;
@@ -50,6 +49,8 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     double previousTime;
     
     float angle;
+    float xAxis;
+    float yAxis;
     
     // Texture used when rendering augmentation
     Texture* augmentationTexture[NUM_AUGMENTATION_TEXTURES];
