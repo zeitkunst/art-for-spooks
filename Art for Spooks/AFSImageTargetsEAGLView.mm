@@ -19,6 +19,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import <QCAR/ImageTarget.h>
 
 #import "AFSImageTargetsEAGLView.h"
+#import "AFSImageTargetsViewController.h"
 #import "AFSCardEmitterObject.h"
 #import "AFSCardParticle.h"
 #import "Texture.h"
@@ -27,6 +28,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "Teapot.h"
 #import "Quad.h"
 #import "card.h"
+#import "skymapTest.h"
 
 
 //******************************************************************************
@@ -257,6 +259,9 @@ namespace {
                                  @"texture": @"card_texture.png"} forKey:@"Cards"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
+                                 @"texture": @"skymapTexture.png"} forKey:@"Buffalo"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
                                  @"texture": @"Intercept-the-art-of-deception-training-for-a-new_035.png"} forKey:@"UFO"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
@@ -478,6 +483,9 @@ namespace {
         } else if ([currentTrackable isEqualToString:@"Cards"]) {
             [self augmentCards:[augmentationDict objectForKey:@"Cards"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
             //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([currentTrackable isEqualToString:@"Buffalo"]) {
+            [self augmentBuffalo:[augmentationDict objectForKey:@"Buffalo"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else {
             // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
             [self applyTextureWithTextureFile:[augmentationDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
@@ -670,6 +678,8 @@ namespace {
             blurredFaces_state = PRE_CAPTURE_FACE;
         } else if ([trackable isEqualToString:@"Cards"]) {
             emitter = [[AFSCardEmitterObject alloc] init];
+        } else if ([trackable isEqualToString:@"Buffalo"]) {
+            
         } else if ([trackable isEqualToString:@"1984"]
                    || [trackable isEqualToString:@"CyberMagicians"]
                    || [trackable isEqualToString:@"Egypt"]) {
@@ -1351,6 +1361,68 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
+
+- (void)augmentBuffalo:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    
+    
+    
+    //QCAR::Matrix44F originalMVMatrix = modelViewMatrix;
+    float originalMVMatrixData[16];
+    
+    for (int i = 0; i < NUM_CARDS; i++) {
+        QCAR::Matrix44F modelViewProjection;
+        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
+        
+        // Set the position
+        SampleApplicationUtils::translatePoseMatrix(0.0, -1.0f, 1.0, &originalMVMatrixData[0]);
+        
+        
+        // Scale to a normal size
+        SampleApplicationUtils::scalePoseMatrix(10*kObjectScaleNormal, 10*kObjectScaleNormal, 10*kObjectScaleNormal, &originalMVMatrixData[0]);
+        
+        // Rotate accordingly
+        // First, rotate to that we default to facing the viewer
+        SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
+        SampleApplicationUtils::rotatePoseMatrix(-90, 0, 1, 0, &originalMVMatrixData[0]);
+        SampleApplicationUtils::rotatePoseMatrix(90, 0, 0, 1, &originalMVMatrixData[0]);
+        // Then, rotate away!
+        //SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
+        
+        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
+        
+        glUseProgram(shaderID);
+        
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)skymapTestVerts);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)skymapTestNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)skymapTestTexCoords);
+        
+        glEnableVertexAttribArray(vertexHandle);
+        glEnableVertexAttribArray(normalHandle);
+        glEnableVertexAttribArray(textureCoordHandle);
+        
+        glActiveTexture(GL_TEXTURE0);
+        
+        NSString *textureFile = [textureInfo objectForKey:@"texture"];
+        Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        
+        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        [self updateTime];
+        glUniform1f(timeHandle, time);
+        glUniform2fv(resolutionHandle, 1, resolution);
+        
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDrawArrays(GL_TRIANGLES, 0, skymapTestNumVerts);
+        //xPos += 30.0;
+    }
+    [emitter updateLifeCycle];
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
 
 // Create the tracking lost timer
 - (void)createTrackingLostTimer
