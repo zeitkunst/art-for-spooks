@@ -125,6 +125,12 @@ namespace {
         BOOL isActive;
     } videoData;
     
+    float rdDeltaMagnitude = 5.0;
+    float rdDelta;
+    float rdXPos;
+    float rdYPos;
+    float rdFramesPerSecond = 30.0;
+    
     AFSCardEmitterObject *emitter;
 }
 
@@ -681,6 +687,11 @@ namespace {
             emitter = [[AFSCardEmitterObject alloc] init];
         } else if ([trackable isEqualToString:@"Buffalo"]) {
             
+        } else if ([trackable isEqualToString:@"RabbitDuck"]) {
+            rdDelta = rdDeltaMagnitude;
+            rdXPos = 0.0;
+            rdYPos = 0.0;
+            previousTime = CACurrentMediaTime();
         } else if ([trackable isEqualToString:@"1984"]
                    || [trackable isEqualToString:@"CyberMagicians"]
                    || [trackable isEqualToString:@"Egypt"]) {
@@ -707,7 +718,24 @@ namespace {
 - (void)updateTime {
     time += 0.1;
     angle += 15.0;
-    //foxacid_currentFrame += 1;
+
+    // Update RabbitDuck params
+    if ((CACurrentMediaTime() - previousTime) >= (1.0/rdFramesPerSecond)) {
+        if ([currentTrackable isEqualToString:@"RabbitDuck"]) {
+            if (rdXPos <= -76.0) {
+                rdDelta = rdDeltaMagnitude;
+            } else if (rdXPos >= 110.0) {
+                rdDelta = -1.0f * rdDeltaMagnitude;
+            }
+            
+            rdXPos += rdDelta;
+            rdYPos = 30*sinf(0.1 * rdXPos) + 10.0;
+        }
+
+        previousTime = CACurrentMediaTime();
+    }
+    
+    // Update Foxacid params
     if ((CACurrentMediaTime() - previousTime) >= (1.0/foxacid_FramesPerSecond) ) {
         foxacid_currentFrame += 1;
         foxacid_currentFrame = (foxacid_currentFrame)%foxacid_Frames;
@@ -1244,7 +1272,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     // OpenGL 2
     QCAR::Matrix44F modelViewProjection;
     
-    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    if ([currentTrackable isEqualToString:@"RabbitDuck"]) {
+        SampleApplicationUtils::translatePoseMatrix(rdXPos, rdYPos, 0.0f, &modelViewMatrix.data[0]);
+        SampleApplicationUtils::translatePoseMatrix(-30.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
+    } else {
+        SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    }
+    
     //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
     //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
     SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
