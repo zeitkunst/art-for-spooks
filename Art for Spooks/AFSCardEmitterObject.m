@@ -60,7 +60,7 @@
             
             //self.cardEmitter.eCards[i].angle += self.cardEmitter.eCards[i].angleOffset;
             currentCard.angle += currentCard.angleOffset;
-            currentCard.zPos += 3*currentCard.zPosOffset;
+            currentCard.zPos += currentCard.zPosOffset;
             [self.cardEmitter replaceObjectAtIndex:i withObject:currentCard];
             NSLog(@"currentCard angle: %f", currentCard.angle);
             //NSLog(@"angle: %f", [self.cardEmitter objectAtIndex:i]);

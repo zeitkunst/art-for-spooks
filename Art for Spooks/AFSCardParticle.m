@@ -23,11 +23,11 @@ float xPosMax = 20.0;
 float yPosMin = -10.0;
 float yPosMax = 10.0;
 
-float zPosMin = 0.2;
-float zPosMax = 0.9;
+float zPosMin = 2.0;
+float zPosMax = 9.0;
 
-double lifetimeMin = 4.0;
-double lifetimeMax = 8.0;
+double lifetimeMin = 1.5;
+double lifetimeMax = 3.5;
 
 float xStartPosMin = -100.0;
 float xStartPosMax = 100.0;
@@ -38,7 +38,7 @@ float yStartPosMax = 50.0;
 float zStartPosMin = 1.0;
 float zStartPosMax = 4.0;
 
-float angleOffsetMin = 5.0;
+float angleOffsetMin = 10.0;
 float angleOffsetMax = 20.0;
 
 @implementation AFSCardParticle
