@@ -29,8 +29,8 @@ float zPosMax = 9.0;
 double lifetimeMin = 1.5;
 double lifetimeMax = 3.5;
 
-float xStartPosMin = -100.0;
-float xStartPosMax = 100.0;
+float xStartPosMin = -80.0;
+float xStartPosMax = 40.0;
 
 float yStartPosMin = -50.0;
 float yStartPosMax = 50.0;
