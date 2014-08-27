@@ -16,6 +16,7 @@
 		34823E8319AD3A8B00C526EB /* card_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E8119AD3A8B00C526EB /* card_texture.png */; };
 		34823E8619AD63E200C526EB /* AFSCardParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 34823E8519AD63E200C526EB /* AFSCardParticle.m */; };
 		34823E8919ADA33A00C526EB /* skymapTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E8819ADA33A00C526EB /* skymapTexture.png */; };
+		34823EA919AE862B00C526EB /* curvedDisplayTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823EA819AE862B00C526EB /* curvedDisplayTexture.png */; };
 		34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
 		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
@@ -108,6 +109,8 @@
 		34823E8519AD63E200C526EB /* AFSCardParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSCardParticle.m; sourceTree = "<group>"; };
 		34823E8719ADA33A00C526EB /* skymapTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skymapTest.h; sourceTree = "<group>"; };
 		34823E8819ADA33A00C526EB /* skymapTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skymapTexture.png; sourceTree = "<group>"; };
+		34823EA719AE831600C526EB /* curvedDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curvedDisplay.h; sourceTree = "<group>"; };
+		34823EA819AE862B00C526EB /* curvedDisplayTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = curvedDisplayTexture.png; sourceTree = "<group>"; };
 		34832E8819A1829100C80D70 /* Art for Spooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art for Spooks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34832E8B19A1829100C80D70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34832E8D19A1829100C80D70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -412,6 +415,8 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
+				34823EA719AE831600C526EB /* curvedDisplay.h */,
+				34823EA819AE862B00C526EB /* curvedDisplayTexture.png */,
 				34823E8719ADA33A00C526EB /* skymapTest.h */,
 				34823E8819ADA33A00C526EB /* skymapTexture.png */,
 				34823E8119AD3A8B00C526EB /* card_texture.png */,
@@ -528,6 +533,7 @@
 				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
+				34823EA919AE862B00C526EB /* curvedDisplayTexture.png in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
 				34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */,

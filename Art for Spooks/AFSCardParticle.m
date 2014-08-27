@@ -77,7 +77,6 @@ float angleOffsetMax = 20.0;
     
     self.xPos = self.xStartPos;
     self.yPos = self.yStartPos;
-    NSLog(@"Creating card, yPos: %f", self.yPos);
     self.zPos = self.zStartPos;
     
     self.xRot = self.xRotOffset;

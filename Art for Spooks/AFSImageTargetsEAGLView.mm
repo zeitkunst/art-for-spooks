@@ -29,6 +29,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "Quad.h"
 #import "card.h"
 #import "skymapTest.h"
+#import "curvedDisplay.h"
 
 
 //******************************************************************************
@@ -259,7 +260,7 @@ namespace {
                                  @"texture": @"card_texture.png"} forKey:@"Cards"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"skymapTexture.png"} forKey:@"Buffalo"];
+                                 @"texture": @"curvedDisplayTexture.png"} forKey:@"Buffalo"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
                                  @"texture": @"Intercept-the-art-of-deception-training-for-a-new_035.png"} forKey:@"UFO"];
@@ -1312,11 +1313,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         zRot = currentCard.zRot;
         
         rotAngle = currentCard.angle;
-        NSLog(@"rotAngle: %f", rotAngle);
         
         // Set the position of the card
         //SampleApplicationUtils::translatePoseMatrix(xPos, -1.0f, zPos, &originalMVMatrixData[0]);
-        NSLog(@"yPos: %f", yPos);
         SampleApplicationUtils::translatePoseMatrix(xPos, yPos, zPos, &originalMVMatrixData[0]);
         
         // Scale to a normal size
@@ -1375,7 +1374,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
         
         // Set the position
-        SampleApplicationUtils::translatePoseMatrix(0.0, -1.0f, 1.0, &originalMVMatrixData[0]);
+        SampleApplicationUtils::translatePoseMatrix(0.0, 300.0f, 1.0, &originalMVMatrixData[0]);
         
         
         // Scale to a normal size
@@ -1383,9 +1382,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         // Rotate accordingly
         // First, rotate to that we default to facing the viewer
+        //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
         SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
         SampleApplicationUtils::rotatePoseMatrix(-90, 0, 1, 0, &originalMVMatrixData[0]);
-        SampleApplicationUtils::rotatePoseMatrix(90, 0, 0, 1, &originalMVMatrixData[0]);
+        
         // Then, rotate away!
         //SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
         
@@ -1393,9 +1393,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         glUseProgram(shaderID);
         
-        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)skymapTestVerts);
-        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)skymapTestNormals);
-        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)skymapTestTexCoords);
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayVerts);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayTexCoords);
         
         glEnableVertexAttribArray(vertexHandle);
         glEnableVertexAttribArray(normalHandle);
@@ -1415,7 +1415,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_BLEND);
-        glDrawArrays(GL_TRIANGLES, 0, skymapTestNumVerts);
+        glDrawArrays(GL_TRIANGLES, 0, curvedDisplayNumVerts);
         //xPos += 30.0;
     }
     [emitter updateLifeCycle];
