@@ -267,6 +267,11 @@ namespace {
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
                                  @"texture": @"curvedDisplayTexture.png"} forKey:@"Buffalo"];
+
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
+                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_025.png"} forKey:@"Women"];
+
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
                                  @"texture": @"Intercept-the-art-of-deception-training-for-a-new_035.png"} forKey:@"UFO"];
@@ -1281,7 +1286,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
     //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    if ([currentTrackable isEqualToString:@"Women"]) {
+        SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    } else if ([currentTrackable isEqualToString:@"Anchory"]) {
+        SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, 0.95*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    } else {
+        SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    }
     //[self updateTexturePosition];
     
     SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
