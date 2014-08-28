@@ -94,6 +94,21 @@ namespace {
     float foxacid_preDelay = 2.0;
     float foxacid_postDelay = 2.0;
     
+    enum tagDOLPHIN_STATE {
+        PRE_DOLPHIN,
+        PLAYING_DOLPHIN,
+        POST_DOLPHIN
+    } dolphin_state;
+
+    int dolphin_FramesPerSecond = 15;
+    int dolphin_FramesPerRow = 8;
+    int dolphin_FramesPerColumn = 8;
+    int dolphin_Frames = 40;
+    int dolphin_currentFrame = 0;
+    float dolphin_preDelay = 2.0;
+    float dolphin_postDelay = 2.0;
+
+    
     enum tagBLURREDFACES_STATE {
         PRE_CAPTURE_FACE,
         SETUP_CAPTURE_FACE,
@@ -279,6 +294,9 @@ namespace {
                                  @"shader": @"Simple",
                                  @"texture": @"",
                                  @"video":@"YoussefForAFS.m4v"} forKey:@"Egypt"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Animate_8x8",
+                                 @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"} forKey:@"Couple"];
     
     /* 
      * AUGMENTATIONS TO AUGMENT
@@ -481,6 +499,8 @@ namespace {
         
         if ([currentTrackable isEqualToString:@"Foxacid"]) {
             [self animateFoxacid:[augmentationDict objectForKey:@"Foxacid"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([currentTrackable isEqualToString:@"Couple"]) {
+            [self animateDolphin:[augmentationDict objectForKey:@"Couple"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
             [self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"CyberMagicians"]) {
@@ -686,6 +706,9 @@ namespace {
         if ([trackable isEqualToString:@"Foxacid"]) {
             foxacid_state = PRE_FOXACID;
             foxacid_currentFrame = 0;
+        } if ([trackable isEqualToString:@"Couple"]) {
+            dolphin_state = PRE_DOLPHIN;
+            dolphin_currentFrame = 0;
         } else if ([trackable isEqualToString:@"BlurredFaces"]) {
             blurredFaces_state = PRE_CAPTURE_FACE;
         } else if ([trackable isEqualToString:@"Cards"]) {
@@ -744,6 +767,14 @@ namespace {
     if ((CACurrentMediaTime() - previousTime) >= (1.0/foxacid_FramesPerSecond) ) {
         foxacid_currentFrame += 1;
         foxacid_currentFrame = (foxacid_currentFrame)%foxacid_Frames;
+        //foxacid_currentFrame = 0;
+        previousTime = CACurrentMediaTime();
+    }
+    
+    // Update Dolphin params
+    if ((CACurrentMediaTime() - previousTime) >= (1.0/dolphin_FramesPerSecond) ) {
+        dolphin_currentFrame += 1;
+        dolphin_currentFrame = (dolphin_currentFrame)%dolphin_Frames;
         //foxacid_currentFrame = 0;
         previousTime = CACurrentMediaTime();
     }
@@ -814,6 +845,42 @@ namespace {
     }
 }
 
+- (void)updateDolphinParams {
+    time += 0.1;
+    angle += 1.0;
+    //dolphin_currentFrame += 1;
+    switch (dolphin_state) {
+        case PRE_DOLPHIN:
+            if ((CACurrentMediaTime() - previousTime) >= dolphin_preDelay) {
+                previousTime = CACurrentMediaTime();
+                dolphin_state = PLAYING_DOLPHIN;
+            }
+            break;
+        case PLAYING_DOLPHIN:
+            if ((CACurrentMediaTime() - previousTime) >= (1.0/dolphin_FramesPerSecond) ) {
+                dolphin_currentFrame += 1;
+                //dolphin_currentFrame = (dolphin_currentFrame)%dolphin_Frames;
+                //dolphin_currentFrame = 0;
+                previousTime = CACurrentMediaTime();
+            }
+            
+            //NSLog(@"Current frame: %d", dolphin_currentFrame);
+            if (dolphin_currentFrame == dolphin_Frames) {
+                //NSLog(@"RESETTING");
+                previousTime = CACurrentMediaTime();
+                dolphin_state = POST_DOLPHIN;
+            }
+            break;
+        case POST_DOLPHIN:
+            if ((CACurrentMediaTime() - previousTime) >= dolphin_postDelay) {
+                previousTime = CACurrentMediaTime();
+                dolphin_state = PRE_DOLPHIN;
+                dolphin_currentFrame = 0;
+            }
+            break;
+    }
+}
+
 - (void)animateFoxacid:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
     // OpenGL 2
     QCAR::Matrix44F modelViewProjection;
@@ -867,6 +934,61 @@ namespace {
     
     SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
+
+- (void)animateDolphin:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    QCAR::Matrix44F modelViewProjection;
+    
+    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    
+    
+    // If sprite sheet is organized from right to left, then we need to offset by the last x position
+    float currentRowPosition = 0.875 - (((dolphin_currentFrame) % dolphin_FramesPerRow) * 1.0f / dolphin_FramesPerRow);
+    //NSLog(@"Current row position: %f", currentRowPosition);
+    float currentColumnPosition = ((dolphin_currentFrame) / dolphin_FramesPerRow) * 1.0f / dolphin_FramesPerColumn;
+    //NSLog(@"Current column position: %f", currentColumnPosition);
+    //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::scalePoseMatrix(1.0f/dolphin_FramesPerRow, 1/dolphin_FramesPerColumn, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(-0.15f, -0.10f, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(0.64f, 1.0f, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttrib1f(frameRowHandle, currentRowPosition);
+    glVertexAttrib1f(frameColumnHandle, currentColumnPosition);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    //glUniform1f(frameHandle, dolphin_currentFrame);
+    //glUniform1f(frameRowHandle, currentRowPosition);
+    //glUniform1f(frameColumnHandle, currentColumnPosition);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateDolphinParams];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
+    
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
 
 - (void)augmentBlurredFaces:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
     // OpenGL 2
