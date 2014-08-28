@@ -295,6 +295,10 @@ namespace {
                                  @"texture": @"",
                                  @"video":@"YoussefForAFS.m4v"} forKey:@"Egypt"];
     [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
+                                 @"texture": @"",
+                                 @"video":@"OliverFerguson.m4v"} forKey:@"Tank"];
+    [augmentationDict setValue:@{
                                  @"shader": @"Animate_8x8",
                                  @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"} forKey:@"Couple"];
     
@@ -326,7 +330,7 @@ namespace {
      */
     [augmentationDict setValue:@{
                             @"shader": @"Simple",
-                            @"texture": @"dollar_bill_obverse.png"} forKey:@"default"];
+                            @"texture": @"transparent.png"} forKey:@"default"];
 }
 
 - (void)loadTextureIDs {
@@ -509,6 +513,8 @@ namespace {
         } else if ([currentTrackable isEqualToString:@"CyberMagicians"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
         } else if ([currentTrackable isEqualToString:@"Egypt"]) {
+            [self playVideoWithTrackable:trackable withCurrentResult:result];
+        } else if ([currentTrackable isEqualToString:@"Tank"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
         } else if ([currentTrackable isEqualToString:@"1984"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
@@ -720,7 +726,8 @@ namespace {
             previousTime = CACurrentMediaTime();
         } else if ([trackable isEqualToString:@"1984"]
                    || [trackable isEqualToString:@"CyberMagicians"]
-                   || [trackable isEqualToString:@"Egypt"]) {
+                   || [trackable isEqualToString:@"Egypt"]
+                   || [trackable isEqualToString:@"Tank"]) {
             videoData.targetPositiveDimensions.data[0] = 0.0f;
             videoData.targetPositiveDimensions.data[1] = 0.0f;
             videoPlaybackTime = VIDEO_PLAYBACK_CURRENT_POSITION;
