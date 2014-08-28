@@ -896,8 +896,8 @@ namespace {
     //NSLog(@"Current column position: %f", currentColumnPosition);
     //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
     //SampleApplicationUtils::scalePoseMatrix(1.0f/foxacid_FramesPerRow, 1/foxacid_FramesPerColumn, 1, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::translatePoseMatrix(-0.37, 0.07, 0.0f, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(0.58, 0.71, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(-0.37, 0.09, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(0.55, 0.71, 1, &modelViewMatrix.data[0]);
     SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
     
     glUseProgram(shaderID);
