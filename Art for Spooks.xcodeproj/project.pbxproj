@@ -15,6 +15,7 @@
 		347B0AC119AED77F0062C532 /* Animate_8x8.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABF19AED77F0062C532 /* Animate_8x8.fragsh */; };
 		347B0AC219AED77F0062C532 /* Animate_8x8.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 347B0AC019AED77F0062C532 /* Animate_8x8.vertsh */; };
 		347B0AC619AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0AC519AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */; };
+		347B0ACC19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ACB19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png */; };
 		34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */; };
 		34823E3619AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E3519AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */; };
 		34823E7519ACDF4B00C526EB /* AFSCardEmitterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 34823E7419ACDF4B00C526EB /* AFSCardEmitterObject.m */; };
@@ -108,6 +109,7 @@
 		347B0ABF19AED77F0062C532 /* Animate_8x8.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Animate_8x8.fragsh; path = shaders/Animate_8x8.fragsh; sourceTree = "<group>"; };
 		347B0AC019AED77F0062C532 /* Animate_8x8.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Animate_8x8.vertsh; path = shaders/Animate_8x8.vertsh; sourceTree = "<group>"; };
 		347B0AC519AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-nsa-quantumtheory_002_sprites.png"; sourceTree = "<group>"; };
+		347B0ACB19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WashingtonPost-fisa03201404590770.png"; sourceTree = "<group>"; };
 		34823E3119ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DerSpiegel-image-542019-galleryV9-hheg.png"; sourceTree = "<group>"; };
 		34823E3519AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_035.png"; sourceTree = "<group>"; };
 		34823E7319ACDF4B00C526EB /* AFSCardEmitterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSCardEmitterObject.h; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
+				347B0ACB19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png */,
 				347B0AC519AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
 				347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */,
 				347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */,
@@ -558,6 +561,7 @@
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
+				347B0ACC19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
 				347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */,
 				34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */,

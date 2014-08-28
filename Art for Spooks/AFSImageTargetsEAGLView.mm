@@ -318,7 +318,7 @@ namespace {
      */
     [augmentationDict setValue:@{
                             @"shader": @"Simple",
-                            @"texture": @"clouds-2.png"} forKey:@"BlurredFaces"];
+                            @"texture": @"WashingtonPost-fisa03201404590770.png"} forKey:@"BlurredFaces"];
     
     /*
      * DEFAULT AUGMENTATION
@@ -502,22 +502,20 @@ namespace {
         } else if ([currentTrackable isEqualToString:@"Couple"]) {
             [self animateDolphin:[augmentationDict objectForKey:@"Couple"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
-            [self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            // This isn't working right now, so we skip it
+            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
+            [self applyTextureWithTextureFile:[augmentationDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"CyberMagicians"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
-            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"Egypt"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
-            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"1984"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
-            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"Cards"]) {
             [self augmentCards:[augmentationDict objectForKey:@"Cards"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
-            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"Buffalo"]) {
             [self augmentBuffalo:[augmentationDict objectForKey:@"Buffalo"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
-            //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else {
             // Do our generic apply texture with the selected shader program, set in setCurrentTrackableWith:trackableName
             [self applyTextureWithTextureFile:[augmentationDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
@@ -1402,6 +1400,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     if ([currentTrackable isEqualToString:@"RabbitDuck"]) {
         SampleApplicationUtils::translatePoseMatrix(rdXPos, rdYPos, 0.0f, &modelViewMatrix.data[0]);
         SampleApplicationUtils::translatePoseMatrix(-30.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
+    } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
+        SampleApplicationUtils::translatePoseMatrix(0.0, -1.0f, 0.0f, &modelViewMatrix.data[0]);
     } else {
         SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
     }
@@ -1412,6 +1412,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
     } else if ([currentTrackable isEqualToString:@"Anchory"]) {
         SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, 0.95*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
+        SampleApplicationUtils::scalePoseMatrix(0.97*kObjectScaleNormalx, 0.48*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
     } else {
         SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
     }
