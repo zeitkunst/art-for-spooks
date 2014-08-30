@@ -140,12 +140,50 @@ namespace {
         BOOL isActive;
     } videoData;
     
+    
+    // Phantasmagoria Parameters
+    NSArray *phTextures = @[@"phantasmagoria001.png", @"phantasmagoria002.png", @"phantasmagoria003.png"];
+    
+    float phFramesPerSecond = 30.0;
+    
+    float phP0MinX = -2.0;
+    //float phP0MaxX = -0.5;
+    float phP0MinY = -2.0;
+    float phP0MaxY = 2.0;
+    
+    float phP1MinOffsetX = -2.0;
+    float phP1MaxOffsetX = 2.0;
+    float phP1MinOffsetY = -2.0;
+    float phP1MaxOffsetY = 2.0;
+
+    float phP2MinOffsetX = -2.0;
+    float phP2MaxOffsetX = 2.0;
+    float phP2MinOffsetY = -2.0;
+    float phP2MaxOffsetY = 2.0;
+    
+    //float phP3MinX = 0.5;
+    float phP3MaxX = 2.0;
+    float phP3MinY = -2.0;
+    float phP3MaxY = 2.0;
+    
+    float phTimeOffset[NUM_PHANTASMAGORIA_TEXTURES];
+    float phTime[NUM_PHANTASMAGORIA_TEXTURES];
+    float phTimeOffsetMin = 0.0005;
+    float phTimeOffsetMax = 0.009;
+    
+    float phP[NUM_PHANTASMAGORIA_TEXTURES][4][2];
+    float phScale[NUM_PHANTASMAGORIA_TEXTURES][2];
+    float phCurrentPos[NUM_PHANTASMAGORIA_TEXTURES][2];
+
+    
+    // RabbitDuck parameters
     float rdDeltaMagnitude = 5.0;
     float rdDelta;
     float rdXPos;
     float rdYPos;
     float rdFramesPerSecond = 30.0;
     
+    // Card Emitter parameters
     AFSCardEmitterObject *emitter;
 }
 
@@ -292,6 +330,13 @@ namespace {
                                  @"texture": @"Intercept-the-art-of-deception-training-for-a-new_035.png"} forKey:@"UFO"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
+                                 @"textureArray": @[
+                                     @"phantasmagoria001.png",
+                                     @"phantasmagoria002.png",
+                                     @"phantasmagoria003.png"]} forKey:@"Kidnapper"];
+
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
                                  @"texture": @"",
                                  @"video":@"YoussefForAFS.m4v"} forKey:@"Egypt"];
     [augmentationDict setValue:@{
@@ -338,23 +383,45 @@ namespace {
         NSDictionary *dict = [augmentationDict objectForKey:key];
         NSString *textureFilename = [dict valueForKey:@"texture"];
         
-        // If no texture is set for this particular trackable, skip
-        if ([textureFilename isEqualToString:@""]) {
-            continue;
+        if (textureFilename == nil) {
+            // Try the key "textureArray"
+            NSArray *textureArray = [dict valueForKey:@"textureArray"];
+            
+            for (NSString *arrayItem in textureArray) {
+                if ([arrayItem isEqualToString:@""]) {
+                    continue;
+                } else {
+                    [self loadTextureWith:arrayItem];
+                }
+            }
+            
+        } else {
+            // If no texture is set for this particular trackable, skip
+            if ([textureFilename isEqualToString:@""]) {
+                continue;
+            }
+            
+            // Otherwise, load the texture
+            [self loadTextureWith:textureFilename];
         }
-        Texture* t = [[Texture alloc] initWithImageFile:[dict valueForKey:@"texture"]];
-
-        GLuint textureID;
-        glGenTextures(1, &textureID);
-        [t setTextureID:textureID];
-        glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [t width], [t height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[t pngData]);
-        [textureIDs setObject:t forKey:[dict valueForKey:@"texture"]];
+        
     }
+}
+
+- (void)loadTextureWith:(NSString *)textureFilename {
+    Texture* t = [[Texture alloc] initWithImageFile:textureFilename];
+    
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+    [t setTextureID:textureID];
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [t width], [t height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[t pngData]);
+    [textureIDs setObject:t forKey:textureFilename];
+    
 }
 
 // From RosyWriter
@@ -505,6 +572,8 @@ namespace {
             [self animateFoxacid:[augmentationDict objectForKey:@"Foxacid"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"Couple"]) {
             [self animateDolphin:[augmentationDict objectForKey:@"Couple"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+        } else if ([currentTrackable isEqualToString:@"Kidnapper"]) {
+            [self animatePhantasmagoria:[augmentationDict objectForKey:@"Kidnapper"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
             // This isn't working right now, so we skip it
             //[self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
@@ -715,6 +784,8 @@ namespace {
             dolphin_currentFrame = 0;
         } else if ([trackable isEqualToString:@"BlurredFaces"]) {
             blurredFaces_state = PRE_CAPTURE_FACE;
+        } else if ([trackable isEqualToString:@"Kidnapper"]) {
+            [self initPhantasmagoriaParams];
         } else if ([trackable isEqualToString:@"Cards"]) {
             emitter = [[AFSCardEmitterObject alloc] init];
         } else if ([trackable isEqualToString:@"Buffalo"]) {
@@ -738,6 +809,59 @@ namespace {
             }
         }
     }
+}
+
+- (void)initPhantasmagoriaParams {
+    // Have to set scaling manually, outside of the loop
+    // This is factor that gets multiplied with the overall factor
+    // TODO
+    // This is brittle
+    phScale[0][0] = 0.3;
+    phScale[0][1] = 0.3;
+    phScale[1][0] = 0.3;
+    phScale[1][1] = 0.3;
+    phScale[2][0] = 0.3;
+    phScale[2][1] = 0.3;
+    
+    // Set initial positions for my Bezier control points
+    for (int i = 0; i < NUM_PHANTASMAGORIA_TEXTURES; i++) {
+        // Set P0 and P3 as fixed for a given augmentation
+        phP[i][0][0] = phP0MinX;
+        phP[i][0][1] = [self randomFloatBetweenMin:phP0MinY andMax:phP0MaxY];
+        phP[i][3][0] = phP3MaxX;
+        phP[i][3][1] = [self randomFloatBetweenMin:phP3MinY andMax:phP3MaxY];
+        
+        // Setup the other values
+        [self setupPhantasmagoriaParamFor:i];
+    }
+    
+}
+
+- (void)setupPhantasmagoriaParamFor:(int)phIndex {
+    phTime[phIndex] = 0.0;
+    phTimeOffset[phIndex] = [self randomFloatBetweenMin:phTimeOffsetMin andMax:phTimeOffsetMax];
+    
+    
+    phP[phIndex][1][0] = phP[phIndex][0][0] + [self randomFloatBetweenMin:phP1MinOffsetX andMax:phP1MaxOffsetX];
+    phP[phIndex][1][1] = phP[phIndex][0][1] + [self randomFloatBetweenMin:phP1MinOffsetY andMax:phP1MaxOffsetY];
+    phP[phIndex][2][0] = phP[phIndex][3][0] + [self randomFloatBetweenMin:phP2MinOffsetX andMax:phP2MaxOffsetX];
+    phP[phIndex][2][1] = phP[phIndex][3][1] + [self randomFloatBetweenMin:phP2MinOffsetY andMax:phP2MaxOffsetY];
+    
+    // Setup the initial position along Bezier curve
+    phCurrentPos[phIndex][0] = powf(1 - phTime[phIndex], 3)*phP[phIndex][0][0] +
+    3 * phTime[phIndex] * powf(1 - phTime[phIndex], 2) * phP[phIndex][1][0] +
+    3 * powf(phTime[phIndex], 2) * (1 - phTime[phIndex]) * phP[phIndex][2][0] +
+    powf(phTime[phIndex], 3)*phP[phIndex][3][0];
+    phCurrentPos[phIndex][1] = powf(1 - phTime[phIndex], 3)*phP[phIndex][0][1] +
+    3 * phTime[phIndex] * powf(1 - phTime[phIndex], 2) * phP[phIndex][1][1] +
+    3 * powf(phTime[phIndex], 2) * (1 - phTime[phIndex]) * phP[phIndex][2][1] +
+    powf(phTime[phIndex], 3)*phP[phIndex][3][1];
+}
+
+- (float)randomFloatBetweenMin:(float)min andMax:(float)max
+{
+    float range = max - min;
+    return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * range) + min;
 }
 
 - (void)resetTime {
@@ -847,6 +971,32 @@ namespace {
                 foxacid_currentFrame = 0;
             }
             break;
+    }
+}
+
+- (void)updatePhantasmagoriaParams {
+    for (int i = 0; i < NUM_PHANTASMAGORIA_TEXTURES; i++) {
+        if ((phTime[i] >= 1.0) && (phTimeOffset[i] > 0.0)) {
+            [self setupPhantasmagoriaParamFor:i];
+            phTime[i] = 1.0;
+            phTimeOffset[i] = -1.0 * phTimeOffset[i];
+        } else if ((phTimeOffset[i] < 0.0) && (phTime[i] <= 0.0)) {
+            [self setupPhantasmagoriaParamFor:i];
+            phTime[i] = 0.0;
+            phTimeOffset[i] = 1.0 * phTimeOffset[i];
+        }else {
+            phTime[i] += phTimeOffset[i];
+        }
+        
+        // Update current position along Bezier curve
+        phCurrentPos[i][0] = powf(1 - phTime[i], 3)*phP[i][0][0] +
+                            3 * phTime[i] * powf(1 - phTime[i], 2) * phP[i][1][0] +
+                            3 * powf(phTime[i], 2) * (1 - phTime[i]) * phP[i][2][0] +
+                            powf(phTime[i], 3)*phP[i][3][0];
+        phCurrentPos[i][1] = powf(1 - phTime[i], 3)*phP[i][0][1] +
+                            3 * phTime[i] * powf(1 - phTime[i], 2) * phP[i][1][1] +
+                            3 * powf(phTime[i], 2) * (1 - phTime[i]) * phP[i][2][1] +
+                            powf(phTime[i], 3)*phP[i][3][1];
     }
 }
 
@@ -990,6 +1140,54 @@ namespace {
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
+- (void)animatePhantasmagoria:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    float originalMVMatrixData[16];
+    
+    for (int i = 0; i < NUM_PHANTASMAGORIA_TEXTURES; i++) {
+        QCAR::Matrix44F modelViewProjection;
+        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
+        
+        SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &originalMVMatrixData[0]);
+        SampleApplicationUtils::scalePoseMatrix(phScale[i][0]*kObjectScaleNormalx, phScale[i][1]*kObjectScaleNormaly, 1, &originalMVMatrixData[0]);
+        
+        
+        SampleApplicationUtils::translatePoseMatrix(phCurrentPos[i][0], phCurrentPos[i][1], 0.0f, &originalMVMatrixData[0]);
+        NSLog(@"%d: x: %f, y: %f", i, phCurrentPos[i][0], phCurrentPos[i][1]);
+        
+        //SampleApplicationUtils::translatePoseMatrix(-0.15f, -0.10f, 0.0f, &modelViewMatrix.data[0]);
+        //SampleApplicationUtils::scalePoseMatrix(phScale[i][1], phScale[i][1], 1, &modelViewMatrix.data[0]);
+        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
+        
+        glUseProgram(shaderID);
+        
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+        
+        glEnableVertexAttribArray(vertexHandle);
+        glEnableVertexAttribArray(normalHandle);
+        glEnableVertexAttribArray(textureCoordHandle);
+        
+        glActiveTexture(GL_TEXTURE0);
+        
+        //NSString *textureFile = [textureInfo objectForKey:@"texture"];
+        Texture* currentTexture = (Texture *)[textureIDs objectForKey:phTextures[i]];
+        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        
+        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        [self updatePhantasmagoriaParams];
+        glUniform1f(timeHandle, time);
+        glUniform2fv(resolutionHandle, 1, resolution);
+        
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    }
     
     SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
@@ -1644,6 +1842,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         frameColumnHandle = glGetAttribLocation(shaderProgramID, "frameColumn");
         mvpMatrixHandle = glGetUniformLocation(shaderProgramID, "modelViewProjectionMatrix");
         texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
+        texSampler2DHandle_001  = glGetUniformLocation(shaderProgramID,"texSampler2D_001");
+        texSampler2DHandle_002  = glGetUniformLocation(shaderProgramID,"texSampler2D_002");
+        texSampler2DHandle_003  = glGetUniformLocation(shaderProgramID,"texSampler2D_003");
         resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");
         timeHandle = glGetUniformLocation(shaderProgramID, "time");
         time = 0.0;
