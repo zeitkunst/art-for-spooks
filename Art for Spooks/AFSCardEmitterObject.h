@@ -11,7 +11,7 @@
 #define NUM_CARDS 8
 
 @interface AFSCardEmitterObject : NSObject
-@property NSMutableArray* cardEmitter;
+@property (strong, nonatomic) NSMutableArray* cardEmitter;
 - (void)updateLifeCycle;
 - (void)setupCardEmitter;
 

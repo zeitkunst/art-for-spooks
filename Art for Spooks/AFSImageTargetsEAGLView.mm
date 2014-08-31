@@ -54,15 +54,6 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 
 namespace {
     // --- Data private to this unit ---
-
-    // Teapot texture filenames
-    const char* textureFilenames[] = {
-        "DerSpiegel-media-34098_003.png",
-        "Intercept-psychology-a-new-kind-of-sigdev_020.png",
-        "Intercept-psychology-a-new-kind-of-sigdev_025.png",
-        "building_texture.jpeg",
-        "clouds-2.png"
-    };
     
     NSMutableDictionary *augmentationDict = [[[NSMutableDictionary alloc] init] autorelease];
     NSMutableDictionary *textureIDs = [[[NSMutableDictionary alloc] init] autorelease];
@@ -142,9 +133,8 @@ namespace {
     
     
     // Phantasmagoria Parameters
-    NSArray *phTextures = @[@"phantasmagoria001.png", @"phantasmagoria002.png", @"phantasmagoria003.png"];
-    
-    float phFramesPerSecond = 30.0;
+    //NSArray *phTextures = @[@"phantasmagoria003.png", @"phantasmagoria002.png", @"phantasmagoria001.png"];
+    NSArray *phTextures = @[@"phantasmagoria002.png", @"phantasmagoria001.png"];
     
     float phP0MinX = -2.0;
     //float phP0MaxX = -0.5;
@@ -168,7 +158,7 @@ namespace {
     
     float phTimeOffset[NUM_PHANTASMAGORIA_TEXTURES];
     float phTime[NUM_PHANTASMAGORIA_TEXTURES];
-    float phTimeOffsetMin = 0.0005;
+    float phTimeOffsetMin = 0.003;
     float phTimeOffsetMax = 0.009;
     
     float phP[NUM_PHANTASMAGORIA_TEXTURES][4][2];
@@ -332,8 +322,7 @@ namespace {
                                  @"shader": @"Simple",
                                  @"textureArray": @[
                                      @"phantasmagoria001.png",
-                                     @"phantasmagoria002.png",
-                                     @"phantasmagoria003.png"]} forKey:@"Kidnapper"];
+                                     @"phantasmagoria002.png"]} forKey:@"Kidnapper"];
 
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
@@ -343,24 +332,32 @@ namespace {
                                  @"shader": @"Simple",
                                  @"texture": @"",
                                  @"video":@"OliverFerguson.m4v"} forKey:@"Tank"];
+    
+    [augmentationDict setValue:@{
+                                 @"shader": @"ChromaKey",
+                                 @"texture": @"",
+                                 @"video":@"Intercept-psychology-a-new-kind-of-sigdev_007.m4v"} forKey:@"CatDog"];
+    /*
+    [augmentationDict setValue:@{
+                                 @"shader": @"ChromaKey",
+                                 @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_007.png"} forKey:@"CatDog"];
+     */
     [augmentationDict setValue:@{
                                  @"shader": @"Animate_8x8",
                                  @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"} forKey:@"Couple"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Animate_4x5",
+                                 @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
+                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_022.png"} forKey:@"RabbitDuck"];
     
     /* 
      * AUGMENTATIONS TO AUGMENT
      * :-) (i.e., make better) 
      */
     
-    // Add background to cover up original fox/barrel; add bubbles coming out of barrel
-    [augmentationDict setValue:@{
-                            @"shader": @"Animate_4x5",
-                            @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
-    
-    // Add some kind of animation
-    [augmentationDict setValue:@{
-                                 @"shader": @"Simple",
-                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_022.png"} forKey:@"RabbitDuck"];
+
     
     /* 
      * AUGMENTATIONS THAT ARE NOT DONE YET
@@ -435,7 +432,7 @@ namespace {
     // Need to deal with proper positioning, padding
     CGFloat labelHeight = self.bounds.size.height/2.0;
     CGFloat labelWidth = self.bounds.size.width/2.0;
-	CGFloat xPosition = self.bounds.size.width - labelWidth - 10;
+	//CGFloat xPosition = self.bounds.size.width - labelWidth - 10;
 	//CGRect labelFrame = CGRectMake(xPosition, yPosition, labelWidth, labelHeight);
     CGRect labelFrame = CGRectMake(0, 0, labelWidth, labelHeight);
 	UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
@@ -585,6 +582,8 @@ namespace {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
         } else if ([currentTrackable isEqualToString:@"Tank"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
+        } else if ([currentTrackable isEqualToString:@"CatDog"]) {
+            [self playVideoWithTrackable:trackable withCurrentResult:result];
         } else if ([currentTrackable isEqualToString:@"1984"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
         } else if ([currentTrackable isEqualToString:@"Cards"]) {
@@ -718,6 +717,7 @@ namespace {
         //Texture* t = augmentationTexture[OBJECT_KEYFRAME_1 + playerIndex];
         //frameTextureID = [t textureID];
         //aspectRatio = (float)[t height] / (float)[t width];
+        aspectRatio = 1.0;
         texCoords = quadTexCoords;
     }
     
@@ -757,6 +757,14 @@ namespace {
         glBindTexture(GL_TEXTURE_2D, frameTextureID);
         glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
         glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        
+        // This works to chroma key my video, but screws a lot of other things up...
+        glDepthFunc(GL_LEQUAL);
+        //glEnable(GL_BLEND);
+        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        
         glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
         
         glDisableVertexAttribArray(vertexHandle);
@@ -798,7 +806,8 @@ namespace {
         } else if ([trackable isEqualToString:@"1984"]
                    || [trackable isEqualToString:@"CyberMagicians"]
                    || [trackable isEqualToString:@"Egypt"]
-                   || [trackable isEqualToString:@"Tank"]) {
+                   || [trackable isEqualToString:@"Tank"]
+                   || [trackable isEqualToString:@"CatDog"]) {
             videoData.targetPositiveDimensions.data[0] = 0.0f;
             videoData.targetPositiveDimensions.data[1] = 0.0f;
             videoPlaybackTime = VIDEO_PLAYBACK_CURRENT_POSITION;
@@ -816,12 +825,12 @@ namespace {
     // This is factor that gets multiplied with the overall factor
     // TODO
     // This is brittle
-    phScale[0][0] = 0.3;
-    phScale[0][1] = 0.3;
-    phScale[1][0] = 0.3;
-    phScale[1][1] = 0.3;
-    phScale[2][0] = 0.3;
-    phScale[2][1] = 0.3;
+    //phScale[0][0] = 0.3 * 0.48;
+    //phScale[0][1] = 0.3;
+    phScale[0][0] = 0.4;
+    phScale[0][1] = 0.4 * 0.96;
+    phScale[1][0] = 0.4;
+    phScale[1][1] = 0.4 * 0.90;
     
     // Set initial positions for my Bezier control points
     for (int i = 0; i < NUM_PHANTASMAGORIA_TEXTURES; i++) {
@@ -1146,6 +1155,7 @@ namespace {
 
 - (void)animatePhantasmagoria:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
     float originalMVMatrixData[16];
+    float zPos = 0.05;
     
     for (int i = 0; i < NUM_PHANTASMAGORIA_TEXTURES; i++) {
         QCAR::Matrix44F modelViewProjection;
@@ -1154,9 +1164,11 @@ namespace {
         SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &originalMVMatrixData[0]);
         SampleApplicationUtils::scalePoseMatrix(phScale[i][0]*kObjectScaleNormalx, phScale[i][1]*kObjectScaleNormaly, 1, &originalMVMatrixData[0]);
         
-        
-        SampleApplicationUtils::translatePoseMatrix(phCurrentPos[i][0], phCurrentPos[i][1], 0.0f, &originalMVMatrixData[0]);
-        NSLog(@"%d: x: %f, y: %f", i, phCurrentPos[i][0], phCurrentPos[i][1]);
+        // TODO
+        // Render each image to an FBO, recombine and mix in a shader, so as to eliminate need for translating
+        // to different z positions
+        SampleApplicationUtils::translatePoseMatrix(phCurrentPos[i][0], phCurrentPos[i][1], i * zPos, &originalMVMatrixData[0]);
+        //NSLog(@"%d: x: %f, y: %f", i, phCurrentPos[i][0], phCurrentPos[i][1]);
         
         //SampleApplicationUtils::translatePoseMatrix(-0.15f, -0.10f, 0.0f, &modelViewMatrix.data[0]);
         //SampleApplicationUtils::scalePoseMatrix(phScale[i][1], phScale[i][1], 1, &modelViewMatrix.data[0]);
@@ -1181,6 +1193,7 @@ namespace {
         glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
         glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
         [self updatePhantasmagoriaParams];
+        
         glUniform1f(timeHandle, time);
         glUniform2fv(resolutionHandle, 1, resolution);
         
@@ -1648,6 +1661,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     glUniform1f(timeHandle, time);
     glUniform2fv(resolutionHandle, 1, resolution);
     
+    glDepthFunc(GL_LEQUAL);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
@@ -1842,9 +1856,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         frameColumnHandle = glGetAttribLocation(shaderProgramID, "frameColumn");
         mvpMatrixHandle = glGetUniformLocation(shaderProgramID, "modelViewProjectionMatrix");
         texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
-        texSampler2DHandle_001  = glGetUniformLocation(shaderProgramID,"texSampler2D_001");
-        texSampler2DHandle_002  = glGetUniformLocation(shaderProgramID,"texSampler2D_002");
-        texSampler2DHandle_003  = glGetUniformLocation(shaderProgramID,"texSampler2D_003");
         resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");
         timeHandle = glGetUniformLocation(shaderProgramID, "time");
         time = 0.0;

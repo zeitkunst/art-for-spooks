@@ -15,7 +15,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "VideoPlayerHelper.h"
 
 #define NUM_AUGMENTATION_TEXTURES 5
-#define NUM_PHANTASMAGORIA_TEXTURES 3
+#define NUM_PHANTASMAGORIA_TEXTURES 2
 
 @class AFSImageTargetsViewController;
 
@@ -40,9 +40,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     GLint textureCoordHandle;
     GLint mvpMatrixHandle;
     GLint texSampler2DHandle;
-    GLint texSampler2DHandle_001;
-    GLint texSampler2DHandle_002;
-    GLint texSampler2DHandle_003;
     GLint resolutionHandle;
     GLint timeHandle;
     GLint frameRowHandle;

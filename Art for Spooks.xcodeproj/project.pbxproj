@@ -44,11 +44,13 @@
 		34832EC719A1838700C80D70 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC619A1838700C80D70 /* Security.framework */; };
 		34832EC919A1839200C80D70 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC819A1839200C80D70 /* QuartzCore.framework */; };
 		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
-		34BDB19119B27881005B1AA8 /* phantasmagoria001.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB18E19B27881005B1AA8 /* phantasmagoria001.png */; };
-		34BDB19219B27881005B1AA8 /* phantasmagoria002.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB18F19B27881005B1AA8 /* phantasmagoria002.png */; };
-		34BDB19319B27881005B1AA8 /* phantasmagoria003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19019B27881005B1AA8 /* phantasmagoria003.png */; };
-		34BDB19619B29659005B1AA8 /* Phantasmagoria.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19419B29659005B1AA8 /* Phantasmagoria.fragsh */; };
-		34BDB19719B29659005B1AA8 /* Phantasmagoria.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19519B29659005B1AA8 /* Phantasmagoria.vertsh */; };
+		348B1B6719B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */; };
+		348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */; };
+		348B1B7019B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6F19B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */; };
+		34BDB19B19B29F36005B1AA8 /* phantasmagoria001.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */; };
+		34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */; };
+		34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19A19B29F36005B1AA8 /* phantasmagoria003.png */; };
+		34BDB1A919B2D672005B1AA8 /* ChromaKey.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB1A719B2D672005B1AA8 /* ChromaKey.vertsh */; };
 		34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */; };
 		34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540119A842F600A7B2E4 /* ArtForSpooks.dat */; };
 		34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */; };
@@ -151,11 +153,13 @@
 		34832EC619A1838700C80D70 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		34832EC819A1839200C80D70 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		34832ECA19A1841B00C80D70 /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVuforia.a; path = "../../../../../development/vuforia-sdk-ios-3-0-9/build/lib/arm/libVuforia.a"; sourceTree = "<group>"; };
-		34BDB18E19B27881005B1AA8 /* phantasmagoria001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria001.png; sourceTree = "<group>"; };
-		34BDB18F19B27881005B1AA8 /* phantasmagoria002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria002.png; sourceTree = "<group>"; };
-		34BDB19019B27881005B1AA8 /* phantasmagoria003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria003.png; sourceTree = "<group>"; };
-		34BDB19419B29659005B1AA8 /* Phantasmagoria.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Phantasmagoria.fragsh; path = shaders/Phantasmagoria.fragsh; sourceTree = "<group>"; };
-		34BDB19519B29659005B1AA8 /* Phantasmagoria.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Phantasmagoria.vertsh; path = shaders/Phantasmagoria.vertsh; sourceTree = "<group>"; };
+		348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_007.png"; sourceTree = "<group>"; };
+		348B1B6919B2EB460034FD98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/ChromaKey.fragsh; sourceTree = "<group>"; };
+		348B1B6F19B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Intercept-psychology-a-new-kind-of-sigdev_007.m4v"; sourceTree = "<group>"; };
+		34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria001.png; sourceTree = "<group>"; };
+		34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria002.png; sourceTree = "<group>"; };
+		34BDB19A19B29F36005B1AA8 /* phantasmagoria003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria003.png; sourceTree = "<group>"; };
+		34BDB1A719B2D672005B1AA8 /* ChromaKey.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChromaKey.vertsh; path = shaders/ChromaKey.vertsh; sourceTree = "<group>"; };
 		34C753FF19A83D4D00A7B2E4 /* dollar_bill_obverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_bill_obverse.png; sourceTree = "<group>"; };
 		34C7540119A842F600A7B2E4 /* ArtForSpooks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArtForSpooks.dat; sourceTree = "<group>"; };
 		34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArtForSpooks.xml; sourceTree = "<group>"; };
@@ -352,8 +356,8 @@
 		34C7540B19A84BDE00A7B2E4 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				34BDB19419B29659005B1AA8 /* Phantasmagoria.fragsh */,
-				34BDB19519B29659005B1AA8 /* Phantasmagoria.vertsh */,
+				348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */,
+				34BDB1A719B2D672005B1AA8 /* ChromaKey.vertsh */,
 				347B0ABF19AED77F0062C532 /* Animate_8x8.fragsh */,
 				347B0AC019AED77F0062C532 /* Animate_8x8.vertsh */,
 				34C7542F19AA552300A7B2E4 /* Animate_4x5.fragsh */,
@@ -380,6 +384,7 @@
 		34C7541819A91F4F00A7B2E4 /* videos */ = {
 			isa = PBXGroup;
 			children = (
+				348B1B6F19B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */,
 				347B0ACD19AEF14B0062C532 /* OliverFerguson.m4v */,
 				3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */,
 				3433E67D19AAABA600640977 /* YoussefForAFS.m4v */,
@@ -442,9 +447,10 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
-				34BDB18E19B27881005B1AA8 /* phantasmagoria001.png */,
-				34BDB18F19B27881005B1AA8 /* phantasmagoria002.png */,
-				34BDB19019B27881005B1AA8 /* phantasmagoria003.png */,
+				348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */,
+				34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */,
+				34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */,
+				34BDB19A19B29F36005B1AA8 /* phantasmagoria003.png */,
 				347B0ACB19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png */,
 				347B0AC519AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png */,
 				347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */,
@@ -560,16 +566,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				34823E3619AC008100C526EB /* Intercept-the-art-of-deception-training-for-a-new_035.png in Resources */,
-				34BDB19719B29659005B1AA8 /* Phantasmagoria.vertsh in Resources */,
 				34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
-				34BDB19219B27881005B1AA8 /* phantasmagoria002.png in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
 				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
 				34823EA919AE862B00C526EB /* curvedDisplayTexture.png in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
+				34BDB19B19B29F36005B1AA8 /* phantasmagoria001.png in Resources */,
 				347B0ABA19AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */,
 				347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
@@ -580,10 +585,13 @@
 				34823E8319AD3A8B00C526EB /* card_texture.png in Resources */,
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
+				348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
 				347B0ACC19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
+				34BDB1A919B2D672005B1AA8 /* ChromaKey.vertsh in Resources */,
 				347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */,
+				348B1B7019B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */,
 				34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
 				34C7542619A95E0800A7B2E4 /* Bubbles.vertsh in Resources */,
@@ -592,6 +600,8 @@
 				34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
 				3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */,
+				34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */,
+				34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */,
 				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,
 				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				347B0ACE19AEF14B0062C532 /* OliverFerguson.m4v in Resources */,
@@ -600,16 +610,14 @@
 				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
 				34823E8919ADA33A00C526EB /* skymapTexture.png in Resources */,
 				34C7540F19A84C0200A7B2E4 /* DistortedTV.vertsh in Resources */,
+				348B1B6719B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png in Resources */,
 				347B0AC619AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */,
-				34BDB19119B27881005B1AA8 /* phantasmagoria001.png in Resources */,
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
 				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,
 				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
 				347B0AC119AED77F0062C532 /* Animate_8x8.fragsh in Resources */,
-				34BDB19319B27881005B1AA8 /* phantasmagoria003.png in Resources */,
 				34C7542519A95E0800A7B2E4 /* Bubbles.fragsh in Resources */,
 				34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
-				34BDB19619B29659005B1AA8 /* Phantasmagoria.fragsh in Resources */,
 				347B0AC219AED77F0062C532 /* Animate_8x8.vertsh in Resources */,
 				34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,
 			);
@@ -679,6 +687,15 @@
 				34832EAE19A1829200C80D70 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */ = {
+			isa = PBXVariantGroup;
+			children = (
+				348B1B6919B2EB460034FD98 /* en */,
+			);
+			name = ChromaKey.fragsh;
+			path = shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
