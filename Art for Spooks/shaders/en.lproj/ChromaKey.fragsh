@@ -19,7 +19,7 @@ float chromaKeyB = 0.0;
 // Chroma Key shader from http://pilcrowpipe.blogspot.jp/2013/03/chroma-keying-transparent-background.html
 void main() {
     vec3 keying_color = vec3(chromaKeyR, chromaKeyG, chromaKeyB);
-    float thresh = 0.8;
+    float thresh = 0.4;
     float slope = 0.2;
     vec3 sample = texture2D(texSampler2D, texCoord).rgb;
     
