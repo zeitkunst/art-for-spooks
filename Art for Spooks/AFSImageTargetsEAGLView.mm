@@ -758,14 +758,16 @@ namespace {
         glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
         glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
         
-        // This works to chroma key my video, but screws a lot of other things up...
+        // This is the trick to enable chroma keying
+        // Set glBlendFunc to be GL_SRC_ALPHA, and then reset to GL_ONE after drawing
         glDepthFunc(GL_LEQUAL);
-        //glEnable(GL_BLEND);
-        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_BLEND);
         
         glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
+        
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
         
         glDisableVertexAttribArray(vertexHandle);
         glDisableVertexAttribArray(normalHandle);

@@ -13,12 +13,10 @@ float PI = 3.1415926535;
 uniform mat4 modelViewProjectionMatrix;
 
 float chromaKeyR = 0.0;
-float chromaKeyG = 0.95;
+float chromaKeyG = 1.0;
 float chromaKeyB = 0.0;
-float chromaKeyThresh = 0.5;
-vec4 color;
 
-
+// Chroma Key shader from http://pilcrowpipe.blogspot.jp/2013/03/chroma-keying-transparent-background.html
 void main() {
     vec3 keying_color = vec3(chromaKeyR, chromaKeyG, chromaKeyB);
     float thresh = 0.8;
@@ -31,34 +29,6 @@ void main() {
     float edge0 = thresh * (1.0 - slope);
     float alpha = smoothstep(edge0, thresh, d);
     
-    /*
-    if (d < 4.0) {
-        gl_FragColor = vec4(sample, 1.0);
-    } else {
-        gl_FragColor = vec4(sample, 0.0);
-    }
-     */
     
-    /*
-    if (sample.g >= 0.95) {
-        gl_FragColor = vec4(sample, 0.0);
-    } else {
-        gl_FragColor = vec4(sample, 1.0);
-    }
-     */
-    
-    /*
-    if (d < thresh) {
-        gl_FragColor = vec4(sample, 0.0);
-    } else {
-        gl_FragColor = vec4(sample, 1.0);
-    }
-     */
     gl_FragColor = vec4(sample, alpha);
-    /*
-    gl_FragColor = sample;
-    if ((abs(sample.r - chromaKeyR) < chromaKeyThresh) && (abs(sample.g - chromaKeyG) < chromaKeyThresh) && (abs(sample.b - chromaKeyB) < chromaKeyThresh)) {
-        gl_FragColor.a = 0.0;
-    }
-     */
 }

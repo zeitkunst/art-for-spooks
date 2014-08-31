@@ -46,7 +46,7 @@
 		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
 		348B1B6719B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */; };
 		348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */; };
-		348B1B7019B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6F19B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */; };
+		348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */; };
 		34BDB19B19B29F36005B1AA8 /* phantasmagoria001.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */; };
 		34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */; };
 		34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19A19B29F36005B1AA8 /* phantasmagoria003.png */; };
@@ -155,7 +155,7 @@
 		34832ECA19A1841B00C80D70 /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVuforia.a; path = "../../../../../development/vuforia-sdk-ios-3-0-9/build/lib/arm/libVuforia.a"; sourceTree = "<group>"; };
 		348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_007.png"; sourceTree = "<group>"; };
 		348B1B6919B2EB460034FD98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/ChromaKey.fragsh; sourceTree = "<group>"; };
-		348B1B6F19B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Intercept-psychology-a-new-kind-of-sigdev_007.m4v"; sourceTree = "<group>"; };
+		348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Intercept-psychology-a-new-kind-of-sigdev_007.m4v"; sourceTree = "<group>"; };
 		34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria001.png; sourceTree = "<group>"; };
 		34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria002.png; sourceTree = "<group>"; };
 		34BDB19A19B29F36005B1AA8 /* phantasmagoria003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria003.png; sourceTree = "<group>"; };
@@ -384,7 +384,7 @@
 		34C7541819A91F4F00A7B2E4 /* videos */ = {
 			isa = PBXGroup;
 			children = (
-				348B1B6F19B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */,
+				348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */,
 				347B0ACD19AEF14B0062C532 /* OliverFerguson.m4v */,
 				3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */,
 				3433E67D19AAABA600640977 /* YoussefForAFS.m4v */,
@@ -591,7 +591,7 @@
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
 				34BDB1A919B2D672005B1AA8 /* ChromaKey.vertsh in Resources */,
 				347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */,
-				348B1B7019B2FA810034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */,
+				348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */,
 				34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
 				34C7542619A95E0800A7B2E4 /* Bubbles.vertsh in Resources */,
