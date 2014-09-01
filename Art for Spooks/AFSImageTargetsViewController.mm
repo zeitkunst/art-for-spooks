@@ -44,7 +44,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         }
         
         dataSetCurrent = nil;
-        extendedTrackingIsOn = NO;
+        extendedTrackingIsOn = YES;
         
         // a single tap will trigger a single autofocus operation
         tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(autofocus:)];
@@ -525,16 +525,23 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     for (int tIdx = 0; tIdx < theDataSet->getNumTrackables(); tIdx++) {
         QCAR::Trackable* trackable = theDataSet->getTrackable(tIdx);
         if (start) {
-            if (!trackable->startExtendedTracking())
-            {
-                NSLog(@"Failed to start extended tracking on: %s", trackable->getName());
-                result = false;
+            // Start extended tracking on Buffalo
+            if (!strcmp(trackable->getName(), "Buffalo")) {
+                NSLog(@"DEBUG: Starting extended tracking for 'Buffalo'");
+                if (!trackable->startExtendedTracking())
+                {
+                    NSLog(@"Failed to start extended tracking on: %s", trackable->getName());
+                    result = false;
+                }
             }
         } else {
-            if (!trackable->stopExtendedTracking())
-            {
-                NSLog(@"Failed to stop extended tracking on: %s", trackable->getName());
-                result = false;
+            if (!strcmp(trackable->getName(), "Buffalo")) {
+                NSLog(@"DEBUG: Stopping extended tracking for 'Buffalo'");                
+                if (!trackable->stopExtendedTracking())
+                {
+                    NSLog(@"Failed to stop extended tracking on: %s", trackable->getName());
+                    result = false;
+                }
             }
         }
     }
