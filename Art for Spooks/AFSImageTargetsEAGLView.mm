@@ -417,6 +417,8 @@ namespace {
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [t width], [t height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[t pngData]);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    NSLog(@"Loaded texture '%@' with textureID %d", textureFilename, textureID);
     [textureIDs setObject:t forKey:textureFilename];
     
 }
@@ -426,10 +428,8 @@ namespace {
 {
 	//CGFloat labelWidth = 200.0;
 	//CGFloat labelHeight = 400.0;
-    // TODO
-    // Deal better with content scaling/retina displays than this hardcoded sample.
-    // TODO
-    // Need to deal with proper positioning, padding
+    // TODO: Deal better with content scaling/retina displays than this hardcoded sample.
+    // TODO: Need to deal with proper positioning, padding
     CGFloat labelHeight = self.bounds.size.height/2.0;
     CGFloat labelWidth = self.bounds.size.width/2.0;
 	//CGFloat xPosition = self.bounds.size.width - labelWidth - 10;
@@ -437,8 +437,7 @@ namespace {
     CGRect labelFrame = CGRectMake(0, 0, labelWidth, labelHeight);
 	UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
 	[label setFont:[UIFont systemFontOfSize:36]];
-    // TODO
-    // Figure out how to set the following parameters in ios 7
+    // TODO: Figure out how to set the following parameters in ios 7
     [label setLineBreakMode:NSLineBreakByWordWrapping];
     [label setTextAlignment:NSTextAlignmentJustified];
 	[label setTextColor:[UIColor whiteColor]];
@@ -494,14 +493,6 @@ namespace {
     // recreated OpenGL ES resources
     [self deleteFramebuffer];
     glFinish();
-}
-
-- (void) updateTexturePosition {
-    if (texturePosition >= 20.0) {
-        texturePosition = -20.0;
-    } else {
-        texturePosition += 0.05;
-    }
 }
 
 //------------------------------------------------------------------------------
@@ -619,6 +610,208 @@ namespace {
     [self presentFramebuffer];
 }
 
+//------------------------------------------------------------------------------
+#pragma mark - Augmentation methods
+
+- (void)applyTextureWithTextureFile:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    QCAR::Matrix44F modelViewProjection;
+    
+    if ([currentTrackable isEqualToString:@"RabbitDuck"]) {
+        SampleApplicationUtils::translatePoseMatrix(rdXPos, rdYPos, 0.0f, &modelViewMatrix.data[0]);
+        SampleApplicationUtils::translatePoseMatrix(-30.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
+    } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
+        SampleApplicationUtils::translatePoseMatrix(0.0, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    } else {
+        SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    }
+    
+    //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
+    if ([currentTrackable isEqualToString:@"Women"]) {
+        SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    } else if ([currentTrackable isEqualToString:@"Anchory"]) {
+        SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, 0.95*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
+        SampleApplicationUtils::scalePoseMatrix(0.97*kObjectScaleNormalx, 0.48*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    } else {
+        SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    }
+    
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateTime];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
+    
+    glDepthFunc(GL_LEQUAL);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
+- (void)augmentCards:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    
+    
+    float xPos;
+    float yPos;
+    float zPos;
+    float xRot;
+    float yRot;
+    float zRot;
+    float rotAngle;
+    //xPos = -100.0;
+    
+    
+    //QCAR::Matrix44F originalMVMatrix = modelViewMatrix;
+    float originalMVMatrixData[16];
+    
+    for (int i = 0; i < NUM_CARDS; i++) {
+        QCAR::Matrix44F modelViewProjection;
+        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
+        AFSCardParticle *currentCard;
+        currentCard = [[emitter cardEmitter] objectAtIndex:i];
+        
+        xPos = currentCard.xPos;
+        yPos = currentCard.yPos;
+        zPos = currentCard.zPos;
+        
+        xRot = currentCard.xRot;
+        yRot = currentCard.yRot;
+        zRot = currentCard.zRot;
+        
+        rotAngle = currentCard.angle;
+        
+        // Set the position of the card
+        //SampleApplicationUtils::translatePoseMatrix(xPos, -1.0f, zPos, &originalMVMatrixData[0]);
+        SampleApplicationUtils::translatePoseMatrix(xPos, yPos, zPos, &originalMVMatrixData[0]);
+        
+        // Scale to a normal size
+        SampleApplicationUtils::scalePoseMatrix(kCardsScaleNormal, kCardsScaleNormal, kCardsScaleNormal, &originalMVMatrixData[0]);
+        
+        // Rotate accordingly
+        // First, rotate to that we default to facing the viewer
+        SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
+        // Then, rotate away!
+        SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
+        
+        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
+        
+        glUseProgram(shaderID);
+        
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardVerts);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardTexCoords);
+        
+        glEnableVertexAttribArray(vertexHandle);
+        glEnableVertexAttribArray(normalHandle);
+        glEnableVertexAttribArray(textureCoordHandle);
+        
+        glActiveTexture(GL_TEXTURE0);
+        
+        NSString *textureFile = [textureInfo objectForKey:@"texture"];
+        Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        
+        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        [self updateTime];
+        glUniform1f(timeHandle, time);
+        glUniform2fv(resolutionHandle, 1, resolution);
+        
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDrawArrays(GL_TRIANGLES, 0, cardNumVerts);
+        //xPos += 30.0;
+    }
+    [emitter updateLifeCycle];
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
+- (void)augmentBuffalo:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    
+    
+    
+    //QCAR::Matrix44F originalMVMatrix = modelViewMatrix;
+    float originalMVMatrixData[16];
+    
+    for (int i = 0; i < NUM_CARDS; i++) {
+        QCAR::Matrix44F modelViewProjection;
+        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
+        
+        // Set the position
+        SampleApplicationUtils::translatePoseMatrix(0.0, 300.0f, 1.0, &originalMVMatrixData[0]);
+        
+        
+        // Scale to a normal size
+        SampleApplicationUtils::scalePoseMatrix(10*kObjectScaleNormal, 10*kObjectScaleNormal, 10*kObjectScaleNormal, &originalMVMatrixData[0]);
+        
+        // Rotate accordingly
+        // First, rotate to that we default to facing the viewer
+        //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
+        SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
+        SampleApplicationUtils::rotatePoseMatrix(-90, 0, 1, 0, &originalMVMatrixData[0]);
+        
+        // Then, rotate away!
+        //SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
+        
+        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
+        
+        glUseProgram(shaderID);
+        
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayVerts);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayTexCoords);
+        
+        glEnableVertexAttribArray(vertexHandle);
+        glEnableVertexAttribArray(normalHandle);
+        glEnableVertexAttribArray(textureCoordHandle);
+        
+        glActiveTexture(GL_TEXTURE0);
+        
+        NSString *textureFile = [textureInfo objectForKey:@"texture"];
+        Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        
+        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        [self updateTime];
+        glUniform1f(timeHandle, time);
+        glUniform2fv(resolutionHandle, 1, resolution);
+        
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDrawArrays(GL_TRIANGLES, 0, curvedDisplayNumVerts);
+        //xPos += 30.0;
+    }
+    [emitter updateLifeCycle];
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
 - (void) playVideoWithTrackable:(const QCAR::Trackable& )trackable withCurrentResult:(const QCAR::TrackableResult*) result  {
     // Mark this video (target) as active
     videoData.isActive = YES;
@@ -643,7 +836,8 @@ namespace {
     
     float aspectRatio;
     const GLvoid* texCoords;
-    GLuint frameTextureID;
+    // Set the frameTextureID to the default texture to avoid any potential problems with unset values
+    GLuint frameTextureID = 0;
     BOOL displayVideoFrame = YES;
     
     // Retain value between calls
@@ -708,75 +902,391 @@ namespace {
     }
     
     if (YES == displayVideoFrame) {
+        // NOTE
+        // Placing the video drawing code here to prevent having to create a keyframe
+        
         // ---- Display the video frame -----
         aspectRatio = (float)[videoPlayerHelper getVideoHeight] / (float)[videoPlayerHelper getVideoWidth];
         texCoords = videoQuadTextureCoords;
+        
+        // Get the current projection matrix
+        QCAR::Matrix44F projMatrix = vapp.projectionMatrix;
+        
+        // If the current status is valid (not NOT_READY or ERROR), render the
+        // video quad with the texture we've just selected
+        if (NOT_READY != currentStatus) {
+            // Convert trackable pose to matrix for use with OpenGL
+            QCAR::Matrix44F modelViewMatrixVideo = QCAR::Tool::convertPose2GLMatrix(trackablePose);
+            QCAR::Matrix44F modelViewProjectionVideo;
+            
+            //            SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, videoData[playerIndex].targetPositiveDimensions.data[0],
+            //                                             &modelViewMatrixVideo.data[0]);
+            
+            SampleApplicationUtils::scalePoseMatrix(videoData.targetPositiveDimensions.data[0],
+                                                    videoData.targetPositiveDimensions.data[0] * aspectRatio,
+                                                    videoData.targetPositiveDimensions.data[0],
+                                                    &modelViewMatrixVideo.data[0]);
+            
+            SampleApplicationUtils::multiplyMatrix(projMatrix.data,
+                                                   &modelViewMatrixVideo.data[0] ,
+                                                   &modelViewProjectionVideo.data[0]);
+            
+            glUseProgram(shaderProgramID);
+            
+            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, quadVertices);
+            glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, quadNormals);
+            glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
+            
+            glEnableVertexAttribArray(vertexHandle);
+            glEnableVertexAttribArray(normalHandle);
+            glEnableVertexAttribArray(textureCoordHandle);
+            
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, frameTextureID);
+            glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
+            glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+            
+            // This is the trick to enable chroma keying
+            // Set glBlendFunc to be GL_SRC_ALPHA, and then reset to GL_ONE after drawing
+            glDepthFunc(GL_LEQUAL);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            
+            glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
+            
+            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            
+            glDisableVertexAttribArray(vertexHandle);
+            glDisableVertexAttribArray(normalHandle);
+            glDisableVertexAttribArray(textureCoordHandle);
+            
+            glUseProgram(0);
+        }
+        
     }
     else {
+        // Don't display anything if we're not ready
+        
         // ----- Display the keyframe -----
         //Texture* t = augmentationTexture[OBJECT_KEYFRAME_1 + playerIndex];
         //frameTextureID = [t textureID];
         //aspectRatio = (float)[t height] / (float)[t width];
-        aspectRatio = 1.0;
-        texCoords = quadTexCoords;
+        //aspectRatio = 1.0;
+        //texCoords = quadTexCoords;
     }
     
-    // Get the current projection matrix
-    QCAR::Matrix44F projMatrix = vapp.projectionMatrix;
     
-    // If the current status is valid (not NOT_READY or ERROR), render the
-    // video quad with the texture we've just selected
-    if (NOT_READY != currentStatus) {
-        // Convert trackable pose to matrix for use with OpenGL
-        QCAR::Matrix44F modelViewMatrixVideo = QCAR::Tool::convertPose2GLMatrix(trackablePose);
-        QCAR::Matrix44F modelViewProjectionVideo;
+}
+
+- (void)animateFoxacid:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    QCAR::Matrix44F modelViewProjection;
+    
+    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    
+    
+    // If sprite sheet is organized from right to left, then we need to offset by the last x position
+    float currentRowPosition = 0.75 - (((foxacid_currentFrame) % foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerRow);
+    //NSLog(@"Current row position: %f", currentRowPosition);
+    float currentColumnPosition = ((foxacid_currentFrame) / foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerColumn;
+    //NSLog(@"Current column position: %f", currentColumnPosition);
+    //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::scalePoseMatrix(1.0f/foxacid_FramesPerRow, 1/foxacid_FramesPerColumn, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(-0.37, 0.09, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(0.55, 0.71, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttrib1f(frameRowHandle, currentRowPosition);
+    glVertexAttrib1f(frameColumnHandle, currentColumnPosition);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    //glUniform1f(frameHandle, foxacid_currentFrame);
+    //glUniform1f(frameRowHandle, currentRowPosition);
+    //glUniform1f(frameColumnHandle, currentColumnPosition);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateFoxacidParams];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
+    
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
+- (void)animateDolphin:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    QCAR::Matrix44F modelViewProjection;
+    
+    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+    
+    
+    // If sprite sheet is organized from right to left, then we need to offset by the last x position
+    float currentRowPosition = 0.875 - (((dolphin_currentFrame) % dolphin_FramesPerRow) * 1.0f / dolphin_FramesPerRow);
+    //NSLog(@"Current row position: %f", currentRowPosition);
+    float currentColumnPosition = ((dolphin_currentFrame) / dolphin_FramesPerRow) * 1.0f / dolphin_FramesPerColumn;
+    //NSLog(@"Current column position: %f", currentColumnPosition);
+    //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
+    //SampleApplicationUtils::scalePoseMatrix(1.0f/dolphin_FramesPerRow, 1/dolphin_FramesPerColumn, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::translatePoseMatrix(-0.15f, -0.10f, 0.0f, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::scalePoseMatrix(0.64f, 1.0f, 1, &modelViewMatrix.data[0]);
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttrib1f(frameRowHandle, currentRowPosition);
+    glVertexAttrib1f(frameColumnHandle, currentColumnPosition);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    //glUniform1f(frameHandle, dolphin_currentFrame);
+    //glUniform1f(frameRowHandle, currentRowPosition);
+    //glUniform1f(frameColumnHandle, currentColumnPosition);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateDolphinParams];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
+    
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+    
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+}
+
+- (void)animatePhantasmagoria:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    float originalMVMatrixData[16];
+    float zPos = 0.05;
+    
+    for (int i = 0; i < NUM_PHANTASMAGORIA_TEXTURES; i++) {
+        QCAR::Matrix44F modelViewProjection;
+        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
         
-        //            SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, videoData[playerIndex].targetPositiveDimensions.data[0],
-        //                                             &modelViewMatrixVideo.data[0]);
+        SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &originalMVMatrixData[0]);
+        SampleApplicationUtils::scalePoseMatrix(phScale[i][0]*kObjectScaleNormalx, phScale[i][1]*kObjectScaleNormaly, 1, &originalMVMatrixData[0]);
         
-        SampleApplicationUtils::scalePoseMatrix(videoData.targetPositiveDimensions.data[0],
-                                                videoData.targetPositiveDimensions.data[0] * aspectRatio,
-                                                videoData.targetPositiveDimensions.data[0],
-                                                &modelViewMatrixVideo.data[0]);
+        // TODO: Render each image to an FBO, recombine and mix in a shader, so as to eliminate need for translating
+        // to different z positions
+        SampleApplicationUtils::translatePoseMatrix(phCurrentPos[i][0], phCurrentPos[i][1], i * zPos, &originalMVMatrixData[0]);
+        //NSLog(@"%d: x: %f, y: %f", i, phCurrentPos[i][0], phCurrentPos[i][1]);
         
-        SampleApplicationUtils::multiplyMatrix(projMatrix.data,
-                                               &modelViewMatrixVideo.data[0] ,
-                                               &modelViewProjectionVideo.data[0]);
+        //SampleApplicationUtils::translatePoseMatrix(-0.15f, -0.10f, 0.0f, &modelViewMatrix.data[0]);
+        //SampleApplicationUtils::scalePoseMatrix(phScale[i][1], phScale[i][1], 1, &modelViewMatrix.data[0]);
+        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
         
-        glUseProgram(shaderProgramID);
+        glUseProgram(shaderID);
         
-        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, quadVertices);
-        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, quadNormals);
-        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
+        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
         
         glEnableVertexAttribArray(vertexHandle);
         glEnableVertexAttribArray(normalHandle);
         glEnableVertexAttribArray(textureCoordHandle);
         
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, frameTextureID);
-        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
+        
+        //NSString *textureFile = [textureInfo objectForKey:@"texture"];
+        Texture* currentTexture = (Texture *)[textureIDs objectForKey:phTextures[i]];
+        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        
+        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
         glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+        [self updatePhantasmagoriaParams];
         
-        // This is the trick to enable chroma keying
-        // Set glBlendFunc to be GL_SRC_ALPHA, and then reset to GL_ONE after drawing
-        glDepthFunc(GL_LEQUAL);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        
-        glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
+        glUniform1f(timeHandle, time);
+        glUniform2fv(resolutionHandle, 1, resolution);
         
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_BLEND);
-        
-        glDisableVertexAttribArray(vertexHandle);
-        glDisableVertexAttribArray(normalHandle);
-        glDisableVertexAttribArray(textureCoordHandle);
-        
-        glUseProgram(0);
+        glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
     }
     
+    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
+
+
+- (void)augmentBlurredFaces:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
+    // OpenGL 2
+    [self updateBlurredFacesParams];
+    switch (blurredFaces_state) {
+        case PRE_CAPTURE_FACE: {
+            
+            break;
+        }
+        case SETUP_CAPTURE_FACE: {
+            self.cicontext = [CIContext contextWithEAGLContext:context];
+            self.currentFrontImage = [CIImage emptyImage];
+            
+            NSError *error = nil;
+            session = [[AVCaptureSession alloc] init];
+            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+                [session setSessionPreset:AVCaptureSessionPreset640x480];
+            } else {
+                [session setSessionPreset:AVCaptureSessionPresetPhoto];
+            }
+            // Select a video device, make an input
+            AVCaptureDevice *device;
+            AVCaptureDevicePosition desiredPosition = AVCaptureDevicePositionFront;
+            // find the front facing camera
+            for (AVCaptureDevice *d in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
+                if ([d position] == desiredPosition) {
+                    device = d;
+                    self.isUsingFrontFacingCamera = YES;
+                    break;
+                }
+            }
+            // fall back to the default camera.
+            if( nil == device )
+            {
+                self.isUsingFrontFacingCamera = NO;
+                device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+            }
+            // get the input device
+            AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+            if( !error ) {
+                
+                // add the input to the session
+                if ( [session canAddInput:deviceInput] ){
+                    [session addInput:deviceInput];
+                }
+                
+                // Make a video data output
+                self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+                
+                // we want BGRA, both CoreGraphics and OpenGL work well with 'BGRA'
+                NSDictionary *rgbOutputSettings = [NSDictionary dictionaryWithObject:
+                                                   [NSNumber numberWithInt:kCMPixelFormat_32BGRA] forKey:(id)kCVPixelBufferPixelFormatTypeKey];
+                [self.videoDataOutput setVideoSettings:rgbOutputSettings];
+                [self.videoDataOutput setAlwaysDiscardsLateVideoFrames:YES]; // discard if the data output queue is blocked
+                
+                // create a serial dispatch queue used for the sample buffer delegate
+                // a serial dispatch queue must be used to guarantee that video frames will be delivered in order
+                // see the header doc for setSampleBufferDelegate:queue: for more information
+                self.videoDataOutputQueue = dispatch_queue_create("VideoDataOutputQueue", DISPATCH_QUEUE_SERIAL);
+                [self.videoDataOutput setSampleBufferDelegate:self queue:self.videoDataOutputQueue];
+                
+                if ( [session canAddOutput:self.videoDataOutput] ){
+                    [session addOutput:self.videoDataOutput];
+                }
+                
+                // get the output for doing face detection.
+                [[self.videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:YES];
+                
+                self.videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
+                self.videoPreviewLayer.backgroundColor = [[UIColor blackColor] CGColor];
+                self.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+                
+                CALayer *rootLayer = [self.videoPreviewLayer presentationLayer];
+                [rootLayer setMasksToBounds:YES];
+                [self.videoPreviewLayer setFrame:[rootLayer bounds]];
+                [rootLayer addSublayer:self.videoPreviewLayer];
+                [session startRunning];
+            }
+            
+            session = nil;
+            if (error) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:
+                                          [NSString stringWithFormat:@"Failed with error %d", (int)[error code]]
+                                                                    message:[error localizedDescription]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Dismiss"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                [self teardownAVCapture];
+            }
+            
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glFlush();
+            blurredFaces_state = CAPTURE_FACE;
+            NSLog(@"Swithing to CAPTURE_FACE");
+            break;
+        }
+        case CAPTURE_FACE: {
+            
+            [self.cicontext drawImage:self.currentFrontImage
+                               inRect:self.eaglFrame
+                             fromRect:self.currentFrontImage.extent];
+            
+            break;
+        }
+        case AUGMENT_FACE: {
+            QCAR::Matrix44F modelViewProjection;
+            
+            SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
+            SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+            
+            SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
+            
+            glUseProgram(shaderID);
+            
+            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
+            glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+            glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+            
+            glEnableVertexAttribArray(vertexHandle);
+            glEnableVertexAttribArray(normalHandle);
+            glEnableVertexAttribArray(textureCoordHandle);
+            
+            glActiveTexture(GL_TEXTURE0);
+            
+            NSString *textureFile = [textureInfo objectForKey:@"texture"];
+            Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+            glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+            
+            glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+            glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+            
+            glUniform1f(timeHandle, time);
+            glUniform2fv(resolutionHandle, 1, resolution);
+            
+            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+            
+            SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+            break;
+        }
+    }
+    
+    
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - Update augmentation params
 
 - (void)setCurrentTrackableWith:(NSString *)trackable {
     // Check if we're still tracking the same trackable; if not, update and reset time
@@ -825,8 +1335,7 @@ namespace {
 - (void)initPhantasmagoriaParams {
     // Have to set scaling manually, outside of the loop
     // This is factor that gets multiplied with the overall factor
-    // TODO
-    // This is brittle
+    // TODO: This is brittle
     //phScale[0][0] = 0.3 * 0.48;
     //phScale[0][1] = 0.3;
     phScale[0][0] = 0.4;
@@ -1047,312 +1556,8 @@ namespace {
     }
 }
 
-- (void)animateFoxacid:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
-    // OpenGL 2
-    QCAR::Matrix44F modelViewProjection;
-    
-    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
-    
-    
-    // If sprite sheet is organized from right to left, then we need to offset by the last x position
-    float currentRowPosition = 0.75 - (((foxacid_currentFrame) % foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerRow);
-    //NSLog(@"Current row position: %f", currentRowPosition);
-    float currentColumnPosition = ((foxacid_currentFrame) / foxacid_FramesPerRow) * 1.0f / foxacid_FramesPerColumn;
-    //NSLog(@"Current column position: %f", currentColumnPosition);
-    //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
-    //SampleApplicationUtils::scalePoseMatrix(1.0f/foxacid_FramesPerRow, 1/foxacid_FramesPerColumn, 1, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::translatePoseMatrix(-0.37, 0.09, 0.0f, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(0.55, 0.71, 1, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
-    
-    glUseProgram(shaderID);
-    
-    glVertexAttrib1f(frameRowHandle, currentRowPosition);
-    glVertexAttrib1f(frameColumnHandle, currentColumnPosition);
-    
-    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
-    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
-    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
-    
-    glEnableVertexAttribArray(vertexHandle);
-    glEnableVertexAttribArray(normalHandle);
-    glEnableVertexAttribArray(textureCoordHandle);
-    
-    glActiveTexture(GL_TEXTURE0);
-    
-    NSString *textureFile = [textureInfo objectForKey:@"texture"];
-    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-    
-    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-    //glUniform1f(frameHandle, foxacid_currentFrame);
-    //glUniform1f(frameRowHandle, currentRowPosition);
-    //glUniform1f(frameColumnHandle, currentColumnPosition);
-    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-    [self updateFoxacidParams];
-    glUniform1f(timeHandle, time);
-    glUniform2fv(resolutionHandle, 1, resolution);
-    
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-    
-    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-}
-
-- (void)animateDolphin:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
-    // OpenGL 2
-    QCAR::Matrix44F modelViewProjection;
-    
-    SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
-    
-    
-    // If sprite sheet is organized from right to left, then we need to offset by the last x position
-    float currentRowPosition = 0.875 - (((dolphin_currentFrame) % dolphin_FramesPerRow) * 1.0f / dolphin_FramesPerRow);
-    //NSLog(@"Current row position: %f", currentRowPosition);
-    float currentColumnPosition = ((dolphin_currentFrame) / dolphin_FramesPerRow) * 1.0f / dolphin_FramesPerColumn;
-    //NSLog(@"Current column position: %f", currentColumnPosition);
-    //SampleApplicationUtils::translatePoseMatrix(currentRowPosition, currentColumnPosition, 0.0f, &modelViewMatrix.data[0]);
-    //SampleApplicationUtils::scalePoseMatrix(1.0f/dolphin_FramesPerRow, 1/dolphin_FramesPerColumn, 1, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::translatePoseMatrix(-0.15f, -0.10f, 0.0f, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::scalePoseMatrix(0.64f, 1.0f, 1, &modelViewMatrix.data[0]);
-    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
-    
-    glUseProgram(shaderID);
-    
-    glVertexAttrib1f(frameRowHandle, currentRowPosition);
-    glVertexAttrib1f(frameColumnHandle, currentColumnPosition);
-    
-    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
-    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
-    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
-    
-    glEnableVertexAttribArray(vertexHandle);
-    glEnableVertexAttribArray(normalHandle);
-    glEnableVertexAttribArray(textureCoordHandle);
-    
-    glActiveTexture(GL_TEXTURE0);
-    
-    NSString *textureFile = [textureInfo objectForKey:@"texture"];
-    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-    
-    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-    //glUniform1f(frameHandle, dolphin_currentFrame);
-    //glUniform1f(frameRowHandle, currentRowPosition);
-    //glUniform1f(frameColumnHandle, currentColumnPosition);
-    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-    [self updateDolphinParams];
-    glUniform1f(timeHandle, time);
-    glUniform2fv(resolutionHandle, 1, resolution);
-    
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-    
-    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-}
-
-- (void)animatePhantasmagoria:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
-    float originalMVMatrixData[16];
-    float zPos = 0.05;
-    
-    for (int i = 0; i < NUM_PHANTASMAGORIA_TEXTURES; i++) {
-        QCAR::Matrix44F modelViewProjection;
-        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
-        
-        SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &originalMVMatrixData[0]);
-        SampleApplicationUtils::scalePoseMatrix(phScale[i][0]*kObjectScaleNormalx, phScale[i][1]*kObjectScaleNormaly, 1, &originalMVMatrixData[0]);
-        
-        // TODO
-        // Render each image to an FBO, recombine and mix in a shader, so as to eliminate need for translating
-        // to different z positions
-        SampleApplicationUtils::translatePoseMatrix(phCurrentPos[i][0], phCurrentPos[i][1], i * zPos, &originalMVMatrixData[0]);
-        //NSLog(@"%d: x: %f, y: %f", i, phCurrentPos[i][0], phCurrentPos[i][1]);
-        
-        //SampleApplicationUtils::translatePoseMatrix(-0.15f, -0.10f, 0.0f, &modelViewMatrix.data[0]);
-        //SampleApplicationUtils::scalePoseMatrix(phScale[i][1], phScale[i][1], 1, &modelViewMatrix.data[0]);
-        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
-        
-        glUseProgram(shaderID);
-        
-        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
-        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
-        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
-        
-        glEnableVertexAttribArray(vertexHandle);
-        glEnableVertexAttribArray(normalHandle);
-        glEnableVertexAttribArray(textureCoordHandle);
-        
-        glActiveTexture(GL_TEXTURE0);
-        
-        //NSString *textureFile = [textureInfo objectForKey:@"texture"];
-        Texture* currentTexture = (Texture *)[textureIDs objectForKey:phTextures[i]];
-        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-        
-        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-        [self updatePhantasmagoriaParams];
-        
-        glUniform1f(timeHandle, time);
-        glUniform2fv(resolutionHandle, 1, resolution);
-        
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-    }
-    
-    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-}
-
-
-- (void)augmentBlurredFaces:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
-    // OpenGL 2
-    [self updateBlurredFacesParams];
-    switch (blurredFaces_state) {
-        case PRE_CAPTURE_FACE: {
-            
-            break;
-        }
-        case SETUP_CAPTURE_FACE: {
-            self.cicontext = [CIContext contextWithEAGLContext:context];
-            self.currentFrontImage = [CIImage emptyImage];
-            
-            NSError *error = nil;
-            session = [[AVCaptureSession alloc] init];
-            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
-                [session setSessionPreset:AVCaptureSessionPreset640x480];
-            } else {
-                [session setSessionPreset:AVCaptureSessionPresetPhoto];
-            }
-            // Select a video device, make an input
-            AVCaptureDevice *device;
-            AVCaptureDevicePosition desiredPosition = AVCaptureDevicePositionFront;
-            // find the front facing camera
-            for (AVCaptureDevice *d in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
-                if ([d position] == desiredPosition) {
-                    device = d;
-                    self.isUsingFrontFacingCamera = YES;
-                    break;
-                }
-            }
-            // fall back to the default camera.
-            if( nil == device )
-            {
-                self.isUsingFrontFacingCamera = NO;
-                device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-            }
-            // get the input device
-            AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-            if( !error ) {
-                
-                // add the input to the session
-                if ( [session canAddInput:deviceInput] ){
-                    [session addInput:deviceInput];
-                }
-                
-                // Make a video data output
-                self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-                
-                // we want BGRA, both CoreGraphics and OpenGL work well with 'BGRA'
-                NSDictionary *rgbOutputSettings = [NSDictionary dictionaryWithObject:
-                                                   [NSNumber numberWithInt:kCMPixelFormat_32BGRA] forKey:(id)kCVPixelBufferPixelFormatTypeKey];
-                [self.videoDataOutput setVideoSettings:rgbOutputSettings];
-                [self.videoDataOutput setAlwaysDiscardsLateVideoFrames:YES]; // discard if the data output queue is blocked
-                
-                // create a serial dispatch queue used for the sample buffer delegate
-                // a serial dispatch queue must be used to guarantee that video frames will be delivered in order
-                // see the header doc for setSampleBufferDelegate:queue: for more information
-                self.videoDataOutputQueue = dispatch_queue_create("VideoDataOutputQueue", DISPATCH_QUEUE_SERIAL);
-                [self.videoDataOutput setSampleBufferDelegate:self queue:self.videoDataOutputQueue];
-                
-                if ( [session canAddOutput:self.videoDataOutput] ){
-                    [session addOutput:self.videoDataOutput];
-                }
-                
-                // get the output for doing face detection.
-                [[self.videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:YES];
-                
-                self.videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
-                self.videoPreviewLayer.backgroundColor = [[UIColor blackColor] CGColor];
-                self.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-                
-                CALayer *rootLayer = [self.videoPreviewLayer presentationLayer];
-                [rootLayer setMasksToBounds:YES];
-                [self.videoPreviewLayer setFrame:[rootLayer bounds]];
-                [rootLayer addSublayer:self.videoPreviewLayer];
-                [session startRunning];
-            }
-            
-            session = nil;
-            if (error) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:
-                                          [NSString stringWithFormat:@"Failed with error %d", (int)[error code]]
-                                                                    message:[error localizedDescription]
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"Dismiss"
-                                                          otherButtonTitles:nil];
-                [alertView show];
-                [self teardownAVCapture];
-            }
-            
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glFlush();
-            blurredFaces_state = CAPTURE_FACE;
-            NSLog(@"Swithing to CAPTURE_FACE");
-            break;
-        }
-        case CAPTURE_FACE: {
-            
-            [self.cicontext drawImage:self.currentFrontImage
-                               inRect:self.eaglFrame
-                             fromRect:self.currentFrontImage.extent];
-
-            break;
-        }
-        case AUGMENT_FACE: {
-            QCAR::Matrix44F modelViewProjection;
-            
-            SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
-            SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
-            
-            SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
-            
-            glUseProgram(shaderID);
-            
-            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
-            glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
-            glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
-            
-            glEnableVertexAttribArray(vertexHandle);
-            glEnableVertexAttribArray(normalHandle);
-            glEnableVertexAttribArray(textureCoordHandle);
-            
-            glActiveTexture(GL_TEXTURE0);
-            
-            NSString *textureFile = [textureInfo objectForKey:@"texture"];
-            Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-            glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-            
-            glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-            glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-            
-            glUniform1f(timeHandle, time);
-            glUniform2fv(resolutionHandle, 1, resolution);
-            
-            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-            glEnable(GL_BLEND);
-            glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-            
-            SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-            break;
-        }
-    }
-    
-    
-}
+//------------------------------------------------------------------------------
+#pragma mark - Front camera methods (not used right now)
 
 - (NSNumber *) exifOrientation: (UIDeviceOrientation) orientation
 {
@@ -1612,207 +1817,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     session = nil;
 }
 
-
-- (void)applyTextureWithTextureFile:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
-    // OpenGL 2
-    QCAR::Matrix44F modelViewProjection;
-    
-    if ([currentTrackable isEqualToString:@"RabbitDuck"]) {
-        SampleApplicationUtils::translatePoseMatrix(rdXPos, rdYPos, 0.0f, &modelViewMatrix.data[0]);
-        SampleApplicationUtils::translatePoseMatrix(-30.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
-    } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
-        SampleApplicationUtils::translatePoseMatrix(0.0, -1.0f, 0.0f, &modelViewMatrix.data[0]);
-    } else {
-        SampleApplicationUtils::translatePoseMatrix(0.0f, -1.0f, 0.0f, &modelViewMatrix.data[0]);
-    }
-    
-    //SampleApplicationUtils::translatePoseMatrix(0, 0, 30.0, &modelViewMatrix.data[0]);
-    //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &modelViewMatrix.data[0]);
-    if ([currentTrackable isEqualToString:@"Women"]) {
-        SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
-    } else if ([currentTrackable isEqualToString:@"Anchory"]) {
-        SampleApplicationUtils::scalePoseMatrix(0.95*kObjectScaleNormalx, 0.95*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
-    } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
-        SampleApplicationUtils::scalePoseMatrix(0.97*kObjectScaleNormalx, 0.48*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
-    } else {
-        SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
-    }
-    //[self updateTexturePosition];
-    
-    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
-    
-    glUseProgram(shaderID);
-    
-    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
-    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
-    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
-    
-    glEnableVertexAttribArray(vertexHandle);
-    glEnableVertexAttribArray(normalHandle);
-    glEnableVertexAttribArray(textureCoordHandle);
-    
-    glActiveTexture(GL_TEXTURE0);
-    
-    NSString *textureFile = [textureInfo objectForKey:@"texture"];
-    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-    
-    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-    [self updateTime];
-    glUniform1f(timeHandle, time);
-    glUniform2fv(resolutionHandle, 1, resolution);
-    
-    glDepthFunc(GL_LEQUAL);
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-    
-    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-}
-
-- (void)augmentCards:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
-    // OpenGL 2
-    
-    
-    float xPos;
-    float yPos;
-    float zPos;
-    float xRot;
-    float yRot;
-    float zRot;
-    float rotAngle;
-    //xPos = -100.0;
-    
-    
-    //QCAR::Matrix44F originalMVMatrix = modelViewMatrix;
-    float originalMVMatrixData[16];
-    
-    for (int i = 0; i < NUM_CARDS; i++) {
-        QCAR::Matrix44F modelViewProjection;
-        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
-        AFSCardParticle *currentCard;
-        currentCard = [[emitter cardEmitter] objectAtIndex:i];
-        
-        xPos = currentCard.xPos;
-        yPos = currentCard.yPos;
-        zPos = currentCard.zPos;
-        
-        xRot = currentCard.xRot;
-        yRot = currentCard.yRot;
-        zRot = currentCard.zRot;
-        
-        rotAngle = currentCard.angle;
-        
-        // Set the position of the card
-        //SampleApplicationUtils::translatePoseMatrix(xPos, -1.0f, zPos, &originalMVMatrixData[0]);
-        SampleApplicationUtils::translatePoseMatrix(xPos, yPos, zPos, &originalMVMatrixData[0]);
-        
-        // Scale to a normal size
-        SampleApplicationUtils::scalePoseMatrix(kCardsScaleNormal, kCardsScaleNormal, kCardsScaleNormal, &originalMVMatrixData[0]);
-        
-        // Rotate accordingly
-        // First, rotate to that we default to facing the viewer
-        SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
-        // Then, rotate away!
-        SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
-        
-        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
-        
-        glUseProgram(shaderID);
-        
-        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardVerts);
-        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardNormals);
-        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)cardTexCoords);
-        
-        glEnableVertexAttribArray(vertexHandle);
-        glEnableVertexAttribArray(normalHandle);
-        glEnableVertexAttribArray(textureCoordHandle);
-        
-        glActiveTexture(GL_TEXTURE0);
-        
-        NSString *textureFile = [textureInfo objectForKey:@"texture"];
-        Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-        
-        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-        [self updateTime];
-        glUniform1f(timeHandle, time);
-        glUniform2fv(resolutionHandle, 1, resolution);
-        
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glDrawArrays(GL_TRIANGLES, 0, cardNumVerts);
-        //xPos += 30.0;
-    }
-    [emitter updateLifeCycle];
-    
-    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-}
-
-- (void)augmentBuffalo:(NSDictionary *)textureInfo modelViewMatrix:(QCAR::Matrix44F)modelViewMatrix shaderProgramID:(GLuint)shaderID {
-    // OpenGL 2
-    
-    
-    
-    //QCAR::Matrix44F originalMVMatrix = modelViewMatrix;
-    float originalMVMatrixData[16];
-    
-    for (int i = 0; i < NUM_CARDS; i++) {
-        QCAR::Matrix44F modelViewProjection;
-        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
-        
-        // Set the position
-        SampleApplicationUtils::translatePoseMatrix(0.0, 300.0f, 1.0, &originalMVMatrixData[0]);
-        
-        
-        // Scale to a normal size
-        SampleApplicationUtils::scalePoseMatrix(10*kObjectScaleNormal, 10*kObjectScaleNormal, 10*kObjectScaleNormal, &originalMVMatrixData[0]);
-        
-        // Rotate accordingly
-        // First, rotate to that we default to facing the viewer
-        //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
-        SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
-        SampleApplicationUtils::rotatePoseMatrix(-90, 0, 1, 0, &originalMVMatrixData[0]);
-        
-        // Then, rotate away!
-        //SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
-        
-        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
-        
-        glUseProgram(shaderID);
-        
-        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayVerts);
-        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayNormals);
-        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayTexCoords);
-        
-        glEnableVertexAttribArray(vertexHandle);
-        glEnableVertexAttribArray(normalHandle);
-        glEnableVertexAttribArray(textureCoordHandle);
-        
-        glActiveTexture(GL_TEXTURE0);
-        
-        NSString *textureFile = [textureInfo objectForKey:@"texture"];
-        Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-        
-        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-        [self updateTime];
-        glUniform1f(timeHandle, time);
-        glUniform2fv(resolutionHandle, 1, resolution);
-        
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glDrawArrays(GL_TRIANGLES, 0, curvedDisplayNumVerts);
-        //xPos += 30.0;
-    }
-    [emitter updateLifeCycle];
-    
-    SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
-}
-
+//------------------------------------------------------------------------------
+#pragma mark - Tracking timer methods
 
 // Create the tracking lost timer
 - (void)createTrackingLostTimer

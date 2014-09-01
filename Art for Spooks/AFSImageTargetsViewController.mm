@@ -536,7 +536,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
             }
         } else {
             if (!strcmp(trackable->getName(), "Buffalo")) {
-                NSLog(@"DEBUG: Stopping extended tracking for 'Buffalo'");                
+                NSLog(@"DEBUG: Stopping extended tracking for 'Buffalo'");
                 if (!trackable->stopExtendedTracking())
                 {
                     NSLog(@"Failed to stop extended tracking on: %s", trackable->getName());
