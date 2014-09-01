@@ -758,56 +758,53 @@ namespace {
     //QCAR::Matrix44F originalMVMatrix = modelViewMatrix;
     float originalMVMatrixData[16];
     
-    for (int i = 0; i < NUM_CARDS; i++) {
-        QCAR::Matrix44F modelViewProjection;
-        memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
-        
-        // Set the position
-        SampleApplicationUtils::translatePoseMatrix(0.0, 300.0f, 1.0, &originalMVMatrixData[0]);
-        
-        
-        // Scale to a normal size
-        SampleApplicationUtils::scalePoseMatrix(10*kObjectScaleNormal, 10*kObjectScaleNormal, 10*kObjectScaleNormal, &originalMVMatrixData[0]);
-        
-        // Rotate accordingly
-        // First, rotate to that we default to facing the viewer
-        //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
-        SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
-        SampleApplicationUtils::rotatePoseMatrix(-90, 0, 1, 0, &originalMVMatrixData[0]);
-        
-        // Then, rotate away!
-        //SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
-        
-        SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
-        
-        glUseProgram(shaderID);
-        
-        glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayVerts);
-        glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayNormals);
-        glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayTexCoords);
-        
-        glEnableVertexAttribArray(vertexHandle);
-        glEnableVertexAttribArray(normalHandle);
-        glEnableVertexAttribArray(textureCoordHandle);
-        
-        glActiveTexture(GL_TEXTURE0);
-        
-        NSString *textureFile = [textureInfo objectForKey:@"texture"];
-        Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
-        
-        glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-        glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
-        [self updateTime];
-        glUniform1f(timeHandle, time);
-        glUniform2fv(resolutionHandle, 1, resolution);
-        
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glDrawArrays(GL_TRIANGLES, 0, curvedDisplayNumVerts);
-        //xPos += 30.0;
-    }
-    [emitter updateLifeCycle];
+    QCAR::Matrix44F modelViewProjection;
+    memcpy(originalMVMatrixData, modelViewMatrix.data, sizeof(modelViewMatrix.data));
+    
+    // Set the position
+    SampleApplicationUtils::translatePoseMatrix(0.0, 300.0f, 1.0, &originalMVMatrixData[0]);
+    
+    
+    // Scale to a normal size
+    SampleApplicationUtils::scalePoseMatrix(10*kObjectScaleNormal, 10*kObjectScaleNormal, 10*kObjectScaleNormal, &originalMVMatrixData[0]);
+    
+    // Rotate accordingly
+    // First, rotate to that we default to facing the viewer
+    //SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
+    SampleApplicationUtils::rotatePoseMatrix(90, 1, 0, 0, &originalMVMatrixData[0]);
+    SampleApplicationUtils::rotatePoseMatrix(-90, 0, 1, 0, &originalMVMatrixData[0]);
+    
+    // Then, rotate away!
+    //SampleApplicationUtils::rotatePoseMatrix(rotAngle, xRot, yRot, zRot, &originalMVMatrixData[0]);
+    
+    SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &originalMVMatrixData[0], &modelViewProjection.data[0]);
+    
+    glUseProgram(shaderID);
+    
+    glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayVerts);
+    glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayNormals);
+    glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)curvedDisplayTexCoords);
+    
+    glEnableVertexAttribArray(vertexHandle);
+    glEnableVertexAttribArray(normalHandle);
+    glEnableVertexAttribArray(textureCoordHandle);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    NSString *textureFile = [textureInfo objectForKey:@"texture"];
+    Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
+    glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+    
+    glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+    glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+    [self updateTime];
+    glUniform1f(timeHandle, time);
+    glUniform2fv(resolutionHandle, 1, resolution);
+    
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDrawArrays(GL_TRIANGLES, 0, curvedDisplayNumVerts);
+    //xPos += 30.0;
     
     SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
 }
