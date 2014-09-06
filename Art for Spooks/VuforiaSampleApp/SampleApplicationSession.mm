@@ -271,8 +271,6 @@ namespace {
     // Get the default video mode
     QCAR::CameraDevice& cameraDevice = QCAR::CameraDevice::getInstance();
     QCAR::VideoMode videoMode = cameraDevice.getVideoMode(QCAR::CameraDevice::MODE_DEFAULT);
-    //videoMode.mWidth = 640;
-    //videoMode.mHeight = 480;
     
     // Configure the video background
     QCAR::VideoBackgroundConfig config;
@@ -387,13 +385,13 @@ namespace {
     viewport.posY = (((int)(viewHeight - config.mSize.data[1])) / (int) 2) + config.mPosition.data[1];
     viewport.sizeX = config.mSize.data[0];
     viewport.sizeY = config.mSize.data[1];
- 
-//#ifdef DEBUG_SAMPLE_APP
+    
+    //#ifdef DEBUG_SAMPLE_APP
     NSLog(@"VideoBackgroundConfig: size: %d,%d", config.mSize.data[0], config.mSize.data[1]);
     NSLog(@"VideoMode:w=%d h=%d", videoMode.mWidth, videoMode.mHeight);
     NSLog(@"width=%7.3f height=%7.3f", viewWidth, viewHeight);
     NSLog(@"ViewPort: X,Y: %d,%d Size X,Y:%d,%d", viewport.posX,viewport.posY,viewport.sizeX,viewport.sizeY);
-//#endif
+    //#endif
     
     // Set the config
     QCAR::Renderer::getInstance().setVideoBackgroundConfig(config);

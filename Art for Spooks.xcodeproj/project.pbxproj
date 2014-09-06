@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		3433E67E19AAABA600640977 /* YoussefForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67D19AAABA600640977 /* YoussefForAFS.m4v */; };
 		3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */; };
+		343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		343C3D8519BB833300EE4B89 /* AFSInfoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */; };
+		343C3D8719BB836200EE4B89 /* AFSInfoOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */; };
+		343C3D8A19BB84C300EE4B89 /* AFSOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */; };
+		343C3D8C19BB8A6B00EE4B89 /* overlayInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */; };
 		347B0ABA19AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */; };
 		347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */; };
 		347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */; };
@@ -81,7 +86,6 @@
 		34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACE19A6AA1300CE0CA1 /* TextureTeapotRed.png */; };
 		34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DACF19A6AA1300CE0CA1 /* TextureTeapotYellow.png */; };
 		34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34D1DAF919A6AA2500CE0CA1 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAE919A6AA2500CE0CA1 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DAFA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAEB19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAEC19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp */; };
 		34D1DAFC19A6AA2500CE0CA1 /* SampleAppMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DAEF19A6AA2500CE0CA1 /* SampleAppMenu.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -98,6 +102,7 @@
 		34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
 		34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1319A6AD5100CE0CA1 /* transparent.png */; };
 		34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */; };
+		34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +118,14 @@
 /* Begin PBXFileReference section */
 		3433E67D19AAABA600640977 /* YoussefForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = YoussefForAFS.m4v; sourceTree = "<group>"; };
 		3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
+		343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
+		343C3D7B19BB773100EE4B89 /* libQCAR.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQCAR.a; path = "../../../../../development/vuforia-sdk-ios-2-8-7/build/lib/arm/libQCAR.a"; sourceTree = "<group>"; };
+		343C3D8319BB833300EE4B89 /* AFSInfoOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSInfoOverlayView.h; sourceTree = "<group>"; };
+		343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSInfoOverlayView.m; sourceTree = "<group>"; };
+		343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AFSInfoOverlayView.xib; sourceTree = "<group>"; };
+		343C3D8819BB84C300EE4B89 /* AFSOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayView.h; sourceTree = "<group>"; };
+		343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayView.m; sourceTree = "<group>"; };
+		343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = overlayInfo.html; sourceTree = "<group>"; };
 		347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_022.png"; sourceTree = "<group>"; };
 		347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_025.png"; sourceTree = "<group>"; };
 		347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"; sourceTree = "<group>"; };
@@ -199,7 +212,6 @@
 		34D1DAE619A6AA2500CE0CA1 /* SampleApplication3DModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplication3DModel.h; sourceTree = "<group>"; };
 		34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplication3DModel.mm; sourceTree = "<group>"; };
 		34D1DAE819A6AA2500CE0CA1 /* SampleApplicationSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationSession.h; sourceTree = "<group>"; };
-		34D1DAE919A6AA2500CE0CA1 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
 		34D1DAEA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApplicationShaderUtils.h; sourceTree = "<group>"; };
 		34D1DAEB19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationShaderUtils.mm; sourceTree = "<group>"; };
 		34D1DAEC19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleApplicationUtils.cpp; sourceTree = "<group>"; };
@@ -223,6 +235,8 @@
 		34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
 		34D1DB1319A6AD5100CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_034.png"; sourceTree = "<group>"; };
+		34DD0A8F19B67512008E97B0 /* AFSOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayViewController.h; sourceTree = "<group>"; };
+		34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +276,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		343C3D7D19BB80CB00EE4B89 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */,
+				343C3D8319BB833300EE4B89 /* AFSInfoOverlayView.h */,
+				343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */,
+				343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */,
+				343C3D8819BB84C300EE4B89 /* AFSOverlayView.h */,
+				343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		34832E7F19A1829100C80D70 = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +311,7 @@
 		34832E8A19A1829100C80D70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				343C3D7B19BB773100EE4B89 /* libQCAR.a */,
 				34C7543519AA812500A7B2E4 /* ImageIO.framework */,
 				34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */,
 				34C7541419A91A0700A7B2E4 /* AudioToolbox.framework */,
@@ -308,11 +336,13 @@
 		34832E9119A1829100C80D70 /* Art for Spooks */ = {
 			isa = PBXGroup;
 			children = (
+				343C3D7D19BB80CB00EE4B89 /* views */,
 				34D1DABD19A6AA1300CE0CA1 /* assets */,
 				34D1DAE419A6AA2500CE0CA1 /* VuforiaSampleApp */,
+				34DD0A8B19B66AB4008E97B0 /* UI */,
 				34C7540B19A84BDE00A7B2E4 /* shaders */,
-				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
 				34D1DA7619A4559E00CE0CA1 /* QuadResized.h */,
+				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
 				34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */,
 				34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */,
 				34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */,
@@ -322,6 +352,8 @@
 				34823E8519AD63E200C526EB /* AFSCardParticle.m */,
 				34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */,
 				34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */,
+				34DD0A8F19B67512008E97B0 /* AFSOverlayViewController.h */,
+				34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */,
 				34832E9D19A1829100C80D70 /* Images.xcassets */,
 				34832E9219A1829100C80D70 /* Supporting Files */,
 			);
@@ -423,7 +455,7 @@
 				34D1DAE619A6AA2500CE0CA1 /* SampleApplication3DModel.h */,
 				34D1DAE719A6AA2500CE0CA1 /* SampleApplication3DModel.mm */,
 				34D1DAE819A6AA2500CE0CA1 /* SampleApplicationSession.h */,
-				34D1DAE919A6AA2500CE0CA1 /* SampleApplicationSession.mm */,
+				343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */,
 				34D1DAEA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.h */,
 				34D1DAEB19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm */,
 				34D1DAEC19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp */,
@@ -490,6 +522,13 @@
 				34C7540219A842F600A7B2E4 /* ArtForSpooks.xml */,
 			);
 			path = tracking_database;
+			sourceTree = "<group>";
+		};
+		34DD0A8B19B66AB4008E97B0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,6 +620,7 @@
 				34823EA919AE862B00C526EB /* curvedDisplayTexture.png in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
 				34BDB19B19B29F36005B1AA8 /* phantasmagoria001.png in Resources */,
+				343C3D8719BB836200EE4B89 /* AFSInfoOverlayView.xib in Resources */,
 				347B0ABA19AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */,
 				348B1B8019B3DD820034FD98 /* Bloom.vertsh in Resources */,
 				347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */,
@@ -594,6 +634,7 @@
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
 				348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
+				343C3D8C19BB8A6B00EE4B89 /* overlayInfo.html in Resources */,
 				347B0ACC19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
 				34BDB1A919B2D672005B1AA8 /* ChromaKey.vertsh in Resources */,
@@ -648,8 +689,9 @@
 			files = (
 				34D1DB0B19A6AB5400CE0CA1 /* main.m in Sources */,
 				34C7541319A917D900A7B2E4 /* VideoPlayerHelper.mm in Sources */,
+				343C3D8A19BB84C300EE4B89 /* AFSOverlayView.m in Sources */,
 				34D1DB0119A6AA2500CE0CA1 /* Texture.mm in Sources */,
-				34D1DAF919A6AA2500CE0CA1 /* SampleApplicationSession.mm in Sources */,
+				343C3D8519BB833300EE4B89 /* AFSInfoOverlayView.m in Sources */,
 				34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
 				34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */,
 				34823E7519ACDF4B00C526EB /* AFSCardEmitterObject.m in Sources */,
@@ -657,7 +699,9 @@
 				34823E8619AD63E200C526EB /* AFSCardParticle.m in Sources */,
 				34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */,
 				34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */,
+				343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */,
 				34D1DAFC19A6AA2500CE0CA1 /* SampleAppMenu.mm in Sources */,
+				34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */,
 				34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -801,7 +845,10 @@
 					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/include",
 				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
-				LIBRARY_SEARCH_PATHS = "/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm",
+					"/Users/nknouf/development/vuforia-sdk-ios-2-8-7/build/lib/arm",
+				);
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -828,7 +875,10 @@
 					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/include",
 				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
-				LIBRARY_SEARCH_PATHS = "/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm",
+					"/Users/nknouf/development/vuforia-sdk-ios-2-8-7/build/lib/arm",
+				);
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

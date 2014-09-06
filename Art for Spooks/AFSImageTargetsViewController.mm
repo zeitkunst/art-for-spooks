@@ -6,6 +6,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 ===============================================================================*/
 
 #import "AFSImageTargetsViewController.h"
+#import "AFSOverlayViewController.h"
 #import <QCAR/QCAR.h>
 #import <QCAR/TrackerManager.h>
 #import <QCAR/ImageTracker.h>
@@ -26,7 +27,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         vapp = [[SampleApplicationSession alloc] initWithDelegate:self];
         
         // Custom initialization
-        self.title = @"Image Targets";
+        self.title = @"Art for Spooks";
         // Create the EAGLView with the screen dimensions
         CGRect screenBounds = [[UIScreen mainScreen] bounds];
         viewFrame = screenBounds;
@@ -98,8 +99,12 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 - (void)loadView
 {
+    //[[[NSBundle mainBundle] loadNibNamed:@"AFSOverlayViewController" owner:nil options:nil] objectAtIndex:0];
+    overlayViewController = [[AFSOverlayViewController alloc] initWithDelegate:self];
+    
     // Create the EAGLView
     eaglView = [[AFSImageTargetsEAGLView alloc] initWithFrame:viewFrame rootViewController:self appSession:vapp];
+    [eaglView addSubview:overlayViewController.view];
     [self setView:eaglView];
     
     // show loading animation while AR is being initialized
@@ -200,8 +205,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 - (bool) doLoadTrackersData {
     dataSetSpooks = [self loadImageTrackerDataSet:@"ArtForSpooks.xml"];
-    dataSetTarmac = [self loadImageTrackerDataSet:@"Tarmac.xml"];
-    if ((dataSetSpooks == NULL) || (dataSetTarmac == NULL)) {
+    if (dataSetSpooks == NULL) {
         NSLog(@"Failed to load datasets");
         return NO;
     }
@@ -276,7 +280,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 - (void) handleRotation:(UIInterfaceOrientation)interfaceOrientation {
     // ensure overlay size and AR orientation is correct for screen orientation
-    [self handleARViewRotation:self.interfaceOrientation];
+    //[self handleARViewRotation:self.interfaceOrientation];
     //[bookOverlayController handleViewRotation:self.interfaceOrientation];
     [vapp changeOrientation:self.interfaceOrientation];
 }
@@ -303,6 +307,11 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         viewBounds.size.height = arViewRect.size.height;
         
         [eaglView setFrame:viewBounds];
+        CGRect afterBounds = [eaglView bounds];
+        NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
+        NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
+        NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
+        NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
     }
     else if (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
     {
@@ -328,10 +337,10 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         CGRect viewBounds;
         viewBounds.origin.x = 0;
         viewBounds.origin.y = 0;
-        //viewBounds.size.width = arViewRect.size.height;
-        viewBounds.size.width = 568;
-        //viewBounds.size.height = arViewRect.size.width;
-        viewBounds.size.height = 320;
+        viewBounds.size.width = arViewRect.size.height;
+        //viewBounds.size.width = 568;
+        viewBounds.size.height = arViewRect.size.width;
+        //viewBounds.size.height = 320;
         
         [eaglView setFrame:viewBounds];
         CGRect afterBounds = [eaglView bounds];
@@ -351,18 +360,21 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         viewBounds.origin.x = 0;
         viewBounds.origin.y = 0;
         viewBounds.size.width = arViewRect.size.height;
+        viewBounds.size.width = 1024.0f;
         viewBounds.size.height = arViewRect.size.width;
+        viewBounds.size.height = 768.0f;
         
         [eaglView setFrame:viewBounds];
+        CGRect afterBounds = [eaglView bounds];
+        NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
+        NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
+        NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
+        NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
     }
 }
 
 
 - (void) onQCARUpdate: (QCAR::State *) state {
-    if (switchToTarmac) {
-        [self activateDataSet:dataSetTarmac];
-        switchToTarmac = NO;
-    }
     if (switchToSpooks) {
         [self activateDataSet:dataSetSpooks];
         switchToSpooks = NO;
@@ -429,10 +441,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
     
     // Destroy the data sets:
-    if (!imageTracker->destroyDataSet(dataSetTarmac))
-    {
-        NSLog(@"Failed to destroy data set Tarmac.");
-    }
     if (!imageTracker->destroyDataSet(dataSetSpooks))
     {
         NSLog(@"Failed to destroy data set Spooks.");

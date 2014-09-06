@@ -418,7 +418,7 @@ namespace {
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, [t width], [t height], 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)[t pngData]);
     glBindTexture(GL_TEXTURE_2D, 0);
-    NSLog(@"Loaded texture '%@' with textureID %d", textureFilename, textureID);
+    //NSLog(@"Loaded texture '%@' with textureID %d", textureFilename, textureID);
     [textureIDs setObject:t forKey:textureFilename];
     
 }
