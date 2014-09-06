@@ -16,5 +16,5 @@
 @property (nonatomic) BOOL infoOverlayWebViewHidden;
 
 - (void)setOverlayInfoWebView:(NSString *)infoHTMLFilename;
-
+- (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord;
 @end

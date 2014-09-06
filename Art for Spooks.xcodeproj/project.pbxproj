@@ -14,6 +14,13 @@
 		343C3D8719BB836200EE4B89 /* AFSInfoOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */; };
 		343C3D8A19BB84C300EE4B89 /* AFSOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */; };
 		343C3D8C19BB8A6B00EE4B89 /* overlayInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */; };
+		343C3D9319BBC9B100EE4B89 /* drone_coords.csv in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */; };
+		343C3D9419BBC9B100EE4B89 /* art_for_spooks_model.json in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8F19BBC9B100EE4B89 /* art_for_spooks_model.json */; };
+		343C3D9519BBC9B100EE4B89 /* art_for_spooks_words.json in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D9019BBC9B100EE4B89 /* art_for_spooks_words.json */; };
+		343C3D9619BBC9B100EE4B89 /* MarkovGenerate.py in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D9119BBC9B100EE4B89 /* MarkovGenerate.py */; };
+		343C3D9719BBC9B100EE4B89 /* nsa_corpus.txt in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D9219BBC9B100EE4B89 /* nsa_corpus.txt */; };
+		343C3D9C19BBCA5000EE4B89 /* AFSDroneCoords.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D9919BBCA5000EE4B89 /* AFSDroneCoords.m */; };
+		343C3D9D19BBCA5000EE4B89 /* AFSMarkovChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D9B19BBCA5000EE4B89 /* AFSMarkovChain.m */; };
 		347B0ABA19AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */; };
 		347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */; };
 		347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */; };
@@ -126,6 +133,15 @@
 		343C3D8819BB84C300EE4B89 /* AFSOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayView.h; sourceTree = "<group>"; };
 		343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayView.m; sourceTree = "<group>"; };
 		343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = overlayInfo.html; sourceTree = "<group>"; };
+		343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drone_coords.csv; sourceTree = "<group>"; };
+		343C3D8F19BBC9B100EE4B89 /* art_for_spooks_model.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = art_for_spooks_model.json; sourceTree = "<group>"; };
+		343C3D9019BBC9B100EE4B89 /* art_for_spooks_words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = art_for_spooks_words.json; sourceTree = "<group>"; };
+		343C3D9119BBC9B100EE4B89 /* MarkovGenerate.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = MarkovGenerate.py; sourceTree = "<group>"; };
+		343C3D9219BBC9B100EE4B89 /* nsa_corpus.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsa_corpus.txt; sourceTree = "<group>"; };
+		343C3D9819BBCA5000EE4B89 /* AFSDroneCoords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSDroneCoords.h; sourceTree = "<group>"; };
+		343C3D9919BBCA5000EE4B89 /* AFSDroneCoords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSDroneCoords.m; sourceTree = "<group>"; };
+		343C3D9A19BBCA5000EE4B89 /* AFSMarkovChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSMarkovChain.h; sourceTree = "<group>"; };
+		343C3D9B19BBCA5000EE4B89 /* AFSMarkovChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSMarkovChain.m; sourceTree = "<group>"; };
 		347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_022.png"; sourceTree = "<group>"; };
 		347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_025.png"; sourceTree = "<group>"; };
 		347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"; sourceTree = "<group>"; };
@@ -289,6 +305,17 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		343C3D8E19BBC9B100EE4B89 /* markov */ = {
+			isa = PBXGroup;
+			children = (
+				343C3D8F19BBC9B100EE4B89 /* art_for_spooks_model.json */,
+				343C3D9019BBC9B100EE4B89 /* art_for_spooks_words.json */,
+				343C3D9119BBC9B100EE4B89 /* MarkovGenerate.py */,
+				343C3D9219BBC9B100EE4B89 /* nsa_corpus.txt */,
+			);
+			path = markov;
+			sourceTree = "<group>";
+		};
 		34832E7F19A1829100C80D70 = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +369,10 @@
 				34DD0A8B19B66AB4008E97B0 /* UI */,
 				34C7540B19A84BDE00A7B2E4 /* shaders */,
 				34D1DA7619A4559E00CE0CA1 /* QuadResized.h */,
+				343C3D9819BBCA5000EE4B89 /* AFSDroneCoords.h */,
+				343C3D9919BBCA5000EE4B89 /* AFSDroneCoords.m */,
+				343C3D9A19BBCA5000EE4B89 /* AFSMarkovChain.h */,
+				343C3D9B19BBCA5000EE4B89 /* AFSMarkovChain.m */,
 				34832E9A19A1829100C80D70 /* AFSAppDelegate.h */,
 				34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */,
 				34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */,
@@ -434,6 +465,8 @@
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */,
+				343C3D8E19BBC9B100EE4B89 /* markov */,
 				34D1DB0D19A6AD5100CE0CA1 /* replacements */,
 				34D1DB1A19A6AD7800CE0CA1 /* tracking_database */,
 				34C7541819A91F4F00A7B2E4 /* videos */,
@@ -615,6 +648,7 @@
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
 				34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
+				343C3D9419BBC9B100EE4B89 /* art_for_spooks_model.json in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
 				34823EA919AE862B00C526EB /* curvedDisplayTexture.png in Resources */,
@@ -625,13 +659,16 @@
 				348B1B8019B3DD820034FD98 /* Bloom.vertsh in Resources */,
 				347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
+				343C3D9319BBC9B100EE4B89 /* drone_coords.csv in Resources */,
 				34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */,
 				34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */,
 				34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */,
+				343C3D9519BBC9B100EE4B89 /* art_for_spooks_words.json in Resources */,
 				34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */,
 				34823E8319AD3A8B00C526EB /* card_texture.png in Resources */,
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
+				343C3D9719BBC9B100EE4B89 /* nsa_corpus.txt in Resources */,
 				348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
 				343C3D8C19BB8A6B00EE4B89 /* overlayInfo.html in Resources */,
@@ -646,6 +683,7 @@
 				348B1B7F19B3DD820034FD98 /* Bloom.fragsh in Resources */,
 				34C7542119A9591700A7B2E4 /* Hologram.fragsh in Resources */,
 				34D1DB1519A6AD5100CE0CA1 /* clouds.png in Resources */,
+				343C3D9619BBC9B100EE4B89 /* MarkovGenerate.py in Resources */,
 				34C7541C19A9331E00A7B2E4 /* 1984Macintosh.m4v in Resources */,
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
 				3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */,
@@ -695,9 +733,11 @@
 				34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
 				34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */,
 				34823E7519ACDF4B00C526EB /* AFSCardEmitterObject.m in Sources */,
+				343C3D9D19BBCA5000EE4B89 /* AFSMarkovChain.m in Sources */,
 				34D1DAFA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */,
 				34823E8619AD63E200C526EB /* AFSCardParticle.m in Sources */,
 				34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */,
+				343C3D9C19BBCA5000EE4B89 /* AFSDroneCoords.m in Sources */,
 				34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */,
 				343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */,
 				34D1DAFC19A6AA2500CE0CA1 /* SampleAppMenu.mm in Sources */,

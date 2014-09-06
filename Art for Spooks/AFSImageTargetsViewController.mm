@@ -5,8 +5,12 @@ Vuforia is a trademark of QUALCOMM Incorporated, registered in the United States
 and other countries. Trademarks of QUALCOMM Incorporated are used with permission.
 ===============================================================================*/
 
+#import <Accounts/Accounts.h>
+#import <Social/Social.h>
 #import "AFSImageTargetsViewController.h"
 #import "AFSOverlayViewController.h"
+#import "AFSDroneCoords.h"
+#import "AFSMarkovChain.h"
 #import <QCAR/QCAR.h>
 #import <QCAR/TrackerManager.h>
 #import <QCAR/ImageTracker.h>
@@ -15,11 +19,14 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import <QCAR/CameraDevice.h>
 
 @interface AFSImageTargetsViewController ()
-
+@property (nonatomic, strong) ACAccountStore *accountStore;
+@property (nonatomic, strong) AFSDroneCoords *droneCoords;
+@property (nonatomic, strong) AFSMarkovChain *markovChain;
 @end
 
 @implementation AFSImageTargetsViewController
 
+#pragma mark - Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -47,8 +54,9 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         dataSetCurrent = nil;
         extendedTrackingIsOn = YES;
         
-        // a single tap will trigger a single autofocus operation
-        tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(autofocus:)];
+        // Setup tap gesture recognizer
+        tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        tapGestureRecognizer.delegate = self;
         
         // we use the iOS notification to pause/resume the AR when the application goes (or come back from) background
         
@@ -89,7 +97,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //[tapGestureRecognizer release];
+    [tapGestureRecognizer release];
     
     [vapp release];
     [eaglView release];
@@ -122,7 +130,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 	// Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    //[self.view addGestureRecognizer:tapGestureRecognizer];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     NSLog(@"self.navigationController.navigationBarHidden:%d",self.navigationController.navigationBarHidden);
 }
@@ -157,6 +165,12 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Gestures and taps
+/*
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return ([touch.view.superview isKindOfClass:[AFSImageTargetsEAGLView class]] || [touch.view.superview isKindOfClass:[AFSInfoOverlayView class]]);
+}
+ */
 
 #pragma mark - loading animation
 
@@ -562,7 +576,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     return YES;
 }
 
-- (void)autofocus:(UITapGestureRecognizer *)sender
+- (void)handleTap:(UITapGestureRecognizer *)sender
 {
     [self performSelector:@selector(cameraPerformAutoFocus) withObject:nil afterDelay:.4];
 }

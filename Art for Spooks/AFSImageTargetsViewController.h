@@ -13,7 +13,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "SampleApplicationSession.h"
 #import <QCAR/DataSet.h>
 
-@interface AFSImageTargetsViewController : UIViewController <SampleApplicationControl>{
+@interface AFSImageTargetsViewController : UIViewController <SampleApplicationControl, UIGestureRecognizerDelegate>{
     CGRect viewFrame;
     AFSImageTargetsEAGLView* eaglView;
     QCAR::DataSet*  dataSetCurrent;
@@ -30,6 +30,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     AFSOverlayViewController* overlayViewController;
     
 }
+
 
 - (void) pauseAR;
 - (void) setNavigationController:(UINavigationController *) navController;

@@ -37,9 +37,10 @@
     
     //CGRect screenBounds = [[UIScreen mainScreen] bounds];
 
+    // We don't need to do this...let this VC handle all interactions
     // We're going to let the parent VC handle all interactions so disable any UI
     // Further on, we'll also implement a touch pass-through
-    self.view.userInteractionEnabled = NO;
+    //self.view.userInteractionEnabled = NO;
     
 }
 
