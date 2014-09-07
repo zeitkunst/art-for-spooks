@@ -535,7 +535,16 @@ namespace {
     // Assume video is inactive
     videoData.isActive = NO;
     
+    if (state.getNumTrackableResults() == 0) {
+        dispatch_async(dispatch_get_main_queue(),^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"NoTargetsNotification" object:nil userInfo:nil];
+        });
+    }
+    
     for (int i = 0; i < state.getNumTrackableResults(); ++i) {
+        dispatch_async(dispatch_get_main_queue(),^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TargetsNotification" object:nil userInfo:nil];
+        });
         
         // Get the trackable
         const QCAR::TrackableResult* result = state.getTrackableResult(i);
