@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2li-hp-0ug">
-                                <rect key="frame" x="150" y="810" width="469" height="48"/>
+                                <rect key="frame" x="89" y="810" width="590" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Open Art for Spooks Twitter Stream">
@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cia-qm-AAG">
-                                <rect key="frame" x="150" y="866" width="469" height="48"/>
+                                <rect key="frame" x="89" y="871" width="590" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Open Art for Spooks Flickr Photostream">
@@ -57,7 +57,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-C3-vaf">
-                                <rect key="frame" x="202" y="939" width="364" height="65"/>
+                                <rect key="frame" x="187" y="922" width="394" height="82"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Launch Art for Spooks">
@@ -68,14 +68,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not logged in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqA-oL-OKB">
-                                <rect key="frame" x="61" y="670" width="646" height="28"/>
+                                <rect key="frame" x="61" y="670" width="646" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ensure that you have added a Twitter account in Settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="376" translatesAutoresizingMaskIntoConstraints="NO" id="LuV-yp-eM1">
-                                <rect key="frame" x="196" y="723" width="376" height="58"/>
+                                <rect key="frame" x="196" y="723" width="376" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -88,6 +88,10 @@
                     <connections>
                         <outlet property="flickrAuthButton" destination="P9S-nl-Ats" id="XWo-b9-2ng"/>
                         <outlet property="flickrAuthLabel" destination="mqA-oL-OKB" id="dKY-PZ-8mJ"/>
+                        <outlet property="flickrLaunchButton" destination="cia-qm-AAG" id="FaZ-di-62A"/>
+                        <outlet property="launchButton" destination="o9G-C3-vaf" id="K0p-Bm-6Ru"/>
+                        <outlet property="twitterInfoLabel" destination="LuV-yp-eM1" id="DXs-hD-hW2"/>
+                        <outlet property="twitterstreamLaunchButton" destination="2li-hp-0ug" id="p8p-P9-dqj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3S-CE-d1z" userLabel="First Responder" sceneMemberID="firstResponder"/>

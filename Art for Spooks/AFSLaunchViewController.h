@@ -11,5 +11,9 @@
 @interface AFSLaunchViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIButton *flickrAuthButton;
 @property (strong, nonatomic) IBOutlet UILabel *flickrAuthLabel;
+@property (strong, nonatomic) IBOutlet UILabel *twitterInfoLabel;
+@property (strong, nonatomic) IBOutlet UIButton *twitterstreamLaunchButton;
+@property (strong, nonatomic) IBOutlet UIButton *flickrLaunchButton;
+@property (strong, nonatomic) IBOutlet UIButton *launchButton;
 
 @end

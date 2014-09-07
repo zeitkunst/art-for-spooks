@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		341FFF3019BCFC18000EAA97 /* overlayInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF2D19BCFC18000EAA97 /* overlayInfo.html */; };
+		341FFF3119BCFC18000EAA97 /* questionMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF2E19BCFC18000EAA97 /* questionMark.png */; };
+		341FFF3219BCFC18000EAA97 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF2F19BCFC18000EAA97 /* share.png */; };
 		3433E67E19AAABA600640977 /* YoussefForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67D19AAABA600640977 /* YoussefForAFS.m4v */; };
 		3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */; };
 		343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		343C3D8519BB833300EE4B89 /* AFSInfoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */; };
 		343C3D8719BB836200EE4B89 /* AFSInfoOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */; };
-		343C3D8C19BB8A6B00EE4B89 /* overlayInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */; };
 		343C3D9319BBC9B100EE4B89 /* drone_coords.csv in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */; };
 		343C3D9419BBC9B100EE4B89 /* art_for_spooks_model.json in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8F19BBC9B100EE4B89 /* art_for_spooks_model.json */; };
 		343C3D9519BBC9B100EE4B89 /* art_for_spooks_words.json in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D9019BBC9B100EE4B89 /* art_for_spooks_words.json */; };
@@ -88,6 +90,14 @@
 		34CFECB919BBEA4E00D21EA9 /* AFSLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CFECB819BBEA4E00D21EA9 /* AFSLaunchViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34CFECBE19BBF09000D21EA9 /* AFSOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */; };
 		34CFECE319BC180500D21EA9 /* libFlickrKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CFECDE19BC179F00D21EA9 /* libFlickrKit.a */; };
+		34CFECFD19BCED8200D21EA9 /* SourceSansPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF519BCED8200D21EA9 /* SourceSansPro-Black.otf */; };
+		34CFECFE19BCED8200D21EA9 /* SourceSansPro-BlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF619BCED8200D21EA9 /* SourceSansPro-BlackIt.otf */; };
+		34CFECFF19BCED8200D21EA9 /* SourceSansPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF719BCED8200D21EA9 /* SourceSansPro-Bold.otf */; };
+		34CFED0019BCED8200D21EA9 /* SourceSansPro-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF819BCED8200D21EA9 /* SourceSansPro-BoldIt.otf */; };
+		34CFED0119BCED8200D21EA9 /* SourceSansPro-It.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF919BCED8200D21EA9 /* SourceSansPro-It.otf */; };
+		34CFED0219BCED8200D21EA9 /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECFA19BCED8200D21EA9 /* SourceSansPro-Regular.otf */; };
+		34CFED0319BCED8200D21EA9 /* SourceSansPro-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECFB19BCED8200D21EA9 /* SourceSansPro-Semibold.otf */; };
+		34CFED0419BCED8200D21EA9 /* SourceSansPro-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECFC19BCED8200D21EA9 /* SourceSansPro-SemiboldIt.otf */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -151,6 +161,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		341FFF2D19BCFC18000EAA97 /* overlayInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = overlayInfo.html; sourceTree = "<group>"; };
+		341FFF2E19BCFC18000EAA97 /* questionMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = questionMark.png; sourceTree = "<group>"; };
+		341FFF2F19BCFC18000EAA97 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		3433E67D19AAABA600640977 /* YoussefForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = YoussefForAFS.m4v; sourceTree = "<group>"; };
 		3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
 		343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
@@ -158,7 +171,6 @@
 		343C3D8319BB833300EE4B89 /* AFSInfoOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSInfoOverlayView.h; sourceTree = "<group>"; };
 		343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSInfoOverlayView.m; sourceTree = "<group>"; };
 		343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AFSInfoOverlayView.xib; sourceTree = "<group>"; };
-		343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = overlayInfo.html; sourceTree = "<group>"; };
 		343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drone_coords.csv; sourceTree = "<group>"; };
 		343C3D8F19BBC9B100EE4B89 /* art_for_spooks_model.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = art_for_spooks_model.json; sourceTree = "<group>"; };
 		343C3D9019BBC9B100EE4B89 /* art_for_spooks_words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = art_for_spooks_words.json; sourceTree = "<group>"; };
@@ -246,6 +258,14 @@
 		34CFECBC19BBF09000D21EA9 /* AFSOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayView.h; sourceTree = "<group>"; };
 		34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayView.m; sourceTree = "<group>"; };
 		34CFECD819BC179F00D21EA9 /* FlickrKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FlickrKit.xcodeproj; path = ../../../../../development/ZeitkunstFlickrKit/FlickrKit.xcodeproj; sourceTree = "<group>"; };
+		34CFECF519BCED8200D21EA9 /* SourceSansPro-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.otf"; sourceTree = "<group>"; };
+		34CFECF619BCED8200D21EA9 /* SourceSansPro-BlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BlackIt.otf"; sourceTree = "<group>"; };
+		34CFECF719BCED8200D21EA9 /* SourceSansPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.otf"; sourceTree = "<group>"; };
+		34CFECF819BCED8200D21EA9 /* SourceSansPro-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BoldIt.otf"; sourceTree = "<group>"; };
+		34CFECF919BCED8200D21EA9 /* SourceSansPro-It.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-It.otf"; sourceTree = "<group>"; };
+		34CFECFA19BCED8200D21EA9 /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
+		34CFECFB19BCED8200D21EA9 /* SourceSansPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.otf"; sourceTree = "<group>"; };
+		34CFECFC19BCED8200D21EA9 /* SourceSansPro-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiboldIt.otf"; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -333,10 +353,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		341FFF2C19BCFC18000EAA97 /* html */ = {
+			isa = PBXGroup;
+			children = (
+				341FFF2D19BCFC18000EAA97 /* overlayInfo.html */,
+				341FFF2E19BCFC18000EAA97 /* questionMark.png */,
+				341FFF2F19BCFC18000EAA97 /* share.png */,
+			);
+			path = html;
+			sourceTree = "<group>";
+		};
 		343C3D7D19BB80CB00EE4B89 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */,
 				343C3D8319BB833300EE4B89 /* AFSInfoOverlayView.h */,
 				343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */,
 				343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */,
@@ -521,9 +550,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		34CFECF419BCED8100D21EA9 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				34CFECF519BCED8200D21EA9 /* SourceSansPro-Black.otf */,
+				34CFECF619BCED8200D21EA9 /* SourceSansPro-BlackIt.otf */,
+				34CFECF719BCED8200D21EA9 /* SourceSansPro-Bold.otf */,
+				34CFECF819BCED8200D21EA9 /* SourceSansPro-BoldIt.otf */,
+				34CFECF919BCED8200D21EA9 /* SourceSansPro-It.otf */,
+				34CFECFA19BCED8200D21EA9 /* SourceSansPro-Regular.otf */,
+				34CFECFB19BCED8200D21EA9 /* SourceSansPro-Semibold.otf */,
+				34CFECFC19BCED8200D21EA9 /* SourceSansPro-SemiboldIt.otf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				341FFF2C19BCFC18000EAA97 /* html */,
+				34CFECF419BCED8100D21EA9 /* fonts */,
 				343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */,
 				343C3D8E19BBC9B100EE4B89 /* markov */,
 				34D1DB0D19A6AD5100CE0CA1 /* replacements */,
@@ -743,18 +789,24 @@
 				347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
 				343C3D9319BBC9B100EE4B89 /* drone_coords.csv in Resources */,
+				34CFED0219BCED8200D21EA9 /* SourceSansPro-Regular.otf in Resources */,
 				34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */,
 				34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */,
+				34CFECFE19BCED8200D21EA9 /* SourceSansPro-BlackIt.otf in Resources */,
 				34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */,
 				343C3D9519BBC9B100EE4B89 /* art_for_spooks_words.json in Resources */,
 				34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */,
 				34823E8319AD3A8B00C526EB /* card_texture.png in Resources */,
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
 				34D1DB1419A6AD5100CE0CA1 /* clouds-2.png in Resources */,
+				34CFED0019BCED8200D21EA9 /* SourceSansPro-BoldIt.otf in Resources */,
 				343C3D9719BBC9B100EE4B89 /* nsa_corpus.txt in Resources */,
+				341FFF3019BCFC18000EAA97 /* overlayInfo.html in Resources */,
 				348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
-				343C3D8C19BB8A6B00EE4B89 /* overlayInfo.html in Resources */,
+				34CFED0119BCED8200D21EA9 /* SourceSansPro-It.otf in Resources */,
+				341FFF3119BCFC18000EAA97 /* questionMark.png in Resources */,
+				34CFED0419BCED8200D21EA9 /* SourceSansPro-SemiboldIt.otf in Resources */,
 				347B0ACC19AEEA810062C532 /* WashingtonPost-fisa03201404590770.png in Resources */,
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
 				34BDB1A919B2D672005B1AA8 /* ChromaKey.vertsh in Resources */,
@@ -774,6 +826,7 @@
 				34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */,
 				34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */,
 				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,
+				34CFED0319BCED8200D21EA9 /* SourceSansPro-Semibold.otf in Resources */,
 				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				347B0ACE19AEF14B0062C532 /* OliverFerguson.m4v in Resources */,
 				34D1DAE219A6AA1300CE0CA1 /* TextureTeapotYellow.png in Resources */,
@@ -781,11 +834,14 @@
 				34832E9E19A1829100C80D70 /* Images.xcassets in Resources */,
 				34823E8919ADA33A00C526EB /* skymapTexture.png in Resources */,
 				34C7540F19A84C0200A7B2E4 /* DistortedTV.vertsh in Resources */,
+				341FFF3219BCFC18000EAA97 /* share.png in Resources */,
+				34CFECFD19BCED8200D21EA9 /* SourceSansPro-Black.otf in Resources */,
 				348B1B6719B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png in Resources */,
 				347B0AC619AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */,
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
 				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,
 				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
+				34CFECFF19BCED8200D21EA9 /* SourceSansPro-Bold.otf in Resources */,
 				347B0AC119AED77F0062C532 /* Animate_8x8.fragsh in Resources */,
 				34C7542519A95E0800A7B2E4 /* Bubbles.fragsh in Resources */,
 				34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,

@@ -31,6 +31,7 @@
     //UIViewController *vc = [[[AFSLaunchViewController alloc] init] autorelease];
     //self.window.rootViewController = vc;
     //[self.window makeKeyAndVisible];
+    //TODO: Generate new key and secret once we launch
     NSString *apiKey = @"9a4a6ad4ddd2398e02b45c193f385d8f";
 	NSString *secret = @"2e006ab52ffa280f";
     if (!apiKey) {
@@ -38,6 +39,19 @@
         exit(0);
     }
     [[FlickrKit sharedFlickrKit] initializeWithAPIKey:apiKey sharedSecret:secret];
+    
+    /*
+    NSLog(@"Available fonts: %@", [UIFont familyNames]);
+    NSArray *familyNames = [UIFont familyNames];
+    NSMutableString *name;
+    for (name in familyNames) {
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:name];
+        NSMutableString *fontName;
+        for (fontName in fontNames) {
+            NSLog(@"Family Name: %@; Font Name: %@", name, fontName);
+        }
+    }
+     */
     return YES;
 }
 

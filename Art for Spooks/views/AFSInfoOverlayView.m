@@ -39,11 +39,14 @@
         // Setup drone coords and markov chain
         self.droneCoords = [[AFSDroneCoords alloc] initWithFilename:@"drone_coords"];
         self.markovChain = [[AFSMarkovChain alloc] init];
-        [self.markovChain loadModelWithMaxChars:90];
+        [self.markovChain loadModelWithMaxChars:80];
         
         // Hide status label
         [self.overlayStatusLabel setHidden:YES];
         [self.overlayStatusLabel setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.25]];
+        
+        // Hide overlay web view
+        [self.infoWebView setHidden:YES];
         
         // Subscribe to notifications for loss of tracking
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noTargetsCallback:) name:@"NoTargetsNotification" object:nil];
@@ -147,6 +150,7 @@
     //NSArray *chosenCoord = [self.droneCoords randomDroneCoord];
     NSLog(@"lat: %@; long: %@", chosenCoord[0], chosenCoord[1]);
     
+    NSLog(@"Status length is: %d", [status length]);
     ACAccountType *twitterType =
     [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     SLRequestHandler requestHandler =

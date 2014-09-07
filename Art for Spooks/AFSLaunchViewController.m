@@ -40,13 +40,24 @@
     // Setup callback for authentication callback
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAuthenticateCallback:) name:@"UserAuthCallbackNotification" object:nil];
     
+    // Setup my fonts
+    UIFont* sourceSansProBlack  = [UIFont fontWithName:@"SourceSansPro-Black" size:30];
+    UIFont* sourceSansProRegular  = [UIFont fontWithName:@"SourceSansPro-Regular" size:24];
+    self.flickrAuthButton.titleLabel.font = sourceSansProBlack;
+    self.flickrAuthLabel.font = sourceSansProRegular;
+    self.twitterInfoLabel.font = sourceSansProRegular;
+    [self.twitterInfoLabel setNumberOfLines:2];
+    self.twitterstreamLaunchButton.titleLabel.font = sourceSansProBlack;
+    self.flickrLaunchButton.titleLabel.font = sourceSansProBlack;
+    self.launchButton.titleLabel.font = sourceSansProBlack;
+    
     // Check if there is a stored token
 	// You should do this once on app launch
 	self.checkAuthOp = [[FlickrKit sharedFlickrKit] checkAuthorizationOnCompletion:^(NSString *userName, NSString *userId, NSString *fullName, NSError *error) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (!error) {
 				[self userLoggedIn:userName userID:userId];
-                NSLog(@"userID: %@", userId);
+                //NSLog(@"userID: %@", userId);
 			} else {
 				[self userLoggedOut];
 			}
