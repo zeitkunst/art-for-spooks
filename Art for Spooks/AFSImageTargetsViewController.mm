@@ -283,6 +283,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     [super viewWillAppear:animated];
     // make sure we're oriented/sized properly before reappearing/restarting
     [self handleARViewRotation:self.interfaceOrientation];
+    [overlayViewController handleViewRotation:self.interfaceOrientation];
 }
 
 // This is called on iOS 4 devices (when built with SDK 5.1 or 6.0) and iOS 6
@@ -290,12 +291,14 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
     [self handleRotation:interfaceOrientation];
+    [overlayViewController handleViewRotation:self.interfaceOrientation];
 }
 
 - (void) handleRotation:(UIInterfaceOrientation)interfaceOrientation {
     // ensure overlay size and AR orientation is correct for screen orientation
     //[self handleARViewRotation:self.interfaceOrientation];
     //[bookOverlayController handleViewRotation:self.interfaceOrientation];
+    [overlayViewController handleViewRotation:self.interfaceOrientation];
     [vapp changeOrientation:self.interfaceOrientation];
 }
 

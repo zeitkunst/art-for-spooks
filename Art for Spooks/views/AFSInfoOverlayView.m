@@ -33,13 +33,13 @@
         // Initialization code
         self = [[[NSBundle mainBundle] loadNibNamed:@"AFSInfoOverlayView" owner:nil options:nil] objectAtIndex:0];
         [self setFrame:frame];
-        self.infoOverlayWebViewHidden = NO;
+        self.infoOverlayWebViewHidden = YES;
         [self.infoWebView setHidden:self.infoOverlayWebViewHidden];
         
         // Setup drone coords and markov chain
         self.droneCoords = [[AFSDroneCoords alloc] initWithFilename:@"drone_coords"];
         self.markovChain = [[AFSMarkovChain alloc] init];
-        [self.markovChain loadModelWithMaxChars:80];
+        [self.markovChain loadModelWithMaxChars:70];
         
         // Hide status label
         [self.overlayStatusLabel setHidden:YES];

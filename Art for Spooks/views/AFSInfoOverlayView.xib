@@ -10,14 +10,18 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <webView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eia-9Q-1Y6">
-                    <rect key="frame" x="64" y="20" width="640" height="897"/>
+                <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eia-9Q-1Y6">
+                    <rect key="frame" x="64" y="27" width="640" height="897"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                 </webView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iq-AB-X93">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iq-AB-X93">
                     <rect key="frame" x="20" y="932" width="72" height="72"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="72" id="gvf-jI-Ani"/>
+                        <constraint firstAttribute="width" constant="72" id="h38-ye-4DF"/>
+                    </constraints>
                     <state key="normal" image="OverlayQuestionMark">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -25,9 +29,13 @@
                         <action selector="overlayQuestionMarkTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="rgf-sz-kfc"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDb-Kr-9Q8">
-                    <rect key="frame" x="688" y="944" width="60" height="60"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDb-Kr-9Q8">
+                    <rect key="frame" x="688" y="938" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="d5P-ee-9ZO"/>
+                        <constraint firstAttribute="width" constant="60" id="npI-0Q-4Wg"/>
+                    </constraints>
                     <state key="normal" image="OverlayShare">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -35,8 +43,8 @@
                         <action selector="overlayShareTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="V73-yx-VCU"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OK-Y0-C4M">
-                    <rect key="frame" x="100" y="957" width="580" height="34"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OK-Y0-C4M">
+                    <rect key="frame" x="94" y="951" width="580" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -44,6 +52,21 @@
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="5OK-Y0-C4M" secondAttribute="bottom" constant="39" id="056-eJ-1bn"/>
+                <constraint firstItem="8iq-AB-X93" firstAttribute="top" secondItem="eia-9Q-1Y6" secondAttribute="bottom" constant="8" symbolic="YES" id="2R3-Kc-8Yh"/>
+                <constraint firstAttribute="trailing" secondItem="FDb-Kr-9Q8" secondAttribute="trailing" constant="20" id="7rs-q5-z3f"/>
+                <constraint firstAttribute="bottom" secondItem="FDb-Kr-9Q8" secondAttribute="bottom" constant="26" id="QEB-3v-qUE"/>
+                <constraint firstItem="eia-9Q-1Y6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="27" id="TcU-Sd-0DY"/>
+                <constraint firstItem="eia-9Q-1Y6" firstAttribute="centerX" secondItem="5OK-Y0-C4M" secondAttribute="centerX" id="VjO-Ts-TuD"/>
+                <constraint firstAttribute="bottom" secondItem="8iq-AB-X93" secondAttribute="bottom" constant="20" id="Xl5-2E-5J3"/>
+                <constraint firstItem="FDb-Kr-9Q8" firstAttribute="leading" secondItem="5OK-Y0-C4M" secondAttribute="trailing" constant="14" id="YTS-gQ-Yqh"/>
+                <constraint firstItem="eia-9Q-1Y6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="64" id="kxu-Mi-6JY"/>
+                <constraint firstItem="8iq-AB-X93" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="m7p-Wj-CSC"/>
+                <constraint firstItem="5OK-Y0-C4M" firstAttribute="leading" secondItem="8iq-AB-X93" secondAttribute="trailing" constant="2" id="nX6-2g-dXT"/>
+                <constraint firstItem="5OK-Y0-C4M" firstAttribute="leading" secondItem="8iq-AB-X93" secondAttribute="trailing" constant="2" id="sfO-gU-Xos"/>
+                <constraint firstItem="FDb-Kr-9Q8" firstAttribute="leading" secondItem="5OK-Y0-C4M" secondAttribute="trailing" constant="14" id="zIs-jE-IJ9"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <connections>
                 <outlet property="infoWebView" destination="eia-9Q-1Y6" id="IVa-KH-vfP"/>

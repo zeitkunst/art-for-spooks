@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "launch_ipad-h.png"
+      "filename" : "launch_ipad-v.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "launch_ipad-h@2x.png"
+      "filename" : "launch_ipad-v@2x.png"
     }
   ],
   "info" : {

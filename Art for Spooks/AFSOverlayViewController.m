@@ -26,6 +26,7 @@
         [self.infoOverlayView setBackgroundColor:[UIColor clearColor]];
         [self.infoOverlayView setOverlayInfoWebView:@"overlayInfo"];
         [self.view addSubview:self.infoOverlayView];
+        
     }
     return self;
 }
@@ -42,7 +43,24 @@
     // We're going to let the parent VC handle all interactions so disable any UI
     // Further on, we'll also implement a touch pass-through
     //self.view.userInteractionEnabled = NO;
+    self.view.userInteractionEnabled = YES;
     
+}
+
+- (void) handleViewRotation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // adjust the size according to the rotation
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGRect overlayRect = screenRect;
+    
+    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        overlayRect.size.width = screenRect.size.height;
+        overlayRect.size.height = screenRect.size.width;
+    }
+    
+    self.view.frame = overlayRect;
+    self.view.userInteractionEnabled = YES;
 }
 
 - (void)viewDidLoad

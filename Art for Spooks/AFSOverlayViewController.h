@@ -15,4 +15,5 @@
 }
 @property (nonatomic, retain) IBOutlet AFSInfoOverlayView *infoOverlayView;
 - (id)initWithDelegate:(id) delegate;
+- (void) handleViewRotation:(UIInterfaceOrientation)interfaceOrientation;
 @end
