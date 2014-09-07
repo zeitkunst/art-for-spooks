@@ -41,6 +41,14 @@
         self.markovChain = [[AFSMarkovChain alloc] init];
         [self.markovChain loadModelWithMaxChars:90];
         
+        // Hide status label
+        [self.overlayStatusLabel setHidden:YES];
+        [self.overlayStatusLabel setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.25]];
+        
+        // Subscribe to notifications for loss of tracking
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noTargetsCallback:) name:@"NoTargetsNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(targetsCallback:) name:@"TargetsNotification" object:nil];
+        
         // Check if there is a stored token
         // You should do this once on app launch
         self.checkAuthOp = [[FlickrKit sharedFlickrKit] checkAuthorizationOnCompletion:^(NSString *userName, NSString *userId, NSString *fullName, NSError *error) {
@@ -99,22 +107,42 @@
 			if (error) {
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 				[alert show];
+                [self.overlayStatusLabel setText:error.localizedDescription];
+                if (statusLabelTimer == nil) {
+                    [self createStatusLabelTimer];
+                }
 			} else {
 				//NSString *msg = [NSString stringWithFormat:@"Uploaded image ID %@", imageID];
 				//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 				//[alert show];
                 [status appendFormat:@": http://www.flickr.com/photos/%@/%@/", self.userID, imageID];
-                [self tweetWithStatus:status andCoords:chosenCoord];
+                [self tweetWithStatus:status andCoords:chosenCoord andImage:screenshot];
 			}
-            //[self.uploadOp removeObserver:self forKeyPath:@"uploadProgress" context:NULL];
+            [self.uploadOp removeObserver:self forKeyPath:@"uploadProgress" context:NULL];
         });
 	}];
-    //[self.uploadOp addObserver:self forKeyPath:@"uploadProgress" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.uploadOp addObserver:self forKeyPath:@"uploadProgress" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.overlayStatusLabel setHidden:NO];
+    [self.overlayStatusLabel setText:@"Uploading screenshot to Flickr and posting to Twitter..."];
     
-    //[self tweetWithStatus:status andCoords:chosenCoord];
+    
 }
 
-- (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord {
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([keyPath isEqualToString:@"uploadProgress"]) {
+            CGFloat progress = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+            if (progress >= 1.0f) {
+                //[self.overlayStatusLabel setText:@"Screenshot uploaded to Flickr"];
+            }
+        }
+        //CGFloat progress = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+        //self.progressView.progress = progress;
+        //[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    });
+}
+
+- (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord andImage:(UIImage *) image {
     self.accountStore = [[ACAccountStore alloc] init];
     //NSArray *chosenCoord = [self.droneCoords randomDroneCoord];
     NSLog(@"lat: %@; long: %@", chosenCoord[0], chosenCoord[1]);
@@ -132,8 +160,14 @@
             if (statusCode >= 200 && statusCode < 300) {
                 
                 NSLog(@"[SUCCESS!] Created Tweet with ID: %@; postResponseData: %@", postResponseData[@"id_str"], postResponseData);
+                //NSLog(@"[SUCCESS!] Created Tweet with ID: %@", postResponseData[@"id_str"]);
+                if (statusLabelTimer == nil) {
+                    [self performSelectorOnMainThread:@selector(createStatusLabelTimer) withObject:nil waitUntilDone:YES];
+                }
             }
             else {
+                [self.overlayStatusLabel setText:@"Problem posting to Twitter"];
+                [self createStatusLabelTimer];
                 NSLog(@"[ERROR] Server responded: status code %d %@, responseData %@", statusCode,
                       [NSHTTPURLResponse localizedStringForStatusCode:statusCode], postResponseData);
             }
@@ -148,7 +182,7 @@
         if (granted) {
             NSArray *accounts = [self.accountStore accountsWithAccountType:twitterType];
             NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
-                          @"/1.1/statuses/update.json"];
+                          @"/1.1/statuses/update_with_media.json"];
             NSDictionary *params = @{
                                      @"status" : status,
                                      @"lat": chosenCoord[0],
@@ -157,6 +191,11 @@
                                                     requestMethod:SLRequestMethodPOST
                                                               URL:url
                                                        parameters:params];
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.f);
+            [request addMultipartData:imageData
+                             withName:@"media[]"
+                                 type:@"image/jpeg"
+                             filename:[status substringWithRange:NSMakeRange(0, 10)]];
             [request setAccount:[accounts lastObject]];
             [request performRequestWithHandler:requestHandler];
         }
@@ -213,6 +252,40 @@
     UIGraphicsEndImageContext();
     return image;
 }
+
+#pragma mark - Notifications
+- (void) noTargetsCallback:(NSNotification *)notification {
+    [self.overlayShareButton setHidden:YES];
+}
+
+- (void) targetsCallback:(NSNotification *)notification {
+    [self.overlayShareButton setHidden:NO];
+}
+
+#pragma mark - Tracking timer methods
+
+// Create the status label timer
+- (void)createStatusLabelTimer
+{
+    [self.overlayStatusLabel setText:@"Successfully posted to Flickr and Twitter"];
+    statusLabelTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(statusLabelTimerFired:) userInfo:nil repeats:NO];
+}
+
+// Terminate the tracking lost timer
+- (void)terminateStatusLabelTimer
+{
+    [statusLabelTimer invalidate];
+    statusLabelTimer = nil;
+}
+
+
+// Tracking lost timer fired, pause video playback
+- (void)statusLabelTimerFired:(NSTimer*)timer
+{
+    [self.overlayStatusLabel setHidden:YES];
+    statusLabelTimer = nil;
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

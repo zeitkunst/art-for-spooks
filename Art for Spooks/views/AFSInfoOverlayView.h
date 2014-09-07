@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AFSInfoOverlayView : UIView
+@interface AFSInfoOverlayView : UIView {
+    // Timer to hide status label
+    NSTimer* statusLabelTimer;
+}
 @property (weak, nonatomic) IBOutlet UIWebView *infoWebView;
 @property (weak, nonatomic) IBOutlet UIButton *overlayQuestionMarkButton;
 @property (weak, nonatomic) IBOutlet UIButton *overlayShareButton;
 
 @property (nonatomic) BOOL infoOverlayWebViewHidden;
+@property (weak, nonatomic) IBOutlet UILabel *overlayStatusLabel;
+
 
 - (void)setOverlayInfoWebView:(NSString *)infoHTMLFilename;
 - (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord;

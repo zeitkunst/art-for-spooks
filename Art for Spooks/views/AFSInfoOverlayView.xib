@@ -35,6 +35,13 @@
                         <action selector="overlayShareTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="V73-yx-VCU"/>
                     </connections>
                 </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OK-Y0-C4M">
+                    <rect key="frame" x="100" y="957" width="580" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -42,6 +49,7 @@
                 <outlet property="infoWebView" destination="eia-9Q-1Y6" id="IVa-KH-vfP"/>
                 <outlet property="overlayQuestionMarkButton" destination="8iq-AB-X93" id="FAH-bV-Ebe"/>
                 <outlet property="overlayShareButton" destination="FDb-Kr-9Q8" id="gzs-5I-FZL"/>
+                <outlet property="overlayStatusLabel" destination="5OK-Y0-C4M" id="SV0-wJ-cJM"/>
             </connections>
         </view>
     </objects>
