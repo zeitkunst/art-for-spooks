@@ -12,7 +12,6 @@
 		343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		343C3D8519BB833300EE4B89 /* AFSInfoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */; };
 		343C3D8719BB836200EE4B89 /* AFSInfoOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */; };
-		343C3D8A19BB84C300EE4B89 /* AFSOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */; };
 		343C3D8C19BB8A6B00EE4B89 /* overlayInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */; };
 		343C3D9319BBC9B100EE4B89 /* drone_coords.csv in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */; };
 		343C3D9419BBC9B100EE4B89 /* art_for_spooks_model.json in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D8F19BBC9B100EE4B89 /* art_for_spooks_model.json */; };
@@ -21,6 +20,11 @@
 		343C3D9719BBC9B100EE4B89 /* nsa_corpus.txt in Resources */ = {isa = PBXBuildFile; fileRef = 343C3D9219BBC9B100EE4B89 /* nsa_corpus.txt */; };
 		343C3D9C19BBCA5000EE4B89 /* AFSDroneCoords.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D9919BBCA5000EE4B89 /* AFSDroneCoords.m */; };
 		343C3D9D19BBCA5000EE4B89 /* AFSMarkovChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D9B19BBCA5000EE4B89 /* AFSMarkovChain.m */; };
+		343C3DA719BBD01E00EE4B89 /* AFSLaunchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 343C3DA619BBD01E00EE4B89 /* AFSLaunchView.storyboard */; };
+		343C3DB219BBD47300EE4B89 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343C3DB119BBD47300EE4B89 /* Accounts.framework */; };
+		343C3DB419BBD47E00EE4B89 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343C3DB319BBD47E00EE4B89 /* Social.framework */; };
+		343C3DB819BBD4D100EE4B89 /* libFlickrKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343C3DAE19BBD46800EE4B89 /* libFlickrKit.a */; };
+		343C3DC019BBDCA800EE4B89 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343C3DBF19BBDCA800EE4B89 /* AssetsLibrary.framework */; };
 		347B0ABA19AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */; };
 		347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */; };
 		347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */; };
@@ -82,6 +86,8 @@
 		34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7542F19AA552300A7B2E4 /* Animate_4x5.fragsh */; };
 		34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */; };
 		34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7543519AA812500A7B2E4 /* ImageIO.framework */; };
+		34CFECB919BBEA4E00D21EA9 /* AFSLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CFECB819BBEA4E00D21EA9 /* AFSLaunchViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34CFECBE19BBF09000D21EA9 /* AFSOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */; };
 		34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D1DABB19A5A7D200CE0CA1 /* GLKit.framework */; };
@@ -110,9 +116,31 @@
 		34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1319A6AD5100CE0CA1 /* transparent.png */; };
 		34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */; };
 		34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */; };
+		34DEBE1019BBE490002BD86D /* AFSFlickrAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		343C3DAD19BBD46800EE4B89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 343C3DA819BBD46800EE4B89 /* FlickrKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 552D918C1753F8EF00BE3FEA;
+			remoteInfo = FlickrKit;
+		};
+		343C3DAF19BBD46800EE4B89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 343C3DA819BBD46800EE4B89 /* FlickrKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 552D919A1753F8F000BE3FEA;
+			remoteInfo = FlickrKitTests;
+		};
+		343C3DB919BBD4E500EE4B89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 343C3DA819BBD46800EE4B89 /* FlickrKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 552D918B1753F8EF00BE3FEA;
+			remoteInfo = FlickrKit;
+		};
 		34832EA819A1829200C80D70 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 34832E8019A1829100C80D70 /* Project object */;
@@ -130,8 +158,6 @@
 		343C3D8319BB833300EE4B89 /* AFSInfoOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSInfoOverlayView.h; sourceTree = "<group>"; };
 		343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSInfoOverlayView.m; sourceTree = "<group>"; };
 		343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AFSInfoOverlayView.xib; sourceTree = "<group>"; };
-		343C3D8819BB84C300EE4B89 /* AFSOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayView.h; sourceTree = "<group>"; };
-		343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayView.m; sourceTree = "<group>"; };
 		343C3D8B19BB8A6B00EE4B89 /* overlayInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = overlayInfo.html; sourceTree = "<group>"; };
 		343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drone_coords.csv; sourceTree = "<group>"; };
 		343C3D8F19BBC9B100EE4B89 /* art_for_spooks_model.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = art_for_spooks_model.json; sourceTree = "<group>"; };
@@ -142,6 +168,12 @@
 		343C3D9919BBCA5000EE4B89 /* AFSDroneCoords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSDroneCoords.m; sourceTree = "<group>"; };
 		343C3D9A19BBCA5000EE4B89 /* AFSMarkovChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSMarkovChain.h; sourceTree = "<group>"; };
 		343C3D9B19BBCA5000EE4B89 /* AFSMarkovChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSMarkovChain.m; sourceTree = "<group>"; };
+		343C3DA319BBCF9800EE4B89 /* AFSLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSLaunchViewController.h; sourceTree = "<group>"; };
+		343C3DA619BBD01E00EE4B89 /* AFSLaunchView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AFSLaunchView.storyboard; sourceTree = "<group>"; };
+		343C3DA819BBD46800EE4B89 /* FlickrKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FlickrKit.xcodeproj; path = ../../../../../development/ZeitkunstFlickrKit/FlickrKit.xcodeproj; sourceTree = "<group>"; };
+		343C3DB119BBD47300EE4B89 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		343C3DB319BBD47E00EE4B89 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		343C3DBF19BBDCA800EE4B89 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_022.png"; sourceTree = "<group>"; };
 		347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_025.png"; sourceTree = "<group>"; };
 		347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"; sourceTree = "<group>"; };
@@ -211,6 +243,9 @@
 		34C7542F19AA552300A7B2E4 /* Animate_4x5.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.fragsh; path = shaders/Animate_4x5.fragsh; sourceTree = "<group>"; };
 		34C7543019AA552300A7B2E4 /* Animate_4x5.vertsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Animate_4x5.vertsh; path = shaders/Animate_4x5.vertsh; sourceTree = "<group>"; };
 		34C7543519AA812500A7B2E4 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		34CFECB819BBEA4E00D21EA9 /* AFSLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSLaunchViewController.m; sourceTree = "<group>"; };
+		34CFECBC19BBF09000D21EA9 /* AFSOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayView.h; sourceTree = "<group>"; };
+		34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayView.m; sourceTree = "<group>"; };
 		34D1DA6019A4531800CE0CA1 /* AFSImageTargetsEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsEAGLView.h; sourceTree = "<group>"; };
 		34D1DA6119A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFSImageTargetsEAGLView.mm; sourceTree = "<group>"; };
 		34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSImageTargetsViewController.h; sourceTree = "<group>"; };
@@ -253,6 +288,8 @@
 		34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_034.png"; sourceTree = "<group>"; };
 		34DD0A8F19B67512008E97B0 /* AFSOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayViewController.h; sourceTree = "<group>"; };
 		34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayViewController.m; sourceTree = "<group>"; };
+		34DEBE0E19BBE490002BD86D /* AFSFlickrAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSFlickrAuthViewController.h; sourceTree = "<group>"; };
+		34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSFlickrAuthViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +297,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343C3DC019BBDCA800EE4B89 /* AssetsLibrary.framework in Frameworks */,
+				343C3DB419BBD47E00EE4B89 /* Social.framework in Frameworks */,
+				343C3DB219BBD47300EE4B89 /* Accounts.framework in Frameworks */,
 				34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */,
 				34C7541519A91A0700A7B2E4 /* AudioToolbox.framework in Frameworks */,
 				34C7541719A91A0F00A7B2E4 /* MediaPlayer.framework in Frameworks */,
@@ -276,6 +316,7 @@
 				34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */,
 				34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */,
 				34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */,
+				343C3DB819BBD4D100EE4B89 /* libFlickrKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,8 +340,9 @@
 				343C3D8319BB833300EE4B89 /* AFSInfoOverlayView.h */,
 				343C3D8419BB833300EE4B89 /* AFSInfoOverlayView.m */,
 				343C3D8619BB836100EE4B89 /* AFSInfoOverlayView.xib */,
-				343C3D8819BB84C300EE4B89 /* AFSOverlayView.h */,
-				343C3D8919BB84C300EE4B89 /* AFSOverlayView.m */,
+				34CFECBC19BBF09000D21EA9 /* AFSOverlayView.h */,
+				34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */,
+				343C3DA619BBD01E00EE4B89 /* AFSLaunchView.storyboard */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -316,9 +358,19 @@
 			path = markov;
 			sourceTree = "<group>";
 		};
+		343C3DA919BBD46800EE4B89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				343C3DAE19BBD46800EE4B89 /* libFlickrKit.a */,
+				343C3DB019BBD46800EE4B89 /* FlickrKitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		34832E7F19A1829100C80D70 = {
 			isa = PBXGroup;
 			children = (
+				343C3DA819BBD46800EE4B89 /* FlickrKit.xcodeproj */,
 				34832E9119A1829100C80D70 /* Art for Spooks */,
 				34832EAA19A1829200C80D70 /* Art for SpooksTests */,
 				34832E8A19A1829100C80D70 /* Frameworks */,
@@ -338,6 +390,9 @@
 		34832E8A19A1829100C80D70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				343C3DBF19BBDCA800EE4B89 /* AssetsLibrary.framework */,
+				343C3DB319BBD47E00EE4B89 /* Social.framework */,
+				343C3DB119BBD47300EE4B89 /* Accounts.framework */,
 				343C3D7B19BB773100EE4B89 /* libQCAR.a */,
 				34C7543519AA812500A7B2E4 /* ImageIO.framework */,
 				34C7541619A91A0F00A7B2E4 /* MediaPlayer.framework */,
@@ -383,6 +438,10 @@
 				34823E8519AD63E200C526EB /* AFSCardParticle.m */,
 				34D1DA6219A4531800CE0CA1 /* AFSImageTargetsViewController.h */,
 				34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */,
+				343C3DA319BBCF9800EE4B89 /* AFSLaunchViewController.h */,
+				34CFECB819BBEA4E00D21EA9 /* AFSLaunchViewController.m */,
+				34DEBE0E19BBE490002BD86D /* AFSFlickrAuthViewController.h */,
+				34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */,
 				34DD0A8F19B67512008E97B0 /* AFSOverlayViewController.h */,
 				34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */,
 				34832E9D19A1829100C80D70 /* Images.xcassets */,
@@ -578,6 +637,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				343C3DBA19BBD4E500EE4B89 /* PBXTargetDependency */,
 			);
 			name = "Art for Spooks";
 			productName = "Art for Spooks";
@@ -630,6 +690,12 @@
 			mainGroup = 34832E7F19A1829100C80D70;
 			productRefGroup = 34832E8919A1829100C80D70 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 343C3DA919BBD46800EE4B89 /* Products */;
+					ProjectRef = 343C3DA819BBD46800EE4B89 /* FlickrKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				34832E8719A1829100C80D70 /* Art for Spooks */,
@@ -637,6 +703,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		343C3DAE19BBD46800EE4B89 /* libFlickrKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFlickrKit.a;
+			remoteRef = 343C3DAD19BBD46800EE4B89 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		343C3DB019BBD46800EE4B89 /* FlickrKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FlickrKitTests.octest;
+			remoteRef = 343C3DAF19BBD46800EE4B89 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		34832E8619A1829100C80D70 /* Resources */ = {
@@ -676,6 +759,7 @@
 				34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */,
 				34BDB1A919B2D672005B1AA8 /* ChromaKey.vertsh in Resources */,
 				347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */,
+				343C3DA719BBD01E00EE4B89 /* AFSLaunchView.storyboard in Resources */,
 				348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */,
 				34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
@@ -726,14 +810,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				34D1DB0B19A6AB5400CE0CA1 /* main.m in Sources */,
+				34DEBE1019BBE490002BD86D /* AFSFlickrAuthViewController.m in Sources */,
 				34C7541319A917D900A7B2E4 /* VideoPlayerHelper.mm in Sources */,
-				343C3D8A19BB84C300EE4B89 /* AFSOverlayView.m in Sources */,
 				34D1DB0119A6AA2500CE0CA1 /* Texture.mm in Sources */,
 				343C3D8519BB833300EE4B89 /* AFSInfoOverlayView.m in Sources */,
 				34D1DAFB19A6AA2500CE0CA1 /* SampleApplicationUtils.cpp in Sources */,
 				34D1DA6519A4531800CE0CA1 /* AFSImageTargetsViewController.mm in Sources */,
 				34823E7519ACDF4B00C526EB /* AFSCardEmitterObject.m in Sources */,
+				34CFECB919BBEA4E00D21EA9 /* AFSLaunchViewController.m in Sources */,
 				343C3D9D19BBCA5000EE4B89 /* AFSMarkovChain.m in Sources */,
+				34CFECBE19BBF09000D21EA9 /* AFSOverlayView.m in Sources */,
 				34D1DAFA19A6AA2500CE0CA1 /* SampleApplicationShaderUtils.mm in Sources */,
 				34823E8619AD63E200C526EB /* AFSCardParticle.m in Sources */,
 				34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */,
@@ -757,6 +843,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		343C3DBA19BBD4E500EE4B89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FlickrKit;
+			targetProxy = 343C3DB919BBD4E500EE4B89 /* PBXContainerItemProxy */;
+		};
 		34832EA919A1829200C80D70 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 34832E8719A1829100C80D70 /* Art for Spooks */;
@@ -868,10 +959,7 @@
 		34832EB519A1829200C80D70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -883,14 +971,17 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/include",
+					"/Users/nknouf/development/ZeitkunstFlickrKit/Classes/**",
 				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm",
 					"/Users/nknouf/development/vuforia-sdk-ios-2-8-7/build/lib/arm",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv8 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -898,10 +989,7 @@
 		34832EB619A1829200C80D70 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -913,6 +1001,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/include",
+					"/Users/nknouf/development/ZeitkunstFlickrKit/Classes/**",
 				);
 				INFOPLIST_FILE = "Art for Spooks/Art for Spooks-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -921,6 +1010,7 @@
 				);
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv8 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -177,7 +177,7 @@
         tagger.string = fileString;
         
         [tagger enumerateTagsInRange:NSMakeRange(0, [fileString length]) scheme:NSLinguisticTagSchemeTokenType options:options usingBlock:^(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop) {
-            NSArray *currentToken = [[NSArray alloc] initWithObjects:[fileString substringWithRange:tokenRange], tag, nil];
+            //NSArray *currentToken = [[NSArray alloc] initWithObjects:[fileString substringWithRange:tokenRange], tag, nil];
             //[self.tokensArray addObject:currentToken];
             [self.tokensArray addObject:[fileString substringWithRange:tokenRange]];
             //NSLog(@"token tag: %@", tag);
@@ -192,7 +192,7 @@
 - (void)generateModelWithOrder:(int)order {
     for (int i = 0; i < ([self.tokensArray count] - order); i++) {
         NSArray *fragment = [self.tokensArray subarrayWithRange:NSMakeRange(i, order)];
-        NSArray *nextWord = self.tokensArray[i + order];
+        //NSArray *nextWord = self.tokensArray[i + order];
         NSArray *keys = [self.markovChain allKeys];
         
         // If our keys don't already contain the fragment, create an empty dictionary

@@ -14,5 +14,4 @@
 - (id)initWithFilename:(NSString *)filename;
 - (void)loadCoordsFrom:(NSString *)droneCoordsFile;
 - (NSArray *)randomDroneCoord;
-- (void)tokenizeTextFrom:(NSString *)textFilename;
 @end

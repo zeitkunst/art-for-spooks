@@ -69,8 +69,6 @@ namespace {
     // Tracking lost timeout
     const NSTimeInterval TRACKING_LOST_TIMEOUT = 2.0f;
     
-    float texturePosition = -20.0;
-    
     enum tagFOXACID_STATE {
         PRE_FOXACID,
         PLAYING_FOXACID,
@@ -965,12 +963,6 @@ namespace {
     else {
         // Don't display anything if we're not ready
         
-        // ----- Display the keyframe -----
-        //Texture* t = augmentationTexture[OBJECT_KEYFRAME_1 + playerIndex];
-        //frameTextureID = [t textureID];
-        //aspectRatio = (float)[t height] / (float)[t width];
-        //aspectRatio = 1.0;
-        //texCoords = quadTexCoords;
     }
     
     
@@ -1851,8 +1843,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                        createProgramWithVertexShaderFileName:[NSString stringWithFormat:@"%@.vertsh", shaderName]
                        fragmentShaderFileName:[NSString stringWithFormat:@"%@.fragsh", shaderName]];
     
-    //distortedTVShaderProgramID = [SampleApplicationShaderUtils createProgramWithVertexShaderFileName:@"DistortedTV.vertsh"
-    //                                                                          fragmentShaderFileName:@"DistortedTV.fragsh"];
     if (0 < shaderProgramID) {
         vertexHandle = glGetAttribLocation(shaderProgramID, "vertexPosition");
         normalHandle = glGetAttribLocation(shaderProgramID, "vertexNormal");

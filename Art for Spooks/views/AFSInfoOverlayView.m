@@ -8,6 +8,7 @@
 
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import "FlickrKit.h"
 #import "AFSDroneCoords.h"
 #import "AFSMarkovChain.h"
 #import "AFSInfoOverlayView.h"
@@ -16,6 +17,10 @@
 @property (nonatomic, strong) ACAccountStore *accountStore;
 @property (nonatomic, strong) AFSDroneCoords *droneCoords;
 @property (nonatomic, strong) AFSMarkovChain *markovChain;
+@property (nonatomic, retain) FKDUNetworkOperation *checkAuthOp;
+@property (nonatomic, retain) FKImageUploadNetworkOperation *uploadOp;
+@property (nonatomic, retain) NSString *userName;
+@property (nonatomic, retain) NSString *userID;
 @end
 
 @implementation AFSInfoOverlayView
@@ -35,6 +40,20 @@
         self.droneCoords = [[AFSDroneCoords alloc] initWithFilename:@"drone_coords"];
         self.markovChain = [[AFSMarkovChain alloc] init];
         [self.markovChain loadModelWithMaxChars:90];
+        
+        // Check if there is a stored token
+        // You should do this once on app launch
+        self.checkAuthOp = [[FlickrKit sharedFlickrKit] checkAuthorizationOnCompletion:^(NSString *userName, NSString *userId, NSString *fullName, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error) {
+                    self.userName = userName;
+                    self.userID = userId;
+                    NSLog(@"userID: %@", self.userID);
+                } else {
+                    self.userID = nil;
+                }
+            });
+        }];
         
     }
     //[self.infoWebView setHidden:YES];
@@ -64,10 +83,35 @@
     //NSMutableString *generatedText = [self.markovChain generateTextWith:50 limitToMaxChars:NO];
     //NSLog(@"Generated text: %@", generatedText);
     
+    // Get the screenshot
+    UIImage *screenshot = [self takeScreenshot];
+    
     // Get some coords
     NSArray *chosenCoord = [self.droneCoords randomDroneCoord];
     NSMutableString *status = [self.markovChain generateTextWith:50 limitToMaxChars:YES];
-    [self tweetWithStatus:status andCoords:chosenCoord];
+    NSMutableString *description = [self.markovChain generateTextWith:150 limitToMaxChars:NO];
+    
+    NSDictionary *uploadArgs = @{@"title": status, @"description": description, @"is_public": @"1", @"is_friend": @"0", @"is_family": @"0", @"hidden": @"1"};
+    
+    //self.progressView.progress = 0.0;
+	self.uploadOp =  [[FlickrKit sharedFlickrKit] uploadImage:screenshot args:uploadArgs completion:^(NSString *imageID, NSError *error) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if (error) {
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+				[alert show];
+			} else {
+				//NSString *msg = [NSString stringWithFormat:@"Uploaded image ID %@", imageID];
+				//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+				//[alert show];
+                [status appendFormat:@": http://www.flickr.com/photos/%@/%@/", self.userID, imageID];
+                [self tweetWithStatus:status andCoords:chosenCoord];
+			}
+            //[self.uploadOp removeObserver:self forKeyPath:@"uploadProgress" context:NULL];
+        });
+	}];
+    //[self.uploadOp addObserver:self forKeyPath:@"uploadProgress" options:NSKeyValueObservingOptionNew context:NULL];
+    
+    //[self tweetWithStatus:status andCoords:chosenCoord];
 }
 
 - (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord {
@@ -129,6 +173,46 @@
     
 }
 
+- (UIImage *)takeScreenshot
+{
+    CGSize imageSize = CGSizeZero;
+    
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if (UIInterfaceOrientationIsPortrait(orientation)) {
+        imageSize = [UIScreen mainScreen].bounds.size;
+    } else {
+        imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, window.center.x, window.center.y);
+        CGContextConcatCTM(context, window.transform);
+        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
+        if (orientation == UIInterfaceOrientationLandscapeLeft) {
+            CGContextRotateCTM(context, M_PI_2);
+            CGContextTranslateCTM(context, 0, -imageSize.width);
+        } else if (orientation == UIInterfaceOrientationLandscapeRight) {
+            CGContextRotateCTM(context, -M_PI_2);
+            CGContextTranslateCTM(context, -imageSize.height, 0);
+        } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+            CGContextRotateCTM(context, M_PI);
+            CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
+        }
+        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
+        } else {
+            [window.layer renderInContext:context];
+        }
+        CGContextRestoreGState(context);
+    }
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
