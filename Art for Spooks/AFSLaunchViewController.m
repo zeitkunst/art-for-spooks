@@ -68,7 +68,7 @@
     [super viewWillDisappear:animated];
 }
 
-#pragma mark - Launch AFS
+#pragma mark - Launch
 - (IBAction)launchButtonPressed:(id)sender {
     
     //UIViewController *vc = [[[AFSLaunchViewController alloc] init] autorelease];
@@ -79,7 +79,15 @@
     [self.navigationController pushViewController:vc animated:NO];
 }
 
+- (IBAction)openTwitterStream:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"https://twitter.com/artforspooks"];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
+- (IBAction)openFlickrPhotostream:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"https://www.flickr.com/photos/126630681@N03/"];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 #pragma mark - Authentication
 
