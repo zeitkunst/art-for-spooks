@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface AFSInfoOverlayView : UIView {
     // Timer to hide status label
@@ -21,5 +22,6 @@
 
 
 - (void)setOverlayInfoWebView:(NSString *)infoHTMLFilename;
-- (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord;
+- (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord andImage:(UIImage *) image;
+- (int)randomIntBetweenMin:(int)min andMax:(int)max;
 @end

@@ -8,6 +8,9 @@
 
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import <ImageIO/ImageIO.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "FlickrKit.h"
 #import "AFSDroneCoords.h"
 #import "AFSMarkovChain.h"
@@ -21,6 +24,8 @@
 @property (nonatomic, retain) FKImageUploadNetworkOperation *uploadOp;
 @property (nonatomic, retain) NSString *userName;
 @property (nonatomic, retain) NSString *userID;
+@property (nonatomic, retain) NSString *albumName;
+@property (strong, nonatomic) ALAssetsLibrary *assetsLibrary;
 @end
 
 @implementation AFSInfoOverlayView
@@ -47,6 +52,20 @@
         
         // Hide overlay web view
         [self.infoWebView setHidden:YES];
+        
+        // Get our assets library
+        self.assetsLibrary = [[ALAssetsLibrary alloc] init];
+        
+        // Create our group
+        self.albumName = @"Art for Spooks";
+        NSString *albumNameBlock = self.albumName;
+        [self.assetsLibrary addAssetsGroupAlbumWithName:self.albumName
+                                            resultBlock:^(ALAssetsGroup *group) {
+                                                NSLog(@"added album:%@", albumNameBlock);
+                                            }
+                                           failureBlock:^(NSError *error) {
+                                               NSLog(@"error adding album");
+                                           }];
         
         // Subscribe to notifications for loss of tracking
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noTargetsCallback:) name:@"NoTargetsNotification" object:nil];
@@ -90,6 +109,72 @@
     [self.infoWebView setHidden:self.infoOverlayWebViewHidden];
 }
 
+// From: https://stackoverflow.com/questions/7965299/write-uiimage-along-with-metadata-exif-gps-tiff-in-iphones-photo-library
+- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location
+{
+    CLLocationDegrees exifLatitude  = location.coordinate.latitude;
+    CLLocationDegrees exifLongitude = location.coordinate.longitude;
+    
+    NSString * latRef;
+    NSString * longRef;
+    if (exifLatitude < 0.0) {
+        exifLatitude = exifLatitude * -1.0f;
+        latRef = @"S";
+    } else {
+        latRef = @"N";
+    }
+    
+    if (exifLongitude < 0.0) {
+        exifLongitude = exifLongitude * -1.0f;
+        longRef = @"W";
+    } else {
+        longRef = @"E";
+    }
+    
+    NSMutableDictionary *locDict = [[NSMutableDictionary alloc] init];
+    
+    [locDict setObject:location.timestamp forKey:(NSString*)kCGImagePropertyGPSTimeStamp];
+    [locDict setObject:latRef forKey:(NSString*)kCGImagePropertyGPSLatitudeRef];
+    [locDict setObject:[NSNumber numberWithFloat:exifLatitude] forKey:(NSString *)kCGImagePropertyGPSLatitude];
+    [locDict setObject:longRef forKey:(NSString*)kCGImagePropertyGPSLongitudeRef];
+    [locDict setObject:[NSNumber numberWithFloat:exifLongitude] forKey:(NSString *)kCGImagePropertyGPSLongitude];
+    [locDict setObject:[NSNumber numberWithFloat:location.horizontalAccuracy] forKey:(NSString*)kCGImagePropertyGPSDOP];
+    [locDict setObject:[NSNumber numberWithFloat:location.altitude] forKey:(NSString*)kCGImagePropertyGPSAltitude];
+    
+    return locDict;
+    
+}
+
+- (int)randomIntBetweenMin:(int)min andMax:(int)max
+{
+    int range = max - min;
+    return (((int) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * range) + min;
+}
+
+- (NSDictionary *) iptcDictionary
+{
+    NSMutableDictionary *iptcDict = [[NSMutableDictionary alloc] init];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Deleuze1992" ofType:@"txt"];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    
+    int contentLength = (int)[content length];
+    NSLog(@"Content length: %d", contentLength);
+
+    int lowerBound = 0;
+    int upperBound = (contentLength - 2001);
+    int offset = lowerBound + arc4random() % (upperBound - lowerBound);
+    NSLog(@"Offset: %d", offset);
+    NSString *contentCut = [content substringWithRange:NSMakeRange(offset, 2000)];
+    
+    [iptcDict setObject:contentCut forKey:(NSString *)kCGImagePropertyIPTCCaptionAbstract];
+    [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCCredit];
+    [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCSource];
+    [iptcDict setObject:@"NSA, spooks, surveillance, Zelda" forKey:(NSString *)kCGImagePropertyIPTCKeywords];
+    
+    return iptcDict;
+}
+
 - (IBAction)overlayShareTapped:(id)sender {
     //NSMutableString *generatedText = [self.markovChain generateTextWith:50 limitToMaxChars:NO];
     //NSLog(@"Generated text: %@", generatedText);
@@ -102,10 +187,65 @@
     NSMutableString *status = [self.markovChain generateTextWith:50 limitToMaxChars:YES];
     NSMutableString *description = [self.markovChain generateTextWith:150 limitToMaxChars:NO];
     
+    // Set the metadata
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[chosenCoord[0] doubleValue] longitude:[chosenCoord[1] doubleValue]];
+    NSMutableDictionary *imageMetadata = [[NSMutableDictionary alloc] init];
+    [imageMetadata setObject:[self gpsDictionaryForLocation:location] forKey:(NSString*)kCGImagePropertyGPSDictionary];
+    [imageMetadata setObject:[self iptcDictionary] forKey:(NSString *)kCGImagePropertyIPTCDictionary];
+    
+    // Get the assets group
+    __block ALAssetsGroup* groupToAddTo;
+    NSString *albumNameBlock = self.albumName;
+    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAlbum
+                                usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                                    if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:albumNameBlock]) {
+                                        NSLog(@"found album %@", albumNameBlock);
+                                        groupToAddTo = group;
+                                    }
+                                }
+                              failureBlock:^(NSError* error) {
+                                  NSLog(@"failed to enumerate albums:\nError: %@", [error localizedDescription]);
+                              }];
+    
+    // Same image to assets library
+    CGImageRef img = [screenshot CGImage];
+    [self.assetsLibrary writeImageToSavedPhotosAlbum:img
+                                      metadata:imageMetadata
+                               completionBlock:^(NSURL* assetURL, NSError* error) {
+                                   if (error.code == 0) {
+                                       NSLog(@"saved image completed:\nurl: %@", assetURL);
+                                       
+                                       // try to get the asset
+                                       [self.assetsLibrary assetForURL:assetURL
+                                                     resultBlock:^(ALAsset *asset) {
+                                                         // assign the photo to the album
+                                                         [groupToAddTo addAsset:asset];
+                                                         NSLog(@"Added %@ to %@", [[asset defaultRepresentation] filename], @"Art for Spooks");
+                                                         
+                                                     }
+                                                    failureBlock:^(NSError* error) {
+                                                        NSLog(@"failed to retrieve image asset:\nError: %@ ", [error localizedDescription]);
+                                                    }];
+                                       // Finally, after it's been added, upload everything
+                                       [self uploadScreenshot:screenshot withAssetURL:assetURL andStatus:status andDescription:description andCoords:chosenCoord];
+                                   }
+                                   else {
+                                       NSLog(@"saved image failed.\nerror code %i\n%@", error.code, [error localizedDescription]);
+                                   }
+                               }];
+    
+
+    
+    
+    
+}
+
+- (void) uploadScreenshot:(UIImage *)screenshot withAssetURL:(NSURL *)assetURL andStatus:(NSMutableString *)status andDescription:(NSMutableString *)description andCoords:(NSArray *)chosenCoord {
     NSDictionary *uploadArgs = @{@"title": status, @"description": description, @"is_public": @"1", @"is_friend": @"0", @"is_family": @"0", @"hidden": @"1"};
     
     //self.progressView.progress = 0.0;
-	self.uploadOp =  [[FlickrKit sharedFlickrKit] uploadImage:screenshot args:uploadArgs completion:^(NSString *imageID, NSError *error) {
+    NSLog(@"newAssetURL: %@", assetURL);
+	self.uploadOp =  [[FlickrKit sharedFlickrKit] uploadAssetURL:assetURL args:uploadArgs completion:^(NSString *imageID, NSError *error) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (error) {
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -127,8 +267,7 @@
     [self.uploadOp addObserver:self forKeyPath:@"uploadProgress" options:NSKeyValueObservingOptionNew context:NULL];
     [self.overlayStatusLabel setHidden:NO];
     [self.overlayStatusLabel setText:@"Uploading screenshot to Flickr and posting to Twitter..."];
-    
-    
+
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
