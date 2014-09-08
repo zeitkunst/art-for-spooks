@@ -452,11 +452,11 @@
 		34832E9119A1829100C80D70 /* Art for Spooks */ = {
 			isa = PBXGroup;
 			children = (
-				343C3D7D19BB80CB00EE4B89 /* views */,
 				34D1DABD19A6AA1300CE0CA1 /* assets */,
-				34D1DAE419A6AA2500CE0CA1 /* VuforiaSampleApp */,
-				34DD0A8B19B66AB4008E97B0 /* UI */,
 				34C7540B19A84BDE00A7B2E4 /* shaders */,
+				34DD0A8B19B66AB4008E97B0 /* UI */,
+				343C3D7D19BB80CB00EE4B89 /* views */,
+				34D1DAE419A6AA2500CE0CA1 /* VuforiaSampleApp */,
 				34D1DA7619A4559E00CE0CA1 /* QuadResized.h */,
 				343C3D9819BBCA5000EE4B89 /* AFSDroneCoords.h */,
 				343C3D9919BBCA5000EE4B89 /* AFSDroneCoords.m */,
@@ -582,12 +582,12 @@
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				341FFF3619BD5FAC000EAA97 /* texts */,
-				341FFF2C19BCFC18000EAA97 /* html */,
 				34CFECF419BCED8100D21EA9 /* fonts */,
-				343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */,
+				341FFF2C19BCFC18000EAA97 /* html */,
 				343C3D8E19BBC9B100EE4B89 /* markov */,
 				34D1DB0D19A6AD5100CE0CA1 /* replacements */,
+				341FFF3619BD5FAC000EAA97 /* texts */,
+				343C3D8D19BBC9B100EE4B89 /* drone_coords.csv */,
 				34D1DB1A19A6AD7800CE0CA1 /* tracking_database */,
 				34C7541819A91F4F00A7B2E4 /* videos */,
 				34D1DAC019A6AA1300CE0CA1 /* building_texture.jpeg */,

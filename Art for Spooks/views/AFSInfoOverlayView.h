@@ -23,5 +23,4 @@
 
 - (void)setOverlayInfoWebView:(NSString *)infoHTMLFilename;
 - (void)tweetWithStatus:(NSString *)status andCoords:(NSArray *) chosenCoord andImage:(UIImage *) image;
-- (int)randomIntBetweenMin:(int)min andMax:(int)max;
 @end

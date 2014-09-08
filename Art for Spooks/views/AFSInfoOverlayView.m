@@ -145,12 +145,6 @@
     
 }
 
-- (int)randomIntBetweenMin:(int)min andMax:(int)max
-{
-    int range = max - min;
-    return (((int) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * range) + min;
-}
-
 - (NSDictionary *) iptcDictionary
 {
     NSMutableDictionary *iptcDict = [[NSMutableDictionary alloc] init];
@@ -167,6 +161,7 @@
     NSLog(@"Offset: %d", offset);
     NSString *contentCut = [content substringWithRange:NSMakeRange(offset, 2000)];
     
+    // TODO: Add done casulties to metadata
     [iptcDict setObject:contentCut forKey:(NSString *)kCGImagePropertyIPTCCaptionAbstract];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCCredit];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCSource];
