@@ -70,6 +70,8 @@
         // Subscribe to notifications for loss of tracking
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noTargetsCallback:) name:@"NoTargetsNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(targetsCallback:) name:@"TargetsNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureFaceCallback:) name:@"CaptureFaceNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preAugmentFaceCallback:) name:@"PreAugmentFaceNotification" object:nil];
         
         // Check if there is a stored token
         // You should do this once on app launch
@@ -398,6 +400,16 @@
 
 - (void) targetsCallback:(NSNotification *)notification {
     [self.overlayShareButton setHidden:NO];
+}
+
+- (void) captureFaceCallback:(NSNotification *)notification {
+    [self.overlayStatusLabel setHidden:NO];
+    [self.overlayStatusLabel setText:@"Capturing face...hold tablet so that your face is visible on the screen"];
+}
+
+- (void) preAugmentFaceCallback:(NSNotification *)notification {
+    [self.overlayStatusLabel setText:@""];
+    [self.overlayStatusLabel setHidden:YES];
 }
 
 #pragma mark - Tracking timer methods

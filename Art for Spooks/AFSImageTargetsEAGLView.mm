@@ -1280,9 +1280,12 @@ namespace {
             break;
         }
         case CAPTURE_FACE: {
-            // TODO: On main thread, update label in overlay to state that we're capturing a face, disable share icon
-            // TODO: Change to handle appropriate orientation
-            // TODO: Ensure landscape image is drawn correctly; need to shift?
+            dispatch_async(dispatch_get_main_queue(),^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"NoTargetsNotification" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"CaptureFaceNotification" object:nil userInfo:nil];
+            });
+            
+            // TODO: Perhaps, at some point, deal with other orientations
             CGRect newRect = CGRectMake(0, 0, self.eaglFrame.size.height, self.eaglFrame.size.width);
             CIImage *rotatedImage = [self.currentFrontImage imageByApplyingTransform:CGAffineTransformMakeRotation(M_PI)];
             [self.cicontext drawImage:rotatedImage
@@ -1293,8 +1296,11 @@ namespace {
         }
         case PRE_AUGMENT_FACE: {
             // Start things up again
+            dispatch_async(dispatch_get_main_queue(),^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"PreAugmentFaceNotification" object:nil userInfo:nil];
+            });
             
-            // TODO: on main thread, clear label that said we were capturing a face
+            // TODO: draw box using OpenGL, figure out how to convert the coordinate systems
             /*
             NSError *initError;
             [afsImageTargetsViewController onInitARDone:initError];
