@@ -1232,6 +1232,7 @@ namespace {
                 UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
                 if ([conn isVideoOrientationSupported])
                 {
+                    NSLog(@"VIDEO ORIENTATION SUPPORTED");
                     
                     if (curDeviceOrientation == UIDeviceOrientationPortrait) {
                         AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
@@ -1279,16 +1280,21 @@ namespace {
             break;
         }
         case CAPTURE_FACE: {
-            
-            [self.cicontext drawImage:self.currentFrontImage
-                               inRect:self.eaglFrame
-                             fromRect:self.currentFrontImage.extent];
+            // TODO: On main thread, update label in overlay to state that we're capturing a face, disable share icon
+            // TODO: Change to handle appropriate orientation
+            // TODO: Ensure landscape image is drawn correctly; need to shift?
+            CGRect newRect = CGRectMake(0, 0, self.eaglFrame.size.height, self.eaglFrame.size.width);
+            CIImage *rotatedImage = [self.currentFrontImage imageByApplyingTransform:CGAffineTransformMakeRotation(M_PI)];
+            [self.cicontext drawImage:rotatedImage
+                               inRect:newRect
+                             fromRect:rotatedImage.extent];
             
             break;
         }
         case PRE_AUGMENT_FACE: {
             // Start things up again
             
+            // TODO: on main thread, clear label that said we were capturing a face
             /*
             NSError *initError;
             [afsImageTargetsViewController onInitARDone:initError];
@@ -1315,14 +1321,57 @@ namespace {
             //glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             
+            // Create a rect the size of our image
             CGRect inRect = CGRectMake(0, 0, facesFBOWidth, facesFBOHeight);
             NSLog(@"EXTENT: %@", NSStringFromCGRect(self.currentFrontImage.extent));
             NSLog(@"FACE RECT: %@", NSStringFromCGRect(self.faceRect));
-            [self.cicontext drawImage:self.currentFrontImage
+            
+            // Run our own face detector here at high accuracy
+            CIDetector* detector = [CIDetector detectorOfType:CIDetectorTypeFace
+                                                      context:nil
+                                                      options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyHigh forKey:CIDetectorAccuracy]];
+            //NSMutableDictionary *imageOptions = [NSMutableDictionary dictionaryWithObject:[self exifOrientation:[[UIDevice currentDevice] orientation]] forKey:CIDetectorImageOrientation];
+            //NSArray* features = [detector featuresInImage:self.currentFrontImage options:imageOptions];
+            
+            CIImage *rotatedImage = [self.currentFrontImage imageByApplyingTransform:CGAffineTransformMakeRotation(M_PI)];
+            
+            //NSArray* features = [detector featuresInImage:self.currentFrontImage];
+            NSArray* features = [detector featuresInImage:rotatedImage];
+            CGPoint leftEyePos = CGPointMake(0.0, 0.0);
+            CGPoint rightEyePos = CGPointMake(0.0, 0.0);
+            for(CIFaceFeature* faceFeature in features) {
+                self.faceRect = [faceFeature bounds];
+                
+                if ([faceFeature hasLeftEyePosition]) {
+                    leftEyePos = [faceFeature leftEyePosition];
+                }
+                
+                if ([faceFeature hasRightEyePosition]) {
+                    rightEyePos = [faceFeature rightEyePosition];
+                }
+                
+            }
+            NSLog(@"faceRect in PRE_AUGMENT_FACES: %@", NSStringFromCGRect(self.faceRect));
+            
+            // Gaussian blur the image
+            CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+            //[filter setValue:self.currentFrontImage forKey:kCIInputImageKey];
+            [filter setValue:rotatedImage forKey:kCIInputImageKey];
+            [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
+            CIImage *result = [filter valueForKey:kCIOutputImageKey];
+            
+            [self.cicontext drawImage:result
                                inRect:inRect
                              //fromRect:CGRectMake(0, 0, 512, 512)];
-                             fromRect:CGRectIntersection(self.currentFrontImage.extent, self.faceRect)];
+                             fromRect:CGRectIntersection(rotatedImage.extent, self.faceRect)];
+                             //fromRect:CGRectIntersection(self.currentFrontImage.extent, self.faceRect)];
                              //fromRect:self.currentFrontImage.extent];
+            
+            /*
+            [self.cicontext drawImage:[boxLayerImage CIImage]
+                               inRect:inRect
+                             fromRect:CGRectIntersection(self.currentFrontImage.extent, self.faceRect)];
+            */
             
             glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
             
@@ -1350,9 +1399,6 @@ namespace {
             
             glActiveTexture(GL_TEXTURE0);
             
-            NSString *textureFile = [textureInfo objectForKey:@"texture"];
-            Texture* currentTexture = (Texture *)[textureIDs objectForKey:textureFile];
-            //glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
             // Try binding the FBO texture
             glBindTexture(GL_TEXTURE_2D, facesFBOTexture);
             
@@ -1903,6 +1949,7 @@ namespace {
 			featureLayer = [[CALayer alloc]init];
 			//featureLayer.contents = (id)self.borderImage.CGImage;
             featureLayer.borderWidth = 3.0;
+            featureLayer.frame = self.faceRect;
 			[featureLayer setName:@"FaceLayer"];
 			[self.videoPreviewLayer addSublayer:featureLayer];
 			//featureLayer = nil;
@@ -1930,7 +1977,7 @@ namespace {
 		}
 		currentFeature++;
 	}
-	
+    
 	[CATransaction commit];
 }
 
@@ -1940,6 +1987,12 @@ namespace {
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
        fromConnection:(AVCaptureConnection *)connection
 {
+    if (([connection videoOrientation] == AVCaptureVideoOrientationLandscapeLeft) || ([connection videoOrientation] == AVCaptureVideoOrientationLandscapeRight)) {
+        NSLog(@"LANDSCAPE");
+    } else {
+        NSLog(@"PORTRAIT");
+    }
+    
 	// get the image
 	CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 	CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, kCMAttachmentMode_ShouldPropagate);
@@ -1953,11 +2006,30 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     // make sure your device orientation is not locked.
 	UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
+    if ([connection isVideoOrientationSupported])
+    {
+        NSLog(@"VIDEO ORIENTATION SUPPORTED");
+        
+        if (curDeviceOrientation == UIDeviceOrientationPortrait) {
+            AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
+            [connection setVideoOrientation:orientation];
+        } else if (curDeviceOrientation == UIDeviceOrientationLandscapeLeft) {
+            AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationLandscapeLeft;
+            [connection setVideoOrientation:orientation];
+        } else if (curDeviceOrientation == UIDeviceOrientationLandscapeRight) {
+            AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationLandscapeRight;
+            [connection setVideoOrientation:orientation];
+        } else if (curDeviceOrientation == UIDeviceOrientationPortraitUpsideDown) {
+            AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            [connection setVideoOrientation:orientation];
+        }
+        
+    }
     
 	NSMutableDictionary *imageOptions = nil;
     
-	//imageOptions = [NSMutableDictionary dictionaryWithObject:[self exifOrientation:curDeviceOrientation] forKey:CIDetectorImageOrientation];
-    [imageOptions setObject:[NSNumber numberWithInt:6] forKey:CIDetectorImageOrientation];
+	imageOptions = [NSMutableDictionary dictionaryWithObject:[self exifOrientation:curDeviceOrientation] forKey:CIDetectorImageOrientation];
+    //[imageOptions setObject:[NSNumber numberWithInt:6] forKey:CIDetectorImageOrientation];
     
 	NSArray *features = [self.faceDetector featuresInImage:ciImage
                                                    options:imageOptions];
@@ -1969,12 +2041,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	CMFormatDescriptionRef fdesc = CMSampleBufferGetFormatDescription(sampleBuffer);
 	CGRect cleanAperture = CMVideoFormatDescriptionGetCleanAperture(fdesc, false /*originIsTopLeft == false*/);
 
-    
+    /*
 	dispatch_async(dispatch_get_main_queue(), ^(void) {
 		[self drawFaces:features
             forVideoBox:cleanAperture
             orientation:curDeviceOrientation];
 	});
+     */
 }
 
 // clean up capture setup

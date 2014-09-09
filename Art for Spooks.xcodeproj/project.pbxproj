@@ -44,7 +44,6 @@
 		34823E8919ADA33A00C526EB /* skymapTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823E8819ADA33A00C526EB /* skymapTexture.png */; };
 		34823EA919AE862B00C526EB /* curvedDisplayTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34823EA819AE862B00C526EB /* curvedDisplayTexture.png */; };
 		34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8B19A1829100C80D70 /* Foundation.framework */; };
-		34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8D19A1829100C80D70 /* CoreGraphics.framework */; };
 		34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832E8F19A1829100C80D70 /* UIKit.framework */; };
 		34832E9619A1829100C80D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34832E9419A1829100C80D70 /* InfoPlist.strings */; };
 		34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34832E9B19A1829100C80D70 /* AFSAppDelegate.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -339,7 +338,6 @@
 				34D1DABC19A5A7D200CE0CA1 /* GLKit.framework in Frameworks */,
 				34832E9019A1829100C80D70 /* UIKit.framework in Frameworks */,
 				34832E8C19A1829100C80D70 /* Foundation.framework in Frameworks */,
-				34832E8E19A1829100C80D70 /* CoreGraphics.framework in Frameworks */,
 				34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */,
 				34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */,
 			);
