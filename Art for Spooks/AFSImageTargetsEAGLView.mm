@@ -115,6 +115,8 @@ namespace {
     GLuint facesFBOTexture;
     int facesFBOWidth;
     int facesFBOHeight;
+    float eyeBoxQuadVertices[4*3] = {0};
+
     
     // Current trackable
     NSMutableString *currentTrackable = [[[NSMutableString alloc] init] autorelease];
@@ -1331,12 +1333,14 @@ namespace {
             
             glUseProgram(shaderID);
             
-            // TODO: Understand what the heck is going on with my coordinate system...but it works, somehow
+            // After scaling and flipping the coordinate system, we can think of our quad and offset points in a normal coordinate system with origin LL.
+            // Not sure why I have to add to much to the LR and UR x offset, but it works; maybe the eye tracking is off somehow?
             CGSize extent = rotatedImage.extent.size;
-            CGPoint LL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, -40)];
-            CGPoint UL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, 40)];
-            CGPoint LR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, -40)];
-            CGPoint UR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, 40)];
+            CGPoint LL = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(-10, -40)];
+            CGPoint LR = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(120, -40)];
+            CGPoint UR = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(120, 40)];
+            CGPoint UL = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(-10, 40)];
+            
             NSLog(@"LL: %@", NSStringFromCGPoint(LL));
             NSLog(@"LR: %@", NSStringFromCGPoint(LR));
             NSLog(@"UR: %@", NSStringFromCGPoint(UR));
@@ -1348,6 +1352,24 @@ namespace {
                 UL.x,   UL.y,  0.0f,
             };
             
+            /*
+             // Orig
+            CGPoint LL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, -40)];
+            CGPoint UL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, 40)];
+            CGPoint LR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, -40)];
+            CGPoint UR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, 40)];
+            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
+            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
+            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
+            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
+            float newQuadVertices[4*3] = {
+                UR.x,  UR.y,  0.0f,
+                UL.x,  UL.y,  0.0f,
+                LL.x,   LL.y,  0.0f,
+                LR.x,   LR.y,  0.0f,
+            };
+            */
+
             glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)newQuadVertices);
             glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
             glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
@@ -1373,10 +1395,6 @@ namespace {
             });
             
             // TODO: draw box using OpenGL, figure out how to convert the coordinate systems
-            /*
-            NSError *initError;
-            [afsImageTargetsViewController onInitARDone:initError];
-            */
             
             QCAR::CameraDevice::getInstance().stop();
             QCAR::CameraDevice::getInstance().start();
@@ -1455,6 +1473,43 @@ namespace {
             
             glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
             
+            // Define our box coordinates in GL space
+            CGSize extent = self.faceRect.size;
+            NSLog(@"EXTENT IN AUGMENT FACES: %@", NSStringFromCGSize(extent));
+            CGPoint LL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, -40)];
+            CGPoint UL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, 40)];
+            CGPoint LR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, -40)];
+            CGPoint UR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, 40)];
+            
+            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
+            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
+            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
+            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
+            
+            /*
+             float newQuadVertices[4*3] = {
+             UR.x,  UR.y,  0.0f,
+             UL.x,  UL.y,  0.0f,
+             LL.x,   LL.y,  0.0f,
+             LR.x,   LR.y,  0.0f,
+             };
+             */
+            
+            // Faking it
+            // LL vertex
+            eyeBoxQuadVertices[0] = -0.75;
+            eyeBoxQuadVertices[1] = 0.3;
+            // LR vertex
+            eyeBoxQuadVertices[3] = 0.75;
+            eyeBoxQuadVertices[4] = 0.3;
+            // UR vertex
+            eyeBoxQuadVertices[6] = 0.75;
+            eyeBoxQuadVertices[7] = 0.7;
+            // UL vertex
+            eyeBoxQuadVertices[9] = -0.75;
+            eyeBoxQuadVertices[10] = 0.7;
+            
+            
             blurredFaces_state = AUGMENT_FACE;
             NSLog(@"Switching to AUGMENT_FACE");
             break;
@@ -1472,43 +1527,9 @@ namespace {
             
             SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
             
-            
-            
-            
-            
-            // Draw box
-            CGSize extent = self.faceRect.size;
-            NSLog(@"EXTENT IN AUGMENT FACES: %@", NSStringFromCGSize(extent));
-            CGPoint LL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, -40)];
-            CGPoint UL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, 40)];
-            CGPoint LR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, -40)];
-            CGPoint UR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, 40)];
-
-            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
-            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
-            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
-            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
-            
-            /*
-            float newQuadVertices[4*3] = {
-                UR.x,  UR.y,  0.0f,
-                UL.x,  UL.y,  0.0f,
-                LL.x,   LL.y,  0.0f,
-                LR.x,   LR.y,  0.0f,
-            };
-             */
-            
-            float newQuadVertices[4*3] = {
-                -0.75, 0.3,  0.0f,
-                0.75,  0.3, 0.0f,
-                0.75,   0.7,  0.0f,
-                -0.75,   0.7,  0.0f,
-            };
-            
-            
             [self selectShaderWithName:@"SimpleNoTexture"];
             glUseProgram(shaderID);
-            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)newQuadVertices);
+            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)eyeBoxQuadVertices);
             glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
             glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
             
@@ -1927,8 +1948,9 @@ namespace {
 - (CGPoint) scalePoint:(CGPoint)point withExtent:(CGSize)extent andOffset:(CGPoint)offset {
     CGPoint scaled = {0.0, 0.0};
     
-    scaled.x = ((extent.width - point.x) - (extent.width/2.0f))/(extent.width/2.0f) - (offset.x / (extent.width/2.0f));
-    scaled.y = ((extent.height - point.y) - (extent.height/2.0f))/(extent.height/2.0f) - (offset.y / (extent.height/2.0f));
+    // Flip our given coordinates (so that the origin is LL rather than UL), shift so that we are centered around the Y axis, scale to be between -1 and 1, and offset by a given number of pixels in the original coordinate system
+    scaled.x = ((extent.width - (point.x - offset.x)) - (extent.width/2.0f))/(extent.width/2.0f);
+    scaled.y = ((extent.height - (point.y - offset.y)) - (extent.height/2.0f))/(extent.height/2.0f);
     return scaled;
 }
 
@@ -2263,7 +2285,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (void)selectShaderWithName: (NSString *)shaderName
 {
-    NSLog(@"DEBUG: Shader name: %@", shaderName);
+    //NSLog(@"DEBUG: Shader name: %@", shaderName);
     shaderProgramID = [SampleApplicationShaderUtils
                        createProgramWithVertexShaderFileName:[NSString stringWithFormat:@"%@.vertsh", shaderName]
                        fragmentShaderFileName:[NSString stringWithFormat:@"%@.fragsh", shaderName]];

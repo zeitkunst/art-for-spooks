@@ -14,11 +14,11 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     NSString* shaderName = [[shaderFileName lastPathComponent] stringByDeletingPathExtension];
     NSString* shaderFileType = [shaderFileName pathExtension];
     
-    NSLog(@"debug: shaderName=(%@), shaderFileTYpe=(%@)", shaderName, shaderFileType);
+    //NSLog(@"debug: shaderName=(%@), shaderFileTYpe=(%@)", shaderName, shaderFileType);
     
     // 1
     NSString* shaderPath = [[NSBundle mainBundle] pathForResource:shaderName ofType:shaderFileType];
-    NSLog(@"debug: shaderPath=(%@)", shaderPath);
+    //NSLog(@"debug: shaderPath=(%@)", shaderPath);
     NSError* error;
     NSString* shaderString = [NSString stringWithContentsOfFile:shaderPath encoding:NSUTF8StringEncoding error:&error];
     if (!shaderString) {
