@@ -108,7 +108,7 @@ namespace {
         AUGMENT_FACE
     } blurredFaces_state;
     float blurredFaces_preDelay = 2.0;
-    float blurredFaces_captureDelay = 10.0;
+    float blurredFaces_captureDelay = 5.0;
     GLint defaultFBO;
     GLuint facesFBOHandle;
     GLuint facesDepthBuffer;
@@ -205,6 +205,8 @@ namespace {
 @property (strong, nonatomic) CIContext *cicontext;
 @property (strong) CIImage *currentFrontImage;
 @property (nonatomic) CGRect faceRect;
+@property (nonatomic) CGPoint leftEyePoint;
+@property (nonatomic) CGPoint rightEyePoint;
 
 @end
 
@@ -256,24 +258,19 @@ namespace {
         [shaderNames addObject:@"Simple"];
         [shaderNames addObject:@"DistortedTV"];
         
+        // Setup our faces FBO
+        [self setupFacesFBO];
+        
         // Setup video player helper
         videoPlayerHelper = [[VideoPlayerHelper alloc] initWithRootViewController:afsImageTargetsViewController];
         videoData.targetPositiveDimensions.data[0] = 0.0f;
         videoData.targetPositiveDimensions.data[1] = 0.0f;
         videoPlaybackTime = VIDEO_PLAYBACK_CURRENT_POSITION;
         
-        // Load video
-        //if (NO == [videoPlayerHelper load:@"HackersSceneForAFS.m4v" playImmediately:NO fromPosition:videoPlaybackTime]) {
-        //    NSLog(@"Failed to load video file");
-        //}
-        
         // Create our face detector for BlurredFaces
         NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
         self.faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
         
-        testingLabel = [self labelWithText:@"This is a test" yPosition: (CGFloat) 20.0];
-        [testingLabel setBackgroundColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.25]];
-        //[self addSubview:testingLabel];
     }
     
     return self;
@@ -456,10 +453,6 @@ namespace {
     //[label setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
 	
 	return [label autorelease];
-}
-
-- (void) showMessage:(NSString *)message {
-    [testingLabel setText:message];
 }
 
 - (void)dealloc
@@ -1275,22 +1268,101 @@ namespace {
             
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glFlush();
-            blurredFaces_state = CAPTURE_FACE;
-            NSLog(@"Switching to CAPTURE_FACE");
-            break;
-        }
-        case CAPTURE_FACE: {
+            
+            // Setup our shader for the next stage of processing
+            [self selectShaderWithName:@"Passthrough"];
+            
+            // Post our notifications
             dispatch_async(dispatch_get_main_queue(),^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"NoTargetsNotification" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"CaptureFaceNotification" object:nil userInfo:nil];
             });
             
+            blurredFaces_state = CAPTURE_FACE;
+            NSLog(@"Switching to CAPTURE_FACE");
+            break;
+        }
+        case CAPTURE_FACE: {
+            // Rotate our image to work on landscape
             // TODO: Perhaps, at some point, deal with other orientations
             CGRect newRect = CGRectMake(0, 0, self.eaglFrame.size.height, self.eaglFrame.size.width);
             CIImage *rotatedImage = [self.currentFrontImage imageByApplyingTransform:CGAffineTransformMakeRotation(M_PI)];
+            
+            NSMutableDictionary *imageOptions = nil;
+            
+            imageOptions = [NSMutableDictionary dictionaryWithObject:[self exifOrientation:[[UIDevice currentDevice] orientation]] forKey:CIDetectorImageOrientation];
+            //[imageOptions setObject:[NSNumber numberWithInt:6] forKey:CIDetectorImageOrientation];
+            
+            NSArray *features = [self.faceDetector featuresInImage:self.currentFrontImage
+                                                           options:imageOptions];
+            NSLog(@"FEATURES: %@", features);
+            
+            CGPoint leftEyePos;
+            CGPoint rightEyePos;
+            for (CIFaceFeature *faceFeature in features) {
+                if ([faceFeature hasLeftEyePosition]) {
+                    leftEyePos = [faceFeature leftEyePosition];
+                }
+                
+                if ([faceFeature hasRightEyePosition]) {
+                    rightEyePos = [faceFeature rightEyePosition];
+                }
+            }
+            
+
+            NSLog(@"in CAPTURE_FACE, rotatedImage width: %f", rotatedImage.extent.size.width);
+            NSLog(@"in CAPTURE_FACE, rotatedImage height: %f", rotatedImage.extent.size.height);
+        
+            NSLog(@"in CAPTURE_FACE, leftEyePosition: %@", NSStringFromCGPoint(leftEyePos));
+            NSLog(@"in CAPTURE_FACE, rightEyePosition: %@", NSStringFromCGPoint(rightEyePos));
+            
             [self.cicontext drawImage:rotatedImage
                                inRect:newRect
                              fromRect:rotatedImage.extent];
+            
+            /*
+             float newQuadVertices[4*3] = {
+             -0.50f,  -0.50f,  0.0f,
+             0.50f,  -0.50f,  0.0f,
+             0.50f,   0.50f,  0.0f,
+             -0.50f,   0.50f,  0.0f,
+             };
+             */
+            
+            glUseProgram(shaderID);
+            
+            // TODO: Understand what the heck is going on with my coordinate system...but it works, somehow
+            CGSize extent = rotatedImage.extent.size;
+            CGPoint LL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, -40)];
+            CGPoint UL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, 40)];
+            CGPoint LR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, -40)];
+            CGPoint UR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, 40)];
+            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
+            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
+            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
+            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
+            float newQuadVertices[4*3] = {
+                LL.x,  LL.y,  0.0f,
+                LR.x,  LR.y,  0.0f,
+                UR.x,   UR.y,  0.0f,
+                UL.x,   UL.y,  0.0f,
+            };
+            
+            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)newQuadVertices);
+            glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+            glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+            
+            glEnableVertexAttribArray(vertexHandle);
+            glEnableVertexAttribArray(normalHandle);
+            glEnableVertexAttribArray(textureCoordHandle);
+            
+            
+            glUniform1f(timeHandle, time);
+            glUniform2fv(resolutionHandle, 1, resolution);
+            
+            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
             
             break;
         }
@@ -1310,15 +1382,12 @@ namespace {
             QCAR::CameraDevice::getInstance().start();
             QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO);
             
-            /*
-            [afsImageTargetsViewController doInitTrackers];
-            [afsImageTargetsViewController doLoadTrackersData];
-            [afsImageTargetsViewController doStartTrackers];
-            */
-            
             // Render currentFrontImage to the FBO
-            [self setupFacesFBO];
-            //[self renderFacesFBO];
+            
+            // Clear everything before we begin drawing to our FBO
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glFlush();
+            
             glBindTexture(GL_TEXTURE_2D, 0);
             glEnable(GL_TEXTURE_2D);
             glBindFramebuffer(GL_FRAMEBUFFER, facesFBOHandle);
@@ -1349,15 +1418,20 @@ namespace {
                 self.faceRect = [faceFeature bounds];
                 
                 if ([faceFeature hasLeftEyePosition]) {
-                    leftEyePos = [faceFeature leftEyePosition];
+                    CGPoint temp = [faceFeature leftEyePosition];
+                    self.leftEyePoint = CGPointMake(fabsf(temp.x), fabsf(temp.y));
                 }
                 
                 if ([faceFeature hasRightEyePosition]) {
-                    rightEyePos = [faceFeature rightEyePosition];
+                    CGPoint temp = [faceFeature rightEyePosition];
+                    self.rightEyePoint = CGPointMake(fabsf(temp.x), fabsf(temp.y));
                 }
                 
             }
+            NSLog(@"EXTENT (rotated): %@", NSStringFromCGRect(rotatedImage.extent));
             NSLog(@"faceRect in PRE_AUGMENT_FACES: %@", NSStringFromCGRect(self.faceRect));
+            NSLog(@"leftEyePoint in PRE_AUGMENT_FACES: %@", NSStringFromCGPoint(self.leftEyePoint));
+            NSLog(@"rightEyePoint in PRE_AUGMENT_FACES: %@", NSStringFromCGPoint(self.rightEyePoint));
             
             // Gaussian blur the image
             CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
@@ -1388,11 +1462,77 @@ namespace {
         case AUGMENT_FACE: {
             QCAR::Matrix44F modelViewProjection;
             
-            SampleApplicationUtils::translatePoseMatrix(50.0f, -3.0f, 0.0f, &modelViewMatrix.data[0]);
+            float MVMatrixDataCopy[16];
+            memcpy(MVMatrixDataCopy, modelViewMatrix.data, sizeof(modelViewMatrix.data));
+            
+            SampleApplicationUtils::translatePoseMatrix(50.0f, -3.0f, 0.2f, &modelViewMatrix.data[0]);
+            //SampleApplicationUtils::translatePoseMatrix(0.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
             SampleApplicationUtils::scalePoseMatrix(0.3*kObjectScaleNormalx, 0.35*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+            //SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
             
             SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
             
+            
+            
+            
+            
+            // Draw box
+            CGSize extent = self.faceRect.size;
+            NSLog(@"EXTENT IN AUGMENT FACES: %@", NSStringFromCGSize(extent));
+            CGPoint LL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, -40)];
+            CGPoint UL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, 40)];
+            CGPoint LR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, -40)];
+            CGPoint UR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, 40)];
+
+            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
+            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
+            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
+            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
+            
+            /*
+            float newQuadVertices[4*3] = {
+                UR.x,  UR.y,  0.0f,
+                UL.x,  UL.y,  0.0f,
+                LL.x,   LL.y,  0.0f,
+                LR.x,   LR.y,  0.0f,
+            };
+             */
+            
+            float newQuadVertices[4*3] = {
+                -0.75, 0.3,  0.0f,
+                0.75,  0.3, 0.0f,
+                0.75,   0.7,  0.0f,
+                -0.75,   0.7,  0.0f,
+            };
+            
+            
+            [self selectShaderWithName:@"SimpleNoTexture"];
+            glUseProgram(shaderID);
+            glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)newQuadVertices);
+            glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
+            glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
+            
+            glEnableVertexAttribArray(vertexHandle);
+            glEnableVertexAttribArray(normalHandle);
+            glEnableVertexAttribArray(textureCoordHandle);
+            
+            
+            glUniform1f(timeHandle, time);
+            glUniform2fv(resolutionHandle, 1, resolution);
+            glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
+            
+            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+            
+            // Draw face
+            SampleApplicationUtils::translatePoseMatrix(50.0f, -3.0f, 0.0f, &MVMatrixDataCopy[0]);
+            //SampleApplicationUtils::translatePoseMatrix(0.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
+            SampleApplicationUtils::scalePoseMatrix(0.3*kObjectScaleNormalx, 0.35*kObjectScaleNormaly, 1, &MVMatrixDataCopy[0]);
+            //SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+            
+            SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &MVMatrixDataCopy[0], &modelViewProjection.data[0]);
+            [self selectShaderWithName:@"Simple"];
             glUseProgram(shaderID);
             
             glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadVertices);
@@ -1409,7 +1549,7 @@ namespace {
             glBindTexture(GL_TEXTURE_2D, facesFBOTexture);
             
             glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
-            glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
+            glUniform1i(texSampler2DHandle, 0);
             
             glUniform1f(timeHandle, time);
             glUniform2fv(resolutionHandle, 1, resolution);
@@ -1417,6 +1557,8 @@ namespace {
             glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
             glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+
+            
             
             SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
             break;
@@ -1781,6 +1923,15 @@ namespace {
     glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 }
 
+// Scale a point to the OpenGL coordinate system of -1 to 1
+- (CGPoint) scalePoint:(CGPoint)point withExtent:(CGSize)extent andOffset:(CGPoint)offset {
+    CGPoint scaled = {0.0, 0.0};
+    
+    scaled.x = ((extent.width - point.x) - (extent.width/2.0f))/(extent.width/2.0f) - (offset.x / (extent.width/2.0f));
+    scaled.y = ((extent.height - point.y) - (extent.height/2.0f))/(extent.height/2.0f) - (offset.y / (extent.height/2.0f));
+    return scaled;
+}
+
 - (NSNumber *) exifOrientation: (UIDeviceOrientation) orientation
 {
 	int exifOrientation;
@@ -1907,6 +2058,15 @@ namespace {
 	for ( CIFaceFeature *ff in features ) {
         NSLog(@"HAS LEFT EYE POSITION: %d", ff.hasLeftEyePosition);
         NSLog(@"HAS LEFT EYE POSITION x: %f", ff.leftEyePosition.x);
+        
+        if ([ff hasLeftEyePosition]) {
+            self.leftEyePoint = ff.leftEyePosition;
+        }
+        
+        if ([ff hasRightEyePosition]) {
+            self.rightEyePoint = ff.rightEyePosition;
+        }
+        
 		// find the correct position for the square layer within the previewLayer
 		// the feature box originates in the bottom left of the video frame.
 		// (Bottom right if mirroring is turned on)
@@ -1993,11 +2153,13 @@ namespace {
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
        fromConnection:(AVCaptureConnection *)connection
 {
+    /*
     if (([connection videoOrientation] == AVCaptureVideoOrientationLandscapeLeft) || ([connection videoOrientation] == AVCaptureVideoOrientationLandscapeRight)) {
         NSLog(@"LANDSCAPE");
     } else {
         NSLog(@"PORTRAIT");
     }
+     */
     
 	// get the image
 	CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
@@ -2014,7 +2176,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
     if ([connection isVideoOrientationSupported])
     {
-        NSLog(@"VIDEO ORIENTATION SUPPORTED");
         
         if (curDeviceOrientation == UIDeviceOrientationPortrait) {
             AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
@@ -2031,21 +2192,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         }
         
     }
-    
-	NSMutableDictionary *imageOptions = nil;
-    
-	imageOptions = [NSMutableDictionary dictionaryWithObject:[self exifOrientation:curDeviceOrientation] forKey:CIDetectorImageOrientation];
-    //[imageOptions setObject:[NSNumber numberWithInt:6] forKey:CIDetectorImageOrientation];
-    
-	NSArray *features = [self.faceDetector featuresInImage:ciImage
-                                                   options:imageOptions];
-    NSLog(@"FEATURES: %@", features);
 	
-    // get the clean aperture
-    // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
-    // that represents image data valid for display.
-	CMFormatDescriptionRef fdesc = CMSampleBufferGetFormatDescription(sampleBuffer);
-	CGRect cleanAperture = CMVideoFormatDescriptionGetCleanAperture(fdesc, false /*originIsTopLeft == false*/);
+    
+//    // get the clean aperture
+//    // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
+//    // that represents image data valid for display.
+//	CMFormatDescriptionRef fdesc = CMSampleBufferGetFormatDescription(sampleBuffer);
+//	CGRect cleanAperture = CMVideoFormatDescriptionGetCleanAperture(fdesc, false /*originIsTopLeft == false*/);
 
     /*
 	dispatch_async(dispatch_get_main_queue(), ^(void) {

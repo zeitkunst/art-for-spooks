@@ -58,8 +58,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     
     VideoPlayerHelper* videoPlayerHelper;
     float videoPlaybackTime;
-    
-    UILabel *testingLabel;
         
     // Lock to synchronise data that is (potentially) accessed concurrently
     NSLock* dataLock;

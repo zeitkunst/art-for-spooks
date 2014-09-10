@@ -12,6 +12,8 @@
 		341FFF3219BCFC18000EAA97 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF2F19BCFC18000EAA97 /* share.png */; };
 		341FFF3519BD5281000EAA97 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341FFF3419BD5280000EAA97 /* CoreLocation.framework */; };
 		341FFF3819BD5FAC000EAA97 /* Deleuze1992.txt in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3719BD5FAC000EAA97 /* Deleuze1992.txt */; };
+		341FFF3D19BFAE4C000EAA97 /* Passthrough.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3B19BFAE4C000EAA97 /* Passthrough.fragsh */; };
+		341FFF3E19BFAE4C000EAA97 /* Passthrough.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3C19BFAE4C000EAA97 /* Passthrough.vertsh */; };
 		3433E67E19AAABA600640977 /* YoussefForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67D19AAABA600640977 /* YoussefForAFS.m4v */; };
 		3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */; };
 		343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -62,6 +64,8 @@
 		34832EC719A1838700C80D70 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC619A1838700C80D70 /* Security.framework */; };
 		34832EC919A1839200C80D70 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832EC819A1839200C80D70 /* QuartzCore.framework */; };
 		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
+		3484207D19C01B3B002533BB /* SimpleNoTexture.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 3484207B19C01B3B002533BB /* SimpleNoTexture.fragsh */; };
+		3484207E19C01B3B002533BB /* SimpleNoTexture.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 3484207C19C01B3B002533BB /* SimpleNoTexture.vertsh */; };
 		348B1B6719B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */; };
 		348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */; };
 		348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */; };
@@ -167,6 +171,8 @@
 		341FFF2F19BCFC18000EAA97 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		341FFF3419BD5280000EAA97 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		341FFF3719BD5FAC000EAA97 /* Deleuze1992.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Deleuze1992.txt; sourceTree = "<group>"; };
+		341FFF3B19BFAE4C000EAA97 /* Passthrough.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Passthrough.fragsh; path = shaders/Passthrough.fragsh; sourceTree = "<group>"; };
+		341FFF3C19BFAE4C000EAA97 /* Passthrough.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Passthrough.vertsh; path = shaders/Passthrough.vertsh; sourceTree = "<group>"; };
 		3433E67D19AAABA600640977 /* YoussefForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = YoussefForAFS.m4v; sourceTree = "<group>"; };
 		3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
 		343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 		34832EC619A1838700C80D70 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		34832EC819A1839200C80D70 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		34832ECA19A1841B00C80D70 /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVuforia.a; path = "../../../../../development/vuforia-sdk-ios-3-0-9/build/lib/arm/libVuforia.a"; sourceTree = "<group>"; };
+		3484207B19C01B3B002533BB /* SimpleNoTexture.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SimpleNoTexture.fragsh; path = shaders/SimpleNoTexture.fragsh; sourceTree = "<group>"; };
+		3484207C19C01B3B002533BB /* SimpleNoTexture.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SimpleNoTexture.vertsh; path = shaders/SimpleNoTexture.vertsh; sourceTree = "<group>"; };
 		348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_007.png"; sourceTree = "<group>"; };
 		348B1B6919B2EB460034FD98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/ChromaKey.fragsh; sourceTree = "<group>"; };
 		348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Intercept-psychology-a-new-kind-of-sigdev_007.m4v"; sourceTree = "<group>"; };
@@ -514,6 +522,10 @@
 		34C7540B19A84BDE00A7B2E4 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				3484207B19C01B3B002533BB /* SimpleNoTexture.fragsh */,
+				3484207C19C01B3B002533BB /* SimpleNoTexture.vertsh */,
+				341FFF3B19BFAE4C000EAA97 /* Passthrough.fragsh */,
+				341FFF3C19BFAE4C000EAA97 /* Passthrough.vertsh */,
 				348B1B7D19B3DD820034FD98 /* Bloom.fragsh */,
 				348B1B7E19B3DD820034FD98 /* Bloom.vertsh */,
 				348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */,
@@ -802,6 +814,7 @@
 				347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
 				343C3D9319BBC9B100EE4B89 /* drone_coords.csv in Resources */,
+				341FFF3D19BFAE4C000EAA97 /* Passthrough.fragsh in Resources */,
 				34CFED0219BCED8200D21EA9 /* SourceSansPro-Regular.otf in Resources */,
 				34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */,
 				34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */,
@@ -809,6 +822,7 @@
 				34C7540019A83D4D00A7B2E4 /* dollar_bill_obverse.png in Resources */,
 				343C3D9519BBC9B100EE4B89 /* art_for_spooks_words.json in Resources */,
 				34C7542219A9591700A7B2E4 /* Hologram.vertsh in Resources */,
+				3484207D19C01B3B002533BB /* SimpleNoTexture.fragsh in Resources */,
 				341FFF3819BD5FAC000EAA97 /* Deleuze1992.txt in Resources */,
 				34823E8319AD3A8B00C526EB /* card_texture.png in Resources */,
 				34C7540619A843CB00A7B2E4 /* Intercept-the-art-of-deception-training-for-a-new_021.png in Resources */,
@@ -840,6 +854,7 @@
 				34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */,
 				34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */,
 				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,
+				341FFF3E19BFAE4C000EAA97 /* Passthrough.vertsh in Resources */,
 				34CFED0319BCED8200D21EA9 /* SourceSansPro-Semibold.otf in Resources */,
 				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				347B0ACE19AEF14B0062C532 /* OliverFerguson.m4v in Resources */,
@@ -854,6 +869,7 @@
 				347B0AC619AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */,
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
 				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,
+				3484207E19C01B3B002533BB /* SimpleNoTexture.vertsh in Resources */,
 				34D1DADE19A6AA1300CE0CA1 /* TextureTeapotBlue.png in Resources */,
 				34CFECFF19BCED8200D21EA9 /* SourceSansPro-Bold.otf in Resources */,
 				347B0AC119AED77F0062C532 /* Animate_8x8.fragsh in Resources */,
