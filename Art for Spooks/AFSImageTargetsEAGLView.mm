@@ -1285,13 +1285,19 @@ namespace {
             break;
         }
         case CAPTURE_FACE: {
+            // TODO: Delay having the bar come up, somehow
+            
             // Rotate our image to work on landscape
             // TODO: Perhaps, at some point, deal with other orientations
             CGRect newRect = CGRectMake(0, 0, self.eaglFrame.size.height, self.eaglFrame.size.width);
             CIImage *rotatedImage = [self.currentFrontImage imageByApplyingTransform:CGAffineTransformMakeRotation(M_PI)];
             
+            // Mirror the image in X
+            rotatedImage = [rotatedImage imageByApplyingTransform:CGAffineTransformTranslate(CGAffineTransformMakeScale(-1, 1), 0, rotatedImage.extent.size.width)];
+            
             NSMutableDictionary *imageOptions = nil;
             
+            // Setup our face detector
             imageOptions = [NSMutableDictionary dictionaryWithObject:[self exifOrientation:[[UIDevice currentDevice] orientation]] forKey:CIDetectorImageOrientation];
             //[imageOptions setObject:[NSNumber numberWithInt:6] forKey:CIDetectorImageOrientation];
             
@@ -1299,15 +1305,22 @@ namespace {
                                                            options:imageOptions];
             NSLog(@"FEATURES: %@", features);
             
-            CGPoint leftEyePos;
-            CGPoint rightEyePos;
+            // Check for features and save rects and points
             for (CIFaceFeature *faceFeature in features) {
+                self.faceRect = [faceFeature bounds];
+                
                 if ([faceFeature hasLeftEyePosition]) {
-                    leftEyePos = [faceFeature leftEyePosition];
+                    CGPoint temp = [faceFeature leftEyePosition];
+                    self.leftEyePoint = CGPointMake(fabsf(temp.x), fabsf(temp.y));
+                } else {
+                    self.leftEyePoint = CGPointMake(0.0, 0.0);
                 }
                 
                 if ([faceFeature hasRightEyePosition]) {
-                    rightEyePos = [faceFeature rightEyePosition];
+                    CGPoint temp = [faceFeature rightEyePosition];
+                    self.rightEyePoint = CGPointMake(fabsf(temp.x), fabsf(temp.y));
+                } else {
+                    self.rightEyePoint = CGPointMake(0.0, 0.0);
                 }
             }
             
@@ -1315,60 +1328,37 @@ namespace {
             NSLog(@"in CAPTURE_FACE, rotatedImage width: %f", rotatedImage.extent.size.width);
             NSLog(@"in CAPTURE_FACE, rotatedImage height: %f", rotatedImage.extent.size.height);
         
-            NSLog(@"in CAPTURE_FACE, leftEyePosition: %@", NSStringFromCGPoint(leftEyePos));
-            NSLog(@"in CAPTURE_FACE, rightEyePosition: %@", NSStringFromCGPoint(rightEyePos));
+            NSLog(@"in CAPTURE_FACE, leftEyePoint: %@", NSStringFromCGPoint(self.leftEyePoint));
+            NSLog(@"in CAPTURE_FACE, rightEyePoint: %@", NSStringFromCGPoint(self.rightEyePoint));
             
+            // Actually draw our image in the EAGL view
             [self.cicontext drawImage:rotatedImage
                                inRect:newRect
                              fromRect:rotatedImage.extent];
             
-            /*
-             float newQuadVertices[4*3] = {
-             -0.50f,  -0.50f,  0.0f,
-             0.50f,  -0.50f,  0.0f,
-             0.50f,   0.50f,  0.0f,
-             -0.50f,   0.50f,  0.0f,
-             };
-             */
-            
+            // Now let's draw a box that blocks out the eyes
             glUseProgram(shaderID);
             
             // After scaling and flipping the coordinate system, we can think of our quad and offset points in a normal coordinate system with origin LL.
             // Not sure why I have to add to much to the LR and UR x offset, but it works; maybe the eye tracking is off somehow?
             CGSize extent = rotatedImage.extent.size;
-            CGPoint LL = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(-10, -40)];
-            CGPoint LR = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(120, -40)];
-            CGPoint UR = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(120, 40)];
-            CGPoint UL = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(-10, 40)];
+            CGPoint LL = [self scalePoint:CGPointMake(self.leftEyePoint.x, self.leftEyePoint.y) withExtent:extent andOffset:CGPointMake(-10, -40)];
+            CGPoint LR = [self scalePoint:CGPointMake(self.rightEyePoint.x, self.rightEyePoint.y) withExtent:extent andOffset:CGPointMake(120, -40)];
+            CGPoint UR = [self scalePoint:CGPointMake(self.rightEyePoint.x, self.rightEyePoint.y) withExtent:extent andOffset:CGPointMake(120, 40)];
+            CGPoint UL = [self scalePoint:CGPointMake(self.leftEyePoint.x, self.leftEyePoint.y) withExtent:extent andOffset:CGPointMake(-10, 40)];
             
             NSLog(@"LL: %@", NSStringFromCGPoint(LL));
             NSLog(@"LR: %@", NSStringFromCGPoint(LR));
             NSLog(@"UR: %@", NSStringFromCGPoint(UR));
             NSLog(@"UL: %@", NSStringFromCGPoint(UL));
-            float newQuadVertices[4*3] = {
-                LL.x,  LL.y,  0.0f,
-                LR.x,  LR.y,  0.0f,
-                UR.x,   UR.y,  0.0f,
-                UL.x,   UL.y,  0.0f,
-            };
             
-            /*
-             // Orig
-            CGPoint LL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, -40)];
-            CGPoint UL = [self scalePoint:CGPointMake(rightEyePos.x, rightEyePos.y) withExtent:extent andOffset:CGPointMake(-100, 40)];
-            CGPoint LR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, -40)];
-            CGPoint UR = [self scalePoint:CGPointMake(leftEyePos.x, leftEyePos.y) withExtent:extent andOffset:CGPointMake(40, 40)];
-            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
-            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
-            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
-            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
+            // Mirror in the x coordinate so that the image and box appear as expected
             float newQuadVertices[4*3] = {
-                UR.x,  UR.y,  0.0f,
-                UL.x,  UL.y,  0.0f,
-                LL.x,   LL.y,  0.0f,
-                LR.x,   LR.y,  0.0f,
+                -1.0f*LR.x,  LR.y,  0.0f,
+                -1.0f*LL.x,  LL.y,  0.0f,
+                -1.0f*UL.x,   UL.y,  0.0f,
+                -1.0f*UR.x,   UR.y,  0.0f,
             };
-            */
 
             glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)newQuadVertices);
             glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
@@ -1394,14 +1384,12 @@ namespace {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"PreAugmentFaceNotification" object:nil userInfo:nil];
             });
             
-            // TODO: draw box using OpenGL, figure out how to convert the coordinate systems
-            
+            // Restart the camera
             QCAR::CameraDevice::getInstance().stop();
             QCAR::CameraDevice::getInstance().start();
             QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO);
             
-            // Render currentFrontImage to the FBO
-            
+            // Render rect of face to the FBO
             // Clear everything before we begin drawing to our FBO
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glFlush();
@@ -1423,29 +1411,34 @@ namespace {
             CIDetector* detector = [CIDetector detectorOfType:CIDetectorTypeFace
                                                       context:nil
                                                       options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyHigh forKey:CIDetectorAccuracy]];
-            //NSMutableDictionary *imageOptions = [NSMutableDictionary dictionaryWithObject:[self exifOrientation:[[UIDevice currentDevice] orientation]] forKey:CIDetectorImageOrientation];
-            //NSArray* features = [detector featuresInImage:self.currentFrontImage options:imageOptions];
             
+            // Assume that we're working in landscape right, for now
             CIImage *rotatedImage = [self.currentFrontImage imageByApplyingTransform:CGAffineTransformMakeRotation(M_PI)];
+            // Mirror the image in X
+            rotatedImage = [rotatedImage imageByApplyingTransform:CGAffineTransformTranslate(CGAffineTransformMakeScale(-1, 1), 0, rotatedImage.extent.size.width)];
             
-            //NSArray* features = [detector featuresInImage:self.currentFrontImage];
+            // Go through our features
             NSArray* features = [detector featuresInImage:rotatedImage];
-            CGPoint leftEyePos = CGPointMake(0.0, 0.0);
-            CGPoint rightEyePos = CGPointMake(0.0, 0.0);
             for(CIFaceFeature* faceFeature in features) {
                 self.faceRect = [faceFeature bounds];
                 
                 if ([faceFeature hasLeftEyePosition]) {
                     CGPoint temp = [faceFeature leftEyePosition];
                     self.leftEyePoint = CGPointMake(fabsf(temp.x), fabsf(temp.y));
+                } else {
+                    self.leftEyePoint = CGPointMake(0.0, 0.0);
                 }
                 
                 if ([faceFeature hasRightEyePosition]) {
                     CGPoint temp = [faceFeature rightEyePosition];
                     self.rightEyePoint = CGPointMake(fabsf(temp.x), fabsf(temp.y));
+                } else {
+                    self.rightEyePoint = CGPointMake(0.0, 0.0);
                 }
                 
             }
+            
+            
             NSLog(@"EXTENT (rotated): %@", NSStringFromCGRect(rotatedImage.extent));
             NSLog(@"faceRect in PRE_AUGMENT_FACES: %@", NSStringFromCGRect(self.faceRect));
             NSLog(@"leftEyePoint in PRE_AUGMENT_FACES: %@", NSStringFromCGPoint(self.leftEyePoint));
@@ -1453,48 +1446,51 @@ namespace {
             
             // Gaussian blur the image
             CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-            //[filter setValue:self.currentFrontImage forKey:kCIInputImageKey];
             [filter setValue:rotatedImage forKey:kCIInputImageKey];
-            [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
+            [filter setValue:[NSNumber numberWithFloat:10.0f] forKey:@"inputRadius"];
             CIImage *result = [filter valueForKey:kCIOutputImageKey];
             
             [self.cicontext drawImage:result
                                inRect:inRect
-                             //fromRect:CGRectMake(0, 0, 512, 512)];
                              fromRect:CGRectIntersection(rotatedImage.extent, self.faceRect)];
-                             //fromRect:CGRectIntersection(self.currentFrontImage.extent, self.faceRect)];
-                             //fromRect:self.currentFrontImage.extent];
-            
-            /*
-            [self.cicontext drawImage:[boxLayerImage CIImage]
-                               inRect:inRect
-                             fromRect:CGRectIntersection(self.currentFrontImage.extent, self.faceRect)];
-            */
             
             glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
             
             // Define our box coordinates in GL space
+            //CGSize extent = rotatedImage.extent.size;
             CGSize extent = self.faceRect.size;
-            NSLog(@"EXTENT IN AUGMENT FACES: %@", NSStringFromCGSize(extent));
-            CGPoint LL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, -40)];
-            CGPoint UL = [self scalePoint:CGPointMake(self.rightEyePoint.x - (extent.width), self.rightEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(-100, 40)];
-            CGPoint LR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, -40)];
-            CGPoint UR = [self scalePoint:CGPointMake(self.leftEyePoint.x - (extent.width), self.leftEyePoint.y + (extent.height)) withExtent:extent andOffset:CGPointMake(40, 40)];
+            float xOffset = fabsf(self.faceRect.origin.x);
+            float scaleFactorX = fabsf(self.faceRect.size.width/rotatedImage.extent.size.width);
+            float yOffset = fabsf(self.faceRect.origin.y);
+            float scaleFactorY = fabsf(self.faceRect.size.height/rotatedImage.extent.size.height);
+
+            NSLog(@"EXTENT IN PRE_AUGMENT_FACES: %@", NSStringFromCGSize(extent));
+
+            // TODO: This transformation could probably be made better and more accurate
+            CGPoint LL = [self noResetScalePoint:CGPointMake((self.leftEyePoint.x - xOffset), (self.leftEyePoint.y - yOffset)) withExtent:extent andOffset:CGPointMake(-80, -50)];
+            CGPoint LR = [self noResetScalePoint:CGPointMake((self.rightEyePoint.x - xOffset), (self.rightEyePoint.y - yOffset)) withExtent:extent andOffset:CGPointMake(160, -50)];
+            CGPoint UR = [self noResetScalePoint:CGPointMake((self.rightEyePoint.x - xOffset), (self.rightEyePoint.y - yOffset)) withExtent:extent andOffset:CGPointMake(160, 50)];
+            CGPoint UL = [self noResetScalePoint:CGPointMake((self.leftEyePoint.x - xOffset), (self.leftEyePoint.y - yOffset)) withExtent:extent andOffset:CGPointMake(-80, 50)];
             
             NSLog(@"LL: %@", NSStringFromCGPoint(LL));
             NSLog(@"LR: %@", NSStringFromCGPoint(LR));
             NSLog(@"UR: %@", NSStringFromCGPoint(UR));
             NSLog(@"UL: %@", NSStringFromCGPoint(UL));
             
-            /*
-             float newQuadVertices[4*3] = {
-             UR.x,  UR.y,  0.0f,
-             UL.x,  UL.y,  0.0f,
-             LL.x,   LL.y,  0.0f,
-             LR.x,   LR.y,  0.0f,
-             };
-             */
+            // LL vertex
+            eyeBoxQuadVertices[0] = LL.x;
+            eyeBoxQuadVertices[1] = LL.y;
+            // LR vertex
+            eyeBoxQuadVertices[3] = LR.x;
+            eyeBoxQuadVertices[4] = LR.y;
+            // UR vertex
+            eyeBoxQuadVertices[6] = UR.x;
+            eyeBoxQuadVertices[7] = UR.y;
+            // UL vertex
+            eyeBoxQuadVertices[9] = UL.x;
+            eyeBoxQuadVertices[10] = UL.y;
             
+            /*
             // Faking it
             // LL vertex
             eyeBoxQuadVertices[0] = -0.75;
@@ -1508,7 +1504,7 @@ namespace {
             // UL vertex
             eyeBoxQuadVertices[9] = -0.75;
             eyeBoxQuadVertices[10] = 0.7;
-            
+            */
             
             blurredFaces_state = AUGMENT_FACE;
             NSLog(@"Switching to AUGMENT_FACE");
@@ -1521,7 +1517,7 @@ namespace {
             memcpy(MVMatrixDataCopy, modelViewMatrix.data, sizeof(modelViewMatrix.data));
             
             SampleApplicationUtils::translatePoseMatrix(50.0f, -3.0f, 0.2f, &modelViewMatrix.data[0]);
-            //SampleApplicationUtils::translatePoseMatrix(0.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
+            //SampleApplicationUtils::translatePoseMatrix(0.0, 0.0f, 0.2f, &modelViewMatrix.data[0]);
             SampleApplicationUtils::scalePoseMatrix(0.3*kObjectScaleNormalx, 0.35*kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
             //SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
             
@@ -1548,9 +1544,9 @@ namespace {
             
             // Draw face
             SampleApplicationUtils::translatePoseMatrix(50.0f, -3.0f, 0.0f, &MVMatrixDataCopy[0]);
-            //SampleApplicationUtils::translatePoseMatrix(0.0, 0.0f, 0.0f, &modelViewMatrix.data[0]);
+            //SampleApplicationUtils::translatePoseMatrix(0.0, 0.0f, 0.0f, &MVMatrixDataCopy[0]);
             SampleApplicationUtils::scalePoseMatrix(0.3*kObjectScaleNormalx, 0.35*kObjectScaleNormaly, 1, &MVMatrixDataCopy[0]);
-            //SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &modelViewMatrix.data[0]);
+            //SampleApplicationUtils::scalePoseMatrix(kObjectScaleNormalx, kObjectScaleNormaly, 1, &MVMatrixDataCopy[0]);
             
             SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &MVMatrixDataCopy[0], &modelViewProjection.data[0]);
             [self selectShaderWithName:@"Simple"];
@@ -1946,12 +1942,16 @@ namespace {
 
 // Scale a point to the OpenGL coordinate system of -1 to 1
 - (CGPoint) scalePoint:(CGPoint)point withExtent:(CGSize)extent andOffset:(CGPoint)offset {
-    CGPoint scaled = {0.0, 0.0};
-    
     // Flip our given coordinates (so that the origin is LL rather than UL), shift so that we are centered around the Y axis, scale to be between -1 and 1, and offset by a given number of pixels in the original coordinate system
-    scaled.x = ((extent.width - (point.x - offset.x)) - (extent.width/2.0f))/(extent.width/2.0f);
-    scaled.y = ((extent.height - (point.y - offset.y)) - (extent.height/2.0f))/(extent.height/2.0f);
-    return scaled;
+    return CGPointMake(((extent.width - (point.x - offset.x)) - (extent.width/2.0f))/(extent.width/2.0f),
+                       ((extent.height - (point.y - offset.y)) - (extent.height/2.0f))/(extent.height/2.0f));
+}
+
+// Scale a point to the OpenGL coordinate system of -1 to 1
+- (CGPoint) noResetScalePoint:(CGPoint)point withExtent:(CGSize)extent andOffset:(CGPoint)offset {
+    // Flip our given coordinates (so that the origin is LL rather than UL), shift so that we are centered around the Y axis, scale to be between -1 and 1, and offset by a given number of pixels in the original coordinate system
+    return CGPointMake((((point.x + offset.x)) - (extent.width/2.0f))/(extent.width/2.0f),
+                       (((point.y + offset.y)) - (extent.height/2.0f))/(extent.height/2.0f));
 }
 
 - (NSNumber *) exifOrientation: (UIDeviceOrientation) orientation
@@ -2189,6 +2189,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	CIImage *ciImage = [[CIImage alloc] initWithCVPixelBuffer:pixelBuffer
                                                       options:(__bridge NSDictionary *)attachments];
     self.currentFrontImage = [ciImage copy];
+    //self.currentFrontImage = [self.currentFrontImage imageByApplyingTransform:CGAffineTransformTranslate(CGAffineTransformMakeScale(-1, 1), 0, self.currentFrontImage.extent.size.width)];
     
 	if (attachments) {
 		CFRelease(attachments);

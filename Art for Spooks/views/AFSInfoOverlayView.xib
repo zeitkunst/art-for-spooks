@@ -43,7 +43,7 @@
                         <action selector="overlayShareTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="V73-yx-VCU"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OK-Y0-C4M">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OK-Y0-C4M">
                     <rect key="frame" x="94" y="951" width="580" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -56,6 +56,7 @@
                 <constraint firstAttribute="bottom" secondItem="5OK-Y0-C4M" secondAttribute="bottom" constant="39" id="056-eJ-1bn"/>
                 <constraint firstItem="8iq-AB-X93" firstAttribute="top" secondItem="eia-9Q-1Y6" secondAttribute="bottom" constant="8" symbolic="YES" id="2R3-Kc-8Yh"/>
                 <constraint firstAttribute="trailing" secondItem="FDb-Kr-9Q8" secondAttribute="trailing" constant="20" id="7rs-q5-z3f"/>
+                <constraint firstItem="5OK-Y0-C4M" firstAttribute="top" secondItem="eia-9Q-1Y6" secondAttribute="bottom" constant="27" id="CFF-Vf-4ba"/>
                 <constraint firstAttribute="bottom" secondItem="FDb-Kr-9Q8" secondAttribute="bottom" constant="26" id="QEB-3v-qUE"/>
                 <constraint firstItem="eia-9Q-1Y6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="27" id="TcU-Sd-0DY"/>
                 <constraint firstItem="eia-9Q-1Y6" firstAttribute="centerX" secondItem="5OK-Y0-C4M" secondAttribute="centerX" id="VjO-Ts-TuD"/>

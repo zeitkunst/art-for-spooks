@@ -49,6 +49,8 @@
         // Hide status label
         [self.overlayStatusLabel setHidden:YES];
         [self.overlayStatusLabel setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.25]];
+        //CGRect overlayStatusLabelFrame = self.overlayStatusLabel.frame;
+        //[self.overlayStatusLabel setFrame:CGRectMake(overlayStatusLabelFrame.origin.x, overlayStatusLabelFrame.origin.y, overlayStatusLabelFrame.size.width, overlayStatusLabelFrame.size.height + 900)];
         
         // Hide overlay web view
         [self.infoWebView setHidden:YES];
@@ -404,11 +406,15 @@
 
 - (void) captureFaceCallback:(NSNotification *)notification {
     [self.overlayStatusLabel setHidden:NO];
-    [self.overlayStatusLabel setText:@"Capturing face...hold tablet so that your face is visible on the screen"];
+    self.overlayStatusLabel.textColor = [UIColor redColor];
+    [self.overlayStatusLabel setBackgroundColor:[UIColor blackColor]];
+    [self.overlayStatusLabel setText:@"Capturing face...hold tablet in front of your face at arm's length for best results"];
 }
 
 - (void) preAugmentFaceCallback:(NSNotification *)notification {
     [self.overlayStatusLabel setText:@""];
+    self.overlayStatusLabel.textColor = [UIColor blackColor];
+    [self.overlayStatusLabel setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.25]];
     [self.overlayStatusLabel setHidden:YES];
 }
 
