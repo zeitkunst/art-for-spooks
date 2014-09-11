@@ -47,7 +47,7 @@
 		<string>SourceSansPro-SemiboldIt.otf</string>
 	</array>
 	<key>UIMainStoryboardFile</key>
-	<string>AFSLaunchView</string>
+	<string>AFSLaunchView-iPhone</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -57,6 +57,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

@@ -66,6 +66,7 @@
 		34832ECB19A1841B00C80D70 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34832ECA19A1841B00C80D70 /* libVuforia.a */; };
 		3484207D19C01B3B002533BB /* SimpleNoTexture.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 3484207B19C01B3B002533BB /* SimpleNoTexture.fragsh */; };
 		3484207E19C01B3B002533BB /* SimpleNoTexture.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 3484207C19C01B3B002533BB /* SimpleNoTexture.vertsh */; };
+		3484208319C1381C002533BB /* AFSLaunchView-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3484208219C1381C002533BB /* AFSLaunchView-iPhone.storyboard */; };
 		348B1B6719B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */; };
 		348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */; };
 		348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */; };
@@ -238,6 +239,7 @@
 		34832ECA19A1841B00C80D70 /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVuforia.a; path = "../../../../../development/vuforia-sdk-ios-3-0-9/build/lib/arm/libVuforia.a"; sourceTree = "<group>"; };
 		3484207B19C01B3B002533BB /* SimpleNoTexture.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SimpleNoTexture.fragsh; path = shaders/SimpleNoTexture.fragsh; sourceTree = "<group>"; };
 		3484207C19C01B3B002533BB /* SimpleNoTexture.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SimpleNoTexture.vertsh; path = shaders/SimpleNoTexture.vertsh; sourceTree = "<group>"; };
+		3484208219C1381C002533BB /* AFSLaunchView-iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "AFSLaunchView-iPhone.storyboard"; sourceTree = "<group>"; };
 		348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_007.png"; sourceTree = "<group>"; };
 		348B1B6919B2EB460034FD98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/ChromaKey.fragsh; sourceTree = "<group>"; };
 		348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Intercept-psychology-a-new-kind-of-sigdev_007.m4v"; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				34CFECBC19BBF09000D21EA9 /* AFSOverlayView.h */,
 				34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */,
 				343C3DA619BBD01E00EE4B89 /* AFSLaunchView.storyboard */,
+				3484208219C1381C002533BB /* AFSLaunchView-iPhone.storyboard */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 				341FFF3219BCFC18000EAA97 /* share.png in Resources */,
 				34CFECFD19BCED8200D21EA9 /* SourceSansPro-Black.otf in Resources */,
 				348B1B6719B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png in Resources */,
+				3484208319C1381C002533BB /* AFSLaunchView-iPhone.storyboard in Resources */,
 				347B0AC619AEE58A0062C532 /* DerSpiegel-nsa-quantumtheory_002_sprites.png in Resources */,
 				34D1DAE019A6AA1300CE0CA1 /* TextureTeapotGreen.png in Resources */,
 				34C7540E19A84C0200A7B2E4 /* DistortedTV.fragsh in Resources */,
