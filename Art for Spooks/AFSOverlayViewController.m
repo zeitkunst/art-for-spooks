@@ -19,7 +19,7 @@
 - (id)initWithDelegate:(id) delegate {
     self = [super init];
     if (self) {
-        NSLog(@"in AFSOverlayViewController init");
+        //NSLog(@"in AFSOverlayViewController init");
         afsDelegate = delegate;
         //self.infoOverlayView = [[[NSBundle mainBundle] loadNibNamed:@"AFSInfoOverlayView" owner:nil options:nil] objectAtIndex:0];
         self.infoOverlayView = [[AFSInfoOverlayView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -41,7 +41,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         
         arViewRect.size = [[UIScreen mainScreen] bounds].size;
         arViewRect.origin.x = arViewRect.origin.y = 0;
-        NSLog(@"arViewRect.width: %f; arViewRect.height: %f", arViewRect.size.width, arViewRect.size.height);
+        //NSLog(@"arViewRect.width: %f; arViewRect.height: %f", arViewRect.size.width, arViewRect.size.height);
         
         // If this device has a retina display, scale the view bounds that will
         // be passed to QCAR; this allows it to calculate the size and position of
@@ -132,7 +132,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    NSLog(@"self.navigationController.navigationBarHidden:%d",self.navigationController.navigationBarHidden);
+    //NSLog(@"self.navigationController.navigationBarHidden:%d",self.navigationController.navigationBarHidden);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -325,10 +325,10 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         
         [eaglView setFrame:viewBounds];
         CGRect afterBounds = [eaglView bounds];
-        NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
-        NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
-        NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
-        NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
+        //NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
+        //NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
+        //NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
+        //NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
     }
     else if (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
     {
@@ -361,10 +361,10 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         
         [eaglView setFrame:viewBounds];
         CGRect afterBounds = [eaglView bounds];
-        NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
-        NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
-        NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
-        NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
+        //NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
+        //NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
+        //NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
+        //NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
     }
     else if (interfaceOrientation == UIInterfaceOrientationLandscapeRight)
     {
@@ -383,10 +383,10 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
         
         [eaglView setFrame:viewBounds];
         CGRect afterBounds = [eaglView bounds];
-        NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
-        NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
-        NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
-        NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
+        //NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
+        //NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
+        //NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
+        //NSLog(@"afterBounds.size.width: %f; afterBounds.size.height: %f", afterBounds.size.width, afterBounds.size.height);
     }
 }
 

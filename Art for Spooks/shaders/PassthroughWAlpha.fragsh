@@ -11,7 +11,8 @@ uniform vec2 resolution;
 uniform sampler2D texSampler2D;
 float PI = 3.1415926535;
 uniform mat4 modelViewProjectionMatrix;
+uniform float alpha;
 
 void main() {
-    gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+    gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);
 }

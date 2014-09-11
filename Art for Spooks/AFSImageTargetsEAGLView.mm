@@ -108,7 +108,8 @@ namespace {
         AUGMENT_FACE
     } blurredFaces_state;
     float blurredFaces_preDelay = 2.0;
-    float blurredFaces_captureDelay = 5.0;
+    float blurredFaces_preAlphaDelay = 5.0;
+    float blurredFaces_captureDelay = 10.0;
     GLint defaultFBO;
     GLuint facesFBOHandle;
     GLuint facesDepthBuffer;
@@ -259,9 +260,6 @@ namespace {
         // Set of possible shaders
         [shaderNames addObject:@"Simple"];
         [shaderNames addObject:@"DistortedTV"];
-        
-        // Setup our faces FBO
-        [self setupFacesFBO];
         
         // Setup video player helper
         videoPlayerHelper = [[VideoPlayerHelper alloc] initWithRootViewController:afsImageTargetsViewController];
@@ -1227,8 +1225,6 @@ namespace {
                 UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
                 if ([conn isVideoOrientationSupported])
                 {
-                    NSLog(@"VIDEO ORIENTATION SUPPORTED");
-                    
                     if (curDeviceOrientation == UIDeviceOrientationPortrait) {
                         AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
                         [conn setVideoOrientation:orientation];
@@ -1272,11 +1268,9 @@ namespace {
             glFlush();
             
             // Setup our shader for the next stage of processing
-            [self selectShaderWithName:@"Passthrough"];
+            [self selectShaderWithName:@"PassthroughWAlpha"];
             
-            // Post our notifications
             dispatch_async(dispatch_get_main_queue(),^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"NoTargetsNotification" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"CaptureFaceNotification" object:nil userInfo:nil];
             });
             
@@ -1285,7 +1279,10 @@ namespace {
             break;
         }
         case CAPTURE_FACE: {
-            // TODO: Delay having the bar come up, somehow
+            // Post our notifications
+            dispatch_async(dispatch_get_main_queue(),^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"NoTargetsNotification" object:nil userInfo:nil];
+            });
             
             // Rotate our image to work on landscape
             // TODO: Perhaps, at some point, deal with other orientations
@@ -1303,7 +1300,6 @@ namespace {
             
             NSArray *features = [self.faceDetector featuresInImage:self.currentFrontImage
                                                            options:imageOptions];
-            NSLog(@"FEATURES: %@", features);
             
             // Check for features and save rects and points
             for (CIFaceFeature *faceFeature in features) {
@@ -1324,12 +1320,11 @@ namespace {
                 }
             }
             
-
-            NSLog(@"in CAPTURE_FACE, rotatedImage width: %f", rotatedImage.extent.size.width);
-            NSLog(@"in CAPTURE_FACE, rotatedImage height: %f", rotatedImage.extent.size.height);
-        
-            NSLog(@"in CAPTURE_FACE, leftEyePoint: %@", NSStringFromCGPoint(self.leftEyePoint));
-            NSLog(@"in CAPTURE_FACE, rightEyePoint: %@", NSStringFromCGPoint(self.rightEyePoint));
+//
+//            NSLog(@"in CAPTURE_FACE, rotatedImage width: %f", rotatedImage.extent.size.width);
+//            NSLog(@"in CAPTURE_FACE, rotatedImage height: %f", rotatedImage.extent.size.height);
+//            NSLog(@"in CAPTURE_FACE, leftEyePoint: %@", NSStringFromCGPoint(self.leftEyePoint));
+//            NSLog(@"in CAPTURE_FACE, rightEyePoint: %@", NSStringFromCGPoint(self.rightEyePoint));
             
             // Actually draw our image in the EAGL view
             [self.cicontext drawImage:rotatedImage
@@ -1347,10 +1342,12 @@ namespace {
             CGPoint UR = [self scalePoint:CGPointMake(self.rightEyePoint.x, self.rightEyePoint.y) withExtent:extent andOffset:CGPointMake(120, 40)];
             CGPoint UL = [self scalePoint:CGPointMake(self.leftEyePoint.x, self.leftEyePoint.y) withExtent:extent andOffset:CGPointMake(-10, 40)];
             
+            /*
             NSLog(@"LL: %@", NSStringFromCGPoint(LL));
             NSLog(@"LR: %@", NSStringFromCGPoint(LR));
             NSLog(@"UR: %@", NSStringFromCGPoint(UR));
             NSLog(@"UL: %@", NSStringFromCGPoint(UL));
+             */
             
             // Mirror in the x coordinate so that the image and box appear as expected
             float newQuadVertices[4*3] = {
@@ -1370,12 +1367,14 @@ namespace {
             
             
             glUniform1f(timeHandle, time);
+            glUniform1f(alphaHandle, alpha);
             glUniform2fv(resolutionHandle, 1, resolution);
             
             glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
             glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
             
+            SampleApplicationUtils::checkGlError("CAPTURE_FACE EAGLView renderFrameQCAR");
             break;
         }
         case PRE_AUGMENT_FACE: {
@@ -1394,18 +1393,17 @@ namespace {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glFlush();
             
+            glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, 0);
-            glEnable(GL_TEXTURE_2D);
+
             glBindFramebuffer(GL_FRAMEBUFFER, facesFBOHandle);
             
             glViewport(0, 0, facesFBOWidth, facesFBOHeight);
-            //glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             
             // Create a rect the size of our image
             CGRect inRect = CGRectMake(0, 0, facesFBOWidth, facesFBOHeight);
-            NSLog(@"EXTENT: %@", NSStringFromCGRect(self.currentFrontImage.extent));
-            NSLog(@"FACE RECT: %@", NSStringFromCGRect(self.faceRect));
+            //NSLog(@"EXTENT: %@", NSStringFromCGRect(self.currentFrontImage.extent));
+            //NSLog(@"FACE RECT: %@", NSStringFromCGRect(self.faceRect));
             
             // Run our own face detector here at high accuracy
             CIDetector* detector = [CIDetector detectorOfType:CIDetectorTypeFace
@@ -1439,10 +1437,10 @@ namespace {
             }
             
             
-            NSLog(@"EXTENT (rotated): %@", NSStringFromCGRect(rotatedImage.extent));
-            NSLog(@"faceRect in PRE_AUGMENT_FACES: %@", NSStringFromCGRect(self.faceRect));
-            NSLog(@"leftEyePoint in PRE_AUGMENT_FACES: %@", NSStringFromCGPoint(self.leftEyePoint));
-            NSLog(@"rightEyePoint in PRE_AUGMENT_FACES: %@", NSStringFromCGPoint(self.rightEyePoint));
+//            NSLog(@"EXTENT (rotated): %@", NSStringFromCGRect(rotatedImage.extent));
+//            NSLog(@"faceRect in PRE_AUGMENT_FACES: %@", NSStringFromCGRect(self.faceRect));
+//            NSLog(@"leftEyePoint in PRE_AUGMENT_FACES: %@", NSStringFromCGPoint(self.leftEyePoint));
+//            NSLog(@"rightEyePoint in PRE_AUGMENT_FACES: %@", NSStringFromCGPoint(self.rightEyePoint));
             
             // Gaussian blur the image
             CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
@@ -1457,14 +1455,13 @@ namespace {
             glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
             
             // Define our box coordinates in GL space
-            //CGSize extent = rotatedImage.extent.size;
             CGSize extent = self.faceRect.size;
             float xOffset = fabsf(self.faceRect.origin.x);
-            float scaleFactorX = fabsf(self.faceRect.size.width/rotatedImage.extent.size.width);
+            //float scaleFactorX = fabsf(self.faceRect.size.width/rotatedImage.extent.size.width);
             float yOffset = fabsf(self.faceRect.origin.y);
-            float scaleFactorY = fabsf(self.faceRect.size.height/rotatedImage.extent.size.height);
+            //float scaleFactorY = fabsf(self.faceRect.size.height/rotatedImage.extent.size.height);
 
-            NSLog(@"EXTENT IN PRE_AUGMENT_FACES: %@", NSStringFromCGSize(extent));
+            //NSLog(@"EXTENT IN PRE_AUGMENT_FACES: %@", NSStringFromCGSize(extent));
 
             // TODO: This transformation could probably be made better and more accurate
             CGPoint LL = [self noResetScalePoint:CGPointMake((self.leftEyePoint.x - xOffset), (self.leftEyePoint.y - yOffset)) withExtent:extent andOffset:CGPointMake(-80, -50)];
@@ -1472,10 +1469,10 @@ namespace {
             CGPoint UR = [self noResetScalePoint:CGPointMake((self.rightEyePoint.x - xOffset), (self.rightEyePoint.y - yOffset)) withExtent:extent andOffset:CGPointMake(160, 50)];
             CGPoint UL = [self noResetScalePoint:CGPointMake((self.leftEyePoint.x - xOffset), (self.leftEyePoint.y - yOffset)) withExtent:extent andOffset:CGPointMake(-80, 50)];
             
-            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
-            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
-            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
-            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
+//            NSLog(@"LL: %@", NSStringFromCGPoint(LL));
+//            NSLog(@"LR: %@", NSStringFromCGPoint(LR));
+//            NSLog(@"UR: %@", NSStringFromCGPoint(UR));
+//            NSLog(@"UL: %@", NSStringFromCGPoint(UL));
             
             // LL vertex
             eyeBoxQuadVertices[0] = LL.x;
@@ -1508,6 +1505,8 @@ namespace {
             
             blurredFaces_state = AUGMENT_FACE;
             NSLog(@"Switching to AUGMENT_FACE");
+            
+            SampleApplicationUtils::checkGlError("PRE_AUGMENT_FACE EAGLView renderFrameQCAR");
             break;
         }
         case AUGMENT_FACE: {
@@ -1523,8 +1522,10 @@ namespace {
             
             SampleApplicationUtils::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
             
+            
             [self selectShaderWithName:@"SimpleNoTexture"];
             glUseProgram(shaderID);
+            
             glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)eyeBoxQuadVertices);
             glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadNormals);
             glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)quadTexCoords);
@@ -1541,6 +1542,7 @@ namespace {
             glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
             glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
+            
             
             // Draw face
             SampleApplicationUtils::translatePoseMatrix(50.0f, -3.0f, 0.0f, &MVMatrixDataCopy[0]);
@@ -1574,10 +1576,10 @@ namespace {
             glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
             glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, (const GLvoid*)quadIndices);
-
             
-            
-            SampleApplicationUtils::checkGlError("EAGLView renderFrameQCAR");
+            // TODO: We get a 0x502 glError, and I think it's due to the mvpMatrixHandle line, but not sure why it's occuring...
+            // Ignoring for now, as it doesn't seem to harm the app
+            SampleApplicationUtils::checkGlError("AUGMENT_FACE EAGLView renderFrameQCAR");
             break;
         }
     }
@@ -1734,9 +1736,11 @@ namespace {
 - (void)updateBlurredFacesParams {
     time += 0.1;
     angle += 1.0;
+    
     //foxacid_currentFrame += 1;
     switch (blurredFaces_state) {
         case PRE_CAPTURE_FACE: {
+            alpha = 0.0;
             if ((CACurrentMediaTime() - previousTime) >= blurredFaces_preDelay) {
                 previousTime = CACurrentMediaTime();
                 blurredFaces_state = SETUP_CAPTURE_FACE;
@@ -1751,10 +1755,17 @@ namespace {
             break;
         }
         case CAPTURE_FACE: {
+            if (((CACurrentMediaTime() - previousTime) >= blurredFaces_preAlphaDelay) && (((CACurrentMediaTime() - previousTime) <= blurredFaces_captureDelay))) {
+                alpha += 0.05;
+                if (alpha >= 1.0) {
+                    alpha = 1.0;
+                }
+            }
+            
             if ((CACurrentMediaTime() - previousTime) >= blurredFaces_captureDelay ) {
                 blurredFaces_state = PRE_AUGMENT_FACE;
                 previousTime = CACurrentMediaTime();
-                NSLog(@"Swicthing to PRE_AUGMENT_FACE");
+                NSLog(@"Switching to PRE_AUGMENT_FACE");
                 //[self teardownAVCapture];
             }
             
@@ -1911,11 +1922,11 @@ namespace {
     status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     switch(status) {
         case GL_FRAMEBUFFER_COMPLETE:
-            NSLog(@"fbo complete");
+            NSLog(@"FBO complete");
             break;
             
         case GL_FRAMEBUFFER_UNSUPPORTED:
-            NSLog(@"fbo unsupported");
+            NSLog(@"FBO unsupported");
             break;
             
         default:
@@ -2301,6 +2312,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         texSampler2DHandle  = glGetUniformLocation(shaderProgramID,"texSampler2D");
         resolutionHandle = glGetUniformLocation(shaderProgramID, "resolution");
         timeHandle = glGetUniformLocation(shaderProgramID, "time");
+        alphaHandle = glGetUniformLocation(shaderProgramID, "alpha");
         time = 0.0;
         CGRect rect = [self frame];
         resolution[0] = rect.size.width;
@@ -2341,6 +2353,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         // Leave the colour render buffer bound so future rendering operations will act on it
         glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
+        
+        // setup our Faces FBO
+        [self setupFacesFBO];
     }
 }
 

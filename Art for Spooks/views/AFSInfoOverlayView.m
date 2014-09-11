@@ -63,7 +63,7 @@
         NSString *albumNameBlock = self.albumName;
         [self.assetsLibrary addAssetsGroupAlbumWithName:self.albumName
                                             resultBlock:^(ALAssetsGroup *group) {
-                                                NSLog(@"added album:%@", albumNameBlock);
+                                                NSLog(@"Added album:%@", albumNameBlock);
                                             }
                                            failureBlock:^(NSError *error) {
                                                NSLog(@"error adding album");
@@ -82,7 +82,7 @@
                 if (!error) {
                     self.userName = userName;
                     self.userID = userId;
-                    NSLog(@"userID: %@", self.userID);
+                    //NSLog(@"userID: %@", self.userID);
                 } else {
                     self.userID = nil;
                 }

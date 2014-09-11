@@ -16,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.19999999999999968" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-Be-HR9">
+                            <imageView userInteractionEnabled="NO" alpha="0.19999999999999968" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-Be-HR9">
                                 <rect key="frame" x="20" y="64" width="728" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-nl-Ats">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-nl-Ats">
                                 <rect key="frame" x="225" y="340" width="318" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -87,8 +87,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o9G-C3-vaf" secondAttribute="trailing" constant="187" id="0Ga-HT-t9l"/>
-                            <constraint firstAttribute="trailing" secondItem="HDV-Be-HR9" secondAttribute="trailing" constant="20" id="0N4-a3-Y6p"/>
                             <constraint firstItem="2li-hp-0ug" firstAttribute="top" secondItem="LuV-yp-eM1" secondAttribute="bottom" constant="27" id="10a-Xo-YkE"/>
                             <constraint firstAttribute="bottom" secondItem="2li-hp-0ug" secondAttribute="bottom" constant="429" id="1bz-sL-MxY"/>
                             <constraint firstItem="cia-qm-AAG" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="89" id="2FV-rj-w3m"/>
@@ -96,31 +94,23 @@
                             <constraint firstItem="o9G-C3-vaf" firstAttribute="top" secondItem="cia-qm-AAG" secondAttribute="bottom" constant="35" id="4q1-8g-00B"/>
                             <constraint firstAttribute="centerX" secondItem="LuV-yp-eM1" secondAttribute="centerX" id="8WG-0q-8HF"/>
                             <constraint firstItem="cia-qm-AAG" firstAttribute="top" secondItem="2li-hp-0ug" secondAttribute="bottom" constant="8" id="EUj-99-ieA"/>
-                            <constraint firstItem="LuV-yp-eM1" firstAttribute="top" secondItem="mqA-oL-OKB" secondAttribute="bottom" constant="40" id="F1o-nc-Mt3"/>
-                            <constraint firstItem="HDV-Be-HR9" firstAttribute="top" secondItem="Fwz-Ln-5UK" secondAttribute="bottom" id="FSS-jO-Ywa"/>
                             <constraint firstItem="P9S-nl-Ats" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="225" id="GEh-Gn-kWL"/>
                             <constraint firstItem="2li-hp-0ug" firstAttribute="trailing" secondItem="cia-qm-AAG" secondAttribute="trailing" id="Ggd-tp-OXa"/>
-                            <constraint firstItem="o9G-C3-vaf" firstAttribute="top" secondItem="cia-qm-AAG" secondAttribute="bottom" constant="35" id="KIV-mw-KHS"/>
                             <constraint firstAttribute="centerX" secondItem="P9S-nl-Ats" secondAttribute="centerX" id="KtS-WY-RM4"/>
                             <constraint firstItem="LuV-yp-eM1" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="196" id="M54-Yg-7Ll"/>
-                            <constraint firstItem="HDV-Be-HR9" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="20" id="NT9-dH-bBD"/>
                             <constraint firstAttribute="centerX" secondItem="cia-qm-AAG" secondAttribute="centerX" id="OvL-PU-zd1"/>
-                            <constraint firstItem="mqA-oL-OKB" firstAttribute="top" secondItem="P9S-nl-Ats" secondAttribute="bottom" constant="8" id="RDr-ym-Qou"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mqA-oL-OKB" secondAttribute="trailing" constant="61" id="UIk-uT-wqd"/>
+                            <constraint firstItem="uzk-L9-AlC" firstAttribute="top" secondItem="HDV-Be-HR9" secondAttribute="bottom" constant="64" id="PHa-87-zmS"/>
                             <constraint firstItem="mqA-oL-OKB" firstAttribute="top" secondItem="P9S-nl-Ats" secondAttribute="bottom" constant="8" id="UMI-Ev-ER1"/>
-                            <constraint firstAttribute="centerY" secondItem="HDV-Be-HR9" secondAttribute="centerY" id="Utd-Hq-Bum"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LuV-yp-eM1" secondAttribute="trailing" constant="196" id="WdC-YT-HCf"/>
                             <constraint firstAttribute="trailing" secondItem="cia-qm-AAG" secondAttribute="trailing" constant="89" id="Wqg-Dz-M97"/>
                             <constraint firstItem="2li-hp-0ug" firstAttribute="leading" secondItem="cia-qm-AAG" secondAttribute="leading" id="YrM-rN-NnM"/>
-                            <constraint firstAttribute="centerX" secondItem="HDV-Be-HR9" secondAttribute="centerX" id="Yx7-5N-hHK"/>
+                            <constraint firstItem="HDV-Be-HR9" firstAttribute="centerX" secondItem="mqA-oL-OKB" secondAttribute="centerX" id="ZN1-Ro-J8r"/>
                             <constraint firstAttribute="trailing" secondItem="P9S-nl-Ats" secondAttribute="trailing" constant="225" id="ZdB-qZ-2Dd"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cia-qm-AAG" secondAttribute="trailing" constant="89" id="b1B-Um-r2s"/>
                             <constraint firstItem="o9G-C3-vaf" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="187" id="bA5-1J-1mY"/>
-                            <constraint firstItem="HDV-Be-HR9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iLh-yM-O59" secondAttribute="leading" constant="20" id="egX-bD-LG5"/>
                             <constraint firstAttribute="centerX" secondItem="mqA-oL-OKB" secondAttribute="centerX" id="fMm-GM-W1u"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P9S-nl-Ats" secondAttribute="trailing" constant="225" id="ggX-9b-9HF"/>
                             <constraint firstAttribute="trailing" secondItem="mqA-oL-OKB" secondAttribute="trailing" constant="61" id="le5-Po-7ud"/>
+                            <constraint firstItem="HDV-Be-HR9" firstAttribute="centerY" secondItem="iLh-yM-O59" secondAttribute="centerY" id="mmd-Y1-iZU"/>
                             <constraint firstAttribute="trailing" secondItem="LuV-yp-eM1" secondAttribute="trailing" constant="196" id="mp8-ts-Y6P"/>
+                            <constraint firstItem="HDV-Be-HR9" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="20" symbolic="YES" id="pBj-7k-sBR"/>
                             <constraint firstItem="mqA-oL-OKB" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="61" id="pSE-Xf-tL0"/>
                             <constraint firstAttribute="trailing" secondItem="o9G-C3-vaf" secondAttribute="trailing" constant="187" id="vPB-Qf-XFt"/>
                             <constraint firstAttribute="centerX" secondItem="o9G-C3-vaf" secondAttribute="centerX" id="zDn-tN-OHx"/>
@@ -189,7 +179,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchViewImage" width="768" height="1024"/>
+        <image name="LaunchViewImage" width="1024" height="768"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

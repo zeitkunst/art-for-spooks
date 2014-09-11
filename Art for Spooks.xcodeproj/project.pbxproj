@@ -12,8 +12,8 @@
 		341FFF3219BCFC18000EAA97 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF2F19BCFC18000EAA97 /* share.png */; };
 		341FFF3519BD5281000EAA97 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341FFF3419BD5280000EAA97 /* CoreLocation.framework */; };
 		341FFF3819BD5FAC000EAA97 /* Deleuze1992.txt in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3719BD5FAC000EAA97 /* Deleuze1992.txt */; };
-		341FFF3D19BFAE4C000EAA97 /* Passthrough.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3B19BFAE4C000EAA97 /* Passthrough.fragsh */; };
-		341FFF3E19BFAE4C000EAA97 /* Passthrough.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3C19BFAE4C000EAA97 /* Passthrough.vertsh */; };
+		341FFF3D19BFAE4C000EAA97 /* PassthroughWAlpha.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3B19BFAE4C000EAA97 /* PassthroughWAlpha.fragsh */; };
+		341FFF3E19BFAE4C000EAA97 /* PassthroughWAlpha.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 341FFF3C19BFAE4C000EAA97 /* PassthroughWAlpha.vertsh */; };
 		3433E67E19AAABA600640977 /* YoussefForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67D19AAABA600640977 /* YoussefForAFS.m4v */; };
 		3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */; };
 		343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -171,8 +171,8 @@
 		341FFF2F19BCFC18000EAA97 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		341FFF3419BD5280000EAA97 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		341FFF3719BD5FAC000EAA97 /* Deleuze1992.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Deleuze1992.txt; sourceTree = "<group>"; };
-		341FFF3B19BFAE4C000EAA97 /* Passthrough.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Passthrough.fragsh; path = shaders/Passthrough.fragsh; sourceTree = "<group>"; };
-		341FFF3C19BFAE4C000EAA97 /* Passthrough.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Passthrough.vertsh; path = shaders/Passthrough.vertsh; sourceTree = "<group>"; };
+		341FFF3B19BFAE4C000EAA97 /* PassthroughWAlpha.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PassthroughWAlpha.fragsh; path = shaders/PassthroughWAlpha.fragsh; sourceTree = "<group>"; };
+		341FFF3C19BFAE4C000EAA97 /* PassthroughWAlpha.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PassthroughWAlpha.vertsh; path = shaders/PassthroughWAlpha.vertsh; sourceTree = "<group>"; };
 		3433E67D19AAABA600640977 /* YoussefForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = YoussefForAFS.m4v; sourceTree = "<group>"; };
 		3433E67F19AAABAF00640977 /* HackersSceneForAFS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = HackersSceneForAFS.m4v; sourceTree = "<group>"; };
 		343C3D7919BB712A00EE4B89 /* SampleApplicationSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleApplicationSession.mm; sourceTree = "<group>"; };
@@ -524,8 +524,8 @@
 			children = (
 				3484207B19C01B3B002533BB /* SimpleNoTexture.fragsh */,
 				3484207C19C01B3B002533BB /* SimpleNoTexture.vertsh */,
-				341FFF3B19BFAE4C000EAA97 /* Passthrough.fragsh */,
-				341FFF3C19BFAE4C000EAA97 /* Passthrough.vertsh */,
+				341FFF3B19BFAE4C000EAA97 /* PassthroughWAlpha.fragsh */,
+				341FFF3C19BFAE4C000EAA97 /* PassthroughWAlpha.vertsh */,
 				348B1B7D19B3DD820034FD98 /* Bloom.fragsh */,
 				348B1B7E19B3DD820034FD98 /* Bloom.vertsh */,
 				348B1B6A19B2EB460034FD98 /* ChromaKey.fragsh */,
@@ -814,7 +814,7 @@
 				347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
 				343C3D9319BBC9B100EE4B89 /* drone_coords.csv in Resources */,
-				341FFF3D19BFAE4C000EAA97 /* Passthrough.fragsh in Resources */,
+				341FFF3D19BFAE4C000EAA97 /* PassthroughWAlpha.fragsh in Resources */,
 				34CFED0219BCED8200D21EA9 /* SourceSansPro-Regular.otf in Resources */,
 				34C7540319A842F600A7B2E4 /* ArtForSpooks.dat in Resources */,
 				34C7543219AA552300A7B2E4 /* Animate_4x5.vertsh in Resources */,
@@ -854,7 +854,7 @@
 				34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */,
 				34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */,
 				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,
-				341FFF3E19BFAE4C000EAA97 /* Passthrough.vertsh in Resources */,
+				341FFF3E19BFAE4C000EAA97 /* PassthroughWAlpha.vertsh in Resources */,
 				34CFED0319BCED8200D21EA9 /* SourceSansPro-Semibold.otf in Resources */,
 				34D1DB1619A6AD5100CE0CA1 /* DerSpiegel-media-34098_003.png in Resources */,
 				347B0ACE19AEF14B0062C532 /* OliverFerguson.m4v in Resources */,
