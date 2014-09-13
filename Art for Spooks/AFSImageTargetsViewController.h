@@ -9,27 +9,28 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import <GLKit/GLKit.h>
 #import "SampleAppMenu.h"
 #import "AFSImageTargetsEAGLView.h"
+#import "AFSOverlayViewController.h"
 #import "SampleApplicationSession.h"
 #import <QCAR/DataSet.h>
 
-@interface AFSImageTargetsViewController : UIViewController <SampleApplicationControl>{
+@interface AFSImageTargetsViewController : UIViewController <SampleApplicationControl, UIGestureRecognizerDelegate>{
     CGRect viewFrame;
     AFSImageTargetsEAGLView* eaglView;
     QCAR::DataSet*  dataSetCurrent;
-    QCAR::DataSet*  dataSetTarmac;
     QCAR::DataSet*  dataSetSpooks;
     UITapGestureRecognizer * tapGestureRecognizer;
     SampleApplicationSession * vapp;
     CGRect arViewRect; // the size of the AR view
     
-    BOOL switchToTarmac;
     BOOL switchToSpooks;
     BOOL extendedTrackingIsOn;
     
     BOOL fullScreenPlayerPlaying;
     UINavigationController * navController;
+    AFSOverlayViewController* overlayViewController;
     
 }
+
 
 - (void) pauseAR;
 - (void) setNavigationController:(UINavigationController *) navController;

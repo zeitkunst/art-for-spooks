@@ -34,7 +34,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
     // Shader handles
     GLuint shaderProgramID;
-    GLuint distortedTVShaderProgramID;
     GLint vertexHandle;
     GLint normalHandle;
     GLint textureCoordHandle;
@@ -42,9 +41,11 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     GLint texSampler2DHandle;
     GLint resolutionHandle;
     GLint timeHandle;
+    GLint alphaHandle;
     GLint frameRowHandle;
     GLint frameColumnHandle;
     GLfloat time;
+    GLfloat alpha;
     GLfloat resolution[2];
     
     double previousTime;
@@ -52,9 +53,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     float angle;
     float xAxis;
     float yAxis;
-    
-    // Texture used when rendering augmentation
-    Texture* augmentationTexture[NUM_AUGMENTATION_TEXTURES];
 
     SampleApplicationSession * vapp;
     
@@ -62,8 +60,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     
     VideoPlayerHelper* videoPlayerHelper;
     float videoPlaybackTime;
-    
-    UILabel *testingLabel;
         
     // Lock to synchronise data that is (potentially) accessed concurrently
     NSLock* dataLock;
@@ -79,6 +75,4 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 - (void)finishOpenGLESCommands;
 - (void)freeOpenGLESResources;
-
-- (void) updateTexturePosition;
 @end

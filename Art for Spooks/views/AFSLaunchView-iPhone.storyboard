@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jrO-LB-TmM">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Launch View Controller-->
+        <scene sceneID="kFI-p1-MEm">
+            <objects>
+                <viewController id="Lmg-HC-9Ep" customClass="AFSLaunchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fwz-Ln-5UK"/>
+                        <viewControllerLayoutGuide type="bottom" id="uzk-L9-AlC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iLh-yM-O59">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.19999999999999968" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-Be-HR9">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-nl-Ats">
+                                <rect key="frame" x="1" y="64" width="318" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Login to Flickr">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="flickrAuthButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="N0d-mI-U7z"/>
+                                    <segue destination="7q4-P5-2B5" kind="push" identifier="FlickrAuthSegue" id="ebx-x8-WjE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2li-hp-0ug">
+                                <rect key="frame" x="60" y="256" width="201" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Open Twitter Stream">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="flickrAuthButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="tVJ-Jm-2WU"/>
+                                    <action selector="openTwitterStream:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="5dY-N9-WiE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cia-qm-AAG">
+                                <rect key="frame" x="20" y="223" width="280" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Open Flickr Photostream">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="flickrAuthButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="KEq-Qm-B1B"/>
+                                    <action selector="openFlickrPhotostream:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="6bS-XA-Uct"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-C3-vaf">
+                                <rect key="frame" x="12" y="318" width="297" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Launch Art for Spooks">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="launchButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="JCG-ah-n88"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not logged in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqA-oL-OKB">
+                                <rect key="frame" x="61" y="120" width="198" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ensure that you have added a Twitter account in Settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="264" translatesAutoresizingMaskIntoConstraints="NO" id="LuV-yp-eM1">
+                                <rect key="frame" x="28" y="157" width="264" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VSm-Sx-za3"/>
+                    <connections>
+                        <outlet property="flickrAuthButton" destination="P9S-nl-Ats" id="XWo-b9-2ng"/>
+                        <outlet property="flickrAuthLabel" destination="mqA-oL-OKB" id="dKY-PZ-8mJ"/>
+                        <outlet property="flickrLaunchButton" destination="cia-qm-AAG" id="FaZ-di-62A"/>
+                        <outlet property="launchButton" destination="o9G-C3-vaf" id="K0p-Bm-6Ru"/>
+                        <outlet property="twitterInfoLabel" destination="LuV-yp-eM1" id="DXs-hD-hW2"/>
+                        <outlet property="twitterstreamLaunchButton" destination="2li-hp-0ug" id="p8p-P9-dqj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W3S-CE-d1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="619" y="-382"/>
+        </scene>
+        <!--Flickr Auth View Controller - Flickr Authentication View Controller-->
+        <scene sceneID="8Ca-uc-i0J">
+            <objects>
+                <viewController title="Flickr Authentication View Controller" id="7q4-P5-2B5" customClass="AFSFlickrAuthViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U7E-7j-J3o"/>
+                        <viewControllerLayoutGuide type="bottom" id="FcX-v4-rT9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MiK-7A-ZLE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5CY-do-xI4">
+                                <rect key="frame" x="0.0" y="64" width="320" height="524"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Flickr Authentication" id="jcQ-F9-Pub"/>
+                    <connections>
+                        <outlet property="webView" destination="5CY-do-xI4" id="IMB-1T-X0F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VMN-Nz-Ksi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1589" y="-734"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gT9-cS-iHb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jrO-LB-TmM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2ZY-gM-Xe2">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Lmg-HC-9Ep" kind="relationship" relationship="rootViewController" id="1QF-Ma-KW1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IiM-4U-kFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-377" y="-382"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LaunchViewImage" width="1024" height="768"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

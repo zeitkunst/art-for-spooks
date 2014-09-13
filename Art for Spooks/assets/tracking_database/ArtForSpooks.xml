@@ -10,20 +10,21 @@
     <ImageTarget name="Foxacid" size="200.000000 123.615746" />
     <ImageTarget name="Facebook" size="200.000000 150.045013" />
     <ImageTarget name="BlurredFaces" size="200.000000 75.000000" />
-    <ImageTarget name="RabbitDuck" size="200.000000 150.000000" />
     <ImageTarget name="UFO" size="200.000000 150.000000" />
+    <ImageTarget name="RabbitDuck" size="200.000000 150.000000" />
     <ImageTarget name="CatDog" size="200.000000 150.000000" />
     <ImageTarget name="CyberMagicians" size="200.000000 150.000000" />
     <ImageTarget name="ConjuringWithInformation" size="200.000000 150.000000" />
     <ImageTarget name="UFOs" size="200.000000 150.000000" />
     <ImageTarget name="Fields" size="200.000000 150.000000" />
-    <ImageTarget name="Buffalo" size="200.000000 150.000000" />
     <ImageTarget name="Anchory" size="200.000000 149.375000" />
+    <ImageTarget name="Buffalo" size="200.000000 150.000000" />
     <ImageTarget name="Slide" size="100.000000 72.639069" />
-    <ImageTarget name="Kidnapper" size="200.000000 150.000000" />
     <ImageTarget name="Tank" size="200.000000 150.000000" />
+    <ImageTarget name="Kidnapper" size="200.000000 150.000000" />
     <ImageTarget name="Afghan" size="200.000000 149.647064" />
     <ImageTarget name="Egypt" size="200.000000 150.000000" />
     <ImageTarget name="Cards" size="200.000000 150.000000" />
+    <ImageTarget name="Zelda" size="200.000000 160.615387" />
   </Tracking>
 </QCARConfig>

@@ -8,19 +8,50 @@
 
 #import "AFSAppDelegate.h"
 #import "AFSImageTargetsViewController.h"
-#import <GLKit/GLKit.h>
+#import "AFSLaunchViewController.h"
+#import "FlickrKit.h"
 
 @implementation AFSAppDelegate
 
+- (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSString *scheme = [url scheme];
+	if([@"artforspooks" isEqualToString:scheme]) {
+        // TODO: figure out how to make this a singleton like described below
+		// I don't recommend doing it like this, it's just a demo... I use an authentication
+		// controller singleton object in my projects
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"UserAuthCallbackNotification" object:url userInfo:nil];
+    }
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    //self.window.backgroundColor = [UIColor whiteColor];
-    //UIViewController *vc = [[[ImageTargetsViewController alloc] initWithNibName:@"ImageTargetsViewController" bundle:nil] autorelease];
-    UIViewController *vc = [[[AFSImageTargetsViewController alloc] init] autorelease];
-    self.window.rootViewController = vc;
-    [self.window makeKeyAndVisible];
+    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    //UIViewController *vc = [[[AFSLaunchViewController alloc] init] autorelease];
+    //self.window.rootViewController = vc;
+    //[self.window makeKeyAndVisible];
+    //TODO: Generate new key and secret once we launch
+    NSString *apiKey = @"9a4a6ad4ddd2398e02b45c193f385d8f";
+	NSString *secret = @"2e006ab52ffa280f";
+    if (!apiKey) {
+        NSLog(@"\n----------------------------------\nYou need to enter your own 'apiKey' and 'secret' in FKAppDelegate for the demo to run. \n\nYou can get these from your Flickr account settings.\n----------------------------------\n");
+        exit(0);
+    }
+    [[FlickrKit sharedFlickrKit] initializeWithAPIKey:apiKey sharedSecret:secret];
+    
+    /*
+    NSLog(@"Available fonts: %@", [UIFont familyNames]);
+    NSArray *familyNames = [UIFont familyNames];
+    NSMutableString *name;
+    for (name in familyNames) {
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:name];
+        NSMutableString *fontName;
+        for (fontName in fontNames) {
+            NSLog(@"Family Name: %@; Font Name: %@", name, fontName);
+        }
+    }
+     */
     return YES;
 }
 
