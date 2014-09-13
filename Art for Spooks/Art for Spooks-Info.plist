@@ -48,6 +48,8 @@
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>AFSLaunchView-iPhone</string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>AFSLaunchView</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

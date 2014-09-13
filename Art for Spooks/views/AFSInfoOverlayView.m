@@ -265,7 +265,7 @@
 	}];
     [self.uploadOp addObserver:self forKeyPath:@"uploadProgress" options:NSKeyValueObservingOptionNew context:NULL];
     [self.overlayStatusLabel setHidden:NO];
-    [self.overlayStatusLabel setText:@"Uploading screenshot to Flickr and posting to Twitter..."];
+    [self.overlayStatusLabel setText:@"Uploading screenshot to Flickr and posting to Twitter, Facebook, and Tumblr..."];
 
 }
 
@@ -423,7 +423,7 @@
 // Create the status label timer
 - (void)createStatusLabelTimer
 {
-    [self.overlayStatusLabel setText:@"Successfully posted to Flickr and Twitter"];
+    [self.overlayStatusLabel setText:@"Successfully posted to Flickr, Twitter, Facebook, and Tumblr"];
     statusLabelTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(statusLabelTimerFired:) userInfo:nil repeats:NO];
 }
 

@@ -30,6 +30,7 @@
 		343C3DB219BBD47300EE4B89 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343C3DB119BBD47300EE4B89 /* Accounts.framework */; };
 		343C3DB419BBD47E00EE4B89 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343C3DB319BBD47E00EE4B89 /* Social.framework */; };
 		343C3DC019BBDCA800EE4B89 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343C3DBF19BBDCA800EE4B89 /* AssetsLibrary.framework */; };
+		3445039E19C4CB5200F2207C /* ask_zelda.png in Resources */ = {isa = PBXBuildFile; fileRef = 3445039D19C4CB5200F2207C /* ask_zelda.png */; };
 		347B0ABA19AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */; };
 		347B0ABC19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */; };
 		347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */; };
@@ -195,6 +196,7 @@
 		343C3DB119BBD47300EE4B89 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		343C3DB319BBD47E00EE4B89 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		343C3DBF19BBDCA800EE4B89 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		3445039D19C4CB5200F2207C /* ask_zelda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_zelda.png; sourceTree = "<group>"; };
 		347B0AB919AE94790062C532 /* Intercept-the-art-of-deception-training-for-a-new_022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_022.png"; sourceTree = "<group>"; };
 		347B0ABB19AEBAF00062C532 /* Intercept-the-art-of-deception-training-for-a-new_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_025.png"; sourceTree = "<group>"; };
 		347B0ABD19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 		34D1DB0D19A6AD5100CE0CA1 /* replacements */ = {
 			isa = PBXGroup;
 			children = (
+				3445039D19C4CB5200F2207C /* ask_zelda.png */,
 				348B1B6619B2E4E00034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.png */,
 				34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */,
 				34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */,
@@ -834,6 +837,7 @@
 				343C3D9719BBC9B100EE4B89 /* nsa_corpus.txt in Resources */,
 				341FFF3019BCFC18000EAA97 /* overlayInfo.html in Resources */,
 				348B1B6819B2EB460034FD98 /* ChromaKey.fragsh in Resources */,
+				3445039E19C4CB5200F2207C /* ask_zelda.png in Resources */,
 				34D1DAFF19A6AA2500CE0CA1 /* Simple.fragsh in Resources */,
 				34CFED0119BCED8200D21EA9 /* SourceSansPro-It.otf in Resources */,
 				341FFF3119BCFC18000EAA97 /* questionMark.png in Resources */,

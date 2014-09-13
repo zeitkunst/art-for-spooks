@@ -319,6 +319,9 @@ namespace {
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
                                  @"texture": @"Intercept-the-art-of-deception-training-for-a-new_025.png"} forKey:@"Women"];
+    [augmentationDict setValue:@{
+                                 @"shader": @"Simple",
+                                 @"texture": @"ask_zelda.png"} forKey:@"Zelda"];
 
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
