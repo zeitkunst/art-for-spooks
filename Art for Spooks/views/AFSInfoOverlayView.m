@@ -168,11 +168,22 @@
     
 }
 
-- (NSDictionary *) iptcDictionary
+- (NSDictionary *) iptcDictionary:(NSArray *)chosenCoord
 {
+    // TODO: change chosenCoord to dictionary from array (means changing AFSDroneCoords significantly)
+    
+    // In chosenCoord array:
+    // 0: lat
+    // 1: long
+    // 2: city
+    // 3: date
+    // 4: min num civilians killed
+    
     NSMutableDictionary *iptcDict = [[NSMutableDictionary alloc] init];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Deleuze1992" ofType:@"txt"];
+    NSArray *availableTexts = [[NSArray alloc] initWithObjects:@"Deleuze1992", @"Foucault1977", nil];
+    NSUInteger randomIndex = arc4random() % [availableTexts count];
+    NSString *path = [[NSBundle mainBundle] pathForResource:availableTexts[randomIndex] ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     
     int contentLength = (int)[content length];
@@ -183,9 +194,14 @@
     int offset = lowerBound + arc4random() % (upperBound - lowerBound);
     NSLog(@"Offset: %d", offset);
     NSString *contentCut = [content substringWithRange:NSMakeRange(offset, 2000)];
+    NSString *headline = [NSString stringWithFormat:@"Minimum %@ civilians killed in %@", chosenCoord[4], chosenCoord[2]];
     
     // TODO: Add done casulties to metadata
     [iptcDict setObject:contentCut forKey:(NSString *)kCGImagePropertyIPTCCaptionAbstract];
+    [iptcDict setObject:chosenCoord[3] forKey:(NSString *)kCGImagePropertyIPTCReleaseDate];
+    [iptcDict setObject:chosenCoord[2] forKey:(NSString *)kCGImagePropertyIPTCCity];
+    [iptcDict setObject:headline forKey:(NSString *)kCGImagePropertyIPTCHeadline];
+    [iptcDict setObject:@"1" forKey:(NSString *)kCGImagePropertyIPTCUrgency];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCCredit];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCSource];
     [iptcDict setObject:@"NSA, spooks, surveillance, Zelda" forKey:(NSString *)kCGImagePropertyIPTCKeywords];
@@ -209,7 +225,8 @@
     CLLocation *location = [[CLLocation alloc] initWithLatitude:[chosenCoord[0] doubleValue] longitude:[chosenCoord[1] doubleValue]];
     NSMutableDictionary *imageMetadata = [[NSMutableDictionary alloc] init];
     [imageMetadata setObject:[self gpsDictionaryForLocation:location] forKey:(NSString*)kCGImagePropertyGPSDictionary];
-    [imageMetadata setObject:[self iptcDictionary] forKey:(NSString *)kCGImagePropertyIPTCDictionary];
+    NSDictionary *iptcMetadata = [self iptcDictionary:chosenCoord];
+    [imageMetadata setObject:iptcMetadata forKey:(NSString *)kCGImagePropertyIPTCDictionary];
     
     // Get the assets group
     __block ALAssetsGroup* groupToAddTo;

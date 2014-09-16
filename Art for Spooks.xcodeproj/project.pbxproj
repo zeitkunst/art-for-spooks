@@ -133,6 +133,7 @@
 		34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1319A6AD5100CE0CA1 /* transparent.png */; };
 		34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */; };
 		34DCBCCB19C87D7900B7E5B6 /* flickrCredentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 34DCBCCA19C87D7900B7E5B6 /* flickrCredentials.json */; };
+		34DCBCCE19C8847E00B7E5B6 /* Foucault1977.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DCBCCD19C8847E00B7E5B6 /* Foucault1977.txt */; };
 		34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */; };
 		34DEBE1019BBE490002BD86D /* AFSFlickrAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */; };
 /* End PBXBuildFile section */
@@ -323,6 +324,7 @@
 		34D1DB1319A6AD5100CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_034.png"; sourceTree = "<group>"; };
 		34DCBCCA19C87D7900B7E5B6 /* flickrCredentials.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = flickrCredentials.json; sourceTree = "<group>"; };
+		34DCBCCD19C8847E00B7E5B6 /* Foucault1977.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Foucault1977.txt; sourceTree = "<group>"; };
 		34DD0A8F19B67512008E97B0 /* AFSOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayViewController.h; sourceTree = "<group>"; };
 		34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayViewController.m; sourceTree = "<group>"; };
 		34DEBE0E19BBE490002BD86D /* AFSFlickrAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSFlickrAuthViewController.h; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 		341FFF3619BD5FAC000EAA97 /* texts */ = {
 			isa = PBXGroup;
 			children = (
+				34DCBCCD19C8847E00B7E5B6 /* Foucault1977.txt */,
 				341FFF3719BD5FAC000EAA97 /* Deleuze1992.txt */,
 			);
 			path = texts;
@@ -863,6 +866,7 @@
 				34D1DAE119A6AA1300CE0CA1 /* TextureTeapotRed.png in Resources */,
 				3433E68019AAABAF00640977 /* HackersSceneForAFS.m4v in Resources */,
 				34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */,
+				34DCBCCE19C8847E00B7E5B6 /* Foucault1977.txt in Resources */,
 				34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */,
 				34C7540419A842F600A7B2E4 /* ArtForSpooks.xml in Resources */,
 				341FFF3E19BFAE4C000EAA97 /* PassthroughWAlpha.vertsh in Resources */,

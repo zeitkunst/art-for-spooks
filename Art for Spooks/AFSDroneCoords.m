@@ -48,11 +48,11 @@
     NSScanner *scanner = [NSScanner scannerWithString:fileString];
     [scanner setCharactersToBeSkipped:[NSCharacterSet characterSetWithCharactersInString:@"\r ,"]];
 
-    NSString *latCoord, *longCoord;
+    NSString *latCoord, *longCoord, *location, *date, *numCivilians;
     
-    while ([scanner scanUpToString:@"," intoString:&latCoord] && [scanner scanUpToString:@"\r" intoString:&longCoord]) {
+    while ([scanner scanUpToString:@"," intoString:&latCoord] && [scanner scanUpToString:@"," intoString:&longCoord] && [scanner scanUpToString:@"," intoString:&location] && [scanner scanUpToString:@"," intoString:&date] && [scanner scanUpToString:@"\r" intoString:&numCivilians]) {
         //NSLog(@"lat: %@; long: %@", latCoord, longCoord);
-        NSArray *currentCoord = [[NSArray alloc] initWithObjects:latCoord, longCoord, nil];
+        NSArray *currentCoord = [[NSArray alloc] initWithObjects:latCoord, longCoord, location, date, numCivilians, nil];
         [self.droneCoords addObject:currentCoord];
     }
 }
