@@ -196,7 +196,6 @@
     NSString *contentCut = [content substringWithRange:NSMakeRange(offset, 2000)];
     NSString *headline = [NSString stringWithFormat:@"Minimum %@ civilians killed in %@", chosenCoord[4], chosenCoord[2]];
     
-    // TODO: Add done casulties to metadata
     [iptcDict setObject:contentCut forKey:(NSString *)kCGImagePropertyIPTCCaptionAbstract];
     [iptcDict setObject:chosenCoord[3] forKey:(NSString *)kCGImagePropertyIPTCReleaseDate];
     [iptcDict setObject:chosenCoord[2] forKey:(NSString *)kCGImagePropertyIPTCCity];
