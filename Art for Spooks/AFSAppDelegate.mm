@@ -50,9 +50,23 @@
     //UIViewController *vc = [[[AFSLaunchViewController alloc] init] autorelease];
     //self.window.rootViewController = vc;
     //[self.window makeKeyAndVisible];
+    
+    NSDictionary *flickrCredentials;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"flickrCredentials" ofType:@"json"];
+    NSData *jsonData = [NSData dataWithContentsOfFile:path];
+    
+    NSError *error = nil;
+    
+    id object = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
+    
+    if ([object isKindOfClass:[NSDictionary class]] && error == nil) {
+        flickrCredentials = [[NSDictionary alloc] initWithDictionary:object];
+        //NSLog(@"%@", object);
+    }
+    
     //TODO: Generate new key and secret once we launch
-    NSString *apiKey = @"9a4a6ad4ddd2398e02b45c193f385d8f";
-	NSString *secret = @"2e006ab52ffa280f";
+    NSString *apiKey = flickrCredentials[@"apiKey"];
+	NSString *secret = flickrCredentials[@"secret"];
     if (!apiKey) {
         NSLog(@"\n----------------------------------\nYou need to enter your own 'apiKey' and 'secret' in FKAppDelegate for the demo to run. \n\nYou can get these from your Flickr account settings.\n----------------------------------\n");
         exit(0);

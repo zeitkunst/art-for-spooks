@@ -62,7 +62,8 @@
         // Setup drone coords and markov chain
         self.droneCoords = [[AFSDroneCoords alloc] initWithFilename:@"drone_coords"];
         self.markovChain = [[AFSMarkovChain alloc] init];
-        [self.markovChain loadModelWithMaxChars:70];
+        // TODO: Check on Twitter limits
+        [self.markovChain loadModelWithMaxChars:80];
         
         // Hide status label
         [self.overlayStatusLabel setHidden:YES];

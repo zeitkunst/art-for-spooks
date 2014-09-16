@@ -132,6 +132,7 @@
 		34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */; };
 		34D1DB1919A6AD5100CE0CA1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB1319A6AD5100CE0CA1 /* transparent.png */; };
 		34D1DB2819A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */; };
+		34DCBCCB19C87D7900B7E5B6 /* flickrCredentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 34DCBCCA19C87D7900B7E5B6 /* flickrCredentials.json */; };
 		34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */; };
 		34DEBE1019BBE490002BD86D /* AFSFlickrAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */; };
 /* End PBXBuildFile section */
@@ -321,6 +322,7 @@
 		34D1DB1219A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-psychology-a-new-kind-of-sigdev_025.png"; sourceTree = "<group>"; };
 		34D1DB1319A6AD5100CE0CA1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		34D1DB2719A6ADC500CE0CA1 /* Intercept-the-art-of-deception-training-for-a-new_034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intercept-the-art-of-deception-training-for-a-new_034.png"; sourceTree = "<group>"; };
+		34DCBCCA19C87D7900B7E5B6 /* flickrCredentials.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = flickrCredentials.json; sourceTree = "<group>"; };
 		34DD0A8F19B67512008E97B0 /* AFSOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayViewController.h; sourceTree = "<group>"; };
 		34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayViewController.m; sourceTree = "<group>"; };
 		34DEBE0E19BBE490002BD86D /* AFSFlickrAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSFlickrAuthViewController.h; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 		34D1DABD19A6AA1300CE0CA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				34DCBCCA19C87D7900B7E5B6 /* flickrCredentials.json */,
 				34CFECF419BCED8100D21EA9 /* fonts */,
 				341FFF2C19BCFC18000EAA97 /* html */,
 				343C3D8E19BBC9B100EE4B89 /* markov */,
@@ -848,6 +851,7 @@
 				347B0ABE19AED71B0062C532 /* Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png in Resources */,
 				343C3DA719BBD01E00EE4B89 /* AFSLaunchView.storyboard in Resources */,
 				348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */,
+				34DCBCCB19C87D7900B7E5B6 /* flickrCredentials.json in Resources */,
 				34823E3219ABB8E700C526EB /* DerSpiegel-image-542019-galleryV9-hheg.png in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
 				34C7542619A95E0800A7B2E4 /* Bubbles.vertsh in Resources */,
