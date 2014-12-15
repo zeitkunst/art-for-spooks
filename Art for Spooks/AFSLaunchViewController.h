@@ -32,5 +32,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *twitterstreamLaunchButton;
 @property (strong, nonatomic) IBOutlet UIButton *flickrLaunchButton;
 @property (strong, nonatomic) IBOutlet UIButton *launchButton;
+@property (strong, nonatomic) IBOutlet UIButton *setupButton;
+@property (strong, nonatomic) IBOutlet UIButton *aboutButton;
 
 @end

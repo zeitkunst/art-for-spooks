@@ -64,7 +64,6 @@
         //NSLog(@"%@", object);
     }
     
-    //TODO: Generate new key and secret once we launch
     NSString *apiKey = flickrCredentials[@"apiKey"];
 	NSString *secret = flickrCredentials[@"secret"];
     if (!apiKey) {

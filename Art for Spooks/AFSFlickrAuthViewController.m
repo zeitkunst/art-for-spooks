@@ -59,11 +59,14 @@
 	// Begin the authentication process
 	self.authOp = [[FlickrKit sharedFlickrKit] beginAuthWithCallbackURL:[NSURL URLWithString:callbackURLString] permission:FKPermissionDelete completion:^(NSURL *flickrLoginPageURL, NSError *error) {
 		dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"flickrLoginPageURL: %@", flickrLoginPageURL);
 			if (!error) {
 				NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:flickrLoginPageURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
 				[self.webView loadRequest:urlRequest];
 			} else {
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                NSLog(@"ERROR: %@", error.localizedDescription);
+                //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 				[alert show];
 			}
         });

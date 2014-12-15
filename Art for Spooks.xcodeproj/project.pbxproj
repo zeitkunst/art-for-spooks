@@ -73,6 +73,9 @@
 		348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */; };
 		348B1B7F19B3DD820034FD98 /* Bloom.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B7D19B3DD820034FD98 /* Bloom.fragsh */; };
 		348B1B8019B3DD820034FD98 /* Bloom.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = 348B1B7E19B3DD820034FD98 /* Bloom.vertsh */; };
+		348F2D551A3F57BC00907956 /* AFSSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F2D541A3F57BC00907956 /* AFSSetupViewController.m */; };
+		348F2D581A3F668200907956 /* AFSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F2D571A3F668200907956 /* AFSAboutViewController.m */; };
+		348F2D5A1A3F682300907956 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 348F2D591A3F682300907956 /* about.html */; };
 		34BDB19B19B29F36005B1AA8 /* phantasmagoria001.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */; };
 		34BDB19C19B29F36005B1AA8 /* phantasmagoria002.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */; };
 		34BDB19D19B29F36005B1AA8 /* phantasmagoria003.png in Resources */ = {isa = PBXBuildFile; fileRef = 34BDB19A19B29F36005B1AA8 /* phantasmagoria003.png */; };
@@ -96,7 +99,6 @@
 		34C7543619AA812500A7B2E4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7543519AA812500A7B2E4 /* ImageIO.framework */; };
 		34CFECB919BBEA4E00D21EA9 /* AFSLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CFECB819BBEA4E00D21EA9 /* AFSLaunchViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34CFECBE19BBF09000D21EA9 /* AFSOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */; };
-		34CFECE319BC180500D21EA9 /* libFlickrKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CFECDE19BC179F00D21EA9 /* libFlickrKit.a */; };
 		34CFECFD19BCED8200D21EA9 /* SourceSansPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF519BCED8200D21EA9 /* SourceSansPro-Black.otf */; };
 		34CFECFE19BCED8200D21EA9 /* SourceSansPro-BlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF619BCED8200D21EA9 /* SourceSansPro-BlackIt.otf */; };
 		34CFECFF19BCED8200D21EA9 /* SourceSansPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34CFECF719BCED8200D21EA9 /* SourceSansPro-Bold.otf */; };
@@ -136,6 +138,7 @@
 		34DCBCCE19C8847E00B7E5B6 /* Foucault1977.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DCBCCD19C8847E00B7E5B6 /* Foucault1977.txt */; };
 		34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */; };
 		34DEBE1019BBE490002BD86D /* AFSFlickrAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */; };
+		34E77AD81A1F90B5006CA036 /* libFlickrKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E77AD21A1F8A71006CA036 /* libFlickrKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,23 +149,23 @@
 			remoteGlobalIDString = 34832E8719A1829100C80D70;
 			remoteInfo = "Art for Spooks";
 		};
-		34CFECDD19BC179F00D21EA9 /* PBXContainerItemProxy */ = {
+		34E77AD11A1F8A71006CA036 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 34CFECD819BC179F00D21EA9 /* FlickrKit.xcodeproj */;
+			containerPortal = 34E77ACC1A1F8A71006CA036 /* FlickrKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 552D918C1753F8EF00BE3FEA;
 			remoteInfo = FlickrKit;
 		};
-		34CFECDF19BC179F00D21EA9 /* PBXContainerItemProxy */ = {
+		34E77AD31A1F8A71006CA036 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 34CFECD819BC179F00D21EA9 /* FlickrKit.xcodeproj */;
+			containerPortal = 34E77ACC1A1F8A71006CA036 /* FlickrKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 552D919A1753F8F000BE3FEA;
 			remoteInfo = FlickrKitTests;
 		};
-		34CFECE119BC180000D21EA9 /* PBXContainerItemProxy */ = {
+		34E77AD61A1F90AF006CA036 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 34CFECD819BC179F00D21EA9 /* FlickrKit.xcodeproj */;
+			containerPortal = 34E77ACC1A1F8A71006CA036 /* FlickrKit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 552D918B1753F8EF00BE3FEA;
 			remoteInfo = FlickrKit;
@@ -249,6 +252,11 @@
 		348B1B7B19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Intercept-psychology-a-new-kind-of-sigdev_007.m4v"; sourceTree = "<group>"; };
 		348B1B7D19B3DD820034FD98 /* Bloom.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bloom.fragsh; path = shaders/Bloom.fragsh; sourceTree = "<group>"; };
 		348B1B7E19B3DD820034FD98 /* Bloom.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bloom.vertsh; path = shaders/Bloom.vertsh; sourceTree = "<group>"; };
+		348F2D531A3F57BC00907956 /* AFSSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSSetupViewController.h; sourceTree = "<group>"; };
+		348F2D541A3F57BC00907956 /* AFSSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSSetupViewController.m; sourceTree = "<group>"; };
+		348F2D561A3F668200907956 /* AFSAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSAboutViewController.h; sourceTree = "<group>"; };
+		348F2D571A3F668200907956 /* AFSAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSAboutViewController.m; sourceTree = "<group>"; };
+		348F2D591A3F682300907956 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		34BDB19819B29F36005B1AA8 /* phantasmagoria001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria001.png; sourceTree = "<group>"; };
 		34BDB19919B29F36005B1AA8 /* phantasmagoria002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria002.png; sourceTree = "<group>"; };
 		34BDB19A19B29F36005B1AA8 /* phantasmagoria003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phantasmagoria003.png; sourceTree = "<group>"; };
@@ -274,7 +282,6 @@
 		34CFECB819BBEA4E00D21EA9 /* AFSLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSLaunchViewController.m; sourceTree = "<group>"; };
 		34CFECBC19BBF09000D21EA9 /* AFSOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSOverlayView.h; sourceTree = "<group>"; };
 		34CFECBD19BBF09000D21EA9 /* AFSOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayView.m; sourceTree = "<group>"; };
-		34CFECD819BC179F00D21EA9 /* FlickrKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FlickrKit.xcodeproj; path = ../../../../../development/ZeitkunstFlickrKit/FlickrKit.xcodeproj; sourceTree = "<group>"; };
 		34CFECF519BCED8200D21EA9 /* SourceSansPro-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.otf"; sourceTree = "<group>"; };
 		34CFECF619BCED8200D21EA9 /* SourceSansPro-BlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BlackIt.otf"; sourceTree = "<group>"; };
 		34CFECF719BCED8200D21EA9 /* SourceSansPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.otf"; sourceTree = "<group>"; };
@@ -329,6 +336,7 @@
 		34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayViewController.m; sourceTree = "<group>"; };
 		34DEBE0E19BBE490002BD86D /* AFSFlickrAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSFlickrAuthViewController.h; sourceTree = "<group>"; };
 		34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSFlickrAuthViewController.m; sourceTree = "<group>"; };
+		34E77ACC1A1F8A71006CA036 /* FlickrKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FlickrKit.xcodeproj; path = ../../../../../development/FlickrKit/FlickrKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,8 +344,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E77AD81A1F90B5006CA036 /* libFlickrKit.a in Frameworks */,
 				341FFF3519BD5281000EAA97 /* CoreLocation.framework in Frameworks */,
-				34CFECE319BC180500D21EA9 /* libFlickrKit.a in Frameworks */,
 				343C3DC019BBDCA800EE4B89 /* AssetsLibrary.framework in Frameworks */,
 				343C3DB419BBD47E00EE4B89 /* Social.framework in Frameworks */,
 				343C3DB219BBD47300EE4B89 /* Accounts.framework in Frameworks */,
@@ -376,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				341FFF2D19BCFC18000EAA97 /* overlayInfo.html */,
+				348F2D591A3F682300907956 /* about.html */,
 				341FFF2E19BCFC18000EAA97 /* questionMark.png */,
 				341FFF2F19BCFC18000EAA97 /* share.png */,
 			);
@@ -419,7 +428,7 @@
 		34832E7F19A1829100C80D70 = {
 			isa = PBXGroup;
 			children = (
-				34CFECD819BC179F00D21EA9 /* FlickrKit.xcodeproj */,
+				34E77ACC1A1F8A71006CA036 /* FlickrKit.xcodeproj */,
 				34832E9119A1829100C80D70 /* Art for Spooks */,
 				34832EAA19A1829200C80D70 /* Art for SpooksTests */,
 				34832E8A19A1829100C80D70 /* Frameworks */,
@@ -490,6 +499,10 @@
 				34D1DA6319A4531800CE0CA1 /* AFSImageTargetsViewController.mm */,
 				343C3DA319BBCF9800EE4B89 /* AFSLaunchViewController.h */,
 				34CFECB819BBEA4E00D21EA9 /* AFSLaunchViewController.m */,
+				348F2D531A3F57BC00907956 /* AFSSetupViewController.h */,
+				348F2D541A3F57BC00907956 /* AFSSetupViewController.m */,
+				348F2D561A3F668200907956 /* AFSAboutViewController.h */,
+				348F2D571A3F668200907956 /* AFSAboutViewController.m */,
 				34DEBE0E19BBE490002BD86D /* AFSFlickrAuthViewController.h */,
 				34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */,
 				34DD0A8F19B67512008E97B0 /* AFSOverlayViewController.h */,
@@ -573,15 +586,6 @@
 				34C7541B19A9331E00A7B2E4 /* 1984Macintosh.m4v */,
 			);
 			path = videos;
-			sourceTree = "<group>";
-		};
-		34CFECD919BC179F00D21EA9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				34CFECDE19BC179F00D21EA9 /* libFlickrKit.a */,
-				34CFECE019BC179F00D21EA9 /* FlickrKitTests.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		34CFECF419BCED8100D21EA9 /* fonts */ = {
@@ -706,6 +710,15 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		34E77ACD1A1F8A71006CA036 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34E77AD21A1F8A71006CA036 /* libFlickrKit.a */,
+				34E77AD41A1F8A71006CA036 /* FlickrKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -720,7 +733,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				34CFECE219BC180000D21EA9 /* PBXTargetDependency */,
+				34E77AD71A1F90AF006CA036 /* PBXTargetDependency */,
 			);
 			name = "Art for Spooks";
 			productName = "Art for Spooks";
@@ -775,8 +788,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 34CFECD919BC179F00D21EA9 /* Products */;
-					ProjectRef = 34CFECD819BC179F00D21EA9 /* FlickrKit.xcodeproj */;
+					ProductGroup = 34E77ACD1A1F8A71006CA036 /* Products */;
+					ProjectRef = 34E77ACC1A1F8A71006CA036 /* FlickrKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -788,18 +801,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		34CFECDE19BC179F00D21EA9 /* libFlickrKit.a */ = {
+		34E77AD21A1F8A71006CA036 /* libFlickrKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFlickrKit.a;
-			remoteRef = 34CFECDD19BC179F00D21EA9 /* PBXContainerItemProxy */;
+			remoteRef = 34E77AD11A1F8A71006CA036 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		34CFECE019BC179F00D21EA9 /* FlickrKitTests.octest */ = {
+		34E77AD41A1F8A71006CA036 /* FlickrKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = FlickrKitTests.octest;
-			remoteRef = 34CFECDF19BC179F00D21EA9 /* PBXContainerItemProxy */;
+			path = FlickrKitTests.xctest;
+			remoteRef = 34E77AD31A1F8A71006CA036 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -892,6 +905,7 @@
 				34C7542519A95E0800A7B2E4 /* Bubbles.fragsh in Resources */,
 				34D1DB1719A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_020.png in Resources */,
 				347B0AC219AED77F0062C532 /* Animate_8x8.vertsh in Resources */,
+				348F2D5A1A3F682300907956 /* about.html in Resources */,
 				34D1DB1819A6AD5100CE0CA1 /* Intercept-psychology-a-new-kind-of-sigdev_025.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -927,8 +941,10 @@
 				34D1DA6419A4531800CE0CA1 /* AFSImageTargetsEAGLView.mm in Sources */,
 				343C3D9C19BBCA5000EE4B89 /* AFSDroneCoords.m in Sources */,
 				34D1DAF819A6AA2500CE0CA1 /* SampleApplication3DModel.mm in Sources */,
+				348F2D551A3F57BC00907956 /* AFSSetupViewController.m in Sources */,
 				343C3D7A19BB712A00EE4B89 /* SampleApplicationSession.mm in Sources */,
 				34D1DAFC19A6AA2500CE0CA1 /* SampleAppMenu.mm in Sources */,
+				348F2D581A3F668200907956 /* AFSAboutViewController.m in Sources */,
 				34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */,
 				34832E9C19A1829100C80D70 /* AFSAppDelegate.mm in Sources */,
 			);
@@ -950,10 +966,10 @@
 			target = 34832E8719A1829100C80D70 /* Art for Spooks */;
 			targetProxy = 34832EA819A1829200C80D70 /* PBXContainerItemProxy */;
 		};
-		34CFECE219BC180000D21EA9 /* PBXTargetDependency */ = {
+		34E77AD71A1F90AF006CA036 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FlickrKit;
-			targetProxy = 34CFECE119BC180000D21EA9 /* PBXContainerItemProxy */;
+			targetProxy = 34E77AD61A1F90AF006CA036 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1081,8 +1097,9 @@
 					"/Users/nknouf/development/vuforia-sdk-ios-2-8-7/build/lib/arm",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
+				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "aa989dfc-7093-45e4-9634-11ed64c726e1";
 				VALID_ARCHS = "armv8 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1110,8 +1127,9 @@
 					"/Users/nknouf/development/vuforia-sdk-ios-3-0-9/build/lib/arm",
 					"/Users/nknouf/development/vuforia-sdk-ios-2-8-7/build/lib/arm",
 				);
-				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
+				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "aa989dfc-7093-45e4-9634-11ed64c726e1";
 				VALID_ARCHS = "armv8 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

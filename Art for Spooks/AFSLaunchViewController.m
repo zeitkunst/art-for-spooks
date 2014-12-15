@@ -67,6 +67,8 @@
     self.twitterstreamLaunchButton.titleLabel.font = sourceSansProBlack;
     self.flickrLaunchButton.titleLabel.font = sourceSansProBlack;
     self.launchButton.titleLabel.font = sourceSansProBlack;
+    self.setupButton.titleLabel.font = sourceSansProBlack;
+    self.aboutButton.titleLabel.font = sourceSansProBlack;
     
     // Check if there is a stored token
 	// You should do this once on app launch

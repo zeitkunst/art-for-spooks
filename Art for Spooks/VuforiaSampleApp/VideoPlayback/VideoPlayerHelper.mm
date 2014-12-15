@@ -697,7 +697,8 @@ static NSString* const kRateKey = @"rate";
                        context:(void*)context
 {
     if (AVPlayerItemStatusObservationContext == context) {
-        AVPlayerItemStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        NSInteger statusInt = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        AVPlayerItemStatus status = (AVPlayerItemStatus)statusInt;
         
         switch (status) {
             case AVPlayerItemStatusUnknown:
