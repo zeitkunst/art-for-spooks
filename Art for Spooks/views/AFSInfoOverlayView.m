@@ -44,6 +44,7 @@
 @property (nonatomic, retain) NSString *userID;
 @property (nonatomic, retain) NSString *albumName;
 @property (strong, nonatomic) ALAssetsLibrary *assetsLibrary;
+@property BOOL haveTwitter;
 @end
 
 @implementation AFSInfoOverlayView
@@ -107,6 +108,42 @@
                 }
             });
         }];
+        
+        // Check if we have a Twitter account
+        // Check on twitter accounts
+        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) // check Twitter is configured in Settings or not
+        {
+            self.accountStore = [[ACAccountStore alloc] init]; // you have to retain ACAccountStore
+            
+            ACAccountType *twitterAcc = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+            
+            [self.accountStore requestAccessToAccountsWithType:twitterAcc options:nil completion:^(BOOL granted, NSError *error)
+             {
+                 if (granted)
+                 {
+                     ACAccount *twitterAccount = [[self.accountStore accountsWithAccountType:twitterAcc] lastObject];
+                     self.haveTwitter = YES;
+                     NSLog(@"Twitter UserName: %@, FullName: %@", twitterAccount.username, twitterAccount.userFullName);
+                 }
+                 else
+                 {
+                     if (error == nil) {
+                         NSLog(@"User Has disabled your app from settings...");
+                         self.haveTwitter = NO;
+                     }
+                     else
+                     {
+                         self.haveTwitter = NO;
+                         NSLog(@"Error in Login: %@", error);
+                     }
+                 }
+             }];
+        }
+        else
+        {
+            self.haveTwitter = NO;
+            NSLog(@"Twitter account not Configured in Settings......"); // show user an alert view that Twitter is not configured in settings.
+        }
         
     }
     //[self.infoWebView setHidden:YES];
@@ -261,7 +298,11 @@
                                                         NSLog(@"failed to retrieve image asset:\nError: %@ ", [error localizedDescription]);
                                                     }];
                                        // Finally, after it's been added, upload everything
-                                       [self uploadScreenshot:screenshot withAssetURL:assetURL andStatus:status andDescription:description andCoords:chosenCoord];
+                                       if (self.userID != nil) {
+                                           [self uploadScreenshot:screenshot withAssetURL:assetURL andStatus:status andDescription:description andCoords:chosenCoord];
+                                       } else {
+                                           NSLog(@"No Flickr account, so no uploading...");
+                                       }
                                    }
                                    else {
                                        NSLog(@"saved image failed.\nerror code %i\n%@", error.code, [error localizedDescription]);
@@ -293,14 +334,21 @@
 				//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 				//[alert show];
                 [status appendFormat:@": http://www.flickr.com/photos/%@/%@/", self.userID, imageID];
-                [self tweetWithStatus:status andCoords:chosenCoord andImage:screenshot];
+                if (self.haveTwitter) {
+                    [self tweetWithStatus:status andCoords:chosenCoord andImage:screenshot];
+                } else {
+                    NSLog(@"No Twitter account, not tweeting...");
+                    if (statusLabelTimer == nil) {
+                        [self createStatusLabelTimer];
+                    }
+                }
 			}
             [self.uploadOp removeObserver:self forKeyPath:@"uploadProgress" context:NULL];
         });
 	}];
     [self.uploadOp addObserver:self forKeyPath:@"uploadProgress" options:NSKeyValueObservingOptionNew context:NULL];
     [self.overlayStatusLabel setHidden:NO];
-    [self.overlayStatusLabel setText:@"Uploading screenshot to Flickr and posting to Twitter, Facebook, and Tumblr..."];
+    [self.overlayStatusLabel setText:@"Uploading screenshot to social media sites..."];
 
 }
 
@@ -458,7 +506,7 @@
 // Create the status label timer
 - (void)createStatusLabelTimer
 {
-    [self.overlayStatusLabel setText:@"Successfully posted to Flickr, Twitter, Facebook, and Tumblr"];
+    [self.overlayStatusLabel setText:@"Successfully posted to social media sites."];
     statusLabelTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(statusLabelTimerFired:) userInfo:nil repeats:NO];
 }
 
