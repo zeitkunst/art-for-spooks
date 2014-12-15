@@ -55,7 +55,7 @@
     // Do any additional setup after loading the view.
     
     // Setup callback for authentication callback
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAuthenticateCallback:) name:@"UserAuthCallbackNotification" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAuthenticateCallback:) name:@"UserAuthCallbackNotification" object:nil];
     
     // Setup my fonts
     UIFont* sourceSansProBlack  = [UIFont fontWithName:@"SourceSansPro-Black" size:30];
@@ -64,8 +64,6 @@
     self.flickrAuthLabel.font = sourceSansProRegular;
     self.twitterInfoLabel.font = sourceSansProRegular;
     [self.twitterInfoLabel setNumberOfLines:2];
-    self.twitterstreamLaunchButton.titleLabel.font = sourceSansProBlack;
-    self.flickrLaunchButton.titleLabel.font = sourceSansProBlack;
     self.launchButton.titleLabel.font = sourceSansProBlack;
     self.setupButton.titleLabel.font = sourceSansProBlack;
     self.aboutButton.titleLabel.font = sourceSansProBlack;
@@ -92,9 +90,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     
-	[self.completeAuthOp cancel];
 	[self.checkAuthOp cancel];
-    [self.uploadOp cancel];
     [super viewWillDisappear:animated];
 }
 
@@ -109,40 +105,7 @@
     [self.navigationController pushViewController:vc animated:NO];
 }
 
-- (IBAction)openTwitterStream:(id)sender {
-    NSURL *url = [NSURL URLWithString:@"https://twitter.com/artforspooks"];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
-- (IBAction)openFlickrPhotostream:(id)sender {
-    NSURL *url = [NSURL URLWithString:@"https://www.flickr.com/photos/126630681@N03/"];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
 #pragma mark - Authentication
-
-- (void) userAuthenticateCallback:(NSNotification *)notification {
-	NSURL *callbackURL = notification.object;
-    self.completeAuthOp = [[FlickrKit sharedFlickrKit] completeAuthWithURL:callbackURL completion:^(NSString *userName, NSString *userId, NSString *fullName, NSError *error) {
-		dispatch_async(dispatch_get_main_queue(), ^{
-			if (!error) {
-				[self userLoggedIn:userName userID:userId];
-			} else {
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-				[alert show];
-			}
-			[self.navigationController popToRootViewControllerAnimated:YES];
-		});
-	}];
-}
-- (IBAction)flickrAuthButtonPressed:(id)sender {
-    NSLog(@"Auth button pressed");
-    if ([FlickrKit sharedFlickrKit].isAuthorized) {
-		[[FlickrKit sharedFlickrKit] logout];
-		[self userLoggedOut];
-        self.justLoggedOut = YES;
-	}
-}
 
 - (void) userLoggedIn:(NSString *)username userID:(NSString *)userID {
 	self.userID = userID;
@@ -153,23 +116,6 @@
 - (void) userLoggedOut {
 	[self.flickrAuthButton setTitle:@"Login to Flickr" forState:UIControlStateNormal];
 	self.flickrAuthLabel.text = @"Not logged in";
-}
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    NSLog(@"In shouldPerformSequeWithIdentifier");
-    NSLog(@"Identifier: %@", identifier);
-    if ([identifier isEqualToString:@"FlickrAuthSegue"]) {
-        if (self.justLoggedOut) {
-            NSLog(@"Shouldn't perform segue");
-            self.justLoggedOut = NO;
-            return NO;
-        } else {
-            return YES;
-        }
-    }
-    
-    return YES;
-    
 }
 
 

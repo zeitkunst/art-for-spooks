@@ -59,7 +59,7 @@
              if (granted)
              {
                  ACAccount *twitterAccount = [[self.accountStore accountsWithAccountType:twitterAcc] lastObject];
-                 self.twitterAccountLabel.text = [NSString stringWithFormat:@"Twitter account: %@", twitterAccount.username];
+                 [self.twitterAccountLabel setText:[NSString stringWithFormat:@"Twitter account: %@", twitterAccount.username]];
                  NSLog(@"Twitter UserName: %@, FullName: %@", twitterAccount.username, twitterAccount.userFullName);
              }
              else
@@ -76,9 +76,10 @@
     }
     else
     {
-        self.twitterAccountLabel.text = @"No Twitter account specified in Settings; please add one manually.";
+        [self.twitterAccountLabel setText:@"No Twitter account specified in Settings; please add one manually."];
         NSLog(@"Twitter account not Configured in Settings......"); // show user an alert view that Twitter is not configured in settings.
     }
+    [self.twitterAccountLabel setNeedsDisplay];
     
     // Check on stored Flickr token
     // Check if there is a stored token

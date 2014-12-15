@@ -14,115 +14,113 @@
                         <viewControllerLayoutGuide type="bottom" id="uzk-L9-AlC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iLh-yM-O59">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.19999999999999968" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-Be-HR9">
-                                <rect key="frame" x="20" y="64" width="728" height="896"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.19999999999999968" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-Be-HR9">
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-nl-Ats">
-                                <rect key="frame" x="225" y="340" width="318" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Login to Flickr">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="flickrAuthButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="N0d-mI-U7z"/>
-                                    <segue destination="7q4-P5-2B5" kind="push" identifier="FlickrAuthSegue" id="ebx-x8-WjE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2li-hp-0ug">
-                                <rect key="frame" x="89" y="550" width="590" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="PAr-5S-xud"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Open Art for Spooks Twitter Stream">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="flickrAuthButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="tVJ-Jm-2WU"/>
-                                    <action selector="openTwitterStream:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="5dY-N9-WiE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cia-qm-AAG">
-                                <rect key="frame" x="89" y="603" width="590" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Open Art for Spooks Flickr Photostream">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="flickrAuthButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="KEq-Qm-B1B"/>
-                                    <action selector="openFlickrPhotostream:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="6bS-XA-Uct"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-C3-vaf">
-                                <rect key="frame" x="187" y="679" width="394" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Launch Art for Spooks">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-C3-vaf">
+                                <rect key="frame" x="16" y="670" width="205" height="78"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" title="Launch">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="launchButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="JCG-ah-n88"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not logged in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqA-oL-OKB">
-                                <rect key="frame" x="61" y="396" width="646" height="29"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bui-Ot-OBx">
+                                <rect key="frame" x="868" y="665" width="136" height="88"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" title="About">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="1sd-1D-Cwz" kind="push" identifier="AboutSegue" id="1fz-8j-HRo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps1-kK-9tx">
+                                <rect key="frame" x="458" y="674" width="108" height="70"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" title="Setup">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="e18-0B-0JH" kind="push" identifier="SetupSegue" id="8dh-DB-yj9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VSm-Sx-za3"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="aboutButton" destination="Bui-Ot-OBx" id="1q3-rU-cvx"/>
+                        <outlet property="launchButton" destination="o9G-C3-vaf" id="K0p-Bm-6Ru"/>
+                        <outlet property="setupButton" destination="Ps1-kK-9tx" id="6j6-E7-c6o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W3S-CE-d1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="609" y="-382"/>
+        </scene>
+        <!--Setup-->
+        <scene sceneID="ECh-t6-HZj">
+            <objects>
+                <viewController id="e18-0B-0JH" customClass="AFSSetupViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2mw-uu-Gi3"/>
+                        <viewControllerLayoutGuide type="bottom" id="yBk-Eh-5fc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x1G-lZ-dNg">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="gYp-HQ-391">
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rla-eU-Vn0">
+                                <rect key="frame" x="225" y="109" width="574" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Login to Flickr">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="flickrAuthButtonPressed:" destination="e18-0B-0JH" eventType="touchUpInside" id="Bge-Og-p3d"/>
+                                    <action selector="flickrAuthButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="Rld-P4-Csg"/>
+                                    <segue destination="7q4-P5-2B5" kind="push" identifier="FlickrAuthSegue" id="uYt-za-cex"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not logged in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07q-rI-Mqq">
+                                <rect key="frame" x="61" y="165" width="902" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ensure that you have added a Twitter account in Settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="376" translatesAutoresizingMaskIntoConstraints="NO" id="LuV-yp-eM1">
-                                <rect key="frame" x="196" y="465" width="376" height="58"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading Twitter account info..." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvL-nu-JhQ">
+                                <rect key="frame" x="244" y="202" width="536" height="100"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="2li-hp-0ug" firstAttribute="top" secondItem="LuV-yp-eM1" secondAttribute="bottom" constant="27" id="10a-Xo-YkE"/>
-                            <constraint firstAttribute="bottom" secondItem="2li-hp-0ug" secondAttribute="bottom" constant="429" id="1bz-sL-MxY"/>
-                            <constraint firstItem="cia-qm-AAG" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="89" id="2FV-rj-w3m"/>
-                            <constraint firstItem="LuV-yp-eM1" firstAttribute="top" secondItem="mqA-oL-OKB" secondAttribute="bottom" constant="40" id="3WB-ge-oRa"/>
-                            <constraint firstItem="o9G-C3-vaf" firstAttribute="top" secondItem="cia-qm-AAG" secondAttribute="bottom" constant="35" id="4q1-8g-00B"/>
-                            <constraint firstAttribute="centerX" secondItem="LuV-yp-eM1" secondAttribute="centerX" id="8WG-0q-8HF"/>
-                            <constraint firstItem="cia-qm-AAG" firstAttribute="top" secondItem="2li-hp-0ug" secondAttribute="bottom" constant="8" id="EUj-99-ieA"/>
-                            <constraint firstItem="P9S-nl-Ats" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="225" id="GEh-Gn-kWL"/>
-                            <constraint firstItem="2li-hp-0ug" firstAttribute="trailing" secondItem="cia-qm-AAG" secondAttribute="trailing" id="Ggd-tp-OXa"/>
-                            <constraint firstAttribute="centerX" secondItem="P9S-nl-Ats" secondAttribute="centerX" id="KtS-WY-RM4"/>
-                            <constraint firstItem="LuV-yp-eM1" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="196" id="M54-Yg-7Ll"/>
-                            <constraint firstAttribute="centerX" secondItem="cia-qm-AAG" secondAttribute="centerX" id="OvL-PU-zd1"/>
-                            <constraint firstItem="uzk-L9-AlC" firstAttribute="top" secondItem="HDV-Be-HR9" secondAttribute="bottom" constant="64" id="PHa-87-zmS"/>
-                            <constraint firstItem="mqA-oL-OKB" firstAttribute="top" secondItem="P9S-nl-Ats" secondAttribute="bottom" constant="8" id="UMI-Ev-ER1"/>
-                            <constraint firstAttribute="trailing" secondItem="cia-qm-AAG" secondAttribute="trailing" constant="89" id="Wqg-Dz-M97"/>
-                            <constraint firstItem="2li-hp-0ug" firstAttribute="leading" secondItem="cia-qm-AAG" secondAttribute="leading" id="YrM-rN-NnM"/>
-                            <constraint firstItem="HDV-Be-HR9" firstAttribute="centerX" secondItem="mqA-oL-OKB" secondAttribute="centerX" id="ZN1-Ro-J8r"/>
-                            <constraint firstAttribute="trailing" secondItem="P9S-nl-Ats" secondAttribute="trailing" constant="225" id="ZdB-qZ-2Dd"/>
-                            <constraint firstItem="o9G-C3-vaf" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="187" id="bA5-1J-1mY"/>
-                            <constraint firstAttribute="centerX" secondItem="mqA-oL-OKB" secondAttribute="centerX" id="fMm-GM-W1u"/>
-                            <constraint firstAttribute="trailing" secondItem="mqA-oL-OKB" secondAttribute="trailing" constant="61" id="le5-Po-7ud"/>
-                            <constraint firstItem="HDV-Be-HR9" firstAttribute="centerY" secondItem="iLh-yM-O59" secondAttribute="centerY" id="mmd-Y1-iZU"/>
-                            <constraint firstAttribute="trailing" secondItem="LuV-yp-eM1" secondAttribute="trailing" constant="196" id="mp8-ts-Y6P"/>
-                            <constraint firstItem="HDV-Be-HR9" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="20" symbolic="YES" id="pBj-7k-sBR"/>
-                            <constraint firstItem="mqA-oL-OKB" firstAttribute="leading" secondItem="iLh-yM-O59" secondAttribute="leading" constant="61" id="pSE-Xf-tL0"/>
-                            <constraint firstAttribute="trailing" secondItem="o9G-C3-vaf" secondAttribute="trailing" constant="187" id="vPB-Qf-XFt"/>
-                            <constraint firstAttribute="centerX" secondItem="o9G-C3-vaf" secondAttribute="centerX" id="zDn-tN-OHx"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VSm-Sx-za3"/>
+                    <navigationItem key="navigationItem" title="Setup" id="L00-pV-3Pl"/>
                     <connections>
-                        <outlet property="flickrAuthButton" destination="P9S-nl-Ats" id="XWo-b9-2ng"/>
-                        <outlet property="flickrAuthLabel" destination="mqA-oL-OKB" id="dKY-PZ-8mJ"/>
-                        <outlet property="flickrLaunchButton" destination="cia-qm-AAG" id="FaZ-di-62A"/>
-                        <outlet property="launchButton" destination="o9G-C3-vaf" id="K0p-Bm-6Ru"/>
-                        <outlet property="twitterInfoLabel" destination="LuV-yp-eM1" id="DXs-hD-hW2"/>
-                        <outlet property="twitterstreamLaunchButton" destination="2li-hp-0ug" id="p8p-P9-dqj"/>
+                        <outlet property="flickrAuthButton" destination="rla-eU-Vn0" id="ggF-Hl-sZf"/>
+                        <outlet property="flickrAuthLabel" destination="07q-rI-Mqq" id="vkL-bg-YPL"/>
+                        <outlet property="twitterAccountLabel" destination="fvL-nu-JhQ" id="qwQ-Zl-ySb"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W3S-CE-d1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iPI-mV-1Xy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="597" y="-382"/>
+            <point key="canvasLocation" x="275" y="629"/>
         </scene>
         <!--Flickr Authentication View Controller-->
         <scene sceneID="8Ca-uc-i0J">
@@ -133,11 +131,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FcX-v4-rT9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MiK-7A-ZLE">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5CY-do-xI4">
-                                <rect key="frame" x="0.0" y="64" width="768" height="980"/>
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
@@ -150,7 +148,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMN-Nz-Ksi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589" y="-734"/>
+            <point key="canvasLocation" x="275" y="1639"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="0jC-TM-lYM">
+            <objects>
+                <viewController id="1sd-1D-Cwz" customClass="AFSAboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mfv-BR-pFF"/>
+                        <viewControllerLayoutGuide type="bottom" id="vQz-gI-F8N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZFk-ne-5lt">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZLX-Aj-bSb">
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="About" id="LBq-w6-Ur7"/>
+                    <connections>
+                        <outlet property="aboutWebView" destination="ZLX-Aj-bSb" id="fcN-Df-RDU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j30-2G-ax4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1351" y="646"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gT9-cS-iHb">

@@ -504,7 +504,7 @@
     [self.overlayStatusLabel setHidden:NO];
     self.overlayStatusLabel.textColor = [UIColor redColor];
     [self.overlayStatusLabel setBackgroundColor:[UIColor blackColor]];
-    [self.overlayStatusLabel setText:@"Capturing face...hold tablet in front of your face at arm's length for best results"];
+    [self.overlayStatusLabel setText:@"Capturing face...hold device in front of your face at arm's length for best results"];
 }
 
 - (void) preAugmentFaceCallback:(NSNotification *)notification {
