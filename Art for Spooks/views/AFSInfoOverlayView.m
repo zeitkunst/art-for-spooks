@@ -63,8 +63,13 @@
         // Setup drone coords and markov chain
         self.droneCoords = [[AFSDroneCoords alloc] initWithFilename:@"drone_coords"];
         self.markovChain = [[AFSMarkovChain alloc] init];
-        // TODO: Check on Twitter limits
-        [self.markovChain loadModelWithMaxChars:80];
+        
+        // TODO: Programmatically check on Twitter limits
+        // Okay, so there are two links that get posted for each tweet: one for Flickr, one for the photo uploaded to Twitter. So, at 22 ch/link, that's 44
+        // Then there's the hashtag, which is another 13 ch
+        // Adding the colon after our text and spaces between links and hashtags, that's another 4 characters
+        // So max we can have 79 characters. Give us a bit of breathing room by using 75.
+        [self.markovChain loadModelWithMaxChars:75];
         
         // Hide status label
         [self.overlayStatusLabel setHidden:YES];
@@ -240,7 +245,7 @@
     [iptcDict setObject:@"1" forKey:(NSString *)kCGImagePropertyIPTCUrgency];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCCredit];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCSource];
-    [iptcDict setObject:@"NSA, spooks, surveillance, Zelda" forKey:(NSString *)kCGImagePropertyIPTCKeywords];
+    [iptcDict setObject:@"artforspooks, NSA, spooks, surveillance, Zelda" forKey:(NSString *)kCGImagePropertyIPTCKeywords];
     
     return iptcDict;
 }
@@ -333,7 +338,7 @@
 				//NSString *msg = [NSString stringWithFormat:@"Uploaded image ID %@", imageID];
 				//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 				//[alert show];
-                [status appendFormat:@": http://www.flickr.com/photos/%@/%@/", self.userID, imageID];
+                [status appendFormat:@": http://www.flickr.com/photos/%@/%@/ #artforspooks", self.userID, imageID];
                 if (self.haveTwitter) {
                     [self tweetWithStatus:status andCoords:chosenCoord andImage:screenshot];
                 } else {
@@ -371,6 +376,7 @@
     //NSArray *chosenCoord = [self.droneCoords randomDroneCoord];
     NSLog(@"lat: %@; long: %@", chosenCoord[0], chosenCoord[1]);
     
+    NSLog(@"Status is: %@", status);
     NSLog(@"Status length is: %d", [status length]);
     ACAccountType *twitterType =
     [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
