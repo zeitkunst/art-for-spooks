@@ -245,7 +245,14 @@
     [iptcDict setObject:@"1" forKey:(NSString *)kCGImagePropertyIPTCUrgency];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCCredit];
     [iptcDict setObject:@"Art for Spooks" forKey:(NSString *)kCGImagePropertyIPTCSource];
-    [iptcDict setObject:@"artforspooks, NSA, spooks, surveillance, Zelda" forKey:(NSString *)kCGImagePropertyIPTCKeywords];
+    
+    NSMutableArray* keywords=[[NSMutableArray alloc]init];
+    [keywords addObject:@"artforspooks"];
+    [keywords addObject:@"NSA"];
+    [keywords addObject:@"spooks"];
+    [keywords addObject:@"surveillance"];
+    [keywords addObject:@"zelda"];
+    [iptcDict setObject:keywords forKey:(NSString *)kCGImagePropertyIPTCKeywords];
     
     return iptcDict;
 }
