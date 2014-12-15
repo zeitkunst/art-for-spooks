@@ -47,7 +47,6 @@
 #import "Teapot.h"
 #import "Quad.h"
 #import "card.h"
-#import "skymapTest.h"
 #import "curvedDisplay.h"
 
 
@@ -161,7 +160,8 @@ namespace {
     
     // Phantasmagoria Parameters
     //NSArray *phTextures = @[@"phantasmagoria003.png", @"phantasmagoria002.png", @"phantasmagoria001.png"];
-    NSArray *phTextures = @[@"phantasmagoria002.png", @"phantasmagoria001.png"];
+    NSArray *phTextures1x = @[@"phantasmagoria002.png", @"phantasmagoria001.png"];
+    NSArray *phTextures2x = @[@"phantasmagoria002@2x.png", @"phantasmagoria001@2x.png"];
     
     float phP0MinX = -2.0;
     //float phP0MaxX = -0.5;
@@ -202,6 +202,12 @@ namespace {
     
     // Card Emitter parameters
     AFSCardEmitterObject *emitter;
+    
+    // Physical memory
+    unsigned long long physicalMemory;
+    
+    // Size Modifier
+    NSMutableString *sizeModifier = [[NSMutableString alloc] init];
 }
 
 
@@ -269,6 +275,8 @@ namespace {
         }
         
         // Load all of the textures, assign IDs
+        physicalMemory = [NSProcessInfo processInfo].physicalMemory;
+        NSLog(@"Physical Memory: %llu", physicalMemory);
         [self initAugmentationDict];
         [self loadTextureIDs];
         
@@ -299,22 +307,31 @@ namespace {
     /*
      * AUGMENTATIONS
      */
+    
+    if (physicalMemory <= 528130048) {
+        [sizeModifier setString:@""];
+    } else {
+        [sizeModifier setString:@"@2x"];
+    }
+    
+    NSLog(@"Size modifier: %@", sizeModifier);
+    
     [augmentationDict setValue:@{
                              @"shader": @"Simple",
-                             @"texture": @"DerSpiegel-media-34098_003.png"
+                             @"texture": [NSString stringWithFormat:@"DerSpiegel-media-34098_003%@.png", sizeModifier]
                              } forKey:@"Anchory"];
     [augmentationDict setValue:@{
                              @"shader": @"Simple",
-                             @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_020.png"} forKey:@"Facebook"];
+                             @"texture": [NSString stringWithFormat:@"Intercept-psychology-a-new-kind-of-sigdev_020%@.png", sizeModifier]} forKey:@"Facebook"];
     [augmentationDict setValue:@{
                              @"shader": @"Simple",
-                             @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_025.png"} forKey:@"Woman"];
+                             @"texture": [NSString stringWithFormat:@"Intercept-psychology-a-new-kind-of-sigdev_025%@.png", sizeModifier]} forKey:@"Woman"];
     [augmentationDict setValue:@{
                              @"shader": @"Simple",
-                             @"texture": @"Intercept-the-art-of-deception-training-for-a-new_034.png"} forKey:@"Buffalo"];
+                             @"texture": [NSString stringWithFormat:@"Intercept-the-art-of-deception-training-for-a-new_034%@.png", sizeModifier]} forKey:@"Buffalo"];
     [augmentationDict setValue:@{
                              @"shader": @"DistortedTV",
-                             @"texture": @"Intercept-the-art-of-deception-training-for-a-new_021.png"} forKey:@"Bosch"];
+                             @"texture": [NSString stringWithFormat:@"Intercept-the-art-of-deception-training-for-a-new_021%@.png", sizeModifier]} forKey:@"Bosch"];
     [augmentationDict setValue:@{
                             @"shader": @"DistortedTV",
                             @"texture": @"",
@@ -325,29 +342,29 @@ namespace {
                             @"video":@"HackersSceneForAFS.m4v"} forKey:@"CyberMagicians"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"DerSpiegel-image-542019-galleryV9-hheg.png"} forKey:@"Afghan"];
+                                 @"texture": [NSString stringWithFormat:@"DerSpiegel-image-542019-galleryV9-hheg%@.png", sizeModifier]} forKey:@"Afghan"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"card_texture.png"} forKey:@"Cards"];
+                                 @"texture": [NSString stringWithFormat:@"card_texture%@.png", sizeModifier]} forKey:@"Cards"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"curvedDisplayTexture.png"} forKey:@"Buffalo"];
+                                 @"texture": [NSString stringWithFormat:@"curvedDisplayTexture%@.png", sizeModifier]} forKey:@"Buffalo"];
 
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_025.png"} forKey:@"Women"];
+                                 @"texture": [NSString stringWithFormat:@"Intercept-the-art-of-deception-training-for-a-new_025%@.png", sizeModifier]} forKey:@"Women"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"ask_zelda.png"} forKey:@"Zelda"];
+                                 @"texture": [NSString stringWithFormat:@"ask_zelda%@.png", sizeModifier]} forKey:@"Zelda"];
 
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_035.png"} forKey:@"UFO"];
+                                 @"texture": [NSString stringWithFormat:@"Intercept-the-art-of-deception-training-for-a-new_035%@.png", sizeModifier]} forKey:@"UFO"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
                                  @"textureArray": @[
-                                     @"phantasmagoria001.png",
-                                     @"phantasmagoria002.png"]} forKey:@"Kidnapper"];
+                                     [NSString stringWithFormat:@"phantasmagoria001%@.png", sizeModifier],
+                                     [NSString stringWithFormat:@"phantasmagoria002%@.png", sizeModifier]]} forKey:@"Kidnapper"];
 
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
@@ -369,13 +386,13 @@ namespace {
      */
     [augmentationDict setValue:@{
                                  @"shader": @"Animate_8x8",
-                                 @"texture": @"Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet.png"} forKey:@"Couple"];
+                                 @"texture": [NSString stringWithFormat:@"Intercept-psychology-a-new-kind-of-sigdev_024_spriteSheet%@.png", sizeModifier]} forKey:@"Couple"];
     [augmentationDict setValue:@{
                                  @"shader": @"Animate_4x5",
-                                 @"texture": @"DerSpiegel-nsa-quantumtheory_002_sprites.png"} forKey:@"Foxacid"];
+                                 @"texture": [NSString stringWithFormat:@"DerSpiegel-nsa-quantumtheory_002_sprites%@.png", sizeModifier]} forKey:@"Foxacid"];
     [augmentationDict setValue:@{
                                  @"shader": @"Simple",
-                                 @"texture": @"Intercept-the-art-of-deception-training-for-a-new_022.png"} forKey:@"RabbitDuck"];
+                                 @"texture": [NSString stringWithFormat:@"Intercept-the-art-of-deception-training-for-a-new_022%@.png", sizeModifier]} forKey:@"RabbitDuck"];
     
     /* 
      * AUGMENTATIONS TO AUGMENT
@@ -1141,8 +1158,14 @@ namespace {
         glActiveTexture(GL_TEXTURE0);
         
         //NSString *textureFile = [textureInfo objectForKey:@"texture"];
-        Texture* currentTexture = (Texture *)[textureIDs objectForKey:phTextures[i]];
-        glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        if ([sizeModifier isEqualToString:@""]) {
+            Texture* currentTexture = (Texture *)[textureIDs objectForKey:phTextures1x[i]];
+            glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        } else if ([sizeModifier isEqualToString:@"@2x"]) {
+            Texture* currentTexture = (Texture *)[textureIDs objectForKey:phTextures2x[i]];
+            glBindTexture(GL_TEXTURE_2D, currentTexture.textureID);
+        }
+        
         
         glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (const GLfloat*)&modelViewProjection.data[0]);
         glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
