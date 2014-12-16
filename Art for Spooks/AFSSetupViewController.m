@@ -77,7 +77,7 @@
     else
     {
         [self.twitterAccountLabel setText:@"No Twitter account specified in Settings; please add one manually."];
-        NSLog(@"Twitter account not Configured in Settings......"); // show user an alert view that Twitter is not configured in settings.
+        NSLog(@"Twitter account not configured in Settings......"); // show user an alert view that Twitter is not configured in settings.
     }
     [self.twitterAccountLabel setNeedsDisplay];
     

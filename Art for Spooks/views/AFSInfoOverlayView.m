@@ -223,7 +223,7 @@
     
     NSMutableDictionary *iptcDict = [[NSMutableDictionary alloc] init];
     
-    NSArray *availableTexts = [[NSArray alloc] initWithObjects:@"Deleuze1992", @"Foucault1977", nil];
+    NSArray *availableTexts = [[NSArray alloc] initWithObjects:@"Deleuze1992", @"Foucault1977", @"ChurchCommitteeReport", @"Dali1998ba", @"Hooks1992", @"Mulvey1975", @"Magid2009", nil];
     NSUInteger randomIndex = arc4random() % [availableTexts count];
     NSString *path = [[NSBundle mainBundle] pathForResource:availableTexts[randomIndex] ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];

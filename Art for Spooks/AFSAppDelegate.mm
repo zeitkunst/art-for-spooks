@@ -72,6 +72,20 @@
     }
     [[FlickrKit sharedFlickrKit] initializeWithAPIKey:apiKey sharedSecret:secret];
     
+    // Navigation bar style
+    UIFont* sourceSansProRegular  = [UIFont fontWithName:@"SourceSansPro-Regular" size:20];
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowOffset = CGSizeMake(0.0, 1.0);
+    shadow.shadowColor = [UIColor whiteColor];
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
+     setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor redColor],
+       NSShadowAttributeName:shadow,
+       NSFontAttributeName:sourceSansProRegular
+       }
+     forState:UIControlStateNormal];
+    
     /*
     NSLog(@"Available fonts: %@", [UIFont familyNames]);
     NSArray *familyNames = [UIFont familyNames];

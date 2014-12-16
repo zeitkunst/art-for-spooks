@@ -1,24 +1,30 @@
 <html>
     <head>
         <meta name = "viewport" content = "user-scalable=no">
-            <meta name="apple-mobile-web-app-capable" content="yes"/>
-            <style type="text/css">
-                html {
-                    -webkit-text-size-adjust: none; /* Never autoresize text */
-                    word-wrap:break-word; /* break the word in an another line if it's too long */
-                    font-family: "SourceSansPro-Regular";
-                    font-size: 1em;
-                    
-                }
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <style type="text/css">
+            html {
+                -webkit-text-size-adjust: none; /* Never autoresize text */
+                word-wrap:break-word; /* break the word in an another line if it's too long */
+                font-family: "SourceSansPro-Regular";
+                font-size: 1em;
+            }
             
             h1 {
                 font-family: "SourceSansPro-Black";
                 font-size: 2em;
+                color: #FF0000;
             }
-            
-            
-                </style>
-            </head>
+        
+        a {
+            color: #FF0000;
+        }
+        a:visited {
+            color: #aaaaaa;
+        }
+        </style>
+        
+    </head>
     <body>
         
         <div style="padding: 10px auto;">
@@ -28,11 +34,12 @@
                 
                 <h1>Using <em>Art for Spooks</em></h1>
                 <p>Hold the tablet over one of the images in the book, ensuring that the entire image is visible. Watch as the image changes before your eyes!</p>
-                <p><em>Note:</em> tapping or swiping the images does not do anything.</p>
+                <p><em>Note:</em> tapping or swiping the augmented images does not do anything.</p>
                 
                 <h1>Sharing</h1>
-                <p>While viewing one of the images through the tablet, tap the "share" icon (<img width="24" src="share.png" alt="Share Icon"/>) to upload a screenshot to the Art for Spooks Twitter stream and Flickr photostream, as well as posting to the Art for Spooks Facebook Page and the Art for Spooks Tumblr. The share icon only appears when viewing an image.</p>
+                <p>While viewing one of the images through the tablet, tap the "share" icon (<img width="24" src="share.png" alt="Share Icon"/>) to upload a screenshot to your Flickr photostream or Twitter stream, if configured. The share icon only appears when viewing an image.</p>
                 <p>You need to authenticate to Flickr and/or Twitter in order to share the screenshots to your respective accounts. You can authenticate to Flickr by tapping on "Setup" in the home screen. To authenticate to Twitter, you will need to do that through your iOS Settings.</p>
+                <p>For technical reasons, each time you share an image, the shared image is saved to your Camera Roll. This also enables you to e-mail or manipulate these shared images in separate programs.</p>
                 
                 <h1>Website and Contact</h1>
                 <p>More information about the project can be found at <a href="http://art-for-spooks.org">http://art-for-spooks.org</a>. You can contact the authors, Nicholas Knouf and Claudia Pederson, at <a href="mailto:info@art-for-spooks.org">info@art-for-spooks.org</a>.</p>
@@ -60,8 +67,19 @@
                     <li>Page 57: Images from NSAs "America's Crypto Kids" site at https://www.nsa.gov/kids/home.shtml</li>
                     <li>Page 63: Other examples of "Zelda" found on the web</li>
                 </ul>
+                <h1>Colophon</h1>
+                <p>Book designed and typeset in Adobe InDesign. Headings in Source Sans Pro, body text in Adobe Jenson Pro.</p>
+                
+                <p>Augmented reality software built using the Qualcomm Vuforia™ software development kit.</p>
+                
+                <p>Thanks to the Davis Museum, Glenn Greenwald, Barton Gellman, Laura Poitras, David Kelley, Sarina Khan-Reddy, Edward Snowden, Claire Whitner, and Thomas Willis. Thanks as well to all of the other journalists reporting on the Snowden materials.</p>
+                
+                <p>Produced with the generous support of the Wellesley College Office of the Provost and the Dean and the Wellesley College Art Department, as well as a Wellesley College Faculty Award to Knouf.</p>
+                
+                <p>All text comes from the stash of documents released by Edward Snowden. The texts were collected into a corpus and recombined using custom software written in python and the NLTK library. Specific sources are: Intercept, “The NSA Has An Advice Columnist. Seriously.”, 7 March 2014 (<a href="https://firstlook.org/theintercept/article/2014/03/07/nsa-advice-columnist-seriously/">https://firstlook.org/theintercept/article/2014/03/07/nsa-advice-columnist-seriously/</a>); Intercept, “Inside the NSA’s Secret Efforts to Hunt and Hack System Administrators”, 20 March 2014 (<a href="https://firstlook.org/theintercept/article/2014/03/20/inside-nsa-secret-efforts-hunt-hack-system-administrators/">https://firstlook.org/theintercept/article/2014/03/20/inside-nsa-secret-efforts-hunt-hack-system-administrators/</a>); Intercept, “Hacking Online Polls and Other Ways British Spies Seek to Control the Internet”, 14 July 2014 (<a href="https://firstlook.org/theintercept/2014/07/14/manipulating-online-polls-ways-british-spies-seek-control-internet/">https://firstlook.org/theintercept/2014/07/14/manipulating-online-polls-ways-british-spies-seek-control-internet/</a>); Boston Globe, “Meet Zelda, the unlikely ‘Dear Abby’ of NSA”, 7 September 2014 (<a href="http://www.bostonglobe.com/news/nation/2014/09/06/rare-peek-into-super-secret-nsa-through-its-very-own-advice-columnist/pNheGTksn0rqJHU8XqltwI/story.html">http://www.bostonglobe.com/news/nation/2014/09/06/rare-peek-into-super-secret-nsa-through-its-very-own-advice-columnist/pNheGTksn0rqJHU8XqltwI/story.html</a>).</p>
+                
+                <p>All images come from the stash of documents released by Edward Snowden. Specific sources are as follows: pg. 5, Der Spiegel, “NSA-Programm ‘Quantumtheory’: Wie der US-Geheimdienst weltweit Rechner knackt”, 30 December, 2013 (<a href="http://www.spiegel.de/netzwelt/netzpolitik/quantumtheory-wie-die-nsa-weltweit-rechner-hackt-a-941149.html">http://www.spiegel.de/netzwelt/netzpolitik/quantumtheory-wie-die-nsa-weltweit-rechner-hackt-a-941149.html</a>); pg. 7, Washington Post, “In NSA-intercepted data, those not targeted far outnumber the foreigners who are”, 5 July, 2014 (<a href="http://www.washingtonpost.com/world/national-security/in-nsa-intercepted-data-those-not-targeted-far-outnumber-the-foreigners-who-are/2014/07/05/8139adf8-045a-11e4-8572-4b1b969b6322_story.html">http://www.washingtonpost.com/world/national-security/in-nsa-intercepted-data-those-not-targeted-far-outnumber-the-foreigners-who-are/2014/07/05/8139adf8-045a-11e4-8572-4b1b969b6322_story.html</a>); pg. 9, CBC, “CSEC used airport Wi-Fi to track Canadian travellers: Edward Snowden documents”, 30 January, 2014 (<a href="http://www.cbc.ca/news/politics/csec-used-airport-wi-fi-to-track-canadian-travellers-edward-snowden-documents-1.2517881">http://www.cbc.ca/news/politics/csec-used-airport-wi-fi-to-track-canadian-travellers-edward-snowden-documents-1.2517881</a>); pg. 13, Intercept, “How Covert Agents Infiltrate the Internet to Manipulate, Deceive, and Destroy Reputations”, 24 February 2014 (<a href="https://firstlook.org/theintercept/2014/02/24/jtrig-manipulation/">https://firstlook.org/theintercept/2014/02/24/jtrig-manipulation/</a>); pg. 15, Id.; pg. 17, Id.; pg. 19, NBC, “Snowden docs reveal British spies snooped on YouTube and Facebook”, 27 January 2014 (<a href="http://investigations.nbcnews.com/_news/2014/01/27/22469304-snowden-docs-reveal-british-spies-snooped-on-youtube-and-facebook">http://investigations.nbcnews.com/_news/2014/01/27/22469304-snowden-docs-reveal-british-spies-snooped-on-youtube-and-facebook</a>); pg. 25, Der Spiegel, “The NSA in Germany: Snowden’s Documents Available for Download”, 18 June 2014 (<a href="http://www.spiegel.de/international/the-germany-file-of-edward-snowden-documents-available-for-download-a-975917.html">http://www.spiegel.de/international/the-germany-file-of-edward-snowden-documents-available-for-download-a-975917.html</a>); pg 27., Der Spiegel, “Photo Gallery: Spying on Smartphones”, 9 September 2013 (<a href="http://www.spiegel.de/fotostrecke/photo-gallery-spying-on-smartphones-fotostrecke-101201.html">http://www.spiegel.de/fotostrecke/photo-gallery-spying-on-smartphones-fotostrecke-101201.html</a>); pg. 29, NBC, “Snowden docs reveal British spies snooped on YouTube and Facebook”; pg. 35, Intercept, “How Covert Agents Infiltrate the Internet to Manipulate, Deceive, and Destroy Reputations”; pg. 37, Id.;, pg. 39, Id.; pg. 45, NBC, “Snowden docs reveal British spies snooped on YouTube and Facebook”; pg. 47, Intercept, “How Covert Agents Infiltrate the Internet to Manipulate, Deceive, and Destroy Reputations”; pg. 49, Id.; pg. 53, NBC, “Snowden docs reveal British spies snooped on YouTube and Facebook”; pg. 55, Der Spiegel, “Photo Gallery: Spying on Smartphones”; pg. 57, NBC, “Snowden docs reveal British spies snooped on YouTube and Facebook”; pg. 63, Boston Globe, “Meet Zelda, the unlikely ‘Dear Abby’ of NSA”.</p>
             </div>
         </div>
-        
     </body>
 </html>

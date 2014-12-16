@@ -17,13 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.19999999999999968" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-Be-HR9">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AFSTitle" translatesAutoresizingMaskIntoConstraints="NO" id="oxi-nf-IA5">
+                                <rect key="frame" x="88" y="20" width="848" height="452"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-C3-vaf">
-                                <rect key="frame" x="16" y="670" width="205" height="78"/>
+                                <rect key="frame" x="410" y="335" width="205" height="80"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <state key="normal" title="Launch">
+                                <state key="normal" title="LAUNCH">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -32,9 +32,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bui-Ot-OBx">
-                                <rect key="frame" x="868" y="665" width="136" height="88"/>
+                                <rect key="frame" x="444" y="511" width="136" height="80"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <state key="normal" title="About">
+                                <state key="normal" title="ABOUT">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -43,9 +43,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps1-kK-9tx">
-                                <rect key="frame" x="458" y="674" width="108" height="70"/>
+                                <rect key="frame" x="458" y="423" width="108" height="80"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <state key="normal" title="Setup">
+                                <state key="normal" title="SETUP">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -68,7 +68,7 @@
             </objects>
             <point key="canvasLocation" x="609" y="-382"/>
         </scene>
-        <!--Setup-->
+        <!--SETUP-->
         <scene sceneID="ECh-t6-HZj">
             <objects>
                 <viewController id="e18-0B-0JH" customClass="AFSSetupViewController" sceneMemberID="viewController">
@@ -84,7 +84,7 @@
                                 <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rla-eU-Vn0">
-                                <rect key="frame" x="225" y="109" width="574" height="48"/>
+                                <rect key="frame" x="225" y="331" width="574" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Login to Flickr">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,13 +97,22 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not logged in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07q-rI-Mqq">
-                                <rect key="frame" x="61" y="165" width="902" height="29"/>
+                                <rect key="frame" x="61" y="387" width="902" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading Twitter account info..." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvL-nu-JhQ">
-                                <rect key="frame" x="244" y="202" width="536" height="100"/>
+                                <rect key="frame" x="244" y="424" width="536" height="100"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AFSSetup" translatesAutoresizingMaskIntoConstraints="NO" id="p4k-94-3dz">
+                                <rect key="frame" x="359" y="154" width="317" height="169"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To tweet shared images, be sure you have a Twitter account setup in Settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAh-qj-YCT">
+                                <rect key="frame" x="286" y="495" width="452" height="94"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -111,11 +120,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Setup" id="L00-pV-3Pl"/>
+                    <navigationItem key="navigationItem" title="SETUP" id="L00-pV-3Pl"/>
                     <connections>
                         <outlet property="flickrAuthButton" destination="rla-eU-Vn0" id="ggF-Hl-sZf"/>
                         <outlet property="flickrAuthLabel" destination="07q-rI-Mqq" id="vkL-bg-YPL"/>
                         <outlet property="twitterAccountLabel" destination="fvL-nu-JhQ" id="qwQ-Zl-ySb"/>
+                        <outlet property="twitterInfoLabel" destination="DAh-qj-YCT" id="fvZ-SN-aQJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iPI-mV-1Xy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -150,7 +160,7 @@
             </objects>
             <point key="canvasLocation" x="275" y="1639"/>
         </scene>
-        <!--About-->
+        <!--ABOUT-->
         <scene sceneID="0jC-TM-lYM">
             <objects>
                 <viewController id="1sd-1D-Cwz" customClass="AFSAboutViewController" sceneMemberID="viewController">
@@ -169,7 +179,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="About" id="LBq-w6-Ur7"/>
+                    <navigationItem key="navigationItem" title="ABOUT" id="LBq-w6-Ur7"/>
                     <connections>
                         <outlet property="aboutWebView" destination="ZLX-Aj-bSb" id="fcN-Df-RDU"/>
                     </connections>
@@ -198,6 +208,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AFSSetup" width="276" height="63"/>
+        <image name="AFSTitle" width="735" height="64"/>
         <image name="LaunchViewImage" width="1024" height="768"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

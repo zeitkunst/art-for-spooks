@@ -68,6 +68,21 @@
     self.setupButton.titleLabel.font = sourceSansProBlack;
     self.aboutButton.titleLabel.font = sourceSansProBlack;
     
+    // Navigation bar
+    UINavigationBar *bar = self.navigationController.navigationBar;
+    bar.tintColor = [UIColor redColor];
+    bar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"SourceSansPro-Regular" size:20], NSFontAttributeName, nil];
+    
+    /* check for iOS 6 or 7 */
+    if ([[self navigationController].navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
+        [[self navigationController].navigationBar setBarTintColor:[UIColor whiteColor]];
+        
+    } else {
+        /* Set background and foreground */
+        [[self navigationController].navigationBar setTintColor:[UIColor whiteColor]];
+        //[self navigationController].navigationBar.titleTextAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:[UIColor blackColor],UITextAttributeTextColor,nil];
+    }
+    
     // Check if there is a stored token
 	// You should do this once on app launch
 	self.checkAuthOp = [[FlickrKit sharedFlickrKit] checkAuthorizationOnCompletion:^(NSString *userName, NSString *userId, NSString *fullName, NSError *error) {

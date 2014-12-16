@@ -154,6 +154,11 @@
 		34DCBCCE19C8847E00B7E5B6 /* Foucault1977.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DCBCCD19C8847E00B7E5B6 /* Foucault1977.txt */; };
 		34DD0A9219B67512008E97B0 /* AFSOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */; };
 		34DEBE1019BBE490002BD86D /* AFSFlickrAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */; };
+		34DF957B1A40F6AB005AFD09 /* ChurchCommitteeReport.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DF957A1A40F6AB005AFD09 /* ChurchCommitteeReport.txt */; };
+		34DF95801A40FB52005AFD09 /* Dali1998ba.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DF957C1A40FB52005AFD09 /* Dali1998ba.txt */; };
+		34DF95811A40FB52005AFD09 /* Hooks1992.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DF957D1A40FB52005AFD09 /* Hooks1992.txt */; };
+		34DF95821A40FB52005AFD09 /* Magid2009.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DF957E1A40FB52005AFD09 /* Magid2009.txt */; };
+		34DF95831A40FB52005AFD09 /* Mulvey1975.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34DF957F1A40FB52005AFD09 /* Mulvey1975.txt */; };
 		34E77AD81A1F90B5006CA036 /* libFlickrKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E77AD21A1F8A71006CA036 /* libFlickrKit.a */; };
 /* End PBXBuildFile section */
 
@@ -367,6 +372,11 @@
 		34DD0A9019B67512008E97B0 /* AFSOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSOverlayViewController.m; sourceTree = "<group>"; };
 		34DEBE0E19BBE490002BD86D /* AFSFlickrAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSFlickrAuthViewController.h; sourceTree = "<group>"; };
 		34DEBE0F19BBE490002BD86D /* AFSFlickrAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSFlickrAuthViewController.m; sourceTree = "<group>"; };
+		34DF957A1A40F6AB005AFD09 /* ChurchCommitteeReport.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ChurchCommitteeReport.txt; sourceTree = "<group>"; };
+		34DF957C1A40FB52005AFD09 /* Dali1998ba.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Dali1998ba.txt; sourceTree = "<group>"; };
+		34DF957D1A40FB52005AFD09 /* Hooks1992.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hooks1992.txt; sourceTree = "<group>"; };
+		34DF957E1A40FB52005AFD09 /* Magid2009.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Magid2009.txt; sourceTree = "<group>"; };
+		34DF957F1A40FB52005AFD09 /* Mulvey1975.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mulvey1975.txt; sourceTree = "<group>"; };
 		34E77ACC1A1F8A71006CA036 /* FlickrKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FlickrKit.xcodeproj; path = ../../../../../development/FlickrKit/FlickrKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -425,8 +435,13 @@
 		341FFF3619BD5FAC000EAA97 /* texts */ = {
 			isa = PBXGroup;
 			children = (
+				34DF957A1A40F6AB005AFD09 /* ChurchCommitteeReport.txt */,
 				34DCBCCD19C8847E00B7E5B6 /* Foucault1977.txt */,
 				341FFF3719BD5FAC000EAA97 /* Deleuze1992.txt */,
+				34DF957C1A40FB52005AFD09 /* Dali1998ba.txt */,
+				34DF957D1A40FB52005AFD09 /* Hooks1992.txt */,
+				34DF957E1A40FB52005AFD09 /* Magid2009.txt */,
+				34DF957F1A40FB52005AFD09 /* Mulvey1975.txt */,
 			);
 			path = texts;
 			sourceTree = "<group>";
@@ -884,17 +899,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34DF95831A40FB52005AFD09 /* Mulvey1975.txt in Resources */,
 				34D1DAFD19A6AA2500CE0CA1 /* Line.fragsh in Resources */,
 				34D1DAFE19A6AA2500CE0CA1 /* Line.vertsh in Resources */,
 				343C3D9419BBC9B100EE4B89 /* art_for_spooks_model.json in Resources */,
 				34D1DAD319A6AA1300CE0CA1 /* building_texture.jpeg in Resources */,
+				34DF95811A40FB52005AFD09 /* Hooks1992.txt in Resources */,
 				34D1DB0019A6AA2500CE0CA1 /* Simple.vertsh in Resources */,
 				348F2D7F1A3F7CE500907956 /* phantasmagoria001.png in Resources */,
 				34D1DADF19A6AA1300CE0CA1 /* TextureTeapotBrass.png in Resources */,
 				348F2D801A3F7CE500907956 /* phantasmagoria002.png in Resources */,
 				348F2D7D1A3F7CE500907956 /* Intercept-the-art-of-deception-training-for-a-new_034.png in Resources */,
+				34DF957B1A40F6AB005AFD09 /* ChurchCommitteeReport.txt in Resources */,
 				343C3D8719BB836200EE4B89 /* AFSInfoOverlayView.xib in Resources */,
 				348B1B8019B3DD820034FD98 /* Bloom.vertsh in Resources */,
+				34DF95801A40FB52005AFD09 /* Dali1998ba.txt in Resources */,
 				348F2DA81A3F7CF800907956 /* phantasmagoria001@2x.png in Resources */,
 				34C7543119AA552300A7B2E4 /* Animate_4x5.fragsh in Resources */,
 				348F2DA71A3F7CF800907956 /* Intercept-the-art-of-deception-training-for-a-new_035@2x.png in Resources */,
@@ -943,6 +962,7 @@
 				348B1B7C19B3C9D20034FD98 /* Intercept-psychology-a-new-kind-of-sigdev_007.m4v in Resources */,
 				34DCBCCB19C87D7900B7E5B6 /* flickrCredentials.json in Resources */,
 				348F2D831A3F7CE500907956 /* WashingtonPost-fisa03201404590770.png in Resources */,
+				34DF95821A40FB52005AFD09 /* Magid2009.txt in Resources */,
 				348F2D9D1A3F7CF800907956 /* DerSpiegel-media-34098_003@2x.png in Resources */,
 				348F2D701A3F7CE500907956 /* ask_zelda.png in Resources */,
 				34D1DAD419A6AA1300CE0CA1 /* buildings.txt in Resources */,
