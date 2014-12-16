@@ -47,7 +47,6 @@
         AFSCardParticle *newCard = [[AFSCardParticle alloc] init];
         [self.cardEmitter addObject:newCard];
     }
-    AFSCardParticle *testingCard;
 }
 
 - (void)updateLifeCycle {

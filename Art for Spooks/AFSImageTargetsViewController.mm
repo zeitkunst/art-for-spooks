@@ -340,7 +340,7 @@
         viewBounds.size.height = arViewRect.size.height;
         
         [eaglView setFrame:viewBounds];
-        CGRect afterBounds = [eaglView bounds];
+        //CGRect afterBounds = [eaglView bounds];
         //NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
         //NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
         //NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
@@ -376,7 +376,7 @@
         //viewBounds.size.height = 320;
         
         [eaglView setFrame:viewBounds];
-        CGRect afterBounds = [eaglView bounds];
+        //CGRect afterBounds = [eaglView bounds];
         //NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
         //NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
         //NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
@@ -398,7 +398,7 @@
         viewBounds.size.height = 768.0f;
         
         [eaglView setFrame:viewBounds];
-        CGRect afterBounds = [eaglView bounds];
+        //CGRect afterBounds = [eaglView bounds];
         //NSLog(@"viewBounds.size.width: %f; viewBounds.size.height: %f", viewBounds.size.width, viewBounds.size.height);
         //NSLog(@"arViewRect.size.width: %f; arViewRect.size.height: %f", arViewRect.size.width, arViewRect.size.height);
         //NSLog(@"afterBounds.origin.x: %f; afterBounds.origin.y: %f", afterBounds.origin.x, afterBounds.origin.y);
