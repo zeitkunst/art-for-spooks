@@ -611,9 +611,13 @@ namespace {
             [self animatePhantasmagoria:[augmentationDict objectForKey:@"Kidnapper"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
         } else if ([currentTrackable isEqualToString:@"BlurredFaces"]) {
             // This isn't working right now, so we skip it
-            [self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            if ([sizeModifier isEqualToString:@""]) {
+                [self applyTextureWithTextureFile:[augmentationDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            } else {
+                [self augmentBlurredFaces:[augmentationDict objectForKey:@"BlurredFaces"] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            }
             
-            //[self applyTextureWithTextureFile:[augmentationDict objectForKey:currentTrackable] modelViewMatrix:modelViewMatrix shaderProgramID:shaderProgramID];
+            
         } else if ([currentTrackable isEqualToString:@"CyberMagicians"]) {
             [self playVideoWithTrackable:trackable withCurrentResult:result];
         } else if ([currentTrackable isEqualToString:@"Egypt"]) {

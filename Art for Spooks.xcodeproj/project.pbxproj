@@ -1180,7 +1180,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1197,7 +1197,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3fa12164-627b-4d79-9111-3b321df14fc1";
+				PROVISIONING_PROFILE = "93602c72-811f-4c61-8664-3fe1c0de2ce5";
 				VALID_ARCHS = "armv8 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1211,7 +1211,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Knouf (BB5YB7TJG3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Art for Spooks/Art for Spooks-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1227,7 +1227,7 @@
 				);
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3fa12164-627b-4d79-9111-3b321df14fc1";
+				PROVISIONING_PROFILE = "93602c72-811f-4c61-8664-3fe1c0de2ce5";
 				VALID_ARCHS = "armv8 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

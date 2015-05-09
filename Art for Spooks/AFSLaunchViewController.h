@@ -32,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *launchButton;
 @property (strong, nonatomic) IBOutlet UIButton *setupButton;
 @property (strong, nonatomic) IBOutlet UIButton *aboutButton;
+@property (strong, nonatomic) IBOutlet UIButton *downloadButton;
 
 @end

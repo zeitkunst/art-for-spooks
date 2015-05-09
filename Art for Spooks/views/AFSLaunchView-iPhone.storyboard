@@ -24,7 +24,7 @@
                                 <rect key="frame" x="78" y="48" width="413" height="135"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-C3-vaf">
-                                <rect key="frame" x="16" y="264" width="144" height="48"/>
+                                <rect key="frame" x="16" y="179" width="144" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="LAUNCH">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,7 +35,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROL-gM-9A2">
-                                <rect key="frame" x="420" y="270" width="132" height="41"/>
+                                <rect key="frame" x="420" y="185" width="132" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="ABOUT">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -46,7 +46,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="th4-4b-MiX">
-                                <rect key="frame" x="215" y="266" width="138" height="44"/>
+                                <rect key="frame" x="215" y="181" width="138" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="SETUP">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,6 +56,17 @@
                                     <segue destination="puZ-Y3-lJ3" kind="push" identifier="SetupSegue" id="e8P-Wp-ocb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5u-MD-yoG">
+                                <rect key="frame" x="160" y="233" width="248" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="DOWNLOAD BOOK">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="downloadButtonPressed:" destination="Lmg-HC-9Ep" eventType="touchUpInside" id="Qbs-Oc-vCk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -63,6 +74,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="aboutButton" destination="ROL-gM-9A2" id="tRa-yA-qyj"/>
+                        <outlet property="downloadButton" destination="v5u-MD-yoG" id="hs1-1b-BHQ"/>
                         <outlet property="flickrAuthButton" destination="P9S-nl-Ats" id="XWo-b9-2ng"/>
                         <outlet property="flickrAuthLabel" destination="mqA-oL-OKB" id="dKY-PZ-8mJ"/>
                         <outlet property="launchButton" destination="o9G-C3-vaf" id="K0p-Bm-6Ru"/>
@@ -113,6 +125,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To tweet shared images, be sure you have a Twitter account setup in Settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5U-NS-ff5">
+                                <rect key="frame" x="16" y="289" width="536" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-nl-Ats">
                                 <rect key="frame" x="125" y="144" width="318" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -136,14 +154,8 @@
                                 <rect key="frame" x="204" y="72" width="160" height="86"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading Twitter account info..." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ev7-SC-VOe">
-                                <rect key="frame" x="16" y="225" width="536" height="52"/>
+                                <rect key="frame" x="16" y="225" width="536" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To tweet shared images, be sure you have a Twitter account setup in Settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5U-NS-ff5">
-                                <rect key="frame" x="146" y="259" width="276" height="57"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

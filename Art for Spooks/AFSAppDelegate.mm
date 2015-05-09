@@ -101,6 +101,13 @@
     return YES;
 }
 
+// See here for the bug regarding launch images when we only want to support landscape mode:
+// https://stackoverflow.com/questions/19732975/adding-ios-7-version-of-iphone-4-inch-launch-image-to-project-breaks-launch-imag/23360113#23360113
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
+    //NSLog(@"supportedInterfaceOrientationsForWindow");
+    return  UIInterfaceOrientationMaskLandscapeRight;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

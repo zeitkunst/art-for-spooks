@@ -68,8 +68,8 @@
         // Okay, so there are two links that get posted for each tweet: one for Flickr, one for the photo uploaded to Twitter. So, at 22 ch/link, that's 44
         // Then there's the hashtag, which is another 13 ch
         // Adding the colon after our text and spaces between links and hashtags, that's another 4 characters
-        // So max we can have 79 characters. Give us a bit of breathing room by using 75.
-        [self.markovChain loadModelWithMaxChars:75];
+        // So max we can have 79 characters. Give us a bit of breathing room by using 70.
+        [self.markovChain loadModelWithMaxChars:70];
         
         // Hide status label
         [self.overlayStatusLabel setHidden:YES];
@@ -508,10 +508,13 @@
 }
 
 - (void) preAugmentFaceCallback:(NSNotification *)notification {
-    [self.overlayStatusLabel setText:@""];
+    //[self.overlayStatusLabel setText:@""];
+    //[self.overlayStatusLabel setHidden:YES];
     self.overlayStatusLabel.textColor = [UIColor blackColor];
     [self.overlayStatusLabel setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.25]];
-    [self.overlayStatusLabel setHidden:YES];
+    if (postCaptureFaceLabelTimer == nil) {
+        [self createPostCaptureFaceLabelTimer];
+    }
 }
 
 #pragma mark - Tracking timer methods
@@ -523,11 +526,25 @@
     statusLabelTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(statusLabelTimerFired:) userInfo:nil repeats:NO];
 }
 
+// Create the status label timer
+- (void)createPostCaptureFaceLabelTimer
+{
+    [self.overlayStatusLabel setText:@"Point the device at the image again."];
+    postCaptureFaceLabelTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(postCaptureFaceLabelTimerFired:) userInfo:nil repeats:NO];
+}
+
 // Terminate the tracking lost timer
 - (void)terminateStatusLabelTimer
 {
     [statusLabelTimer invalidate];
     statusLabelTimer = nil;
+}
+
+// Terminate the post capture face timer
+- (void)terminatePostCaptureFaceLabelTimer
+{
+    [postCaptureFaceLabelTimer invalidate];
+    postCaptureFaceLabelTimer = nil;
 }
 
 
@@ -536,6 +553,13 @@
 {
     [self.overlayStatusLabel setHidden:YES];
     statusLabelTimer = nil;
+}
+
+// Tracking lost timer fired, pause video playback
+- (void)postCaptureFaceLabelTimerFired:(NSTimer*)timer
+{
+    [self.overlayStatusLabel setHidden:YES];
+    postCaptureFaceLabelTimer = nil;
 }
 
 

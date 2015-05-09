@@ -29,6 +29,7 @@
 @interface AFSInfoOverlayView : UIView {
     // Timer to hide status label
     NSTimer* statusLabelTimer;
+    NSTimer* postCaptureFaceLabelTimer;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *infoWebView;
 @property (weak, nonatomic) IBOutlet UIButton *overlayQuestionMarkButton;

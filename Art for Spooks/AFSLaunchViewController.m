@@ -67,6 +67,7 @@
     self.launchButton.titleLabel.font = sourceSansProBlack;
     self.setupButton.titleLabel.font = sourceSansProBlack;
     self.aboutButton.titleLabel.font = sourceSansProBlack;
+    self.downloadButton.titleLabel.font = sourceSansProBlack;
     
     // Navigation bar
     UINavigationBar *bar = self.navigationController.navigationBar;
@@ -97,6 +98,11 @@
 	}];
 }
 
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return (1 << UIInterfaceOrientationLandscapeRight);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -118,6 +124,9 @@
     UIViewController *vc = [[[AFSImageTargetsViewController alloc]  init] autorelease];
     
     [self.navigationController pushViewController:vc animated:NO];
+}
+- (IBAction)downloadButtonPressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://art-for-spooks.org/pdf/art-for-spooks.pdf"]];
 }
 
 #pragma mark - Authentication
